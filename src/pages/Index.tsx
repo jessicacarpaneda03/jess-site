@@ -2,6 +2,7 @@ import { Hero } from "@/components/protocol/Hero";
 import { Stages } from "@/components/protocol/Stages";
 import { Scripts } from "@/components/protocol/Scripts";
 import { PublicReplies } from "@/components/protocol/PublicReplies";
+import { Anamnese } from "@/components/protocol/Anamnese";
 import { Services } from "@/components/protocol/Services";
 import { Faqs } from "@/components/protocol/Faqs";
 import { Footer } from "@/components/protocol/Footer";
@@ -12,6 +13,7 @@ const Index = () => (
     <Stages />
     <Scripts />
     <PublicReplies />
+    <Anamnese />
     <Services />
     <Faqs />
     <Footer />
