@@ -59,7 +59,7 @@ Estamos à disposição. 💚`,
 
 Após a consulta, enviamos recibo digital contendo CRM, CPF da médica, CID e descrição do atendimento — exatamente o que a maioria dos planos exige para reembolso. O percentual reembolsado depende do seu contrato (em geral varia de 30% a 100%).
 
-Sugestão: antes da consulta, ligue no SAC do seu plano e pergunte o valor do reembolso para a tabela de psiquiatria (CBHPM 50000462 ou consulta em consultório).
+Sugestão: antes da consulta, ligue no SAC do seu plano e pergunte o valor do reembolso para consulta em saúde mental (CBHPM 50000462 ou consulta em consultório).
 
 Para agendar: ${LINK}`,
   },
@@ -227,7 +227,7 @@ Para agendar: ${LINK}`,
     question: "Atende criança / adolescente com TDAH?",
     answer: `Olá, {{nome}}! 🌿
 
-A Dra. Jéssica atende a partir de 16 anos. Para crianças e adolescentes mais novos, o ideal é um(a) psiquiatra da infância e adolescência — se quiser, podemos sugerir profissionais de confiança.
+A Dra. Jéssica atende a partir de 16 anos. Para crianças e adolescentes mais novos, o ideal é um(a) profissional de saúde mental da infância e adolescência — se quiser, podemos sugerir profissionais de confiança.
 
 Para adolescentes a partir de 16 anos, a primeira consulta é feita preferencialmente com presença de um responsável na parte inicial.
 
@@ -518,7 +518,7 @@ O atendimento da Dra. Jéssica é ambulatorial e agendado, então não substitui
   {
     id: "segunda-opiniao",
     category: "Encaminhamento",
-    question: "Já tenho psiquiatra, posso pedir uma segunda opinião?",
+    question: "Já tenho acompanhamento, posso pedir uma segunda opinião?",
     answer: `Olá, {{nome}}! 🌿
 
 Sim, segunda opinião é um direito seu e bem-vinda. A Dra. Jéssica revisa diagnóstico, medicação e plano terapêutico com olhar cuidadoso, sem desautorizar o colega — o objetivo é somar.

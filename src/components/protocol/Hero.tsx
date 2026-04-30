@@ -47,7 +47,7 @@ export const Hero = () => (
 
       <dl className="mt-16 grid grid-cols-2 gap-6 border-t border-border/60 pt-8 md:grid-cols-4">
         {[
-          ["Especialidade", "Psiquiatria"],
+          ["Especialidade", "Saúde mental"],
           ["Modalidade", "100% online"],
           ["Registro", doctor.crm],
           ["Cobertura", "Brasil"],

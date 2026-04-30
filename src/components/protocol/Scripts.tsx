@@ -20,7 +20,7 @@ const channelIcon = {
   Telefone: Phone,
 } as const;
 
-const SPECIALTIES = ["Psiquiatria", "TDAH no adulto", "Ansiedade", "Insônia", "Depressão", "Burnout"];
+const SPECIALTIES = ["Saúde mental", "TDAH no adulto", "Ansiedade", "Insônia", "Depressão", "Burnout"];
 const CHANNELS = ["WhatsApp", "E-mail", "Telefone"] as const;
 
 // Schema de validação — limita tamanhos e remove caracteres potencialmente perigosos
@@ -50,7 +50,7 @@ type FormValues = z.infer<typeof formSchema>;
 
 const initial: FormValues = {
   nome: "",
-  especialidade: "Psiquiatria",
+  especialidade: "Saúde mental",
   canal: "WhatsApp",
   data: undefined,
   hora: "",
