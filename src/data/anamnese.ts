@@ -9,7 +9,7 @@ export type AnamneseTemplate = {
 export const anamneseTemplates: AnamneseTemplate[] = [
   {
     id: "psiq-geral",
-    category: "Psiquiatria geral",
+    category: "Saúde mental geral",
     title: "Anamnese psiquiátrica completa (1ª consulta)",
     description: "Estrutura completa para primeira avaliação psiquiátrica adulta.",
     template: `ANAMNESE PSIQUIÁTRICA — PRIMEIRA CONSULTA

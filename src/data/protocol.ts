@@ -1,6 +1,6 @@
 export const doctor = {
   name: "Dra. Jéssica Carpaneda",
-  specialty: "Psiquiatra • Medicina Clínica Geral",
+  specialty: "Saúde mental • Medicina Clínica Geral",
   crm: "CRM GO 31189",
   city: "Atendimento 100% online — todo o Brasil",
   bookingUrl: "https://www.doctoralia.com.br/z/FcjTe4",
@@ -8,8 +8,8 @@ export const doctor = {
 };
 
 export const services = [
-  { name: "Primeira consulta — Psiquiatria", price: "R$ 320", duration: "50 min" },
-  { name: "Retorno — Psiquiatria", price: "R$ 210", duration: "30 min" },
+  { name: "Primeira consulta — Saúde mental", price: "R$ 320", duration: "50 min" },
+  { name: "Retorno — Saúde mental", price: "R$ 210", duration: "30 min" },
   { name: "Teleconsulta", price: "R$ 320", duration: "50 min" },
   { name: "Diagnóstico e tratamento de TDAH (adultos)", price: "R$ 320", duration: "50 min" },
   { name: "Tratamento de depressão", price: "R$ 320", duration: "50 min" },
@@ -203,7 +203,7 @@ export const faqs = [
   },
   {
     q: "Atende crianças e adolescentes?",
-    a: "O foco é atendimento de adultos. Casos pediátricos devem ser direcionados a especialistas em psiquiatria infantil.",
+    a: "O foco é atendimento de adultos. Casos pediátricos devem ser direcionados a especialistas em saúde mental infantil.",
   },
 ];
 

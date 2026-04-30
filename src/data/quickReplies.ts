@@ -33,10 +33,10 @@ export const quickReplies: QuickReply[] = [
   {
     id: "c-primeira-vez",
     tab: "casuais",
-    label: "Primeiro contato com psiquiatra",
+    label: "Primeiro contato com saúde mental",
     text: `Oi, {{nome}}. Antes de qualquer coisa: que bom que você se permitiu mandar essa mensagem. 💚
 
-Procurar um psiquiatra pela primeira vez mexe com a gente — é normal sentir um friozinho. A Dra. Jéssica conduz a primeira conversa de um jeito tranquilo, sem pressa, pra você se sentir à vontade pra contar o que tá sentindo.
+Buscar um cuidado em saúde mental pela primeira vez mexe com a gente — é normal sentir um friozinho. A Dra. Jéssica conduz a primeira conversa de um jeito tranquilo, sem pressa, pra você se sentir à vontade pra contar o que tá sentindo.
 
 Se quiser, te explico como funciona o agendamento: ${LINK}`,
   },
@@ -46,7 +46,7 @@ Se quiser, te explico como funciona o agendamento: ${LINK}`,
     label: "Medo de ser 'rotulado'",
     text: `{{nome}}, entendo perfeitamente esse receio — muita gente sente o mesmo. 🌿
 
-Diagnóstico em psiquiatria não é um rótulo, é uma chave pra entender o que tá acontecendo e poder cuidar. A Dra. Jéssica trabalha com escuta cuidadosa, sem pressa de "carimbar" nada. Tudo é sigiloso, e nada é compartilhado fora da consulta.
+Diagnóstico em saúde mental não é um rótulo, é uma chave pra entender o que tá acontecendo e poder cuidar. A Dra. Jéssica trabalha com escuta cuidadosa, sem pressa de "carimbar" nada. Tudo é sigiloso, e nada é compartilhado fora da consulta.
 
 Se quiser dar esse passo: ${LINK}`,
   },
@@ -97,17 +97,17 @@ Pra reagendar: ${LINK}`,
 
   // ---------------- ATALHOS / QUICK REPLIES ----------------
   { id: "a-valor", tab: "atalhos", tag: "Valor", label: "Valor da consulta", text: `Primeira consulta R$ 320 (50 min) e retorno R$ 210 (30 min), {{nome}}. Tudo online. Agendamento: ${LINK}` },
-  { id: "a-convenio", tab: "atalhos", tag: "Convênio", label: "Convênio (curto)", text: `Não atendemos convênio, {{nome}} — só particular. Emitimos recibo com CRM e CID pra você pedir reembolso ao seu plano. Agendamento: ${LINK}` },
-  { id: "a-online", tab: "atalhos", tag: "Telemedicina", label: "Só online?", text: `Sim, {{nome}}, atendimento 100% online por videochamada — mesma validade legal de consulta presencial. Receita digital vale em todo o Brasil. ${LINK}` },
-  { id: "a-receita", tab: "atalhos", tag: "Receita", label: "Receita controlada", text: `Sim, {{nome}}, a doutora prescreve quando indicado clinicamente — inclusive controladas, com assinatura digital válida. Avaliação acontece na consulta. ${LINK}` },
+  { id: "a-convenio", tab: "atalhos", tag: "Convênio", label: "Convênio (curto)", text: `Não atendemos convênio, {{nome}} — só particular. Emitimos recibo para você pedir reembolso ao seu plano de saúde, quando aplicável. Agendamento: ${LINK}` },
+  { id: "a-online", tab: "atalhos", tag: "Telemedicina", label: "Só online?", text: `Sim, {{nome}}, atendimento 100% online por videochamada — mesma validade legal de consulta presencial. Atendimento válido em todo o Brasil. ${LINK}` },
+  { id: "a-receita", tab: "atalhos", tag: "Receita", label: "Receita controlada", text: `{{nome}}, condutas e encaminhamentos são definidos com base na avaliação clínica feita na consulta — tudo conversado com você. ${LINK}` },
   { id: "a-tdah", tab: "atalhos", tag: "TDAH", label: "TDAH adulto", text: `Sim, {{nome}}! Diagnóstico de TDAH em adulto é um dos focos da Dra. Jéssica. Primeira consulta R$ 320, online. ${LINK}` },
   { id: "a-ansiedade", tab: "atalhos", tag: "Ansiedade", label: "Ansiedade", text: `Sim, {{nome}}, ansiedade e crises de pânico são acompanhadas com tratamento individualizado. Online, em todo o Brasil. ${LINK}` },
   { id: "a-depressao", tab: "atalhos", tag: "Depressão", label: "Depressão", text: `Sim, {{nome}}, a Dra. Jéssica acompanha quadros de depressão — leves a graves — com escuta cuidadosa e plano individualizado. ${LINK}` },
-  { id: "a-sono", tab: "atalhos", tag: "Sono", label: "Insônia", text: `Sim, {{nome}}, distúrbios de sono são avaliados com tratamento medicamentoso e não medicamentoso. ${LINK}` },
+  { id: "a-sono", tab: "atalhos", tag: "Sono", label: "Insônia", text: `Sim, {{nome}}, dificuldades de sono são avaliadas e o plano de cuidado é individualizado. ${LINK}` },
   { id: "a-bipolar", tab: "atalhos", tag: "Bipolar", label: "Bipolar", text: `Sim, {{nome}}, transtorno bipolar é uma das áreas de atuação. Acompanhamento contínuo e cuidadoso. ${LINK}` },
-  { id: "a-toc", tab: "atalhos", tag: "TOC", label: "TOC", text: `Sim, {{nome}}, TOC é tratado com medicação adequada e indicação de psicoterapia (TCC). ${LINK}` },
+  { id: "a-toc", tab: "atalhos", tag: "TOC", label: "TOC", text: `Sim, {{nome}}, TOC é acompanhado com plano de cuidado individualizado, incluindo indicação de psicoterapia (TCC) quando pertinente. ${LINK}` },
   { id: "a-burnout", tab: "atalhos", tag: "Burnout", label: "Burnout", text: `Sim, {{nome}}, burnout é avaliado com cuidado, incluindo orientação sobre afastamento quando necessário. ${LINK}` },
-  { id: "a-crianca", tab: "atalhos", tag: "Idade", label: "Atende criança?", text: `A Dra. Jéssica atende a partir de 16 anos, {{nome}}. Pra crianças, indicamos um(a) psiquiatra da infância — se quiser, te passo sugestões.` },
+  { id: "a-crianca", tab: "atalhos", tag: "Idade", label: "Atende criança?", text: `A Dra. Jéssica atende a partir de 16 anos, {{nome}}. Pra crianças, indicamos um(a) profissional de saúde mental da infância — se quiser, te passo sugestões.` },
   { id: "a-idoso", tab: "atalhos", tag: "Idade", label: "Atende idoso?", text: `Sim, {{nome}}, atende adultos e idosos. Atendimento online costuma ser bem confortável — se precisar, um familiar pode acompanhar.` },
   { id: "a-gestante", tab: "atalhos", tag: "Gestação", label: "Grávida / amamentando", text: `Sim, {{nome}}, há opções seguras na gestação e amamentação. A doutora avalia caso a caso, em parceria com o obstetra. ${LINK}` },
   { id: "a-horarios", tab: "atalhos", tag: "Agenda", label: "Horários", text: `Os horários atualizados aparecem aqui, {{nome}}: ${LINK} — se não achar horário, me avisa que tento encaixar.` },
@@ -117,7 +117,7 @@ Pra reagendar: ${LINK}`,
   { id: "a-cancelar", tab: "atalhos", tag: "Agenda", label: "Cancelar / reagendar", text: `Sem problema, {{nome}} — cancelamentos com mais de 24h têm reembolso integral pela Doctoralia. Pra reagendar: ${LINK}` },
   { id: "a-atestado", tab: "atalhos", tag: "Documentos", label: "Atestado", text: `Sim, {{nome}}, a doutora emite atestados, relatórios e laudos quando clinicamente indicado, com assinatura digital válida.` },
   { id: "a-recibo", tab: "atalhos", tag: "Documentos", label: "Recibo IR", text: `Sim, {{nome}}, o recibo serve pra dedução no IR e também pra pedido de reembolso ao plano de saúde.` },
-  { id: "a-renovar", tab: "atalhos", tag: "Receita", label: "Renovar receita", text: `Renovação de receita exige consulta, {{nome}} — exigência ética do CFM. Pacientes em acompanhamento agendam um retorno (R$ 210). ${LINK}` },
+  { id: "a-renovar", tab: "atalhos", tag: "Receita", label: "Renovar receita", text: `Renovações e ajustes de conduta exigem uma consulta de retorno, {{nome}} — questão ética. Pacientes em acompanhamento agendam um retorno (R$ 210). ${LINK}` },
   { id: "a-fora-brasil", tab: "atalhos", tag: "Telemedicina", label: "Fora do Brasil", text: `Sim, {{nome}}, brasileiros morando fora podem se consultar normalmente — basta CPF ativo. ${LINK}` },
   { id: "a-urgencia", tab: "atalhos", tag: "Urgência", label: "Crise / urgência", text: `{{nome}}, se há risco agora, por favor ligue CVV 188 (24h) ou procure um pronto-socorro. O atendimento da doutora é ambulatorial e agendado. 💚` },
 
@@ -126,11 +126,11 @@ Pra reagendar: ${LINK}`,
     id: "o-caro",
     tab: "objecoes",
     label: "\"Tá caro pra mim\"",
-    text: `Entendo perfeitamente, {{nome}}. 🌿 O valor da Dra. Jéssica está alinhado com a média de psiquiatras com a mesma formação, e cobre uma consulta longa (50 min na primeira), receita digital, relatórios e suporte pós-consulta.
+    text: `Entendo perfeitamente, {{nome}}. 🌿 O valor da Dra. Jéssica está alinhado com a média de profissionais de saúde mental com a mesma formação, e cobre uma consulta longa (50 min na primeira), documentos quando indicados e suporte pós-consulta.
 
 Algumas opções que ajudam:
 • Parcelamento no cartão pelo checkout da Doctoralia
-• Recibo com CID pra reembolso parcial pelo seu plano
+• Recibo para reembolso parcial pelo seu plano de saúde, quando aplicável
 • Espaçar mais os retornos depois da fase inicial
 
 Se fizer sentido: ${LINK}`,
@@ -139,7 +139,7 @@ Se fizer sentido: ${LINK}`,
     id: "o-pensar",
     tab: "objecoes",
     label: "\"Vou pensar\"",
-    text: `Claro, {{nome}}, pensa com calma. 💚 Só te deixo um lembrete carinhoso: a maioria das pessoas que adia uma consulta de psiquiatria se arrepende de não ter marcado antes — não pelo "remédio", mas pelo alívio de finalmente conversar com alguém que entende.
+    text: `Claro, {{nome}}, pensa com calma. 💚 Só te deixo um lembrete carinhoso: a maioria das pessoas que adia uma consulta de saúde mental se arrepende de não ter marcado antes — não pela conduta em si, mas pelo alívio de finalmente conversar com alguém que entende.
 
 Quando se sentir pronta(o), tô por aqui: ${LINK}`,
   },
@@ -173,7 +173,7 @@ Se em algum momento mudar de ideia, é por aqui: ${LINK}`,
     id: "o-ja-tentou",
     tab: "objecoes",
     label: "\"Já tentei e não funcionou\"",
-    text: `Sinto muito que tenha vivido isso, {{nome}}. 💚 Tratamento psiquiátrico não é tamanho único — às vezes é questão de ajuste de medicação, de abordagem, ou simplesmente de encontrar um(a) profissional que combine com você.
+    text: `Sinto muito que tenha vivido isso, {{nome}}. 💚 Tratamento em saúde mental não é tamanho único — às vezes é questão de ajuste de abordagem, de plano, ou simplesmente de encontrar um(a) profissional que combine com você.
 
 A Dra. Jéssica costuma revisar o histórico com calma antes de propor mudanças. Se quiser dar mais uma chance: ${LINK}`,
   },
@@ -181,7 +181,7 @@ A Dra. Jéssica costuma revisar o histórico com calma antes de propor mudanças
     id: "o-medo-remedio",
     tab: "objecoes",
     label: "\"Tenho medo de remédio\"",
-    text: `Esse medo é super comum e legítimo, {{nome}}. 🌿 A doutora não medica por medicar — só prescreve quando há indicação clara, conversa contigo sobre efeitos esperados, e existem casos em que o tratamento é só com mudanças de hábito e psicoterapia.
+    text: `Esse medo é super comum e legítimo, {{nome}}. 🌿 A doutora não propõe condutas "automáticas" — qualquer indicação é conversada com você, com transparência sobre o que esperar, e em muitos casos o cuidado envolve só mudanças de hábito e psicoterapia.
 
 A decisão é sempre conjunta. Pra conversar: ${LINK}`,
   },
@@ -221,7 +221,7 @@ Se quiser checar: ${LINK}`,
     id: "o-comparou",
     tab: "objecoes",
     label: "\"Achei mais barato em outro lugar\"",
-    text: `Faz sentido pesquisar, {{nome}} 🌿. Só vale comparar o que está incluído: 50 minutos de primeira consulta, retorno acessível, suporte por WhatsApp entre consultas, receita digital e relatórios sem custo extra. Se ainda assim preferir outra opção, tudo bem — fica o convite. ${LINK}`,
+    text: `Faz sentido pesquisar, {{nome}} 🌿. Só vale comparar o que está incluído: 50 minutos de primeira consulta, retorno acessível, suporte por WhatsApp entre consultas e documentos sem custo extra quando indicados. Se ainda assim preferir outra opção, tudo bem — fica o convite. ${LINK}`,
   },
 
   // ---------------- TRIAGEM (sequência WhatsApp) ----------------
@@ -230,7 +230,7 @@ Se quiser checar: ${LINK}`,
     tab: "triagem",
     tag: "1. Abertura",
     label: "Abertura + permissão",
-    text: `Oi, {{nome}}! Tudo bem? 💚 Aqui é da equipe da Dra. Jéssica Lopes, psiquiatra. Vi que você se interessou pelo atendimento — posso te fazer 3 perguntinhas rápidas pra entender o que está acontecendo e te orientar do melhor jeito? 🌿`,
+    text: `Oi, {{nome}}! Tudo bem? 💚 Aqui é da equipe da Dra. Jéssica Lopes, da área de saúde mental. Vi que você se interessou pelo atendimento — posso te fazer 3 perguntinhas rápidas pra entender o que está acontecendo e te orientar do melhor jeito? 🌿`,
   },
   {
     id: "t-02-queixa",
@@ -239,7 +239,7 @@ Se quiser checar: ${LINK}`,
     label: "Pergunta 1: queixa principal",
     text: `Perfeito! 🙏
 
-1) De forma bem livre, o que te fez procurar um psiquiatra agora? Pode ser uma frase só (ex.: "tô muito ansiosa", "não consigo dormir", "suspeita de TDAH", "tô esgotada no trabalho"...).`,
+1) De forma bem livre, o que te fez buscar cuidado em saúde mental agora? Pode ser uma frase só (ex.: "tô muito ansiosa", "não consigo dormir", "suspeita de TDAH", "tô esgotada no trabalho"...).`,
   },
   {
     id: "t-03-tempo",
@@ -257,7 +257,7 @@ Se quiser checar: ${LINK}`,
     label: "Pergunta 3: já tratou antes?",
     text: `Entendi. 🌿
 
-3) Você já se consultou com psiquiatra ou psicólogo antes? Está usando alguma medicação no momento? (Se sim, qual? sem problema se não lembrar o nome certinho.)`,
+3) Você já fez algum acompanhamento em saúde mental antes (psicólogo, psicoterapia, outro profissional)? Está em uso de algum tratamento ou medicação no momento? (Se sim, sem problema se não lembrar o nome certinho.)`,
   },
   {
     id: "t-05-risco",
@@ -303,7 +303,7 @@ Quer que eu te mostre os horários disponíveis? ${LINK}`,
     tab: "triagem",
     tag: "8. Encaixe",
     label: "Encaixe — ansiedade/pânico",
-    text: `{{nome}}, o que você descreve é muito compatível com um quadro ansioso — e tem tratamento, viu? 🌿 A doutora trabalha com escuta cuidadosa + plano individualizado (nem sempre envolve medicação).
+    text: `{{nome}}, o que você descreve é muito compatível com um quadro ansioso — e tem tratamento, viu? 🌿 A doutora trabalha com escuta cuidadosa + plano individualizado (plano individualizado, conversado com você).
 
 Primeira consulta online, 50 min, R$ 320. Posso te ajudar a marcar? ${LINK}`,
   },
@@ -330,7 +330,7 @@ Primeira consulta online, 50 min, R$ 320. Te ajudo a agendar? ${LINK}`,
     tab: "triagem",
     tag: "8. Encaixe",
     label: "Fora do escopo (encaminhar)",
-    text: `{{nome}}, pelo que você descreve, o ideal é um(a) profissional com outro foco (ex.: psiquiatria infantil / neurologia / dependência química em internação). A Dra. Jéssica não é a melhor indicação pra esse caso específico, mas posso te sugerir caminhos. 💚`,
+    text: `{{nome}}, pelo que você descreve, o ideal é um(a) profissional com outro foco (ex.: saúde mental infantil / neurologia / dependência química em internação). A Dra. Jéssica não é a melhor indicação pra esse caso específico, mas posso te sugerir caminhos. 💚`,
   },
   {
     id: "t-09-fechamento-link",
@@ -356,7 +356,7 @@ Qualquer dúvida no caminho, me chama. 💚`,
     text: `Tudo certo, {{nome}}! ✅ Sua consulta com a Dra. Jéssica está marcada para {{data}}.
 
 📍 100% online (link chega 30 min antes por e-mail e WhatsApp)
-📝 Se tiver exames, receitas antigas ou laudos, deixa em mãos
+📝 Se tiver exames, relatórios ou laudos antigos, deixa em mãos
 ⏰ Entra 5 min antes pra testar áudio/vídeo
 
 Qualquer coisa, me chama por aqui. 💚`,

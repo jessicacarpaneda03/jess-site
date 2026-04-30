@@ -14,7 +14,7 @@ import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { cn } from "@/lib/utils";
 
-const SPECIALTIES = ["Psiquiatria", "TDAH no adulto", "Ansiedade", "Insônia", "Depressão", "Burnout"];
+const SPECIALTIES = ["Saúde mental", "TDAH no adulto", "Ansiedade", "Insônia", "Depressão", "Burnout"];
 
 const safeText = (max: number) =>
   z.string().trim().max(max).regex(/^[^<>{}]*$/, { message: "Caracteres inválidos" });
@@ -25,7 +25,7 @@ type Tokens = {
   data: Date | undefined;
 };
 
-const initial: Tokens = { nome: "", especialidade: "Psiquiatria", data: undefined };
+const initial: Tokens = { nome: "", especialidade: "Saúde mental", data: undefined };
 
 const categories = ["Todas", ...Array.from(new Set(publicReplies.map((r) => r.category)))];
 
