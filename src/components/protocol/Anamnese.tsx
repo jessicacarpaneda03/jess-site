@@ -6,6 +6,7 @@ import { toast } from "sonner";
 import { z } from "zod";
 
 import { anamneseTemplates } from "@/data/anamnese";
+import { AnamneseSummary } from "@/components/protocol/AnamneseSummary";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -340,6 +341,8 @@ export const Anamnese = () => {
             Nenhum modelo encontrado para "{query}".
           </div>
         )}
+
+        <AnamneseSummary />
       </div>
     </section>
   );
