@@ -1,4 +1,11 @@
-export type QuickReplyTab = "fillers" | "casuais" | "atalhos" | "objecoes" | "triagem";
+export type QuickReplyTab =
+  | "fillers"
+  | "casuais"
+  | "atalhos"
+  | "objecoes"
+  | "triagem"
+  | "risco"
+  | "modulos";
 
 export type QuickReply = {
   id: string;
@@ -12,10 +19,12 @@ const LINK = "https://www.doctoralia.com.br/z/FcjTe4";
 
 export const quickReplyTabs: { id: QuickReplyTab; label: string; description: string }[] = [
   { id: "triagem", label: "Triagem", description: "Sequência para qualificar o paciente no WhatsApp antes do agendamento" },
+  { id: "risco", label: "Risco", description: "Protocolos de crise, ideação suicida e situações de urgência" },
   { id: "fillers", label: "Coringas", description: "Mensagens curtas de transição enquanto você verifica algo" },
   { id: "casuais", label: "Acolhimento", description: "Respostas humanizadas, tom 'chinelo', leves e próximas" },
-  { id: "atalhos", label: "Atalhos", description: "Mini-respostas de 1-2 linhas para dúvidas comuns" },
+  { id: "atalhos", label: "Atalhos", description: "Mini-respostas (1-2 linhas) para as 68 dúvidas mais comuns" },
   { id: "objecoes", label: "Objeções", description: "Respostas que escorregam objeções clássicas com cuidado" },
+  { id: "modulos", label: "Módulos CX", description: "Arquitetura completa de atendimento (A → F + Ficha + Fluxo)" },
 ];
 
 export const quickReplies: QuickReply[] = [
