@@ -9,10 +9,14 @@ export const doctor = {
 
 export const services = [
   { name: "Primeira consulta — Saúde mental", price: "R$ 350", duration: "50 min" },
-  { name: "Retorno — Saúde mental", price: "R$ 210", duration: "30 min" },
   { name: "Teleconsulta", price: "R$ 350", duration: "50 min" },
-  { name: "Diagnóstico e tratamento de TDAH (adultos)", price: "R$ 350", duration: "50 min" },
-  { name: "Tratamento de depressão", price: "R$ 350", duration: "50 min" },
+  { name: "Diagnóstico e tratamento do TDAH em adultos", price: "R$ 350", duration: "50 min" },
+  { name: "Tratamento de ansiedade", price: "R$ 350", duration: "50 min" },
+  { name: "Tratamento da depressão", price: "R$ 350", duration: "50 min" },
+  { name: "Tratamento da insônia", price: "R$ 350", duration: "50 min" },
+  { name: "Tratamento para síndrome de burnout", price: "R$ 350", duration: "50 min" },
+  { name: "Retorno — Saúde mental", price: "R$ 210", duration: "30 min" },
+  { name: "Retorno (telemedicina)", price: "R$ 210", duration: "30 min" },
 ];
 
 export type Stage = {
