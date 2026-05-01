@@ -50,6 +50,7 @@ function renderHighlighted(template: string, t: Tokens) {
 
 export const QuickReplies = () => {
   const [tab, setTab] = useState<QuickReplyTab>("fillers");
+  const [riskSub, setRiskSub] = useState<string>("all");
   const [query, setQuery] = useState("");
   const [copiedId, setCopiedId] = useState<string | null>(null);
   const [tokens, setTokens] = useState<Tokens>(initial);
@@ -68,6 +69,10 @@ export const QuickReplies = () => {
     const q = query.trim().toLowerCase();
     return quickReplies.filter((r) => {
       if (r.tab !== tab) return false;
+      if (tab === "risco" && riskSub !== "all") {
+        const sub = riskSubTabs.find((s) => s.id === riskSub);
+        if (sub && !sub.match.some((m) => r.tag?.includes(m))) return false;
+      }
       if (!q) return true;
       return (
         r.label.toLowerCase().includes(q) ||
@@ -75,7 +80,7 @@ export const QuickReplies = () => {
         (r.tag?.toLowerCase().includes(q) ?? false)
       );
     });
-  }, [tab, query]);
+  }, [tab, riskSub, query]);
 
   const handleCopy = async (id: string, template: string) => {
     const { text, missing } = applyTokens(template, tokens);
