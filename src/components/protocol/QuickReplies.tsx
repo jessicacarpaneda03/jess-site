@@ -184,6 +184,37 @@ export const QuickReplies = () => {
 
           {quickReplyTabs.map((t) => (
             <TabsContent key={t.id} value={t.id} className="mt-0">
+              {t.id === "risco" && (
+                <div className="mb-4 flex flex-wrap gap-2">
+                  <button
+                    type="button"
+                    onClick={() => setRiskSub("all")}
+                    className={cn(
+                      "rounded-full border px-3 py-1 text-xs font-medium transition",
+                      riskSub === "all"
+                        ? "border-destructive bg-destructive/10 text-destructive"
+                        : "border-border/60 bg-card hover:border-destructive/40",
+                    )}
+                  >
+                    Todas
+                  </button>
+                  {riskSubTabs.map((s) => (
+                    <button
+                      key={s.id}
+                      type="button"
+                      onClick={() => setRiskSub(s.id)}
+                      className={cn(
+                        "rounded-full border px-3 py-1 text-xs font-medium transition",
+                        riskSub === s.id
+                          ? "border-destructive bg-destructive/10 text-destructive"
+                          : "border-border/60 bg-card hover:border-destructive/40",
+                      )}
+                    >
+                      {s.label}
+                    </button>
+                  ))}
+                </div>
+              )}
               {filtered.length === 0 ? (
                 <div className="rounded-xl border border-dashed border-border/60 p-10 text-center text-sm text-muted-foreground">
                   Nenhuma resposta encontrada para essa busca.
