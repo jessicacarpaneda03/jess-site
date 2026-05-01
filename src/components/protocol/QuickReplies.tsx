@@ -5,7 +5,7 @@ import { CalendarIcon, Check, Copy, MessageCircle, RotateCcw, Search, Sparkles }
 import { toast } from "sonner";
 import { z } from "zod";
 
-import { quickReplies, quickReplyTabs, type QuickReplyTab } from "@/data/quickReplies";
+import { quickReplies, quickReplyTabs, riskSubTabs, type QuickReplyTab } from "@/data/quickReplies";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
