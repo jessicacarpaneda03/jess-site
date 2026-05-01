@@ -3,6 +3,7 @@ import { Stages } from "@/components/protocol/Stages";
 import { Scripts } from "@/components/protocol/Scripts";
 import { PublicReplies } from "@/components/protocol/PublicReplies";
 import { QuickReplies } from "@/components/protocol/QuickReplies";
+import { Scales } from "@/components/protocol/Scales";
 import { Anamnese } from "@/components/protocol/Anamnese";
 import { Services } from "@/components/protocol/Services";
 import { Faqs } from "@/components/protocol/Faqs";
@@ -15,6 +16,7 @@ const Index = () => (
     <Scripts />
     <PublicReplies />
     <QuickReplies />
+    <Scales />
     <Anamnese />
     <Services />
     <Faqs />

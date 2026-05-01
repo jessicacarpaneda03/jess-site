@@ -5,7 +5,7 @@ import { CalendarIcon, Check, Copy, MessageCircle, RotateCcw, Search, Sparkles }
 import { toast } from "sonner";
 import { z } from "zod";
 
-import { quickReplies, quickReplyTabs, type QuickReplyTab } from "@/data/quickReplies";
+import { quickReplies, quickReplyTabs, riskSubTabs, type QuickReplyTab } from "@/data/quickReplies";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -50,6 +50,7 @@ function renderHighlighted(template: string, t: Tokens) {
 
 export const QuickReplies = () => {
   const [tab, setTab] = useState<QuickReplyTab>("fillers");
+  const [riskSub, setRiskSub] = useState<string>("all");
   const [query, setQuery] = useState("");
   const [copiedId, setCopiedId] = useState<string | null>(null);
   const [tokens, setTokens] = useState<Tokens>(initial);
@@ -68,6 +69,10 @@ export const QuickReplies = () => {
     const q = query.trim().toLowerCase();
     return quickReplies.filter((r) => {
       if (r.tab !== tab) return false;
+      if (tab === "risco" && riskSub !== "all") {
+        const sub = riskSubTabs.find((s) => s.id === riskSub);
+        if (sub && !sub.match.some((m) => r.tag?.includes(m))) return false;
+      }
       if (!q) return true;
       return (
         r.label.toLowerCase().includes(q) ||
@@ -75,7 +80,7 @@ export const QuickReplies = () => {
         (r.tag?.toLowerCase().includes(q) ?? false)
       );
     });
-  }, [tab, query]);
+  }, [tab, riskSub, query]);
 
   const handleCopy = async (id: string, template: string) => {
     const { text, missing } = applyTokens(template, tokens);
@@ -179,6 +184,37 @@ export const QuickReplies = () => {
 
           {quickReplyTabs.map((t) => (
             <TabsContent key={t.id} value={t.id} className="mt-0">
+              {t.id === "risco" && (
+                <div className="mb-4 flex flex-wrap gap-2">
+                  <button
+                    type="button"
+                    onClick={() => setRiskSub("all")}
+                    className={cn(
+                      "rounded-full border px-3 py-1 text-xs font-medium transition",
+                      riskSub === "all"
+                        ? "border-destructive bg-destructive/10 text-destructive"
+                        : "border-border/60 bg-card hover:border-destructive/40",
+                    )}
+                  >
+                    Todas
+                  </button>
+                  {riskSubTabs.map((s) => (
+                    <button
+                      key={s.id}
+                      type="button"
+                      onClick={() => setRiskSub(s.id)}
+                      className={cn(
+                        "rounded-full border px-3 py-1 text-xs font-medium transition",
+                        riskSub === s.id
+                          ? "border-destructive bg-destructive/10 text-destructive"
+                          : "border-border/60 bg-card hover:border-destructive/40",
+                      )}
+                    >
+                      {s.label}
+                    </button>
+                  ))}
+                </div>
+              )}
               {filtered.length === 0 ? (
                 <div className="rounded-xl border border-dashed border-border/60 p-10 text-center text-sm text-muted-foreground">
                   Nenhuma resposta encontrada para essa busca.
