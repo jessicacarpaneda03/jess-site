@@ -814,16 +814,16 @@ Qualquer dúvida, me chama. 🌿`,
   {
     id: "m-C-2", tab: "modulos", tag: "C. Reembolso",
     label: "C.2 — Política de cancelamento e reembolso",
-    text: `Política de cancelamento e reembolso, {{nome}}:
+    text: `Política de cancelamento e reembolso, {{nome}} (regra oficial Doctoralia):
 
-🟢 Cancelamento com mais de 24h de antecedência → reembolso integral (100%) processado pela Doctoralia em até 7 dias úteis no mesmo meio de pagamento
-🟡 Cancelamento entre 24h e 12h da consulta → reembolso de 50% (cobre reserva de horário)
-🟠 Cancelamento com menos de 12h → sem reembolso, mas posso oferecer 1 reagendamento gratuito em até 30 dias
-🔴 Falta sem aviso (no-show) → sem reembolso e sem reagendamento gratuito
+🟢 Cancelamento com MAIS de 24h de antecedência → reembolso INTEGRAL (100%) automático pela Doctoralia, no mesmo meio de pagamento
+🔴 Cancelamento com MENOS de 24h ou falta sem aviso (no-show) → sem reembolso (cobre a reserva do horário)
 
-📦 Taxa de envio físico de receita (R$ 100, PIX) é não reembolsável após a postagem — antes da postagem, devolvo integralmente.
+🔁 Em casos de força maior (luto, internação, intercorrência grave, comprovados) avalio individualmente o reagendamento sem custo.
 
-Casos de força maior (luto, internação, intercorrência grave) são avaliados individualmente, com comprovação. 💚 ${LINK}`,
+📦 Taxa de envio físico de receita controlada A/B (R$ 100, PIX) é não reembolsável após a postagem — antes da postagem, devolvo integralmente.
+
+💚 ${LINK}`,
   },
   {
     id: "m-C-3", tab: "modulos", tag: "C. Reembolso plano",
