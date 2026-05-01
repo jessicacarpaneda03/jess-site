@@ -8,11 +8,11 @@ export const doctor = {
 };
 
 export const services = [
-  { name: "Primeira consulta — Saúde mental", price: "R$ 320", duration: "50 min" },
+  { name: "Primeira consulta — Saúde mental", price: "R$ 350", duration: "50 min" },
   { name: "Retorno — Saúde mental", price: "R$ 210", duration: "30 min" },
-  { name: "Teleconsulta", price: "R$ 320", duration: "50 min" },
-  { name: "Diagnóstico e tratamento de TDAH (adultos)", price: "R$ 320", duration: "50 min" },
-  { name: "Tratamento de depressão", price: "R$ 320", duration: "50 min" },
+  { name: "Teleconsulta", price: "R$ 350", duration: "50 min" },
+  { name: "Diagnóstico e tratamento de TDAH (adultos)", price: "R$ 350", duration: "50 min" },
+  { name: "Tratamento de depressão", price: "R$ 350", duration: "50 min" },
 ];
 
 export type Stage = {
@@ -109,7 +109,7 @@ Que bom que você chegou até aqui. Antes de qualquer coisa, quero te dizer: ped
 
 A Dra. Jéssica é especialista em {{especialidade}} e atende exclusivamente por telemedicina, com foco em ansiedade, TDAH no adulto, insônia, depressão e burnout.
 
-• Primeira consulta: R$ 320 (50 min)
+• Primeira consulta: R$ 350 (50 min)
 • Retorno: R$ 210 (30 min)
 • Agendamento e pagamento: https://www.doctoralia.com.br/z/FcjTe4
 

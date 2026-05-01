@@ -114,11 +114,11 @@ Pra reagendar: ${LINK}`,
   },
 
   // ---------------- ATALHOS (sintéticos, 1ª pessoa) ----------------
-  { id: "a-valor", tab: "atalhos", tag: "Valor", label: "Valor da consulta", text: `Primeira consulta R$ 320 (50 min) e retorno R$ 210 (30 min), {{nome}}. Tudo online. Agendamento: ${LINK}` },
+  { id: "a-valor", tab: "atalhos", tag: "Valor", label: "Valor da consulta", text: `Primeira consulta R$ 350 (50 min) e retorno R$ 210 (30 min), {{nome}}. Tudo online. Agendamento: ${LINK}` },
   { id: "a-convenio", tab: "atalhos", tag: "Convênio", label: "Convênio (curto)", text: `Não atendo convênio, {{nome}} — só particular. Emito recibo pra você pedir reembolso ao seu plano de saúde, quando aplicável. Agendamento: ${LINK}` },
   { id: "a-online", tab: "atalhos", tag: "Telemedicina", label: "Só online?", text: `Sim, {{nome}}, atendimento 100% online por videochamada — mesma validade legal de consulta presencial. Atendo todo o Brasil. ${LINK}` },
   { id: "a-receita", tab: "atalhos", tag: "Receita", label: "Receita controlada", text: `{{nome}}, condutas e encaminhamentos são definidos com base na avaliação clínica feita na consulta — tudo conversado com você. ${LINK}` },
-  { id: "a-tdah", tab: "atalhos", tag: "TDAH", label: "TDAH adulto", text: `Sim, {{nome}}! TDAH no adulto é uma das minhas áreas de foco. Primeira consulta R$ 320, online. ${LINK}` },
+  { id: "a-tdah", tab: "atalhos", tag: "TDAH", label: "TDAH adulto", text: `Sim, {{nome}}! TDAH no adulto é uma das minhas áreas de foco. Primeira consulta R$ 350, online. ${LINK}` },
   { id: "a-ansiedade", tab: "atalhos", tag: "Ansiedade", label: "Ansiedade", text: `Sim, {{nome}}, acompanho ansiedade e crises de pânico com plano individualizado. Online, em todo o Brasil. ${LINK}` },
   { id: "a-depressao", tab: "atalhos", tag: "Depressão", label: "Depressão", text: `Sim, {{nome}}, acompanho quadros depressivos — leves a graves — com escuta cuidadosa e plano individualizado. ${LINK}` },
   { id: "a-sono", tab: "atalhos", tag: "Sono", label: "Insônia", text: `Sim, {{nome}}, dificuldades de sono são avaliadas e o plano é individualizado. ${LINK}` },
@@ -292,7 +292,7 @@ Se quiser checar: ${LINK}`,
     tab: "triagem",
     tag: "1. Abertura",
     label: "Abertura + permissão",
-    text: `Oi, {{nome}}! Tudo bem? 💚 Sou a Dra. Jéssica Lopes, da área de saúde mental. Vi que você se interessou pelo atendimento — posso te fazer 3 perguntinhas rápidas pra entender o que está acontecendo e te orientar do melhor jeito? 🌿`,
+    text: `Oi, {{nome}}! Tudo bem? 💚 Sou a Dra. Jéssica Carpaneda, da área de saúde mental. Vi que você se interessou pelo atendimento — posso te fazer 3 perguntinhas rápidas pra entender o que está acontecendo e te orientar do melhor jeito? 🌿`,
   },
   {
     id: "t-02-queixa",
@@ -356,7 +356,7 @@ Se quiser checar: ${LINK}`,
     label: "Encaixe — perfil TDAH",
     text: `Pelo que você me conta, {{nome}}, faz muito sentido a gente investigar TDAH — é uma das minhas áreas de foco. 💚
 
-A primeira consulta é online (50 min, R$ 320) e já inicio a investigação com escalas validadas (ASRS-18). Sem precisar de exames antes.
+A primeira consulta é online (50 min, R$ 350) e já inicio a investigação com escalas validadas (ASRS-18). Sem precisar de exames antes.
 
 Quer que eu te mostre os horários disponíveis? ${LINK}`,
   },
@@ -367,7 +367,7 @@ Quer que eu te mostre os horários disponíveis? ${LINK}`,
     label: "Encaixe — ansiedade/pânico",
     text: `{{nome}}, o que você descreve é muito compatível com um quadro ansioso — e tem tratamento, viu? 🌿 Trabalho com escuta cuidadosa + plano individualizado, conversado com você.
 
-Primeira consulta online, 50 min, R$ 320. Posso te ajudar a marcar? ${LINK}`,
+Primeira consulta online, 50 min, R$ 350. Posso te ajudar a marcar? ${LINK}`,
   },
   {
     id: "t-08-encaixe-burnout",
@@ -376,7 +376,7 @@ Primeira consulta online, 50 min, R$ 320. Posso te ajudar a marcar? ${LINK}`,
     label: "Encaixe — burnout",
     text: `Pelo que você relata, {{nome}}, parece quadro de esgotamento (burnout). 💚 Eu avalio, oriento sobre afastamento se necessário e monto o plano de cuidado com você.
 
-Primeira consulta online, 50 min, R$ 320. Quer ver os horários? ${LINK}`,
+Primeira consulta online, 50 min, R$ 350. Quer ver os horários? ${LINK}`,
   },
   {
     id: "t-08-encaixe-depressao",
@@ -385,7 +385,7 @@ Primeira consulta online, 50 min, R$ 320. Quer ver os horários? ${LINK}`,
     label: "Encaixe — depressão",
     text: `{{nome}}, o que você compartilhou tem cara de quadro depressivo — e é totalmente tratável. 🌿 Você não precisa estar "no fundo" pra começar; quanto antes, melhor.
 
-Primeira consulta online, 50 min, R$ 320. Te ajudo a agendar? ${LINK}`,
+Primeira consulta online, 50 min, R$ 350. Te ajudo a agendar? ${LINK}`,
   },
   {
     id: "t-08-encaixe-fora-escopo",
@@ -609,12 +609,12 @@ Manda preenchido por aqui que eu reviso com você. 💚`,
   // ============================================================
 
   // ── Saudações e Primeiro Contato (01–03)
-  { id: "n01", tab: "atalhos", tag: "01. Saudação", label: "01. Boas-vindas", text: `Oi, {{nome}}! 💚 Sou a Dra. Jéssica Lopes — saúde mental. Que bom te ver por aqui! Como posso te ajudar hoje?` },
+  { id: "n01", tab: "atalhos", tag: "01. Saudação", label: "01. Boas-vindas", text: `Oi, {{nome}}! 💚 Sou a Dra. Jéssica Carpaneda — saúde mental. Que bom te ver por aqui! Como posso te ajudar hoje?` },
   { id: "n02", tab: "atalhos", tag: "02. Saudação", label: "02. Fora do horário", text: `Oi, {{nome}}! 🌙 Recebi sua mensagem fora do meu horário comercial (seg-sex, 9h-18h). Amanhã cedo te respondo com calma. Em urgência: CVV 188.` },
   { id: "n03", tab: "atalhos", tag: "03. Saudação", label: "03. Reapresentação", text: `Oi, {{nome}}! 💚 Que bom te ver de volta. Em que posso te ajudar hoje — quer agendar, tirar uma dúvida, ou outra coisa?` },
 
   // ── Valores (04–08)
-  { id: "n04", tab: "atalhos", tag: "04. Valor", label: "04. Valor 1ª consulta", text: `Primeira consulta: R$ 320 (50 min, online), {{nome}}. Inclui avaliação completa e plano de cuidado individualizado. Agendamento: ${LINK}` },
+  { id: "n04", tab: "atalhos", tag: "04. Valor", label: "04. Valor 1ª consulta", text: `Primeira consulta: R$ 350 (50 min, online), {{nome}}. Inclui avaliação completa e plano de cuidado individualizado. Agendamento: ${LINK}` },
   { id: "n05", tab: "atalhos", tag: "05. Valor", label: "05. Valor retorno", text: `Retorno: R$ 210 (30 min, online), {{nome}}. Indicado para acompanhamento, ajustes e renovação de conduta. ${LINK}` },
   { id: "n06", tab: "atalhos", tag: "06. Valor", label: "06. Por que esse valor", text: `O valor reflete formação especializada, consulta longa, suporte pós-consulta por WhatsApp e documentos sem custo extra quando indicados (exceto envio físico de receita A/B), {{nome}}. 🌿` },
   { id: "n07", tab: "atalhos", tag: "07. Valor", label: "07. Parcelamento", text: `Sim, {{nome}}! O checkout da Doctoralia permite parcelar no cartão de crédito (sujeito às condições da operadora). ${LINK}` },
@@ -674,7 +674,7 @@ Manda preenchido por aqui que eu reviso com você. 💚`,
   { id: "n47", tab: "atalhos", tag: "47. Cancel", label: "47. Remarcar", text: `Claro, {{nome}}! Me confirma o melhor dia/período e vejo o que tenho disponível. 🌿` },
   { id: "n48", tab: "atalhos", tag: "48. Cancel", label: "48. Faltei sem avisar", text: `Tudo bem acontecer, {{nome}}. 💚 Faltas sem aviso prévio (no-show) não geram reembolso, mas posso te ajudar a reagendar uma nova consulta. Quer marcar?` },
   { id: "n49", tab: "atalhos", tag: "49. Retorno", label: "49. Quando marcar retorno", text: `Em geral, primeiro retorno em 30 dias, {{nome}} — depois espaçamos conforme estabilidade. Alinho com você na consulta. 🌿` },
-  { id: "n50", tab: "atalhos", tag: "50. Retorno", label: "50. Retorno tardio (sumi)", text: `Que bom te ver de volta, {{nome}}! 💚 Se a última consulta foi há mais de 6 meses, conto como nova primeira consulta (R$ 320). Até lá, é retorno (R$ 210).` },
+  { id: "n50", tab: "atalhos", tag: "50. Retorno", label: "50. Retorno tardio (sumi)", text: `Que bom te ver de volta, {{nome}}! 💚 Se a última consulta foi há mais de 6 meses, conto como nova primeira consulta (R$ 350). Até lá, é retorno (R$ 210).` },
   { id: "n51", tab: "atalhos", tag: "51. Cancel", label: "51. Cancelei e quero remarcar", text: `Claro, {{nome}}! Posso reativar seu agendamento — só me confirma o melhor horário e te envio o novo link. 🌿` },
 
   // ── Urgência e Crises (52–54)
@@ -710,7 +710,7 @@ Manda preenchido por aqui que eu reviso com você. 💚`,
   {
     id: "m-A-1", tab: "modulos", tag: "A. Saudação",
     label: "A.1 — Mensagem de boas-vindas (auto)",
-    text: `Olá! 💚 Sou a Dra. Jéssica Lopes — saúde mental.
+    text: `Olá! 💚 Sou a Dra. Jéssica Carpaneda — saúde mental.
 
 Pra te atender melhor, escolha:
 1️⃣ Quero agendar uma consulta
