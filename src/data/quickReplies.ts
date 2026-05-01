@@ -114,11 +114,11 @@ Pra reagendar: ${LINK}`,
   },
 
   // ---------------- ATALHOS (sintéticos, 1ª pessoa) ----------------
-  { id: "a-valor", tab: "atalhos", tag: "Valor", label: "Valor da consulta", text: `Primeira consulta R$ 320 (50 min) e retorno R$ 210 (30 min), {{nome}}. Tudo online. Agendamento: ${LINK}` },
+  { id: "a-valor", tab: "atalhos", tag: "Valor", label: "Valor da consulta", text: `Primeira consulta R$ 350 (50 min) e retorno R$ 210 (30 min), {{nome}}. Tudo online. Agendamento: ${LINK}` },
   { id: "a-convenio", tab: "atalhos", tag: "Convênio", label: "Convênio (curto)", text: `Não atendo convênio, {{nome}} — só particular. Emito recibo pra você pedir reembolso ao seu plano de saúde, quando aplicável. Agendamento: ${LINK}` },
   { id: "a-online", tab: "atalhos", tag: "Telemedicina", label: "Só online?", text: `Sim, {{nome}}, atendimento 100% online por videochamada — mesma validade legal de consulta presencial. Atendo todo o Brasil. ${LINK}` },
   { id: "a-receita", tab: "atalhos", tag: "Receita", label: "Receita controlada", text: `{{nome}}, condutas e encaminhamentos são definidos com base na avaliação clínica feita na consulta — tudo conversado com você. ${LINK}` },
-  { id: "a-tdah", tab: "atalhos", tag: "TDAH", label: "TDAH adulto", text: `Sim, {{nome}}! TDAH no adulto é uma das minhas áreas de foco. Primeira consulta R$ 320, online. ${LINK}` },
+  { id: "a-tdah", tab: "atalhos", tag: "TDAH", label: "TDAH adulto", text: `Sim, {{nome}}! TDAH no adulto é uma das minhas áreas de foco. Primeira consulta R$ 350, online. ${LINK}` },
   { id: "a-ansiedade", tab: "atalhos", tag: "Ansiedade", label: "Ansiedade", text: `Sim, {{nome}}, acompanho ansiedade e crises de pânico com plano individualizado. Online, em todo o Brasil. ${LINK}` },
   { id: "a-depressao", tab: "atalhos", tag: "Depressão", label: "Depressão", text: `Sim, {{nome}}, acompanho quadros depressivos — leves a graves — com escuta cuidadosa e plano individualizado. ${LINK}` },
   { id: "a-sono", tab: "atalhos", tag: "Sono", label: "Insônia", text: `Sim, {{nome}}, dificuldades de sono são avaliadas e o plano é individualizado. ${LINK}` },
@@ -292,7 +292,7 @@ Se quiser checar: ${LINK}`,
     tab: "triagem",
     tag: "1. Abertura",
     label: "Abertura + permissão",
-    text: `Oi, {{nome}}! Tudo bem? 💚 Sou a Dra. Jéssica Lopes, da área de saúde mental. Vi que você se interessou pelo atendimento — posso te fazer 3 perguntinhas rápidas pra entender o que está acontecendo e te orientar do melhor jeito? 🌿`,
+    text: `Oi, {{nome}}! Tudo bem? 💚 Sou a Dra. Jéssica Carpaneda, da área de saúde mental. Vi que você se interessou pelo atendimento — posso te fazer 3 perguntinhas rápidas pra entender o que está acontecendo e te orientar do melhor jeito? 🌿`,
   },
   {
     id: "t-02-queixa",
@@ -356,7 +356,7 @@ Se quiser checar: ${LINK}`,
     label: "Encaixe — perfil TDAH",
     text: `Pelo que você me conta, {{nome}}, faz muito sentido a gente investigar TDAH — é uma das minhas áreas de foco. 💚
 
-A primeira consulta é online (50 min, R$ 320) e já inicio a investigação com escalas validadas (ASRS-18). Sem precisar de exames antes.
+A primeira consulta é online (50 min, R$ 350) e já inicio a investigação com escalas validadas (ASRS-18). Sem precisar de exames antes.
 
 Quer que eu te mostre os horários disponíveis? ${LINK}`,
   },
@@ -367,7 +367,7 @@ Quer que eu te mostre os horários disponíveis? ${LINK}`,
     label: "Encaixe — ansiedade/pânico",
     text: `{{nome}}, o que você descreve é muito compatível com um quadro ansioso — e tem tratamento, viu? 🌿 Trabalho com escuta cuidadosa + plano individualizado, conversado com você.
 
-Primeira consulta online, 50 min, R$ 320. Posso te ajudar a marcar? ${LINK}`,
+Primeira consulta online, 50 min, R$ 350. Posso te ajudar a marcar? ${LINK}`,
   },
   {
     id: "t-08-encaixe-burnout",
@@ -376,7 +376,7 @@ Primeira consulta online, 50 min, R$ 320. Posso te ajudar a marcar? ${LINK}`,
     label: "Encaixe — burnout",
     text: `Pelo que você relata, {{nome}}, parece quadro de esgotamento (burnout). 💚 Eu avalio, oriento sobre afastamento se necessário e monto o plano de cuidado com você.
 
-Primeira consulta online, 50 min, R$ 320. Quer ver os horários? ${LINK}`,
+Primeira consulta online, 50 min, R$ 350. Quer ver os horários? ${LINK}`,
   },
   {
     id: "t-08-encaixe-depressao",
@@ -385,7 +385,7 @@ Primeira consulta online, 50 min, R$ 320. Quer ver os horários? ${LINK}`,
     label: "Encaixe — depressão",
     text: `{{nome}}, o que você compartilhou tem cara de quadro depressivo — e é totalmente tratável. 🌿 Você não precisa estar "no fundo" pra começar; quanto antes, melhor.
 
-Primeira consulta online, 50 min, R$ 320. Te ajudo a agendar? ${LINK}`,
+Primeira consulta online, 50 min, R$ 350. Te ajudo a agendar? ${LINK}`,
   },
   {
     id: "t-08-encaixe-fora-escopo",
@@ -609,12 +609,12 @@ Manda preenchido por aqui que eu reviso com você. 💚`,
   // ============================================================
 
   // ── Saudações e Primeiro Contato (01–03)
-  { id: "n01", tab: "atalhos", tag: "01. Saudação", label: "01. Boas-vindas", text: `Oi, {{nome}}! 💚 Sou a Dra. Jéssica Lopes — saúde mental. Que bom te ver por aqui! Como posso te ajudar hoje?` },
+  { id: "n01", tab: "atalhos", tag: "01. Saudação", label: "01. Boas-vindas", text: `Oi, {{nome}}! 💚 Sou a Dra. Jéssica Carpaneda — saúde mental. Que bom te ver por aqui! Como posso te ajudar hoje?` },
   { id: "n02", tab: "atalhos", tag: "02. Saudação", label: "02. Fora do horário", text: `Oi, {{nome}}! 🌙 Recebi sua mensagem fora do meu horário comercial (seg-sex, 9h-18h). Amanhã cedo te respondo com calma. Em urgência: CVV 188.` },
   { id: "n03", tab: "atalhos", tag: "03. Saudação", label: "03. Reapresentação", text: `Oi, {{nome}}! 💚 Que bom te ver de volta. Em que posso te ajudar hoje — quer agendar, tirar uma dúvida, ou outra coisa?` },
 
   // ── Valores (04–08)
-  { id: "n04", tab: "atalhos", tag: "04. Valor", label: "04. Valor 1ª consulta", text: `Primeira consulta: R$ 320 (50 min, online), {{nome}}. Inclui avaliação completa e plano de cuidado individualizado. Agendamento: ${LINK}` },
+  { id: "n04", tab: "atalhos", tag: "04. Valor", label: "04. Valor 1ª consulta", text: `Primeira consulta: R$ 350 (50 min, online), {{nome}}. Inclui avaliação completa e plano de cuidado individualizado. Agendamento: ${LINK}` },
   { id: "n05", tab: "atalhos", tag: "05. Valor", label: "05. Valor retorno", text: `Retorno: R$ 210 (30 min, online), {{nome}}. Indicado para acompanhamento, ajustes e renovação de conduta. ${LINK}` },
   { id: "n06", tab: "atalhos", tag: "06. Valor", label: "06. Por que esse valor", text: `O valor reflete formação especializada, consulta longa, suporte pós-consulta por WhatsApp e documentos sem custo extra quando indicados (exceto envio físico de receita A/B), {{nome}}. 🌿` },
   { id: "n07", tab: "atalhos", tag: "07. Valor", label: "07. Parcelamento", text: `Sim, {{nome}}! O checkout da Doctoralia permite parcelar no cartão de crédito (sujeito às condições da operadora). ${LINK}` },
@@ -674,7 +674,7 @@ Manda preenchido por aqui que eu reviso com você. 💚`,
   { id: "n47", tab: "atalhos", tag: "47. Cancel", label: "47. Remarcar", text: `Claro, {{nome}}! Me confirma o melhor dia/período e vejo o que tenho disponível. 🌿` },
   { id: "n48", tab: "atalhos", tag: "48. Cancel", label: "48. Faltei sem avisar", text: `Tudo bem acontecer, {{nome}}. 💚 Faltas sem aviso prévio (no-show) não geram reembolso, mas posso te ajudar a reagendar uma nova consulta. Quer marcar?` },
   { id: "n49", tab: "atalhos", tag: "49. Retorno", label: "49. Quando marcar retorno", text: `Em geral, primeiro retorno em 30 dias, {{nome}} — depois espaçamos conforme estabilidade. Alinho com você na consulta. 🌿` },
-  { id: "n50", tab: "atalhos", tag: "50. Retorno", label: "50. Retorno tardio (sumi)", text: `Que bom te ver de volta, {{nome}}! 💚 Se a última consulta foi há mais de 6 meses, conto como nova primeira consulta (R$ 320). Até lá, é retorno (R$ 210).` },
+  { id: "n50", tab: "atalhos", tag: "50. Retorno", label: "50. Retorno tardio (sumi)", text: `Que bom te ver de volta, {{nome}}! 💚 Se a última consulta foi há mais de 6 meses, conto como nova primeira consulta (R$ 350). Até lá, é retorno (R$ 210).` },
   { id: "n51", tab: "atalhos", tag: "51. Cancel", label: "51. Cancelei e quero remarcar", text: `Claro, {{nome}}! Posso reativar seu agendamento — só me confirma o melhor horário e te envio o novo link. 🌿` },
 
   // ── Urgência e Crises (52–54)
@@ -710,7 +710,7 @@ Manda preenchido por aqui que eu reviso com você. 💚`,
   {
     id: "m-A-1", tab: "modulos", tag: "A. Saudação",
     label: "A.1 — Mensagem de boas-vindas (auto)",
-    text: `Olá! 💚 Sou a Dra. Jéssica Lopes — saúde mental.
+    text: `Olá! 💚 Sou a Dra. Jéssica Carpaneda — saúde mental.
 
 Pra te atender melhor, escolha:
 1️⃣ Quero agendar uma consulta
@@ -814,16 +814,16 @@ Qualquer dúvida, me chama. 🌿`,
   {
     id: "m-C-2", tab: "modulos", tag: "C. Reembolso",
     label: "C.2 — Política de cancelamento e reembolso",
-    text: `Política de cancelamento e reembolso, {{nome}}:
+    text: `Política de cancelamento e reembolso, {{nome}} (regra oficial Doctoralia):
 
-🟢 Cancelamento com mais de 24h de antecedência → reembolso integral (100%) processado pela Doctoralia em até 7 dias úteis no mesmo meio de pagamento
-🟡 Cancelamento entre 24h e 12h da consulta → reembolso de 50% (cobre reserva de horário)
-🟠 Cancelamento com menos de 12h → sem reembolso, mas posso oferecer 1 reagendamento gratuito em até 30 dias
-🔴 Falta sem aviso (no-show) → sem reembolso e sem reagendamento gratuito
+🟢 Cancelamento com MAIS de 24h de antecedência → reembolso INTEGRAL (100%) automático pela Doctoralia, no mesmo meio de pagamento
+🔴 Cancelamento com MENOS de 24h ou falta sem aviso (no-show) → sem reembolso (cobre a reserva do horário)
 
-📦 Taxa de envio físico de receita (R$ 100, PIX) é não reembolsável após a postagem — antes da postagem, devolvo integralmente.
+🔁 Em casos de força maior (luto, internação, intercorrência grave, comprovados) avalio individualmente o reagendamento sem custo.
 
-Casos de força maior (luto, internação, intercorrência grave) são avaliados individualmente, com comprovação. 💚 ${LINK}`,
+📦 Taxa de envio físico de receita controlada A/B (R$ 100, PIX) é não reembolsável após a postagem — antes da postagem, devolvo integralmente.
+
+💚 ${LINK}`,
   },
   {
     id: "m-C-3", tab: "modulos", tag: "C. Reembolso plano",
@@ -1020,4 +1020,123 @@ Me diz qual(is) faz sentido pro seu caso. 🌿`,
 
 ⚠️ Em qualquer ponto: se aparecer sinal de risco, pular para Módulo Risco (sondagem r-01 → conduta conforme nível). 💚`,
   },
+
+  // ============================================================
+  // EXTRAS — Respostas adicionais por tema (1ª pessoa, tom "porto seguro")
+  // ============================================================
+
+  // ── Acolhimento extras (perfil real: "porto seguro", "fardo pesado")
+  {
+    id: "c-fardo-pesado",
+    tab: "casuais",
+    label: "\"Tô com o mundo nas costas\"",
+    text: `{{nome}}, te leio. 💚 Quando o fardo está pesado demais pra carregar sozinha(o), buscar ajuda não é fraqueza — é sabedoria. Aqui é um lugar de pausa: a gente divide esse peso e procura juntas(os) o caminho de volta pro seu bem-estar.
+
+Sem cobrança, sem julgamento. Quando quiser começar: ${LINK} 🌿`,
+  },
+  {
+    id: "c-mente-cansada",
+    tab: "casuais",
+    label: "\"Minha mente não para\"",
+    text: `Entendo, {{nome}}. 🌿 Esse turbilhão na cabeça — pensamentos acelerados, sensação de que você não consegue desligar — é exaustivo e tem nome, tem causa e tem tratamento.
+
+Posso te ajudar a entender o que está acontecendo. Primeira consulta online, 50 min: ${LINK} 💚`,
+  },
+  {
+    id: "c-sem-leveza",
+    tab: "casuais",
+    label: "\"Perdi a leveza\"",
+    text: `{{nome}}, sentir que perdeu a leveza, que tudo virou peso, é um dos sinais mais comuns que escuto aqui. 💚 E é totalmente possível reencontrar a alegria de habitar a sua própria vida — com tempo, escuta e o cuidado certo.
+
+Quando quiser dar esse passo: ${LINK} 🌿`,
+  },
+  {
+    id: "c-tentando-ser-forte",
+    tab: "casuais",
+    label: "\"Tô tentando ser forte\"",
+    text: `{{nome}}, a mente adoece justamente de tanto tentar ser forte. 🌿 Aqui você não precisa carregar essa armadura — pode chegar do jeito que está.
+
+Meu papel não é te trazer mais cobrança, é amparar. Quando quiser: ${LINK} 💚`,
+  },
+
+  // ── Atalhos extras (69-110)
+  { id: "n69", tab: "atalhos", tag: "69. Sobre mim", label: "69. Quem é a doutora", text: `Sou a Dra. Jéssica Carpaneda, {{nome}} — médica (CRM GO 31189), pós-graduanda em Psiquiatria e Saúde Mental (Afya). Atuo principalmente com ansiedade, TDAH no adulto, depressão, insônia e burnout. Atendimento 100% online, em todo o Brasil. 🌿` },
+  { id: "n70", tab: "atalhos", tag: "70. Sobre mim", label: "70. Formação / RQE", text: `{{nome}}, sou médica (CRM GO 31189) com pós-graduação em Psiquiatria e Saúde Mental pela Afya — em processo de obtenção do RQE. Atuo dentro do escopo legal da minha formação, com escuta clínica cuidadosa. 💚` },
+  { id: "n71", tab: "atalhos", tag: "71. Sobre mim", label: "71. Especialista em quê?", text: `Atuo principalmente com ansiedade, TDAH no adulto, depressão, insônia e burnout, {{nome}}. Também acompanho transtornos do humor, do sono e quadros relacionados ao esgotamento. 🌿` },
+  { id: "n72", tab: "atalhos", tag: "72. Sobre mim", label: "72. Abordagem", text: `{{nome}}, minha abordagem combina ciência (medicação quando necessário) e humanidade (escuta cuidadosa, sem pressa de carimbar diagnóstico). Trabalho em parceria com psicólogos(as) e respeito o seu tempo. 💚` },
+  { id: "n73", tab: "atalhos", tag: "73. Sobre mim", label: "73. 5 endereços?", text: `{{nome}}, os endereços que aparecem na Doctoralia são apenas cadastrais. Atendo exclusivamente online, por videochamada, em todo o Brasil. 🌿` },
+
+  { id: "n74", tab: "atalhos", tag: "74. TDAH", label: "74. TDAH — como investigo", text: `{{nome}}, na investigação de TDAH adulto eu uso escuta clínica detalhada + escalas validadas (ASRS-18, DIVA quando necessário) + análise de impacto funcional ao longo da vida. Não preciso de exames antes da 1ª consulta. 💚` },
+  { id: "n75", tab: "atalhos", tag: "75. TDAH", label: "75. TDAH — quantas consultas", text: `Em geral, o diagnóstico de TDAH no adulto se confirma entre a 1ª consulta e o 1º retorno (30 dias), {{nome}}. Depois entramos na fase de tratamento e ajuste fino. 🌿` },
+  { id: "n76", tab: "atalhos", tag: "76. TDAH", label: "76. TDAH — preciso de neuropsicológico?", text: `Nem sempre, {{nome}}. O diagnóstico de TDAH é clínico — o neuropsicológico pode ajudar em casos duvidosos ou para diferenciar de outros quadros. Decidimos juntas(os) se faz sentido. 💚` },
+
+  { id: "n77", tab: "atalhos", tag: "77. Ansiedade", label: "77. Ansiedade — sem remédio?", text: `Sim, {{nome}}, muitos quadros ansiosos respondem bem a mudanças de hábito + psicoterapia, sem medicação. Avalio caso a caso e decidimos juntas(os) o melhor caminho. 🌿` },
+  { id: "n78", tab: "atalhos", tag: "78. Ansiedade", label: "78. Crise de pânico — o que faço agora?", text: `{{nome}}, na crise: respiração 4-7-8 (inspira 4s, segura 7s, solta 8s), os pés bem firmes no chão, gole de água gelada. A crise passa em 10-20 min mesmo parecendo eterna. 💚 Pra cuidar do quadro: ${LINK}` },
+
+  { id: "n79", tab: "atalhos", tag: "79. Insônia", label: "79. Insônia — primeiros passos", text: `{{nome}}, antes de qualquer remédio, a gente revisa higiene do sono (horários, telas, cafeína, ambiente) e técnicas comportamentais (controle de estímulo, restrição de sono). Em muitos casos, isso já resolve. 🌿` },
+  { id: "n80", tab: "atalhos", tag: "80. Insônia", label: "80. Insônia — uso melatonina?", text: `{{nome}}, melatonina pode ajudar em alguns casos (atraso de fase, jet lag), mas não é "remédio pra dormir" universal. Vamos avaliar o seu padrão de sono primeiro. 💚` },
+
+  { id: "n81", tab: "atalhos", tag: "81. Burnout", label: "81. Burnout — preciso afastar?", text: `Depende do quadro, {{nome}}. Avalio sintomas, função e contexto — quando há indicação clínica, emito laudo de afastamento. Não dá pra prescrever afastamento por WhatsApp; precisa de consulta. 🌿` },
+  { id: "n82", tab: "atalhos", tag: "82. Burnout", label: "82. Burnout — só descanso resolve?", text: `Descanso ajuda, {{nome}}, mas burnout costuma envolver mudanças mais profundas: padrão de cobrança, limites, suporte. A gente trabalha tudo isso no acompanhamento. 💚` },
+
+  { id: "n83", tab: "atalhos", tag: "83. Depressão", label: "83. Depressão — quanto tempo melhora?", text: `{{nome}}, a maioria dos pacientes começa a sentir melhora em 2-6 semanas de tratamento bem ajustado. O processo completo de recuperação leva alguns meses, com retornos regulares. 🌿` },
+  { id: "n84", tab: "atalhos", tag: "84. Depressão", label: "84. Depressão — vou ficar dependente?", text: `Antidepressivos não causam dependência química, {{nome}}. Eles têm tempo de uso recomendado (geralmente 6-12 meses após melhora) e a retirada é gradual, planejada juntas(os). 💚` },
+
+  { id: "n85", tab: "atalhos", tag: "85. Medicação", label: "85. Vai me drogar?", text: `Não, {{nome}}. 🌿 Medicação psiquiátrica bem indicada não te \"droga\" — corrige o que está desregulado pra você voltar a ser você. Qualquer indicação é conversada com você, com prós e contras na mesa.` },
+  { id: "n86", tab: "atalhos", tag: "86. Medicação", label: "86. Quanto tempo de tratamento?", text: `Depende do quadro, {{nome}}. Em geral: 6-12 meses para episódios únicos de depressão/ansiedade; uso contínuo em quadros recorrentes ou crônicos (TDAH, bipolar). Sempre reavaliado em consulta. 💚` },
+  { id: "n87", tab: "atalhos", tag: "87. Medicação", label: "87. E os efeitos colaterais?", text: `{{nome}}, todo medicamento tem possibilidade de efeitos. Eu sempre explico o que esperar, o que é passageiro e o que precisa de aviso imediato. A gente ajusta dose e troca se necessário. 🌿` },
+  { id: "n88", tab: "atalhos", tag: "88. Medicação", label: "88. Posso parar quando quiser?", text: `{{nome}}, pode sim — mas com plano. Parada abrupta de alguns remédios traz desconforto ou recaída. A gente combina a retirada juntas(os), no momento certo. 💚` },
+
+  { id: "n89", tab: "atalhos", tag: "89. Receita", label: "89. Receita digital — como recebo?", text: `Receitas digitais (com assinatura ICP-Brasil) chegam por e-mail logo após a consulta, {{nome}}. Você apresenta no celular ou imprime — vale em qualquer farmácia do Brasil. 🌿` },
+  { id: "n90", tab: "atalhos", tag: "90. Receita", label: "90. Receita controlada A/B (Sedex)", text: `{{nome}}, receita controlada tipo A (amarela) e B (azul) com retenção precisa ser enviada física. Taxa fixa de R$ 100 (Sedex), pagamento por PIX, postagem em até 2 dias úteis e código de rastreamento te enviado por aqui. 💚` },
+  { id: "n91", tab: "atalhos", tag: "91. Receita", label: "91. Validade da receita", text: `{{nome}}: receita comum vale 6 meses; receita B (azul) vale 30 dias; receita A (amarela, retinoides/opioides) vale 30 dias e é retida na farmácia. 🌿` },
+
+  { id: "n92", tab: "atalhos", tag: "92. 1ª consulta", label: "92. O que esperar da 1ª consulta", text: `{{nome}}, na 1ª consulta (50 min) eu te ouço com calma, faço perguntas sobre seu histórico, sintomas e contexto, e construímos juntas(os) uma hipótese inicial e o primeiro plano de cuidado. Sem pressa, sem rótulo apressado. 💚` },
+  { id: "n93", tab: "atalhos", tag: "93. 1ª consulta", label: "93. Preciso levar exames?", text: `Se tiver, traz! {{nome}}, exames recentes (sangue, tireoide, B12, vit D), relatórios anteriores e lista de medicações em uso ajudam muito. Se não tiver, sem problema — peço o que precisar. 🌿` },
+  { id: "n94", tab: "atalhos", tag: "94. 1ª consulta", label: "94. Vou precisar de exames depois?", text: `{{nome}}, em alguns casos sim — sangue, tireoide, B12, vit D pra descartar causas clínicas. Eu prescrevo na consulta se for o caso, e a gente revisa no retorno. 💚` },
+
+  { id: "n95", tab: "atalhos", tag: "95. Retorno", label: "95. Quanto tempo dura o retorno", text: `30 minutos, {{nome}}. Tempo focado em revisar evolução, ajustar plano e renovar receita quando necessário. 🌿` },
+  { id: "n96", tab: "atalhos", tag: "96. Retorno", label: "96. Posso fazer só 1 consulta?", text: `Pode, {{nome}} — mas vale lembrar: tratamento em saúde mental funciona com continuidade. A 1ª consulta inicia, e o(s) retorno(s) ajustam o que precisar. 💚` },
+
+  { id: "n97", tab: "atalhos", tag: "97. WhatsApp", label: "97. Posso te chamar entre consultas?", text: `Pode, {{nome}}, dentro do meu horário (seg-sex, 9h-18h) e para dúvidas administrativas ou orientações pontuais. Diagnóstico, ajuste de medicação e renovação de receita = só em consulta. 🌿` },
+  { id: "n98", tab: "atalhos", tag: "98. WhatsApp", label: "98. Quanto tempo demora resposta", text: `Costumo responder em algumas horas dentro do horário comercial, {{nome}}. Fora desse horário, retorno no próximo dia útil. 💚` },
+
+  { id: "n99", tab: "atalhos", tag: "99. Cancelamento", label: "99. Como cancelar (regra Doctoralia)", text: `{{nome}}, pelo painel da Doctoralia: cancelamento com mais de 24h de antecedência tem reembolso INTEGRAL automático. Menos de 24h ou no-show: sem reembolso. ${LINK}` },
+  { id: "n100", tab: "atalhos", tag: "100. Cancelamento", label: "100. Reembolso quando cai", text: `O reembolso da Doctoralia cai automaticamente no mesmo meio de pagamento (PIX/cartão), em até 7 dias úteis, {{nome}}. 🌿` },
+
+  { id: "n101", tab: "atalhos", tag: "101. Plano de saúde", label: "101. CBHPM consulta", text: `{{nome}}, o código CBHPM da consulta em saúde mental é 50000462 — é esse que o seu plano usa pra calcular reembolso. Vale ligar no SAC do plano antes pra confirmar o valor. 💚` },
+  { id: "n102", tab: "atalhos", tag: "102. Plano de saúde", label: "102. Plano cobre teleconsulta?", text: `A maioria dos planos cobre teleconsulta, {{nome}} — mas o valor de reembolso varia muito. Liga no SAC do seu plano e pergunta pelo código 50000462 (consulta em saúde mental). 🌿` },
+
+  { id: "n103", tab: "atalhos", tag: "103. Privacidade", label: "103. Vai aparecer no meu nome em algum lugar?", text: `Não, {{nome}}. 🔒 A consulta é sigilosa e não aparece em sistemas públicos, do trabalho ou em buscas. O recibo e a receita ficam só com você. 💚` },
+  { id: "n104", tab: "atalhos", tag: "104. Privacidade", label: "104. Empresa vai saber?", text: `Não, {{nome}}. Sua consulta não é informada a empregador, escola ou plano sem sua autorização expressa. Atestado e laudo são entregues a você, e você decide se apresenta. 🌿` },
+
+  { id: "n105", tab: "atalhos", tag: "105. Família", label: "105. Posso marcar pra outra pessoa?", text: `Pode iniciar o contato, {{nome}}, mas o agendamento precisa ser confirmado pelo(a) próprio(a) paciente (acima de 16 anos), por questão ética e de vínculo. 💚` },
+
+  { id: "n106", tab: "atalhos", tag: "106. Anti-fraude", label: "106. \"Atendem por R$ 50?\"", text: `{{nome}}, meu valor é R$ 350 (1ª) e R$ 210 (retorno). Se viu valor diferente em algum lugar fora da Doctoralia, provavelmente é golpe — só agendo pelo link oficial: ${LINK}` },
+  { id: "n107", tab: "atalhos", tag: "107. Anti-fraude", label: "107. Outra pessoa pediu PIX em meu nome", text: `{{nome}}, atenção: nunca peço PIX pra agendar consulta — o pagamento é sempre pelo checkout da Doctoralia. Só recebo PIX direto na taxa de envio físico de receita A/B (R$ 100), e sempre confirmo a chave por aqui. 🛡️` },
+
+  { id: "n108", tab: "atalhos", tag: "108. Diversos", label: "108. Acompanhamento por quanto tempo?", text: `Varia, {{nome}}: alguns quadros estabilizam em 6-12 meses; outros (TDAH, bipolar, recorrentes) pedem acompanhamento contínuo, com retornos espaçados. A gente revisa juntas(os) sempre. 🌿` },
+  { id: "n109", tab: "atalhos", tag: "109. Diversos", label: "109. Mudei de cidade — continua?", text: `Continua, {{nome}}! 💚 Como atendo só online, mudança de cidade não interrompe — basta manter o CPF ativo. Se for pra fora do Brasil, também atendo brasileiros no exterior.` },
+  { id: "n110", tab: "atalhos", tag: "110. Diversos", label: "110. Reagendamento por intercorrência minha", text: `{{nome}}, se eu precisar reagendar por algum motivo de força maior, te aviso o quanto antes e te ofereço novos horários sem custo. Compromisso é via de mão dupla. 🌿💚` },
+
+  // ── Objeções extras
+  {
+    id: "o-rqe",
+    tab: "objecoes",
+    label: "\"Você é psiquiatra mesmo?\"",
+    text: `Pergunta justa, {{nome}}. 🌿 Sou médica (CRM GO 31189) e atualmente pós-graduanda em Psiquiatria e Saúde Mental pela Afya — em processo de obtenção do RQE. Atuo dentro do escopo legal da minha formação médica, com escuta clínica cuidadosa e foco em saúde mental. Transparência total. 💚`,
+  },
+  {
+    id: "o-confianca-online",
+    tab: "objecoes",
+    label: "\"Não confio em médico online\"",
+    text: `Entendo, {{nome}}. 🌿 A teleconsulta é regulamentada pelo CFM (Resolução 2.314/2022) e tem mesma validade legal da presencial. Pacientes relatam se sentir mais à vontade falando de casa — e a continuidade do cuidado fica mais fácil. Se não fluir, você não fica preso(a). ${LINK} 💚`,
+  },
+  {
+    id: "o-tempo-resposta",
+    tab: "objecoes",
+    label: "\"Vc demora pra responder\"",
+    text: `Tem razão, {{nome}} — me desculpa. 💚 Respondo dentro do meu horário (seg-sex, 9h-18h) e às vezes acumula. Se for urgente clínica: CVV 188 / SAMU 192. Pra agendar / dúvidas, fico à disposição já já. 🌿`,
+  },
 ];
+
