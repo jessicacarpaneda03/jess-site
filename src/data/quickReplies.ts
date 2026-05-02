@@ -765,7 +765,7 @@ Vou seguir conforme o caso. 💚`,
 💳 2. Pagamento → PIX, débito ou crédito (parcelável) pelo checkout da Doctoralia
 ✉️ 3. Confirmação → chega por e-mail e WhatsApp
 🔗 4. Link da videochamada → enviado 30 min antes
-👩‍⚕️ 5. Consulta → 70 min (1ª) ou 30 min (retorno) comigo
+👩‍⚕️ 5. Consulta → 70 min (1ª) ou 60 min (retorno) comigo
 📋 6. Plano de cuidado → conduta + documentos enviados após a consulta
 
 Simples assim. 💚`,
