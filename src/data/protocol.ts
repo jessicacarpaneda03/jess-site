@@ -8,15 +8,15 @@ export const doctor = {
 };
 
 export const services = [
-  { name: "Primeira consulta — Saúde mental", price: "R$ 350", duration: "50 min" },
-  { name: "Teleconsulta", price: "R$ 350", duration: "50 min" },
-  { name: "Diagnóstico e tratamento do TDAH em adultos", price: "R$ 350", duration: "50 min" },
-  { name: "Tratamento de ansiedade", price: "R$ 350", duration: "50 min" },
-  { name: "Tratamento da depressão", price: "R$ 350", duration: "50 min" },
-  { name: "Tratamento da insônia", price: "R$ 350", duration: "50 min" },
-  { name: "Tratamento para síndrome de burnout", price: "R$ 350", duration: "50 min" },
-  { name: "Retorno — Saúde mental", price: "R$ 210", duration: "30 min" },
-  { name: "Retorno (telemedicina)", price: "R$ 210", duration: "30 min" },
+  { name: "Primeira consulta — Saúde mental", price: "R$ 320", duration: "70 min" },
+  { name: "Teleconsulta", price: "R$ 320", duration: "70 min" },
+  { name: "Diagnóstico e tratamento do TDAH em adultos", price: "R$ 320", duration: "70 min" },
+  { name: "Tratamento de ansiedade", price: "R$ 320", duration: "70 min" },
+  { name: "Tratamento da depressão", price: "R$ 320", duration: "70 min" },
+  { name: "Tratamento da insônia", price: "R$ 320", duration: "70 min" },
+  { name: "Tratamento para síndrome de burnout", price: "R$ 320", duration: "70 min" },
+  { name: "Retorno — Saúde mental", price: "R$ 210", duration: "60 min" },
+  { name: "Retorno (telemedicina)", price: "R$ 210", duration: "60 min" },
 ];
 
 export type Stage = {
