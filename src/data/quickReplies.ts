@@ -1095,7 +1095,7 @@ Meu papel não é te trazer mais cobrança, é amparar. Quando quiser: ${LINK} �
   { id: "n93", tab: "atalhos", tag: "93. 1ª consulta", label: "93. Preciso levar exames?", text: `Se tiver, traz! {{nome}}, exames recentes (sangue, tireoide, B12, vit D), relatórios anteriores e lista de medicações em uso ajudam muito. Se não tiver, sem problema — peço o que precisar. 🌿` },
   { id: "n94", tab: "atalhos", tag: "94. 1ª consulta", label: "94. Vou precisar de exames depois?", text: `{{nome}}, em alguns casos sim — sangue, tireoide, B12, vit D pra descartar causas clínicas. Eu prescrevo na consulta se for o caso, e a gente revisa no retorno. 💚` },
 
-  { id: "n95", tab: "atalhos", tag: "95. Retorno", label: "95. Quanto tempo dura o retorno", text: `30 minutos, {{nome}}. Tempo focado em revisar evolução, ajustar plano e renovar receita quando necessário. 🌿` },
+  { id: "n95", tab: "atalhos", tag: "95. Retorno", label: "95. Quanto tempo dura o retorno", text: `60 minutos, {{nome}}. Tempo focado em revisar evolução, ajustar plano e renovar receita quando necessário. 🌿` },
   { id: "n96", tab: "atalhos", tag: "96. Retorno", label: "96. Posso fazer só 1 consulta?", text: `Pode, {{nome}} — mas vale lembrar: tratamento em saúde mental funciona com continuidade. A 1ª consulta inicia, e o(s) retorno(s) ajustam o que precisar. 💚` },
 
   { id: "n97", tab: "atalhos", tag: "97. WhatsApp", label: "97. Posso te chamar entre consultas?", text: `Pode, {{nome}}, dentro do meu horário (seg-sex, 9h-18h) e para dúvidas administrativas ou orientações pontuais. Diagnóstico, ajuste de medicação e renovação de receita = só em consulta. 🌿` },
