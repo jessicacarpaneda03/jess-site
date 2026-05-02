@@ -43,7 +43,7 @@ export const publicReplies: PublicReply[] = [
 
 A Dra. Jéssica Carpaneda atende exclusivamente como particular, sem vínculo com convênios no momento. Após a consulta, é emitido recibo com CRM e CID, que pode ser usado para reembolso junto ao seu plano (a maioria oferece reembolso parcial — vale consultar diretamente com o seu).
 
-• Primeira consulta: R$ 350 (50 min)
+• Primeira consulta: R$ 320 (70 min)
 • Retorno: R$ 210 (30 min)
 • 100% online, em todo o Brasil
 
@@ -71,9 +71,9 @@ Para agendar: ${LINK}`,
 
 Os valores praticados pela Dra. Jéssica Carpaneda em {{especialidade}} são:
 
-• Primeira consulta — R$ 350 (50 min)
+• Primeira consulta — R$ 320 (70 min)
 • Retorno — R$ 210 (30 min)
-• Diagnóstico e acompanhamento de TDAH em adultos — R$ 350
+• Diagnóstico e acompanhamento de TDAH em adultos — R$ 320
 
 Atendimento exclusivamente por telemedicina (videochamada), com mesma validade legal de uma consulta presencial. Receitas e relatórios são enviados digitalmente.
 
@@ -131,7 +131,7 @@ Se quiser conversar com a doutora: ${LINK}`,
 
 A renovação de receita exige consulta médica — é uma exigência ética e legal do CFM, não apenas do consultório. Pacientes em acompanhamento com a Dra. Jéssica podem agendar um retorno (R$ 210, 30 min) onde a medicação é reavaliada e a receita reemitida na hora.
 
-Para pacientes novos, é necessária a primeira consulta (R$ 350), que permite à doutora conhecer seu histórico antes de assumir a prescrição com segurança.
+Para pacientes novos, é necessária a primeira consulta (R$ 320), que permite à doutora conhecer seu histórico antes de assumir a prescrição com segurança.
 
 Para agendar: ${LINK}`,
   },
@@ -179,7 +179,7 @@ Para agendar: ${LINK}`,
 
 Por questões éticas e de segurança, a Dra. Jéssica não orienta sobre dose, ajuste ou troca de medicação fora de consulta — cada pessoa responde de forma diferente, e uma orientação genérica pode causar prejuízo.
 
-Se a dúvida é urgente e você já é paciente, agende um retorno breve (R$ 210). Se ainda não é paciente, a primeira consulta (R$ 350) permite avaliar com segurança.
+Se a dúvida é urgente e você já é paciente, agende um retorno breve (R$ 210). Se ainda não é paciente, a primeira consulta (R$ 320) permite avaliar com segurança.
 
 Em caso de efeito adverso grave, procure um pronto-socorro.
 
@@ -217,7 +217,7 @@ A avaliação de TDAH no adulto é feita ao longo de uma ou mais consultas, com 
 
 Após o diagnóstico, é construído um plano terapêutico individualizado, que pode envolver medicação, orientações de organização e encaminhamento para psicoterapia quando necessário.
 
-• Primeira consulta: R$ 350 (50 min) • 100% online
+• Primeira consulta: R$ 320 (70 min) • 100% online
 
 Para agendar: ${LINK}`,
   },
@@ -444,14 +444,14 @@ Avise por aqui se possível, para alinharmos. 💚`,
     question: "Como funciona a primeira consulta?",
     answer: `Olá, {{nome}}! Que bom que está pensando em buscar ajuda — esse já é um passo importante. 🌿
 
-A primeira consulta com a Dra. Jéssica em {{especialidade}} dura 50 minutos e é feita por videochamada. Nela, a doutora dedica tempo para te ouvir com calma, entender seu histórico, suas queixas atuais e construir, junto com você, um plano de cuidado.
+A primeira consulta com a Dra. Jéssica em {{especialidade}} dura 70 minutos e é feita por videochamada. Nela, a doutora dedica tempo para te ouvir com calma, entender seu histórico, suas queixas atuais e construir, junto com você, um plano de cuidado.
 
 Para aproveitar melhor:
 • Esteja em um ambiente reservado e silencioso
 • Tenha em mãos lista de medicamentos em uso e exames recentes (se houver)
 • Não precisa preparar nada além disso — o resto é conversa
 
-Valor: R$ 350 • Para agendar: ${LINK}`,
+Valor: R$ 320 • Para agendar: ${LINK}`,
   },
   {
     id: "retorno-prazo",
@@ -475,7 +475,7 @@ Para agendar retorno: ${LINK}`,
     question: "Já fui paciente há um tempo, conta como retorno?",
     answer: `Olá, {{nome}}! Que bom ter você de volta. 🌿
 
-Pacientes com último atendimento há até 12 meses podem agendar como retorno (R$ 210). Acima desse prazo, a recomendação é nova primeira consulta (R$ 350), para a doutora reavaliar seu quadro com calma e atualizar o plano de cuidado.
+Pacientes com último atendimento há até 12 meses podem agendar como retorno (R$ 210). Acima desse prazo, a recomendação é nova primeira consulta (R$ 320), para a doutora reavaliar seu quadro com calma e atualizar o plano de cuidado.
 
 Para agendar: ${LINK}`,
   },
