@@ -113,8 +113,8 @@ Que bom que você chegou até aqui. Antes de qualquer coisa, quero te dizer: ped
 
 A Dra. Jéssica é especialista em {{especialidade}} e atende exclusivamente por telemedicina, com foco em ansiedade, TDAH no adulto, insônia, depressão e burnout.
 
-• Primeira consulta: R$ 350 (50 min)
-• Retorno: R$ 210 (30 min)
+• Primeira consulta: R$ 320 (70 min)
+• Retorno: R$ 210 (60 min)
 • Agendamento e pagamento: https://www.doctoralia.com.br/z/FcjTe4
 
 Posso te ajudar a escolher o melhor horário? (Resposta via {{canal}})`,
