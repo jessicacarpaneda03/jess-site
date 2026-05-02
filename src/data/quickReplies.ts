@@ -114,7 +114,7 @@ Pra reagendar: ${LINK}`,
   },
 
   // ---------------- ATALHOS (sintéticos, 1ª pessoa) ----------------
-  { id: "a-valor", tab: "atalhos", tag: "Valor", label: "Valor da consulta", text: `Primeira consulta R$ 320 (70 min) e retorno R$ 210 (30 min), {{nome}}. Tudo online. Agendamento: ${LINK}` },
+  { id: "a-valor", tab: "atalhos", tag: "Valor", label: "Valor da consulta", text: `Primeira consulta R$ 320 (70 min) e retorno R$ 210 (60 min), {{nome}}. Tudo online. Agendamento: ${LINK}` },
   { id: "a-convenio", tab: "atalhos", tag: "Convênio", label: "Convênio (curto)", text: `Não atendo convênio, {{nome}} — só particular. Emito recibo pra você pedir reembolso ao seu plano de saúde, quando aplicável. Agendamento: ${LINK}` },
   { id: "a-online", tab: "atalhos", tag: "Telemedicina", label: "Só online?", text: `Sim, {{nome}}, atendimento 100% online por videochamada — mesma validade legal de consulta presencial. Atendo todo o Brasil. ${LINK}` },
   { id: "a-receita", tab: "atalhos", tag: "Receita", label: "Receita controlada", text: `{{nome}}, condutas e encaminhamentos são definidos com base na avaliação clínica feita na consulta — tudo conversado com você. ${LINK}` },
@@ -615,7 +615,7 @@ Manda preenchido por aqui que eu reviso com você. 💚`,
 
   // ── Valores (04–08)
   { id: "n04", tab: "atalhos", tag: "04. Valor", label: "04. Valor 1ª consulta", text: `Primeira consulta: R$ 320 (70 min, online), {{nome}}. Inclui avaliação completa e plano de cuidado individualizado. Agendamento: ${LINK}` },
-  { id: "n05", tab: "atalhos", tag: "05. Valor", label: "05. Valor retorno", text: `Retorno: R$ 210 (30 min, online), {{nome}}. Indicado para acompanhamento, ajustes e renovação de conduta. ${LINK}` },
+  { id: "n05", tab: "atalhos", tag: "05. Valor", label: "05. Valor retorno", text: `Retorno: R$ 210 (60 min, online), {{nome}}. Indicado para acompanhamento, ajustes e renovação de conduta. ${LINK}` },
   { id: "n06", tab: "atalhos", tag: "06. Valor", label: "06. Por que esse valor", text: `O valor reflete formação especializada, consulta longa, suporte pós-consulta por WhatsApp e documentos sem custo extra quando indicados (exceto envio físico de receita A/B), {{nome}}. 🌿` },
   { id: "n07", tab: "atalhos", tag: "07. Valor", label: "07. Parcelamento", text: `Sim, {{nome}}! O checkout da Doctoralia permite parcelar no cartão de crédito (sujeito às condições da operadora). ${LINK}` },
   { id: "n08", tab: "atalhos", tag: "08. Valor", label: "08. Desconto / social", text: `{{nome}}, hoje não trabalho com descontos individuais — pra manter equidade entre pacientes. Se o valor pesar, posso te indicar serviços públicos (CAPS, UBS) ou clínicas-escola. 💚` },

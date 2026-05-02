@@ -44,7 +44,7 @@ export const publicReplies: PublicReply[] = [
 A Dra. Jéssica Carpaneda atende exclusivamente como particular, sem vínculo com convênios no momento. Após a consulta, é emitido recibo com CRM e CID, que pode ser usado para reembolso junto ao seu plano (a maioria oferece reembolso parcial — vale consultar diretamente com o seu).
 
 • Primeira consulta: R$ 320 (70 min)
-• Retorno: R$ 210 (30 min)
+• Retorno: R$ 210 (60 min)
 • 100% online, em todo o Brasil
 
 Se quiser agendar: ${LINK}
@@ -72,7 +72,7 @@ Para agendar: ${LINK}`,
 Os valores praticados pela Dra. Jéssica Carpaneda em {{especialidade}} são:
 
 • Primeira consulta — R$ 320 (70 min)
-• Retorno — R$ 210 (30 min)
+• Retorno — R$ 210 (60 min)
 • Diagnóstico e acompanhamento de TDAH em adultos — R$ 320
 
 Atendimento exclusivamente por telemedicina (videochamada), com mesma validade legal de uma consulta presencial. Receitas e relatórios são enviados digitalmente.
@@ -129,7 +129,7 @@ Se quiser conversar com a doutora: ${LINK}`,
     question: "Só preciso renovar a receita, posso?",
     answer: `Olá, {{nome}}! 🌿
 
-A renovação de receita exige consulta médica — é uma exigência ética e legal do CFM, não apenas do consultório. Pacientes em acompanhamento com a Dra. Jéssica podem agendar um retorno (R$ 210, 30 min) onde a medicação é reavaliada e a receita reemitida na hora.
+A renovação de receita exige consulta médica — é uma exigência ética e legal do CFM, não apenas do consultório. Pacientes em acompanhamento com a Dra. Jéssica podem agendar um retorno (R$ 210, 60 min) onde a medicação é reavaliada e a receita reemitida na hora.
 
 Para pacientes novos, é necessária a primeira consulta (R$ 320), que permite à doutora conhecer seu histórico antes de assumir a prescrição com segurança.
 
