@@ -642,7 +642,7 @@ Manda preenchido por aqui que eu reviso com você. 💚`,
   { id: "n23", tab: "atalhos", tag: "23. Pagamento", label: "23. Pagamento direto?", text: `{{nome}}, o pagamento da consulta é via Doctoralia (mais segurança pra você e pra mim). Só recebo PIX direto na taxa de envio físico de receita A/B (R$ 100). 🌿` },
 
   // ── Sobre a Consulta (24–30)
-  { id: "n24", tab: "atalhos", tag: "24. Consulta", label: "24. Quanto tempo dura", text: `Primeira consulta: 70 minutos. Retornos: 30 minutos, {{nome}}. Tempo confortável pra conversar sem pressa. 🌿` },
+  { id: "n24", tab: "atalhos", tag: "24. Consulta", label: "24. Quanto tempo dura", text: `Primeira consulta: 70 minutos. Retornos: 60 minutos, {{nome}}. Tempo confortável pra conversar sem pressa. 🌿` },
   { id: "n25", tab: "atalhos", tag: "25. Consulta", label: "25. O que precisa preparar", text: `Nada formal, {{nome}}! Se tiver exames, relatórios anteriores ou lista de medicações em uso, deixa em mãos. O resto é só conversa. 💚` },
   { id: "n26", tab: "atalhos", tag: "26. Consulta", label: "26. Posso ter acompanhante", text: `Sim, {{nome}}, se você se sentir mais segura(o) com alguém presente — sem problema. Só me avise no início pra alinhar a privacidade do que será compartilhado.` },
   { id: "n27", tab: "atalhos", tag: "27. Consulta", label: "27. Sigilo médico", text: `Sigilo absoluto, {{nome}}. 🌿 Tudo que conversamos fica entre nós, protegido por lei (CFM e LGPD).` },
