@@ -164,11 +164,16 @@ export const ReplyFormulator = () => {
             {resposta && (
               <div className="mt-4 rounded-lg border bg-background p-4">
                 <div className="flex items-center justify-between mb-2">
-                  <div className="flex items-center gap-2">
+                  <div className="flex items-center gap-2 flex-wrap">
                     <span className="text-sm font-medium">Resposta sugerida</span>
+                    {tipo === "opiniao" && tom && (
+                      <Badge variant={TOM_VARIANT[tom]} className="text-xs">
+                        Tom: {TOM_LABEL[tom]}
+                      </Badge>
+                    )}
                     {attempts > 1 && (
                       <span className="text-xs text-muted-foreground">
-                        · reescrita {attempts}x para soar mais humana
+                        · reescrita {attempts}x
                       </span>
                     )}
                   </div>
