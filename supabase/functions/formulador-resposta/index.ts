@@ -267,7 +267,7 @@ Deno.serve(async (req) => {
 
     for (let i = 0; i < maxAttempts; i++) {
       attempts++;
-      const resp = await callModel(LOVABLE_API_KEY, messages, tipoFinal);
+      const resp = await callModel(LOVABLE_API_KEY, messages, tipoFinal, tom);
 
       if (resp.status === 429) {
         return new Response(JSON.stringify({ error: "Limite de requisições atingido. Tente novamente em instantes." }), {
@@ -295,7 +295,7 @@ Deno.serve(async (req) => {
       const issues = validateReply(reply, tipoFinal);
 
       if (issues.length === 0) {
-        return new Response(JSON.stringify({ resposta: reply, attempts, issues_remaining: [] }), {
+        return new Response(JSON.stringify({ resposta: reply, attempts, issues_remaining: [], tom }), {
           headers: { ...corsHeaders, "Content-Type": "application/json" },
         });
       }
@@ -319,7 +319,7 @@ Deno.serve(async (req) => {
     }
 
     console.warn("validateReply: respostas continuam com clichês após", attempts, "tentativas. Issues:", bestIssues);
-    return new Response(JSON.stringify({ resposta: bestReply, attempts, issues_remaining: bestIssues }), {
+    return new Response(JSON.stringify({ resposta: bestReply, attempts, issues_remaining: bestIssues, tom }), {
       headers: { ...corsHeaders, "Content-Type": "application/json" },
     });
   } catch (e) {
