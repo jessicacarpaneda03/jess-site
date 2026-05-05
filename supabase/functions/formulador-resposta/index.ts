@@ -171,8 +171,6 @@ Responda muito curto — 1 a 2 linhas. Só agradeça com naturalidade. Não inve
 Reconheça o que a pessoa sentiu, sem rebater nem justificar clinicamente. Peça desculpas pelo desconforto e abra canal privado pelo agendamento (https://www.doctoralia.com.br/z/FcjTe4). 3 a 5 linhas. Sem emoji.`,
 };
 
-// NOTE: lógica espelhada em src/lib/detectTone.ts (fonte da verdade).
-// Mantenha as duas em sync; testes unitários ficam no arquivo do src.
 function detectTone(text: string): Tom {
   const t = text.toLowerCase();
   const negWords = ["ruim", "péssim", "pessim", "decepc", "demor", "corrid", "caro demais", "frio", "não recomendo", "nao recomendo", "não voltaria", "nao voltaria", "esperei muito", "não gostei", "nao gostei", "horrível", "horrivel", "grosse", "mal atendid"];
