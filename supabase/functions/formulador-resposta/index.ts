@@ -36,11 +36,35 @@ Se a mensagem do paciente for ambígua, faça no máximo 1 pergunta de esclareci
 Se for situação de risco, priorize acolhimento + canais de emergência.
 Devolva APENAS o texto pronto para copiar e colar no WhatsApp/Doctoralia. Sem comentários meta.`;
 
+const SYSTEM_PROMPT_OPINIAO = `Você é a assistente da Dra. Jéssica Carpaneda (CRM GO 31189), respondendo PUBLICAMENTE a uma opinião/avaliação de paciente em plataforma aberta (Doctoralia, Google etc.).
+
+Regras OBRIGATÓRIAS:
+
+SIGILO E LGPD
+- NUNCA confirme que a pessoa é paciente, nem cite diagnóstico, sintoma, medicação, datas de consulta ou qualquer dado clínico.
+- Não use o sobrenome. Use apenas o primeiro nome se aparecer; se não houver, use uma saudação neutra ("Olá, agradecemos sua mensagem").
+- Não prometa resultado, não rebata acusações com detalhes clínicos. Em crítica negativa: agradecer, acolher, convidar contato privado.
+
+TOM
+- Português do Brasil, 2ª pessoa, acolhedor, breve (3 a 6 linhas), profissional.
+- Nunca use "psiquiatria/psiquiátrico" — use "saúde mental".
+- No máximo 1 emoji discreto (🌿 ou 💚), opcional.
+- Sem jargão. Sem promessas absolutas.
+
+ESTRUTURA
+1. Agradecimento curto pela avaliação/mensagem.
+2. Reforço de valor genérico (cuidado humano, escuta, atendimento online em todo o Brasil) — sem citar diagnóstico.
+3. Em crítica: pedido de desculpas pelo desconforto + convite para contato privado pelo agendamento (https://www.doctoralia.com.br/z/FcjTe4) para acolher a situação.
+4. Encerramento assinando "Equipe Dra. Jéssica Carpaneda".
+
+Devolva APENAS o texto pronto para publicar. Sem comentários meta.`;
+
 Deno.serve(async (req) => {
   if (req.method === "OPTIONS") return new Response(null, { headers: corsHeaders });
 
   try {
-    const { mensagem, contexto } = await req.json();
+    const { mensagem, contexto, tipo } = await req.json();
+    const systemPrompt = tipo === "opiniao" ? SYSTEM_PROMPT_OPINIAO : SYSTEM_PROMPT;
     if (!mensagem || typeof mensagem !== "string" || mensagem.trim().length === 0) {
       return new Response(JSON.stringify({ error: "Mensagem vazia." }), {
         status: 400,
@@ -62,9 +86,10 @@ Deno.serve(async (req) => {
       });
     }
 
+    const rotulo = tipo === "opiniao" ? "Opinião/avaliação pública recebida" : "Mensagem do paciente";
     const userContent = contexto
-      ? `Contexto adicional (canal/etapa, observações): ${contexto}\n\nMensagem do paciente:\n${mensagem}`
-      : `Mensagem do paciente:\n${mensagem}`;
+      ? `Contexto adicional (canal/etapa, observações): ${contexto}\n\n${rotulo}:\n${mensagem}`
+      : `${rotulo}:\n${mensagem}`;
 
     const resp = await fetch("https://ai.gateway.lovable.dev/v1/chat/completions", {
       method: "POST",
@@ -75,7 +100,7 @@ Deno.serve(async (req) => {
       body: JSON.stringify({
         model: "google/gemini-3-flash-preview",
         messages: [
-          { role: "system", content: SYSTEM_PROMPT },
+          { role: "system", content: systemPrompt },
           { role: "user", content: userContent },
         ],
       }),
