@@ -3,11 +3,27 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
+import { Badge } from "@/components/ui/badge";
 import { Sparkles, Copy, Check, Loader2 } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "@/hooks/use-toast";
 
 type Tipo = "mensagem" | "opiniao";
+type Tom = "positivo_forte" | "positivo" | "neutro" | "negativo";
+
+const TOM_LABEL: Record<Tom, string> = {
+  positivo_forte: "Muito positivo",
+  positivo: "Positivo",
+  neutro: "Neutro",
+  negativo: "Crítico",
+};
+
+const TOM_VARIANT: Record<Tom, "default" | "secondary" | "destructive" | "outline"> = {
+  positivo_forte: "default",
+  positivo: "secondary",
+  neutro: "outline",
+  negativo: "destructive",
+};
 
 export const ReplyFormulator = () => {
   const [tipo, setTipo] = useState<Tipo>("mensagem");
@@ -15,6 +31,7 @@ export const ReplyFormulator = () => {
   const [contexto, setContexto] = useState("");
   const [resposta, setResposta] = useState("");
   const [attempts, setAttempts] = useState(0);
+  const [tom, setTom] = useState<Tom | null>(null);
   const [loading, setLoading] = useState(false);
   const [copied, setCopied] = useState(false);
 
@@ -26,6 +43,7 @@ export const ReplyFormulator = () => {
     setLoading(true);
     setResposta("");
     setAttempts(0);
+    setTom(null);
     try {
       const { data, error } = await supabase.functions.invoke("formulador-resposta", {
         body: { mensagem: mensagem.trim(), contexto: contexto.trim() || undefined, tipo },
@@ -34,6 +52,7 @@ export const ReplyFormulator = () => {
       if ((data as any)?.error) throw new Error((data as any).error);
       setResposta((data as any)?.resposta ?? "");
       setAttempts((data as any)?.attempts ?? 1);
+      setTom(((data as any)?.tom as Tom) ?? null);
     } catch (e: any) {
       toast({
         title: "Não foi possível gerar a resposta",
