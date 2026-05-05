@@ -1,0 +1,4 @@
+project_id = "faripwgamoymvjdanvpf"
+
+[functions.formulador-resposta]
+verify_jwt = false
