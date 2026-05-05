@@ -7,7 +7,10 @@ import { Sparkles, Copy, Check, Loader2 } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "@/hooks/use-toast";
 
+type Tipo = "mensagem" | "opiniao";
+
 export const ReplyFormulator = () => {
+  const [tipo, setTipo] = useState<Tipo>("mensagem");
   const [mensagem, setMensagem] = useState("");
   const [contexto, setContexto] = useState("");
   const [resposta, setResposta] = useState("");
@@ -23,7 +26,7 @@ export const ReplyFormulator = () => {
     setResposta("");
     try {
       const { data, error } = await supabase.functions.invoke("formulador-resposta", {
-        body: { mensagem: mensagem.trim(), contexto: contexto.trim() || undefined },
+        body: { mensagem: mensagem.trim(), contexto: contexto.trim() || undefined, tipo },
       });
       if (error) throw error;
       if ((data as any)?.error) throw new Error((data as any).error);
@@ -69,12 +72,45 @@ export const ReplyFormulator = () => {
           </CardHeader>
           <CardContent className="space-y-4">
             <div className="space-y-2">
-              <Label htmlFor="mensagem">Mensagem do paciente</Label>
+              <Label>Tipo de resposta</Label>
+              <div className="flex flex-wrap gap-2">
+                <Button
+                  type="button"
+                  variant={tipo === "mensagem" ? "default" : "outline"}
+                  size="sm"
+                  onClick={() => setTipo("mensagem")}
+                >
+                  Mensagem privada
+                </Button>
+                <Button
+                  type="button"
+                  variant={tipo === "opiniao" ? "default" : "outline"}
+                  size="sm"
+                  onClick={() => setTipo("opiniao")}
+                >
+                  Opinião pública
+                </Button>
+              </div>
+              <p className="text-xs text-muted-foreground">
+                {tipo === "opiniao"
+                  ? "Resposta pública (Doctoralia/Google) — sem citar dados clínicos, respeitando sigilo."
+                  : "Resposta privada (WhatsApp/Doctoralia) — pode informar valores, durações e próximos passos."}
+              </p>
+            </div>
+
+            <div className="space-y-2">
+              <Label htmlFor="mensagem">
+                {tipo === "opiniao" ? "Opinião / avaliação recebida" : "Mensagem do paciente"}
+              </Label>
               <Textarea
                 id="mensagem"
                 value={mensagem}
                 onChange={(e) => setMensagem(e.target.value.slice(0, 4000))}
-                placeholder="Ex.: Oi, gostaria de saber valores e como funciona a primeira consulta…"
+                placeholder={
+                  tipo === "opiniao"
+                    ? "Ex.: Atendimento excelente, me senti acolhida desde o primeiro contato."
+                    : "Ex.: Oi, gostaria de saber valores e como funciona a primeira consulta…"
+                }
                 rows={5}
               />
               <p className="text-xs text-muted-foreground text-right">{mensagem.length}/4000</p>
