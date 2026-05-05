@@ -14,6 +14,7 @@ export const ReplyFormulator = () => {
   const [mensagem, setMensagem] = useState("");
   const [contexto, setContexto] = useState("");
   const [resposta, setResposta] = useState("");
+  const [attempts, setAttempts] = useState(0);
   const [loading, setLoading] = useState(false);
   const [copied, setCopied] = useState(false);
 
@@ -24,6 +25,7 @@ export const ReplyFormulator = () => {
     }
     setLoading(true);
     setResposta("");
+    setAttempts(0);
     try {
       const { data, error } = await supabase.functions.invoke("formulador-resposta", {
         body: { mensagem: mensagem.trim(), contexto: contexto.trim() || undefined, tipo },
@@ -31,6 +33,7 @@ export const ReplyFormulator = () => {
       if (error) throw error;
       if ((data as any)?.error) throw new Error((data as any).error);
       setResposta((data as any)?.resposta ?? "");
+      setAttempts((data as any)?.attempts ?? 1);
     } catch (e: any) {
       toast({
         title: "Não foi possível gerar a resposta",
@@ -142,11 +145,24 @@ export const ReplyFormulator = () => {
             {resposta && (
               <div className="mt-4 rounded-lg border bg-background p-4">
                 <div className="flex items-center justify-between mb-2">
-                  <span className="text-sm font-medium">Resposta sugerida</span>
-                  <Button variant="outline" size="sm" onClick={copiar}>
-                    {copied ? <Check className="h-4 w-4" /> : <Copy className="h-4 w-4" />}
-                    {copied ? "Copiado" : "Copiar"}
-                  </Button>
+                  <div className="flex items-center gap-2">
+                    <span className="text-sm font-medium">Resposta sugerida</span>
+                    {attempts > 1 && (
+                      <span className="text-xs text-muted-foreground">
+                        · reescrita {attempts}x para soar mais humana
+                      </span>
+                    )}
+                  </div>
+                  <div className="flex gap-2">
+                    <Button variant="outline" size="sm" onClick={gerar} disabled={loading}>
+                      {loading ? <Loader2 className="h-4 w-4 animate-spin" /> : <Sparkles className="h-4 w-4" />}
+                      Outra versão
+                    </Button>
+                    <Button variant="outline" size="sm" onClick={copiar}>
+                      {copied ? <Check className="h-4 w-4" /> : <Copy className="h-4 w-4" />}
+                      {copied ? "Copiado" : "Copiar"}
+                    </Button>
+                  </div>
                 </div>
                 <p className="whitespace-pre-wrap text-sm leading-relaxed">{resposta}</p>
               </div>
