@@ -145,11 +145,24 @@ export const ReplyFormulator = () => {
             {resposta && (
               <div className="mt-4 rounded-lg border bg-background p-4">
                 <div className="flex items-center justify-between mb-2">
-                  <span className="text-sm font-medium">Resposta sugerida</span>
-                  <Button variant="outline" size="sm" onClick={copiar}>
-                    {copied ? <Check className="h-4 w-4" /> : <Copy className="h-4 w-4" />}
-                    {copied ? "Copiado" : "Copiar"}
-                  </Button>
+                  <div className="flex items-center gap-2">
+                    <span className="text-sm font-medium">Resposta sugerida</span>
+                    {attempts > 1 && (
+                      <span className="text-xs text-muted-foreground">
+                        · reescrita {attempts}x para soar mais humana
+                      </span>
+                    )}
+                  </div>
+                  <div className="flex gap-2">
+                    <Button variant="outline" size="sm" onClick={gerar} disabled={loading}>
+                      {loading ? <Loader2 className="h-4 w-4 animate-spin" /> : <Sparkles className="h-4 w-4" />}
+                      Outra versão
+                    </Button>
+                    <Button variant="outline" size="sm" onClick={copiar}>
+                      {copied ? <Check className="h-4 w-4" /> : <Copy className="h-4 w-4" />}
+                      {copied ? "Copiado" : "Copiar"}
+                    </Button>
+                  </div>
                 </div>
                 <p className="whitespace-pre-wrap text-sm leading-relaxed">{resposta}</p>
               </div>
