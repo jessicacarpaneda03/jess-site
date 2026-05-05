@@ -158,49 +158,7 @@ function validateReply(text: string, tipo: "opiniao" | "mensagem"): Issue[] {
   return issues;
 }
 
-type Tom = "positivo_forte" | "positivo" | "neutro" | "negativo";
-
-const TONE_GUIDES: Record<Tom, string> = {
-  positivo_forte: `TOM DA RESPOSTA: a avaliação é calorosa e enfática.
-Responda com calor real e brevidade — 2 a 4 linhas. Pode mostrar emoção genuína ("me fez bem", "isso aqui me marcou", "fiquei feliz de ler"). Sem exagero, sem clichê. Espelhe 1 ideia específica que a pessoa trouxe, com palavras suas. Pode usar 1 emoji discreto se combinar.`,
-  positivo: `TOM DA RESPOSTA: a avaliação é positiva e contida.
-Responda curto e direto — 1 a 3 linhas. Agradecimento simples + uma frase pessoal ligando ao que a pessoa disse. Sem emoji, sem floreio.`,
-  neutro: `TOM DA RESPOSTA: a avaliação é breve/factual.
-Responda muito curto — 1 a 2 linhas. Só agradeça com naturalidade. Não invente emoção que a pessoa não demonstrou. Sem emoji.`,
-  negativo: `TOM DA RESPOSTA: a avaliação tem crítica ou desconforto.
-Reconheça o que a pessoa sentiu, sem rebater nem justificar clinicamente. Peça desculpas pelo desconforto e abra canal privado pelo agendamento (https://www.doctoralia.com.br/z/FcjTe4). 3 a 5 linhas. Sem emoji.`,
-};
-
-function detectTone(text: string): Tom {
-  const t = text.toLowerCase();
-  const negWords = ["ruim", "péssim", "pessim", "decepc", "demor", "corrid", "caro demais", "frio", "não recomendo", "nao recomendo", "não voltaria", "nao voltaria", "esperei muito", "não gostei", "nao gostei", "horrível", "horrivel", "grosse", "mal atendid"];
-  if (negWords.some((w) => t.includes(w))) return "negativo";
-
-  const strongWords = ["extremamente", "incrível", "incrivel", "diferenciada", "diferenciado", "salvou", "transformou", "melhor médic", "melhor medic", "apenas confiem", "maravilhos", "excepcional", "sensacional", "mudou minha"];
-  const posWords = ["ótim", "otim", "bom ", "boa ", "gostei", "recomendo", "atencios", "ajudou", "gentil", "humana", "humano", "acolhedor", "atenta", "compreens"];
-
-  const strongHits = strongWords.filter((w) => t.includes(w)).length;
-  const posHits = posWords.filter((w) => t.includes(w)).length;
-  const exclam = (text.match(/!/g) || []).length;
-  const hasCaps = /\b[A-ZÁÉÍÓÚÂÊÔÃÕÇ]{4,}\b/.test(text);
-
-  if (strongHits >= 1 && (posHits + strongHits >= 2 || exclam >= 2 || hasCaps)) return "positivo_forte";
-  if (strongHits >= 1 || posHits >= 2) return "positivo_forte";
-  if (posHits >= 1) return "positivo";
-  return "neutro";
-}
-
-function tempForTone(tipo: "opiniao" | "mensagem", tom: Tom): number {
-  if (tipo !== "opiniao") return 0.7;
-  switch (tom) {
-    case "negativo": return 0.6;
-    case "neutro": return 0.8;
-    case "positivo": return 0.95;
-    case "positivo_forte": return 1.0;
-  }
-}
-
-async function callModel(LOVABLE_API_KEY: string, messages: Array<{ role: string; content: string }>, tipo: "opiniao" | "mensagem", tom: Tom) {
+async function callModel(LOVABLE_API_KEY: string, messages: Array<{ role: string; content: string }>, tipo: "opiniao" | "mensagem") {
   const resp = await fetch("https://ai.gateway.lovable.dev/v1/chat/completions", {
     method: "POST",
     headers: {
@@ -210,7 +168,7 @@ async function callModel(LOVABLE_API_KEY: string, messages: Array<{ role: string
     body: JSON.stringify({
       model: "google/gemini-2.5-pro",
       messages,
-      temperature: tempForTone(tipo, tom),
+      temperature: tipo === "opiniao" ? 1.0 : 0.7,
       presence_penalty: 0.6,
       frequency_penalty: 0.4,
     }),
@@ -247,13 +205,10 @@ Deno.serve(async (req) => {
       });
     }
 
-    const tom: Tom = tipoFinal === "opiniao" ? detectTone(mensagem) : "neutro";
-    const guiaTom = tipoFinal === "opiniao" ? `\n\n${TONE_GUIDES[tom]}` : "";
-
     const rotulo = tipoFinal === "opiniao" ? "Avaliação pública recebida" : "Mensagem do paciente";
     const userContent = contexto
-      ? `Contexto adicional: ${contexto}\n\n${rotulo}:\n${mensagem}${guiaTom}`
-      : `${rotulo}:\n${mensagem}${guiaTom}`;
+      ? `Contexto adicional: ${contexto}\n\n${rotulo}:\n${mensagem}`
+      : `${rotulo}:\n${mensagem}`;
 
     const messages: Array<{ role: string; content: string }> = [
       { role: "system", content: systemPrompt },
@@ -267,7 +222,7 @@ Deno.serve(async (req) => {
 
     for (let i = 0; i < maxAttempts; i++) {
       attempts++;
-      const resp = await callModel(LOVABLE_API_KEY, messages, tipoFinal, tom);
+      const resp = await callModel(LOVABLE_API_KEY, messages, tipoFinal);
 
       if (resp.status === 429) {
         return new Response(JSON.stringify({ error: "Limite de requisições atingido. Tente novamente em instantes." }), {
@@ -295,7 +250,7 @@ Deno.serve(async (req) => {
       const issues = validateReply(reply, tipoFinal);
 
       if (issues.length === 0) {
-        return new Response(JSON.stringify({ resposta: reply, attempts, issues_remaining: [], tom }), {
+        return new Response(JSON.stringify({ resposta: reply, attempts, issues_remaining: [] }), {
           headers: { ...corsHeaders, "Content-Type": "application/json" },
         });
       }
@@ -319,7 +274,7 @@ Deno.serve(async (req) => {
     }
 
     console.warn("validateReply: respostas continuam com clichês após", attempts, "tentativas. Issues:", bestIssues);
-    return new Response(JSON.stringify({ resposta: bestReply, attempts, issues_remaining: bestIssues, tom }), {
+    return new Response(JSON.stringify({ resposta: bestReply, attempts, issues_remaining: bestIssues }), {
       headers: { ...corsHeaders, "Content-Type": "application/json" },
     });
   } catch (e) {
