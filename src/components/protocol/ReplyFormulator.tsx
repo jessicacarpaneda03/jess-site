@@ -14,6 +14,7 @@ export const ReplyFormulator = () => {
   const [mensagem, setMensagem] = useState("");
   const [contexto, setContexto] = useState("");
   const [resposta, setResposta] = useState("");
+  const [attempts, setAttempts] = useState(0);
   const [loading, setLoading] = useState(false);
   const [copied, setCopied] = useState(false);
 
@@ -24,6 +25,7 @@ export const ReplyFormulator = () => {
     }
     setLoading(true);
     setResposta("");
+    setAttempts(0);
     try {
       const { data, error } = await supabase.functions.invoke("formulador-resposta", {
         body: { mensagem: mensagem.trim(), contexto: contexto.trim() || undefined, tipo },
@@ -31,6 +33,7 @@ export const ReplyFormulator = () => {
       if (error) throw error;
       if ((data as any)?.error) throw new Error((data as any).error);
       setResposta((data as any)?.resposta ?? "");
+      setAttempts((data as any)?.attempts ?? 1);
     } catch (e: any) {
       toast({
         title: "Não foi possível gerar a resposta",
