@@ -7,7 +7,16 @@ import { Sparkles, Copy, Check, Loader2 } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "@/hooks/use-toast";
 
-type Tipo = "mensagem" | "opiniao";
+type Tipo = "mensagem" | "opiniao" | "novidade";
+
+const TEMAS_NOVIDADE = [
+  "TDAH adulto",
+  "Burnout",
+  "Insônia",
+  "TDPM",
+  "Como funciona a telemedicina",
+  "Ansiedade no trabalho",
+];
 
 export const ReplyFormulator = () => {
   const [tipo, setTipo] = useState<Tipo>("mensagem");
@@ -19,7 +28,12 @@ export const ReplyFormulator = () => {
 
   const gerar = async () => {
     if (!mensagem.trim()) {
-      toast({ title: "Cole a mensagem do paciente para gerar a resposta." });
+      toast({
+        title:
+          tipo === "novidade"
+            ? "Escolha ou escreva o tema da Novidade."
+            : "Cole a mensagem para gerar a resposta.",
+      });
       return;
     }
     setLoading(true);
@@ -49,6 +63,27 @@ export const ReplyFormulator = () => {
     setTimeout(() => setCopied(false), 1800);
   };
 
+  const labelMensagem =
+    tipo === "opiniao"
+      ? "Opinião / avaliação recebida"
+      : tipo === "novidade"
+      ? "Tema da Novidade"
+      : "Mensagem do paciente";
+
+  const placeholder =
+    tipo === "opiniao"
+      ? "Ex.: Atendimento excelente, me senti acolhida desde o primeiro contato."
+      : tipo === "novidade"
+      ? "Ex.: TDAH adulto — sinais que costumam aparecer no trabalho."
+      : "Ex.: Oi, gostaria de saber valores e como funciona a primeira consulta…";
+
+  const ajuda =
+    tipo === "opiniao"
+      ? "Resposta pública (Doctoralia/Google) em 1ª pessoa — sem citar dados clínicos, respeitando sigilo."
+      : tipo === "novidade"
+      ? "Post de Novidade do perfil Doctoralia em 1ª pessoa. Rotacione temas a cada 2–4 semanas para manter o ranqueamento."
+      : "Resposta privada (WhatsApp/Doctoralia) em 1ª pessoa — pode informar valores, durações e próximos passos.";
+
   return (
     <section id="formulador" className="py-20 px-6 bg-muted/30">
       <div className="max-w-4xl mx-auto">
@@ -57,11 +92,11 @@ export const ReplyFormulator = () => {
             <Sparkles className="h-4 w-4" /> Formulador de Resposta com IA
           </div>
           <h2 className="text-3xl md:text-4xl font-semibold tracking-tight">
-            Cole a mensagem do paciente, receba a resposta pronta
+            Mensagem, opinião ou Novidade do perfil — pronto para copiar
           </h2>
           <p className="mt-3 text-muted-foreground max-w-2xl mx-auto">
-            A IA segue as regras do protocolo: tom, valores (R$ 320 / R$ 210), 70/60 min, particular sem convênio,
-            limites éticos do CFM e canais de emergência.
+            Tudo em 1ª pessoa (você, Dra. Jéssica). Segue o protocolo: tom, valores (R$ 320 / R$ 210),
+            70/60 min, particular sem convênio, limites éticos do CFM e sigilo nas respostas públicas.
           </p>
         </div>
 
@@ -72,7 +107,7 @@ export const ReplyFormulator = () => {
           </CardHeader>
           <CardContent className="space-y-4">
             <div className="space-y-2">
-              <Label>Tipo de resposta</Label>
+              <Label>Tipo</Label>
               <div className="flex flex-wrap gap-2">
                 <Button
                   type="button"
@@ -90,27 +125,47 @@ export const ReplyFormulator = () => {
                 >
                   Opinião pública
                 </Button>
+                <Button
+                  type="button"
+                  variant={tipo === "novidade" ? "default" : "outline"}
+                  size="sm"
+                  onClick={() => setTipo("novidade")}
+                >
+                  Novidade Doctoralia
+                </Button>
               </div>
-              <p className="text-xs text-muted-foreground">
-                {tipo === "opiniao"
-                  ? "Resposta pública (Doctoralia/Google) — sem citar dados clínicos, respeitando sigilo."
-                  : "Resposta privada (WhatsApp/Doctoralia) — pode informar valores, durações e próximos passos."}
-              </p>
+              <p className="text-xs text-muted-foreground">{ajuda}</p>
             </div>
 
+            {tipo === "novidade" && (
+              <div className="space-y-2">
+                <Label>Sugestões de tema (clique para usar)</Label>
+                <div className="flex flex-wrap gap-2">
+                  {TEMAS_NOVIDADE.map((t) => (
+                    <Button
+                      key={t}
+                      type="button"
+                      variant="secondary"
+                      size="sm"
+                      onClick={() => setMensagem(t)}
+                    >
+                      {t}
+                    </Button>
+                  ))}
+                </div>
+                <p className="text-xs text-muted-foreground">
+                  Dica: rotacione 1 tema a cada 2–4 semanas. Consistência &gt; criatividade.
+                </p>
+              </div>
+            )}
+
             <div className="space-y-2">
-              <Label htmlFor="mensagem">
-                {tipo === "opiniao" ? "Opinião / avaliação recebida" : "Mensagem do paciente"}
-              </Label>
+              <Label htmlFor="mensagem">{labelMensagem}</Label>
               <Textarea
                 id="mensagem"
                 value={mensagem}
                 onChange={(e) => setMensagem(e.target.value.slice(0, 4000))}
-                placeholder={
-                  tipo === "opiniao"
-                    ? "Ex.: Atendimento excelente, me senti acolhida desde o primeiro contato."
-                    : "Ex.: Oi, gostaria de saber valores e como funciona a primeira consulta…"
-                }
+                placeholder={placeholder}
                 rows={5}
               />
               <p className="text-xs text-muted-foreground text-right">{mensagem.length}/4000</p>
@@ -122,7 +177,11 @@ export const ReplyFormulator = () => {
                 id="contexto"
                 value={contexto}
                 onChange={(e) => setContexto(e.target.value.slice(0, 600))}
-                placeholder="Ex.: paciente já é de retorno; canal: WhatsApp; etapa: pré-consulta."
+                placeholder={
+                  tipo === "novidade"
+                    ? "Ex.: ângulo do post, público (mulheres 30+), época do ano…"
+                    : "Ex.: paciente já é de retorno; canal: WhatsApp; etapa: pré-consulta."
+                }
                 rows={2}
               />
             </div>
