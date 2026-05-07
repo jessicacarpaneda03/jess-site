@@ -17,6 +17,7 @@ export const services = [
   { name: "Tratamento para síndrome de burnout", price: "R$ 320", duration: "70 min" },
   { name: "Retorno — Saúde mental", price: "R$ 210", duration: "60 min" },
   { name: "Retorno (telemedicina)", price: "R$ 210", duration: "60 min" },
+  { name: "Renovação de receita", price: "R$ 150", duration: "avaliação online" },
 ];
 
 export type Stage = {
