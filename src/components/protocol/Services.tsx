@@ -24,6 +24,19 @@ export const Services = () => (
             </li>
           ))}
         </ul>
+
+        <div className="mt-8 rounded-2xl border border-accent/20 bg-accent/5 p-6">
+          <h3 className="font-display text-lg text-accent">Renovação de receita — caso excepcional</h3>
+          <p className="mt-3 text-sm text-muted-foreground leading-relaxed">
+            A renovação de receita (R$ 150) é oferecida <strong className="text-foreground">exclusivamente para pacientes já acompanhados</strong> em casos pontuais e excepcionais, como quando não consigo atender no prazo ideal para o retorno.
+          </p>
+          <p className="mt-3 text-sm text-muted-foreground leading-relaxed">
+            Receitas de medicamentos controlados e psicotrópicos exigem, por norma do CFM, avaliação clínica presencial ou por telemedicina em consulta regular. A renovação sem consulta é uma <strong className="text-foreground">facilidade excepcional</strong> para quem já está sob meu acompanhamento, e não se aplica a novos pacientes.
+          </p>
+          <p className="mt-3 text-xs uppercase tracking-wider text-accent">
+            Disponível apenas para pacientes em acompanhamento ativo.
+          </p>
+        </div>
       </div>
 
       <div className="lg:pl-8">
