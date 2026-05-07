@@ -5,10 +5,10 @@ export const Services = () => (
     <div className="grid gap-16 lg:grid-cols-2">
       <div>
         <p className="text-xs uppercase tracking-[0.2em] text-accent">Serviços e valores</p>
-        <h2 className="mt-3 text-4xl md:text-5xl">Tabela vigente.</h2>
+        <h2 className="mt-3 text-4xl md:text-5xl">Valores que pratico.</h2>
         <p className="mt-5 text-muted-foreground">
-          Valores oficiais para informar pacientes. Pagamento exclusivamente pela
-          plataforma Doctoralia, com reembolso integral em cancelamentos &gt; 24h.
+          Estes são os valores oficiais dos meus atendimentos em Saúde mental. Pagamento exclusivamente pela
+          plataforma Doctoralia, com reembolso integral em cancelamentos com mais de 24h de antecedência.
         </p>
 
         <ul className="mt-10 divide-y divide-border border-y border-border">
