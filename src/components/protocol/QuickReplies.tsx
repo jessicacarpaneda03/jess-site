@@ -173,7 +173,7 @@ export const QuickReplies = () => {
 
         {/* Tabs */}
         <Tabs value={tab} onValueChange={(v) => setTab(v as QuickReplyTab)}>
-          <TabsList className="mb-6 grid h-auto w-full grid-cols-2 gap-1 bg-muted/50 p-1 sm:grid-cols-3 lg:grid-cols-7">
+          <TabsList className="mb-6 grid h-auto w-full grid-cols-2 gap-1 bg-muted/50 p-1 sm:grid-cols-4 lg:grid-cols-8">
             {quickReplyTabs.map((t) => (
               <TabsTrigger key={t.id} value={t.id} className="flex-col gap-0.5 py-2">
                 <span className="text-sm font-medium">{t.label}</span>
