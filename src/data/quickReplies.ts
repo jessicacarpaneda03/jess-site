@@ -40,6 +40,109 @@ export const riskSubTabs = [
 ];
 
 export const quickReplies: QuickReply[] = [
+  // ---------------- AUTO-RESPOSTA (ATIVAS) ----------------
+  {
+    id: "auto-boas-vindas",
+    tab: "auto",
+    tag: "Ativa",
+    active: true,
+    label: "Boas-vindas (mensagem automática)",
+    text: `Olá! Que bom ter seu contato por aqui 🌿
+
+Sou a *Dra. Jéssica Carpaneda* — Psiquiatra (CRM/DF). Recebi sua mensagem e vou te responder pessoalmente assim que possível.
+
+Enquanto isso, minha *agenda online segue aberta* — você não precisa esperar pra garantir seu horário 💙
+
+👉 *Agende em 1 minuto:* ${LINK}
+
+*Atendimento online:*
+• Primeira consulta
+• Retorno
+• Tirar uma dúvida rápida
+
+*Tranquilidade pra agendar:* você pode cancelar com *reembolso total até 24h antes da consulta*, sem burocracia.
+
+Por aqui, *leio todas as mensagens* e respondo assim que possível — pode me escrever à vontade 💬
+
+⚠️ *Em caso de emergência*: pronto-socorro, *SAMU 192* ou *CVV 188* (24h, gratuito e sigiloso).
+
+Com carinho,
+*Dra. Jéssica Carpaneda*`,
+  },
+  {
+    id: "auto-ausencia-congresso",
+    tab: "auto",
+    tag: "Ativa",
+    active: true,
+    label: "Ausência — congresso (até 17/05)",
+    text: `Olá! Que bom ter seu contato por aqui 🌿
+
+Estou em um congresso até *17/05*, mas minha *agenda online segue aberta* — você não precisa esperar eu voltar pra garantir seu horário 💙
+
+👉 *Agende em 1 minuto:* ${LINK}
+
+*Atendimento online:*
+• Primeira consulta
+• Retorno
+• Tirar uma dúvida rápida
+
+*Tranquilidade pra agendar:* você pode cancelar com *reembolso total até 24h antes da consulta*, sem burocracia.
+
+Por aqui, *leio todas as mensagens* e respondo assim que possível — pode me escrever à vontade 💬
+
+⚠️ *Em caso de emergência*: pronto-socorro, *SAMU 192* ou *CVV 188* (24h, gratuito e sigiloso).
+
+Com carinho,
+*Dra. Jéssica Carpaneda*
+Psiquiatra — CRM/DF`,
+  },
+  {
+    id: "auto-fora-horario",
+    tab: "auto",
+    tag: "Ativa",
+    active: true,
+    label: "Fora do horário comercial",
+    text: `Oi! 🌙 Recebi sua mensagem fora do meu horário de atendimento (seg–sex, 9h–18h). Te respondo pessoalmente no próximo horário comercial.
+
+Se preferir já garantir seu horário, minha agenda online está aberta 24h:
+👉 ${LINK}
+
+⚠️ *Em caso de emergência*: pronto-socorro, *SAMU 192* ou *CVV 188* (24h, gratuito e sigiloso).
+
+Com carinho,
+*Dra. Jéssica Carpaneda* — Psiquiatra (CRM/DF)`,
+  },
+  {
+    id: "auto-feriado",
+    tab: "auto",
+    tag: "Modelo",
+    label: "Feriado / recesso (modelo)",
+    text: `Oi! 🌿 Estou de recesso até *{{data}}* e respondo as mensagens com um pouquinho mais de calma.
+
+Minha agenda online segue aberta normalmente — você já pode garantir seu horário sem precisar esperar:
+👉 ${LINK}
+
+Cancelamento com reembolso total até 24h antes da consulta.
+
+⚠️ Emergência: pronto-socorro, *SAMU 192* ou *CVV 188*.
+
+Com carinho,
+*Dra. Jéssica Carpaneda* — Psiquiatra (CRM/DF)`,
+  },
+  {
+    id: "auto-pos-consulta",
+    tab: "auto",
+    tag: "Modelo",
+    label: "Pós-consulta (agradecimento)",
+    text: `Oi, {{nome}}! 💚 Foi muito bom te atender hoje.
+
+• Sua *receita* e *orientações* chegam por aqui em até 24h.
+• Qualquer dúvida sobre o que conversamos, é só me chamar — respondo no horário comercial.
+• Pra *retorno*, agende quando se sentir confortável: ${LINK}
+
+Cuida de você. Tô por aqui. 🌿`,
+  },
+
   // ---------------- FILLERS / CORINGAS (1ª pessoa) ----------------
   { id: "f-oi", tab: "fillers", label: "Saudação inicial", text: `Oi, {{nome}}! Tudo bem? 🌿 Recebi sua mensagem — me dá só um instante que já te respondo com calma.` },
   { id: "f-conferir", tab: "fillers", label: "Conferindo agenda", text: `Deixa eu dar uma olhadinha na minha agenda e já te confirmo, tá? Um minutinho. 💚` },
