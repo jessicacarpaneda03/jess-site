@@ -1,4 +1,5 @@
 export type QuickReplyTab =
+  | "auto"
   | "fillers"
   | "casuais"
   | "atalhos"
@@ -13,16 +14,18 @@ export type QuickReply = {
   label: string;
   text: string;
   tag?: string; // sub-categoria
+  active?: boolean; // marca quando a mensagem está ativa como auto-resposta
 };
 
 const LINK = "https://www.doctoralia.com.br/z/FcjTe4";
 
 export const quickReplyTabs: { id: QuickReplyTab; label: string; description: string }[] = [
+  { id: "auto", label: "Auto-resposta", description: "Boas-vindas e ausência ativos no WhatsApp Business / Doctoralia" },
   { id: "triagem", label: "Triagem", description: "Sequência para qualificar o paciente no WhatsApp antes do agendamento" },
   { id: "risco", label: "Risco", description: "Protocolos de crise, ideação e situações de urgência (sub-abas)" },
   { id: "fillers", label: "Coringas", description: "Mensagens curtas de transição enquanto verifico algo" },
   { id: "casuais", label: "Acolhimento", description: "Respostas humanizadas, tom 'chinelo', leves e próximas" },
-  { id: "atalhos", label: "Atalhos", description: "Mini-respostas (1-2 linhas) para as 75+ dúvidas mais comuns" },
+  { id: "atalhos", label: "Atalhos", description: "Mini-respostas para as dúvidas mais comuns" },
   { id: "objecoes", label: "Objeções", description: "Respostas que escorregam objeções clássicas com cuidado" },
   { id: "modulos", label: "Módulos CX", description: "Arquitetura completa de atendimento (A → F + Ficha + Fluxo)" },
 ];
