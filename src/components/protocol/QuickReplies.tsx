@@ -49,7 +49,7 @@ function renderHighlighted(template: string, t: Tokens) {
 }
 
 export const QuickReplies = () => {
-  const [tab, setTab] = useState<QuickReplyTab>("fillers");
+  const [tab, setTab] = useState<QuickReplyTab>("auto");
   const [riskSub, setRiskSub] = useState<string>("all");
   const [query, setQuery] = useState("");
   const [copiedId, setCopiedId] = useState<string | null>(null);
