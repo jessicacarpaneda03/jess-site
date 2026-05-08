@@ -49,7 +49,7 @@ function renderHighlighted(template: string, t: Tokens) {
 }
 
 export const QuickReplies = () => {
-  const [tab, setTab] = useState<QuickReplyTab>("fillers");
+  const [tab, setTab] = useState<QuickReplyTab>("auto");
   const [riskSub, setRiskSub] = useState<string>("all");
   const [query, setQuery] = useState("");
   const [copiedId, setCopiedId] = useState<string | null>(null);
@@ -173,7 +173,7 @@ export const QuickReplies = () => {
 
         {/* Tabs */}
         <Tabs value={tab} onValueChange={(v) => setTab(v as QuickReplyTab)}>
-          <TabsList className="mb-6 grid h-auto w-full grid-cols-2 gap-1 bg-muted/50 p-1 sm:grid-cols-3 lg:grid-cols-7">
+          <TabsList className="mb-6 grid h-auto w-full grid-cols-2 gap-1 bg-muted/50 p-1 sm:grid-cols-4 lg:grid-cols-8">
             {quickReplyTabs.map((t) => (
               <TabsTrigger key={t.id} value={t.id} className="flex-col gap-0.5 py-2">
                 <span className="text-sm font-medium">{t.label}</span>
@@ -227,18 +227,30 @@ export const QuickReplies = () => {
                     return (
                       <article
                         key={r.id}
-                        className="group flex flex-col rounded-2xl border border-border/60 bg-card p-5 shadow-sm transition hover:border-primary/40 hover:shadow-md"
+                        className={cn(
+                          "group flex flex-col rounded-2xl border bg-card p-5 shadow-sm transition hover:shadow-md",
+                          r.active
+                            ? "border-primary/60 ring-1 ring-primary/30 hover:border-primary"
+                            : "border-border/60 hover:border-primary/40",
+                        )}
                       >
                         <div className="mb-3 flex items-start justify-between gap-3">
                           <div className="flex items-center gap-2">
                             <MessageCircle className="h-4 w-4 text-primary" />
                             <h3 className="text-sm font-semibold leading-tight">{r.label}</h3>
                           </div>
-                          {r.tag && (
-                            <span className="rounded-full bg-secondary px-2 py-0.5 text-[10px] font-medium uppercase tracking-wider text-secondary-foreground">
-                              {r.tag}
-                            </span>
-                          )}
+                          <div className="flex items-center gap-1.5">
+                            {r.active && (
+                              <span className="inline-flex items-center gap-1 rounded-full bg-primary px-2 py-0.5 text-[10px] font-bold uppercase tracking-wider text-primary-foreground">
+                                <Sparkles className="h-2.5 w-2.5" /> Ativa
+                              </span>
+                            )}
+                            {r.tag && (
+                              <span className="rounded-full bg-secondary px-2 py-0.5 text-[10px] font-medium uppercase tracking-wider text-secondary-foreground">
+                                {r.tag}
+                              </span>
+                            )}
+                          </div>
                         </div>
 
                         <div className="mb-4 flex-1 whitespace-pre-wrap rounded-lg bg-muted/40 p-3 text-sm leading-relaxed text-foreground/90">
