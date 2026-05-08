@@ -1244,5 +1244,103 @@ Meu papel não é te trazer mais cobrança, é amparar. Quando quiser: ${LINK} �
     label: "\"Vc demora pra responder\"",
     text: `Tem razão, {{nome}} — me desculpa. 💚 Respondo dentro do meu horário (seg-sex, 9h-18h) e às vezes acumula. Se for urgente clínica: CVV 188 / SAMU 192. Pra agendar / dúvidas, fico à disposição já já. 🌿`,
   },
+
+  // ---------------- ATALHOS EXTRAS (n111+) ----------------
+  { id: "n111", tab: "atalhos", tag: "111. Agenda", label: "111. Próximo horário disponível", text: `Tenho horários abertos essa semana, {{nome}}! Os mais próximos aparecem logo no topo do link: ${LINK} 🌿` },
+  { id: "n112", tab: "atalhos", tag: "112. Agenda", label: "112. Atende fim de semana?", text: `Atendo de seg a sex, {{nome}}. Pra quem trabalha, costumo abrir horários cedo (8h) ou final de tarde (18h-19h). Dá uma olhada: ${LINK}` },
+  { id: "n113", tab: "atalhos", tag: "113. Agenda", label: "113. Atende de madrugada?", text: `Não atendo de madrugada, {{nome}}. Se for emergência agora: *SAMU 192* ou *CVV 188* (24h, gratuito). 💚` },
+  { id: "n114", tab: "atalhos", tag: "114. Agenda", label: "114. Lista de espera", text: `Posso te colocar numa lista de prioridade, {{nome}}! Se abrir um horário antes do que você marcou, te aviso por aqui. 🌿` },
+  { id: "n115", tab: "atalhos", tag: "115. Agenda", label: "115. Encaixe urgente", text: `{{nome}}, encaixes dependem da agenda do dia. Me conta a sua urgência por aqui que tento abrir um espaço. Se for risco agora: *CVV 188* / *SAMU 192*.` },
+  { id: "n116", tab: "atalhos", tag: "116. Agenda", label: "116. Mudança de horário", text: `Sem problema, {{nome}}! Pra trocar de horário, é só cancelar pelo painel da Doctoralia (com mais de 24h tem reembolso integral) e reagendar: ${LINK}` },
+  { id: "n117", tab: "atalhos", tag: "117. Agenda", label: "117. Esqueci da consulta", text: `Tudo bem, {{nome}}, acontece. 🌿 Como o no-show não tem reembolso pelo regulamento da Doctoralia, pra reagendar é uma nova consulta: ${LINK}` },
+  { id: "n118", tab: "atalhos", tag: "118. Agenda", label: "118. Confirmação de horário", text: `Confirmado, {{nome}}! 💚 Te espero no dia/horário marcado — o link da videochamada chega no seu e-mail e WhatsApp 30 min antes.` },
+
+  { id: "n119", tab: "atalhos", tag: "119. Pagamento", label: "119. Aceita PIX?", text: `Sim, {{nome}} — pagamento PIX direto pelo checkout da Doctoralia. Também tem débito e crédito (parcelado). ${LINK}` },
+  { id: "n120", tab: "atalhos", tag: "120. Pagamento", label: "120. Parcela em quantas?", text: `Dá pra parcelar no cartão pelo checkout da Doctoralia, {{nome}} — costuma ir até 3x sem juros (varia por bandeira). ${LINK}` },
+  { id: "n121", tab: "atalhos", tag: "121. Pagamento", label: "121. Pagamento na hora", text: `O pagamento é feito no momento do agendamento, {{nome}} — é o que garante seu horário reservado. ${LINK}` },
+  { id: "n122", tab: "atalhos", tag: "122. Pagamento", label: "122. Comprovante", text: `O comprovante e o recibo ficam disponíveis no seu painel da Doctoralia, {{nome}} — dá pra baixar em PDF a qualquer momento. 🌿` },
+  { id: "n123", tab: "atalhos", tag: "123. Pagamento", label: "123. Pagar depois", text: `Infelizmente o pagamento é antecipado, {{nome}} — é o que reserva seu horário. Se preferir, dá pra parcelar no cartão. ${LINK}` },
+
+  { id: "n124", tab: "atalhos", tag: "124. Telemedicina", label: "124. Que app uso?", text: `Não precisa instalar nada, {{nome}}! 🌿 É só clicar no link que chega no seu e-mail/WhatsApp 30 min antes — abre direto no navegador (Chrome, Safari, etc.).` },
+  { id: "n125", tab: "atalhos", tag: "125. Telemedicina", label: "125. Pelo celular ou notebook?", text: `Os dois funcionam, {{nome}}! 💚 Notebook costuma ser mais confortável pra conversar, mas celular funciona igual — só prefira um ambiente silencioso e com boa internet.` },
+  { id: "n126", tab: "atalhos", tag: "126. Telemedicina", label: "126. Caiu a chamada", text: `Sem stress, {{nome}}! É só clicar no link de novo que entra direto. Se cair de vez, te chamo por aqui pra remarcar o que faltou, ok? 🌿` },
+  { id: "n127", tab: "atalhos", tag: "127. Telemedicina", label: "127. Internet ruim", text: `Se a internet falhar muito, {{nome}}, a gente continua por áudio mesmo — o importante é a conversa. Se ficar inviável, remarcamos sem custo.` },
+  { id: "n128", tab: "atalhos", tag: "128. Telemedicina", label: "128. Posso estar com alguém?", text: `Pode, {{nome}}! 🌿 Se quiser que um familiar acompanhe parte da consulta, me avisa no início — só pergunto o que você prefere conversar a sós.` },
+
+  { id: "n129", tab: "atalhos", tag: "129. Receita", label: "129. Receita digital chega como?", text: `A receita digital chega no seu e-mail em PDF, {{nome}}, com assinatura ICP-Brasil — vale em qualquer farmácia do Brasil. 💚` },
+  { id: "n130", tab: "atalhos", tag: "130. Receita", label: "130. Receita demora quanto?", text: `Em até 24h depois da consulta, {{nome}} — sempre dentro do meu horário comercial. Se não chegou, me avisa por aqui que verifico. 🌿` },
+  { id: "n131", tab: "atalhos", tag: "131. Receita", label: "131. Perdi a receita", text: `Tudo bem, {{nome}}! 💚 Receita digital eu reenvio sem custo. Se for receita física A/B, é nova taxa de Sedex (R$ 100). Me confirma qual é?` },
+  { id: "n132", tab: "atalhos", tag: "132. Receita", label: "132. Pode mandar receita sem consulta?", text: `Não posso, {{nome}} — receita exige consulta clínica (questão ética e legal do CFM). Pacientes em acompanhamento podem agendar um retorno: ${LINK}` },
+  { id: "n133", tab: "atalhos", tag: "133. Receita", label: "133. Receita pra outra pessoa", text: `Não posso, {{nome}}. 🌿 Receita é nominal e exige consulta com a própria pessoa — é a única forma segura e legal.` },
+
+  { id: "n134", tab: "atalhos", tag: "134. Documentos", label: "134. Atestado retroativo", text: `{{nome}}, posso emitir atestado pelo dia da consulta, mas não retroativo — é norma do CFM. Se precisa cobrir dias anteriores, conversamos durante a consulta. 💚` },
+  { id: "n135", tab: "atalhos", tag: "135. Documentos", label: "135. Laudo pra concurso/escola", text: `Sim, {{nome}}, emito laudos quando há indicação clínica. Geralmente exige uma ou duas consultas pra avaliação detalhada. ${LINK}` },
+  { id: "n136", tab: "atalhos", tag: "136. Documentos", label: "136. Relatório pra outro médico", text: `Posso emitir, {{nome}}! 🌿 Relatórios pra outros profissionais ou para tratamentos paralelos são parte do cuidado, sem custo extra.` },
+  { id: "n137", tab: "atalhos", tag: "137. Documentos", label: "137. INSS / perícia", text: `Posso emitir relatório circunstanciado pra perícia, {{nome}}, com base no acompanhamento. Quem decide a concessão é o perito do INSS, não eu — mas o relatório ajuda. 💚` },
+  { id: "n138", tab: "atalhos", tag: "138. Documentos", label: "138. Atestado de afastamento longo", text: `Quando há indicação clínica de afastamento prolongado, {{nome}}, conversamos durante a consulta e emito o atestado pelo período pertinente.` },
+
+  { id: "n139", tab: "atalhos", tag: "139. Tratamento", label: "139. Vou ficar dependente do remédio?", text: `Boa pergunta, {{nome}}! 🌿 A maioria dos remédios em saúde mental NÃO causa dependência (antidepressivos, estabilizadores). Os que podem (alguns ansiolíticos) eu uso com critério, sempre conversado com você.` },
+  { id: "n140", tab: "atalhos", tag: "140. Tratamento", label: "140. Engorda?", text: `{{nome}}, ganho de peso varia muito por medicação e por pessoa. Falo isso ABERTAMENTE com você na consulta e a gente escolhe junto a melhor opção pro seu caso. 💚` },
+  { id: "n141", tab: "atalhos", tag: "141. Tratamento", label: "141. Mexe com libido?", text: `Pode mexer, {{nome}}, dependendo do medicamento. Sempre converso isso com você antes — e existem opções com menos efeito sobre libido. Plano individualizado. 🌿` },
+  { id: "n142", tab: "atalhos", tag: "142. Tratamento", label: "142. Posso beber tomando remédio?", text: `Depende do remédio, {{nome}}, mas em geral o ideal é evitar — álcool atrapalha o efeito e pode aumentar efeitos colaterais. A gente conversa caso a caso. 💚` },
+  { id: "n143", tab: "atalhos", tag: "143. Tratamento", label: "143. Demora quanto pra fazer efeito?", text: `Antidepressivos e estabilizadores costumam levar de 2 a 6 semanas pra efeito completo, {{nome}}. Sintomas mais agudos (sono, ansiedade) podem melhorar antes. 🌿` },
+  { id: "n144", tab: "atalhos", tag: "144. Tratamento", label: "144. Quero parar o remédio", text: `{{nome}}, parar remédio sem orientação pode trazer efeitos rebote ou recaída. Vamos conversar no retorno e desmamar com segurança quando for o momento. 💚` },
+  { id: "n145", tab: "atalhos", tag: "145. Tratamento", label: "145. Posso só psicoterapia?", text: `Pode, sim, {{nome}}! 🌿 Em muitos quadros, psicoterapia sozinha já resolve. Avalio na consulta o que faz mais sentido pra você — sem empurrar remédio.` },
+  { id: "n146", tab: "atalhos", tag: "146. Tratamento", label: "146. Indica psicólogo?", text: `Sim, {{nome}}! Trabalho em parceria com psicólogos(as) e posso te indicar profissionais de confiança, dependendo do seu caso e abordagem desejada. 💚` },
+
+  { id: "n147", tab: "atalhos", tag: "147. Quadros", label: "147. Síndrome do pânico", text: `Sim, {{nome}}, acompanho síndrome do pânico — é um dos quadros que mais respondem bem a tratamento. ${LINK}` },
+  { id: "n148", tab: "atalhos", tag: "148. Quadros", label: "148. Fobia social", text: `Sim, {{nome}}, atendo fobia social — incluindo combinação de medicamento e indicação de TCC quando indicado. 🌿 ${LINK}` },
+  { id: "n149", tab: "atalhos", tag: "149. Quadros", label: "149. Estresse pós-traumático (TEPT)", text: `Sim, {{nome}}, acompanho TEPT com plano individualizado e indicação de psicoterapia especializada quando indicado. 💚 ${LINK}` },
+  { id: "n150", tab: "atalhos", tag: "150. Quadros", label: "150. Transtorno alimentar", text: `Acompanho parte clínica de transtornos alimentares, {{nome}}, sempre em equipe (nutri + psicólogo(a)). Posso te orientar. ${LINK}` },
+  { id: "n151", tab: "atalhos", tag: "151. Quadros", label: "151. Borderline", text: `Sim, {{nome}}, acompanho personalidade borderline — sempre com indicação forte de psicoterapia (DBT/TCC) em paralelo. 🌿 ${LINK}` },
+  { id: "n152", tab: "atalhos", tag: "152. Quadros", label: "152. Autismo adulto", text: `Faço avaliação inicial e acompanhamento de comorbidades do autismo no adulto, {{nome}}. Pra laudo formal, indico colega especializado. 💚` },
+  { id: "n153", tab: "atalhos", tag: "153. Quadros", label: "153. Dependência química", text: `Acompanho casos leves a moderados, {{nome}}, e indico encaminhamento especializado para casos graves. ${LINK}` },
+  { id: "n154", tab: "atalhos", tag: "154. Quadros", label: "154. TPM / TDPM", text: `Sim, {{nome}}, TDPM (transtorno disfórico pré-menstrual) é uma das minhas áreas. Tem tratamento eficaz! ${LINK}` },
+  { id: "n155", tab: "atalhos", tag: "155. Quadros", label: "155. Depressão pós-parto", text: `Sim, {{nome}}, acompanho depressão pós-parto com cuidado especial — incluindo opções compatíveis com amamentação. 💚 ${LINK}` },
+  { id: "n156", tab: "atalhos", tag: "156. Quadros", label: "156. Climatério / menopausa", text: `Sim, {{nome}}, sintomas psiquiátricos do climatério (humor, sono, ansiedade) entram no meu escopo. Trabalho em conjunto com a(o) ginecologista. 🌿` },
+
+  { id: "n157", tab: "atalhos", tag: "157. Primeira consulta", label: "157. Como me preparar?", text: `Não precisa preparar nada, {{nome}}! 🌿 Se tiver exames recentes ou laudos, manda no WhatsApp antes — facilita. O resto a gente conversa.` },
+  { id: "n158", tab: "atalhos", tag: "158. Primeira consulta", label: "158. Vou levar bronca?", text: `De jeito nenhum, {{nome}}. 💚 Consultório é zona livre de julgamento — pode contar tudo, inclusive o que normalmente não conta pra ninguém.` },
+  { id: "n159", tab: "atalhos", tag: "159. Primeira consulta", label: "159. Quanto tempo dura?", text: `Primeira consulta dura cerca de 70 minutos, {{nome}} — pra eu conhecer você sem pressa. Retornos duram 60 min. 🌿` },
+  { id: "n160", tab: "atalhos", tag: "160. Primeira consulta", label: "160. Já saio com receita?", text: `Pode ser, {{nome}}, se for o caso clínico. Mas não é regra — às vezes começamos com observação ou só com mudanças de hábito. Plano individualizado. 💚` },
+  { id: "n161", tab: "atalhos", tag: "161. Primeira consulta", label: "161. Vou ter que voltar?", text: `Depende do caso, {{nome}}. Geralmente o primeiro retorno é em 30-45 dias pra ajustar conduta. Em quadros leves, alta pode ser rápida. 🌿` },
+
+  { id: "n162", tab: "atalhos", tag: "162. Sigilo", label: "162. Você guarda anotações?", text: `Sim, {{nome}}, prontuário digital e seguro (LGPD), de acesso só meu. Você pode pedir cópia quando quiser. 🔒` },
+  { id: "n163", tab: "atalhos", tag: "163. Sigilo", label: "163. Sigilo com adolescente", text: `Sim, {{nome}}, mantenho sigilo com adolescentes. Família só é envolvida em situações de risco grave, sempre conversado antes com o(a) jovem. 💚` },
+  { id: "n164", tab: "atalhos", tag: "164. Sigilo", label: "164. E se for processo judicial?", text: `Sigilo médico é protegido por lei, {{nome}}. Só forneço informação a juízes mediante requisição formal e nos limites éticos do CFM. 🔒` },
+
+  { id: "n165", tab: "atalhos", tag: "165. Comunicação", label: "165. Posso te mandar áudio?", text: `Pode, {{nome}}! 🌿 Mas pra dúvidas rápidas, texto costuma ser mais ágil. Áudios eu escuto dentro do horário comercial.` },
+  { id: "n166", tab: "atalhos", tag: "166. Comunicação", label: "166. Posso mandar print/exame?", text: `Pode, {{nome}}! Recebo por aqui mesmo (WhatsApp criptografado). Se for muito documento, melhor levar na consulta. 💚` },
+  { id: "n167", tab: "atalhos", tag: "167. Comunicação", label: "167. Não respondo grupos", text: `{{nome}}, não atendo nem oriento por grupos do WhatsApp — só por contato direto, pra preservar seu sigilo. 🔒` },
+
+  { id: "n168", tab: "atalhos", tag: "168. Crianças/adolescentes", label: "168. Filho de 14 anos", text: `Atendo a partir de 16, {{nome}}. Pra 14 anos, indico colega de psiquiatria infantojuvenil — se quiser, te passo opções de confiança. 💚` },
+  { id: "n169", tab: "atalhos", tag: "169. Crianças/adolescentes", label: "169. Adolescente de 16/17", text: `Atendo, {{nome}}! 🌿 Pra menores de 18, peço que um responsável esteja disponível pra autorização inicial e pra eventuais comunicações sobre risco grave.` },
+
+  { id: "n170", tab: "atalhos", tag: "170. Bem-estar", label: "170. Dica pra ansiedade agora", text: `{{nome}}, três passos rápidos: 1) respira fundo (4s inspira, 6s expira) por 2 min, 2) sai do ambiente por 5 min, 3) toma um copo de água gelada. Não substitui consulta, mas ajuda no momento. 🌿` },
+  { id: "n171", tab: "atalhos", tag: "171. Bem-estar", label: "171. Dica pra dormir melhor", text: `{{nome}}, três coisas que ajudam: 1) celular fora do quarto, 2) escuro total, 3) horário fixo pra deitar. Se persistir, vale uma avaliação. 🌿 ${LINK}` },
+  { id: "n172", tab: "atalhos", tag: "172. Bem-estar", label: "172. Dica pra crise de pânico", text: `{{nome}}, na crise: respira lentamente (4s inspira / 6s expira), olha em volta e nomeia 5 objetos, lembra que vai passar. Não é infarto. Se for recorrente, agenda avaliação: ${LINK}` },
+
+  { id: "n173", tab: "atalhos", tag: "173. Encaminhamentos", label: "173. Indicação de psicólogo", text: `Posso indicar, {{nome}}! 🌿 Trabalho com colegas de TCC, psicanálise e DBT. Me conta seu perfil que ajusto a indicação.` },
+  { id: "n174", tab: "atalhos", tag: "174. Encaminhamentos", label: "174. Indicação de neuro", text: `Posso indicar neurologista de confiança, {{nome}} — útil em queixas de memória, enxaqueca crônica, suspeita de epilepsia. 💚` },
+  { id: "n175", tab: "atalhos", tag: "175. Encaminhamentos", label: "175. Indicação de nutri", text: `Tenho parceria com nutricionistas que trabalham em conjunto com saúde mental, {{nome}}. Se quiser, te passo contatos. 🌿` },
+
+  { id: "n176", tab: "atalhos", tag: "176. Diversos", label: "176. Atestado pra cirurgia", text: `Posso emitir liberação psiquiátrica pra cirurgia, {{nome}}, com base na avaliação. ${LINK}` },
+  { id: "n177", tab: "atalhos", tag: "177. Diversos", label: "177. Avaliação pré-bariátrica", text: `Faço avaliação psiquiátrica pré-bariátrica, {{nome}} — exigida pela maioria das equipes cirúrgicas. ${LINK}` },
+  { id: "n178", tab: "atalhos", tag: "178. Diversos", label: "178. Habilitação / CNH", text: `Avaliação pra CNH é feita por psiquiatra credenciado ao Detran, {{nome}}. Não tenho esse credenciamento, mas posso indicar colega. 🌿` },
+  { id: "n179", tab: "atalhos", tag: "179. Diversos", label: "179. Porte de arma", text: `Avaliação pra porte de arma exige credenciamento específico da Polícia Federal, {{nome}}. Não faço esse tipo de laudo.` },
+  { id: "n180", tab: "atalhos", tag: "180. Diversos", label: "180. Indicação masculina", text: `Sim, {{nome}}, atendo homens — saúde mental masculina (depressão, burnout, andropausa) é tema importante e silenciado. 💚 ${LINK}` },
+
+  { id: "n181", tab: "atalhos", tag: "181. Pós-consulta", label: "181. Não recebi nada ainda", text: `Vou verificar agora, {{nome}}! 🌿 Receita e orientações chegam em até 24h após a consulta. Se passou, me confirma seu e-mail por gentileza?` },
+  { id: "n182", tab: "atalhos", tag: "182. Pós-consulta", label: "182. Dúvida sobre o remédio", text: `Pode mandar, {{nome}}! 💚 Dúvidas pontuais sobre como/quando tomar respondo por aqui. Mudanças de dose ou suspensão são em consulta.` },
+  { id: "n183", tab: "atalhos", tag: "183. Pós-consulta", label: "183. Efeito colateral incomodando", text: `{{nome}}, me conta o que está sentindo (sintoma + intensidade + quando começou). Se for grave, suspende o remédio e me avisa imediatamente. 🌿` },
+  { id: "n184", tab: "atalhos", tag: "184. Pós-consulta", label: "184. Quando agendar retorno?", text: `Pelo que conversamos, ideal seria retorno em 30 dias, {{nome}}. Pra agendar: ${LINK} 💚` },
+
+  { id: "n185", tab: "atalhos", tag: "185. Boas-vindas", label: "185. Recebimento simples", text: `Oi, {{nome}}! 🌿 Recebi sua mensagem. Te respondo pessoalmente já já — ou, se preferir adiantar, agenda já garantido seu horário: ${LINK}` },
+  { id: "n186", tab: "atalhos", tag: "186. Boas-vindas", label: "186. Já visitou Doctoralia", text: `Oi, {{nome}}! 💚 Vi que você visitou meu perfil. Posso te ajudar com alguma dúvida ou quer agendar direto? ${LINK}` },
+  { id: "n187", tab: "atalhos", tag: "187. Boas-vindas", label: "187. Veio por instagram", text: `Oi, {{nome}}! Que bom te ver por aqui 🌿 Vi que veio pelo Instagram. Se quiser agendar: ${LINK} — qualquer dúvida, é só me chamar.` },
+
+  { id: "n188", tab: "atalhos", tag: "188. Despedida", label: "188. Encerramento amigável", text: `Qualquer coisa, {{nome}}, é só me chamar por aqui. 💚 Tô torcendo por você. 🌿` },
+  { id: "n189", tab: "atalhos", tag: "189. Despedida", label: "189. Até a consulta", text: `Combinado, {{nome}}! Te espero na consulta. Qualquer coisa antes, é só me avisar. 🌿💚` },
+  { id: "n190", tab: "atalhos", tag: "190. Despedida", label: "190. Boa semana", text: `Boa semana, {{nome}}! 🌿 Cuida de você. Tô por aqui se precisar. 💚` },
 ];
 
