@@ -1,7 +1,7 @@
 import { useMemo, useState } from "react";
-import { format } from "date-fns";
+import { format, isAfter, parseISO, differenceInDays } from "date-fns";
 import { ptBR } from "date-fns/locale";
-import { CalendarIcon, Check, Copy, MessageCircle, RotateCcw, Search, Sparkles } from "lucide-react";
+import { CalendarIcon, Check, Copy, MessageCircle, RotateCcw, Search, Sparkles, Clock, AlertTriangle } from "lucide-react";
 import { toast } from "sonner";
 import { z } from "zod";
 
