@@ -15,6 +15,7 @@ export type QuickReply = {
   text: string;
   tag?: string; // sub-categoria
   active?: boolean; // marca quando a mensagem está ativa como auto-resposta
+  expiresAt?: string; // data de expiração no formato YYYY-MM-DD — após essa data a mensagem é esmaecida
 };
 
 const LINK = "https://www.doctoralia.com.br/z/FcjTe4";
