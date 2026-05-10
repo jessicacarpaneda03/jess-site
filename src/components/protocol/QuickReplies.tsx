@@ -48,6 +48,16 @@ function renderHighlighted(template: string, t: Tokens) {
   });
 }
 
+function getExpiryStatus(expiresAt?: string) {
+  if (!expiresAt) return null;
+  const expiry = parseISO(expiresAt);
+  const now = new Date();
+  const days = differenceInDays(expiry, now);
+  if (isAfter(now, expiry)) return { expired: true, label: "Expirada", days };
+  if (days <= 7) return { expired: false, label: `Expira em ${days}d`, days };
+  return null;
+}
+
 export const QuickReplies = () => {
   const [tab, setTab] = useState<QuickReplyTab>("auto");
   const [riskSub, setRiskSub] = useState<string>("all");
