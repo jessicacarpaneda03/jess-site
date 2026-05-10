@@ -74,10 +74,10 @@ Com carinho,
     tab: "auto",
     tag: "Ativa",
     active: true,
-    label: "Ausência — congresso (até 17/05)",
+    label: "Ausência — agenda aberta 18/05",
     text: `Olá! Que bom ter seu contato por aqui 🌿
 
-Estou em um congresso até *17/05*, mas minha *agenda online segue aberta* — você não precisa esperar eu voltar pra garantir seu horário 💙
+Estou em congresso até *17/05* e retorno com agenda aberta a partir de *18/05*. Enquanto isso, você já pode garantir seu horário — não precisa esperar eu voltar 💙
 
 👉 *Agende em 1 minuto:* ${LINK}
 
@@ -87,6 +87,8 @@ Estou em um congresso até *17/05*, mas minha *agenda online segue aberta* — v
 • Tirar uma dúvida rápida
 
 *Tranquilidade pra agendar:* você pode cancelar com *reembolso total até 24h antes da consulta*, sem burocracia.
+
+💡 *Dica:* há um provável reajuste de valores em junho. Agendando agora, você garante o valor atual — e, se precisar remarcar depois, é só avisar com antecedência.
 
 Por aqui, *leio todas as mensagens* e respondo assim que possível — pode me escrever à vontade 💬
 
