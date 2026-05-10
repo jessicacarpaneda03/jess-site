@@ -234,6 +234,7 @@ export const QuickReplies = () => {
                   {filtered.map((r) => {
                     const { missing } = applyTokens(r.text, tokens);
                     const isCopied = copiedId === r.id;
+                    const expiry = getExpiryStatus(r.expiresAt);
                     return (
                       <article
                         key={r.id}
@@ -241,7 +242,9 @@ export const QuickReplies = () => {
                           "group flex flex-col rounded-2xl border bg-card p-5 shadow-sm transition hover:shadow-md",
                           r.active
                             ? "border-primary/60 ring-1 ring-primary/30 hover:border-primary"
-                            : "border-border/60 hover:border-primary/40",
+                            : expiry?.expired
+                              ? "border-destructive/30 bg-muted/30 opacity-60 hover:opacity-80"
+                              : "border-border/60 hover:border-primary/40",
                         )}
                       >
                         <div className="mb-3 flex items-start justify-between gap-3">
@@ -250,6 +253,16 @@ export const QuickReplies = () => {
                             <h3 className="text-sm font-semibold leading-tight">{r.label}</h3>
                           </div>
                           <div className="flex items-center gap-1.5">
+                            {expiry?.expired && (
+                              <span className="inline-flex items-center gap-1 rounded-full bg-destructive px-2 py-0.5 text-[10px] font-bold uppercase tracking-wider text-destructive-foreground">
+                                <AlertTriangle className="h-2.5 w-2.5" /> Expirada
+                              </span>
+                            )}
+                            {!expiry?.expired && expiry && (
+                              <span className="inline-flex items-center gap-1 rounded-full bg-amber-100 px-2 py-0.5 text-[10px] font-bold uppercase tracking-wider text-amber-800 dark:bg-amber-950 dark:text-amber-200">
+                                <Clock className="h-2.5 w-2.5" /> {expiry.label}
+                              </span>
+                            )}
                             {r.active && (
                               <span className="inline-flex items-center gap-1 rounded-full bg-primary px-2 py-0.5 text-[10px] font-bold uppercase tracking-wider text-primary-foreground">
                                 <Sparkles className="h-2.5 w-2.5" /> Ativa
@@ -281,8 +294,18 @@ export const QuickReplies = () => {
                               ))
                             )}
                           </div>
-                          <Button size="sm" variant={isCopied ? "secondary" : "default"} onClick={() => handleCopy(r.id, r.text)} className="h-8">
-                            {isCopied ? (
+                          <Button
+                            size="sm"
+                            variant={isCopied ? "secondary" : "default"}
+                            onClick={() => handleCopy(r.id, r.text)}
+                            disabled={expiry?.expired}
+                            className="h-8"
+                          >
+                            {expiry?.expired ? (
+                              <>
+                                <AlertTriangle className="mr-1 h-3.5 w-3.5" /> Expirada
+                              </>
+                            ) : isCopied ? (
                               <>
                                 <Check className="mr-1 h-3.5 w-3.5" /> Copiado
                               </>
