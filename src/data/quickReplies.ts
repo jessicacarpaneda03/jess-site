@@ -291,6 +291,20 @@ Posso te enviar a chave PIX e o endereço de entrega?`,
     label: "Receita comum/B1 digital",
     text: `{{nome}}, receitas comuns e algumas controladas (B1, sem retenção em algumas farmácias) podem ir digital, com assinatura ICP-Brasil — chega no seu e-mail e vale em qualquer farmácia do Brasil. Se for receita A ou B amarela/azul retida, é envio físico via Sedex (taxa R$ 100, PIX). 💚`,
   },
+  {
+    id: "a-agenda-aberta-reajuste",
+    tab: "atalhos",
+    tag: "Agenda",
+    label: "Agenda aberta + aviso de reajuste",
+    expiresAt: "2025-05-31",
+    text: `Oi, {{nome}}! Minha agenda está aberta pra consultas a partir de *18/05* — você já pode agendar agora e não precisa esperar 💙
+
+👉 ${LINK}
+
+Só um aviso carinhoso: devo fazer um reajuste de valores em *junho*. Ainda não está 100% confirmado, mas se você quiser garantir o valor atual, é só agendar — pode remarcar depois sem problema, desde que avise com antecedência.
+
+Tranquilidade total: cancelamento com reembolso total até 24h antes da consulta.`,
+  },
 
   // ---------------- OBJEÇÕES (1ª pessoa) ----------------
   {
