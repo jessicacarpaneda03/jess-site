@@ -78,70 +78,248 @@ Profissional: Dr(a). {{profissional}}
 - Retorno: {{retorno}}`,
   },
   {
-    id: "tdah-adulto",
-    category: "TDAH",
-    title: "Anamnese dirigida — TDAH no adulto",
-    description: "Triagem estruturada para avaliação de TDAH em adultos.",
-    template: `ANAMNESE DIRIGIDA — TDAH ADULTO
+    id: "tdah-c1",
+    category: "TDAH (avaliação em 3-4 consultas)",
+    title: "TDAH adulto — Consulta 1: avaliação inicial",
+    description: "Primeiro encontro (50-60 min): queixa, sintomas atuais, impacto e escalas iniciais.",
+    template: `AVALIAÇÃO DE TDAH — CONSULTA 1 (INICIAL)
 Paciente: {{nome}}
 Idade: {{idade}} anos
 Data: {{data}}
+Profissional: Dr(a). {{profissional}}
 
-1. QUEIXA E IMPACTO ATUAL
-- Principais dificuldades hoje:
-- Áreas afetadas (trabalho, estudo, finanças, relacionamentos):
-- Quando percebeu que algo era diferente:
+ENQUADRE
+- Avaliação estruturada em 3 a 4 consultas.
+- Hoje: mapear queixa, sintomas atuais e impacto. Sem fechar diagnóstico.
 
-2. SINTOMAS DE DESATENÇÃO (avaliar frequência)
-( ) Erros por descuido em tarefas
-( ) Dificuldade em manter atenção
-( ) Parece não ouvir quando falam diretamente
+1. QUEIXA PRINCIPAL E EXPECTATIVA
+- O que motivou buscar avaliação agora:
+- O que espera deste processo:
+- Quem sugeriu (próprio, família, trabalho, terapeuta):
+
+2. SINTOMAS ATUAIS
+2.1 Desatenção
+( ) Erros por descuido
+( ) Dificuldade em sustentar atenção
+( ) Parece não ouvir
 ( ) Não conclui tarefas
-( ) Dificuldade em organizar atividades
-( ) Evita tarefas que exigem esforço mental
-( ) Perde objetos com frequência
-( ) Distrai-se com estímulos externos
-( ) Esquecimento em atividades diárias
+( ) Dificuldade em organizar
+( ) Evita tarefas de esforço mental
+( ) Perde objetos
+( ) Distrai-se com estímulos
+( ) Esquecimentos no dia a dia
 
-3. SINTOMAS DE HIPERATIVIDADE/IMPULSIVIDADE
-( ) Inquietação, mexe mãos/pés
-( ) Dificuldade em permanecer sentado
-( ) Sensação interna de inquietação
-( ) Dificuldade em atividades de lazer silenciosas
+2.2 Hiperatividade / impulsividade
+( ) Inquietação motora
+( ) Dificuldade em ficar sentado
+( ) Inquietação interna
+( ) Lazer silencioso difícil
 ( ) "A mil por hora"
-( ) Fala excessivamente
-( ) Responde antes da pergunta terminar
+( ) Fala excessiva
+( ) Responde antes do fim da pergunta
 ( ) Dificuldade em esperar a vez
 ( ) Interrompe ou se intromete
 
-4. HISTÓRIA NA INFÂNCIA
-- Sintomas antes dos 12 anos:
-- Desempenho escolar:
-- Relato de pais/professores:
-- Boletins, repetências, reforço:
+2.3 Disfunção executiva
+- Planejamento, priorização, gestão do tempo:
+- Procrastinação e início de tarefas:
+- Regulação emocional, irritabilidade, frustração:
 
-5. COMORBIDADES A RASTREAR
-- Ansiedade / Depressão:
-- Transtorno bipolar:
+3. IMPACTO FUNCIONAL HOJE
+- Trabalho / estudo:
+- Casa, finanças, rotina:
+- Relacionamentos e vida social:
+- Sono e energia:
+
+4. ESCALAS APLICADAS NA CONSULTA
+- ASRS-18:
+- SNAP-IV (auto/heteroaplicado):
+- PHQ-9:
+- GAD-7:
+- AUDIT:
+- Triagem de sono (Epworth/PSQI):
+
+5. SEGURANÇA E COMORBIDADES IMEDIATAS
+- Ideação suicida / autolesão:
 - Uso de substâncias:
-- Transtornos do sono:
-- Transtorno do espectro autista:
-- Transtornos de aprendizagem:
+- Risco no trânsito / trabalho:
 
-6. ANTECEDENTES E MEDICAÇÕES
-- Tentativas terapêuticas prévias:
-- Doenças cardiovasculares (pessoal/familiar):
-- Pressão arterial / FC basal:
+6. TAREFA PARA CASA (até a Consulta 2)
+- Reaplicar/levar ASRS, SNAP, PHQ-9, GAD-7 preenchidos.
+- Trazer relato de familiar e, se possível, de professor/colega de trabalho.
+- Buscar boletins escolares antigos, fichas médicas e cartão de vacina.
+- Anotar 3 situações reais da semana em que os sintomas atrapalharam.
 
-7. INSTRUMENTOS APLICADOS
-- ASRS-18: …
-- WURS: …
-- Outros:
+7. IMPRESSÃO INICIAL E CONDUTA
+- Impressão preliminar (sem fechar diagnóstico):
+- Conduta hoje: {{conduta}}
+- Retorno: {{retorno}}`,
+  },
+  {
+    id: "tdah-c2",
+    category: "TDAH (avaliação em 3-4 consultas)",
+    title: "TDAH adulto — Consulta 2: história de desenvolvimento",
+    description: "Segundo encontro (50-60 min): trajetória de vida, infância, escola e família.",
+    template: `AVALIAÇÃO DE TDAH — CONSULTA 2 (HISTÓRIA DE DESENVOLVIMENTO)
+Paciente: {{nome}}
+Data: {{data}}
+Profissional: Dr(a). {{profissional}}
 
-8. HIPÓTESE E PLANO
-- Diagnóstico (CID-11 6A05):
-- Apresentação predominante:
+REVISÃO DA SEMANA
+- Escalas trazidas (ASRS / SNAP / PHQ-9 / GAD-7):
+- 3 situações reais anotadas:
+- Material escolar / relatos de família trazidos:
+
+1. GESTAÇÃO, PARTO E PRIMEIRA INFÂNCIA
+- Intercorrências na gestação:
+- Parto, prematuridade, intercorrências neonatais:
+- Marcos do desenvolvimento (fala, marcha, controle esfincteriano):
+- Temperamento nos primeiros anos:
+
+2. INFÂNCIA (até os 12 anos)
+- Comportamento em casa:
+- Adaptação escolar (alfabetização, leitura, escrita, matemática):
+- Boletins, advertências, reforço, repetências:
+- Relato de pais e professores:
+- Sociabilidade, amizades, conflitos:
+- Esportes e atividades extracurriculares:
+
+3. ADOLESCÊNCIA
+- Desempenho no fundamental II e ensino médio:
+- Organização, agenda, estudo independente:
+- Uso de álcool, tabaco, outras substâncias:
+- Comportamentos de risco (trânsito, sexualidade, brigas):
+- Saúde mental nesta fase (humor, ansiedade, autolesão):
+
+4. VIDA ADULTA
+- Trajetória acadêmica e profissional:
+- Trocas de emprego, demissões, sub-rendimento:
+- Vida financeira, dívidas, impulsividade de consumo:
+- Relacionamentos afetivos, separações, conflitos:
+- Maternidade/paternidade e organização familiar:
+
+5. HISTÓRIA FAMILIAR
+- TDAH, transtornos de aprendizagem, ansiedade, depressão, bipolaridade, uso de substâncias:
+- Diagnósticos formais e tratamentos na família:
+
+6. ANTECEDENTES CLÍNICOS
+- Doenças clínicas, neurológicas, endocrinológicas, cardiológicas:
+- Medicações em uso:
+- Exames recentes relevantes:
+
+7. TAREFA PARA CASA (até a Consulta 3)
+- Diário semanal: 3 momentos/dia em que sintomas apareceram (situação, gatilho, impacto).
+- Levar informante significativo (parceiro, mãe/pai, amigo próximo) à próxima consulta, presencial ou por vídeo.
+- Se possível, trazer avaliação neuropsicológica prévia ou solicitar.
+
+8. CONDUTA
+- Resumo do que ficou claro hoje:
+- Pendências para a próxima consulta:
 - Conduta: {{conduta}}
+- Retorno: {{retorno}}`,
+  },
+  {
+    id: "tdah-c3",
+    category: "TDAH (avaliação em 3-4 consultas)",
+    title: "TDAH adulto — Consulta 3: diagnóstico e plano",
+    description: "Terceiro encontro (50-60 min): informante, diferenciais, fechamento e plano.",
+    template: `AVALIAÇÃO DE TDAH — CONSULTA 3 (DIAGNÓSTICO E PLANO)
+Paciente: {{nome}}
+Data: {{data}}
+Profissional: Dr(a). {{profissional}}
+
+1. ENTREVISTA COM INFORMANTE
+- Quem é (vínculo, tempo de convivência):
+- Percepção dos sintomas no dia a dia:
+- Sintomas observados antes dos 12 anos (ou desde quando convive):
+- Impacto observado em casa, trabalho, estudos:
+- Diferenças entre o relato do paciente e o do informante:
+
+2. REVISÃO DAS ESCALAS E DO DIÁRIO
+- ASRS-18 (total e domínios):
+- SNAP-IV:
+- PHQ-9 / GAD-7 / AUDIT:
+- Padrões observados no diário semanal:
+
+3. DIAGNÓSTICOS DIFERENCIAIS
+- Depressão / distimia:
+- Transtornos de ansiedade:
+- Transtorno bipolar (hipomania, ciclos):
+- Transtornos do sono (apneia, atraso de fase, insônia crônica):
+- Uso de álcool e substâncias:
+- Transtornos de aprendizagem específicos:
+- Transtorno do espectro autista:
+- Transtornos de personalidade (borderline em especial):
+- Causas clínicas (tireoide, anemia, dor crônica, efeito de medicamentos):
+
+4. CRITÉRIOS DSM-5-TR / CID-11 (6A05)
+- ≥5 sintomas de desatenção e/ou hiperatividade-impulsividade por ≥6 meses:
+- Início antes dos 12 anos (documentado):
+- Presentes em ≥2 contextos:
+- Prejuízo funcional claro:
+- Não melhor explicado por outro transtorno:
+
+5. FECHAMENTO DIAGNÓSTICO
+- Diagnóstico (CID-11):
+- Apresentação predominante (desatento / hiperativo-impulsivo / combinado):
+- Gravidade (leve / moderada / grave):
+- Comorbidades confirmadas:
+
+6. PLANO TERAPÊUTICO INDIVIDUALIZADO
+- Psicoeducação (paciente e família):
+- Higiene de sono e rotina:
+- Estratégias de organização externa (agenda, lembretes, blocos de tempo):
+- Psicoterapia (TCC com foco em TDAH, coaching executivo):
+- Tratamento farmacológico proposto e alternativas:
+- Avaliação cardiovascular pré-medicação (PA, FC, ECG se indicado):
+- Encaminhamentos (neuropsicologia, fonoaudiologia, nutrição, terapeuta ocupacional):
+- Documentos: relatório, atestado, laudo escolar/trabalho:
+
+7. CONDUTA HOJE
+- Decisão compartilhada com o paciente: {{conduta}}
+- Retorno: {{retorno}}`,
+  },
+  {
+    id: "tdah-c4",
+    category: "TDAH (avaliação em 3-4 consultas)",
+    title: "TDAH adulto — Consulta 4: ajuste e seguimento",
+    description: "Quarto encontro (opcional, 30-50 min): titulação, metas e plano de seguimento.",
+    template: `AVALIAÇÃO DE TDAH — CONSULTA 4 (AJUSTE E SEGUIMENTO)
+Paciente: {{nome}}
+Data: {{data}}
+Profissional: Dr(a). {{profissional}}
+
+1. REVISÃO DESDE A CONSULTA 3
+- Adesão ao plano não farmacológico:
+- Adesão à medicação (dose atual, horário, esquecimentos):
+- Efeitos percebidos (atenção, organização, humor, sono, apetite):
+- Efeitos adversos (cardiovasculares, sono, apetite, humor, tiques):
+- PA e FC nesta consulta:
+
+2. RESULTADOS DE EXAMES E LAUDOS
+- Avaliação neuropsicológica:
+- Exames cardiológicos:
+- Outros exames solicitados:
+
+3. METAS DE 4 A 8 SEMANAS
+- Meta 1 (trabalho/estudo):
+- Meta 2 (rotina/sono):
+- Meta 3 (relacional/emocional):
+- Indicadores objetivos de melhora:
+
+4. AJUSTE TERAPÊUTICO
+- Titulação de medicação:
+- Mudanças em psicoterapia / encaminhamentos:
+- Estratégias comportamentais reforçadas:
+
+5. PLANO DE SEGUIMENTO
+- Frequência inicial: semanal -> quinzenal -> mensal -> trimestral.
+- Sinais de alerta para contato antes do retorno (humor, ideação, efeitos adversos, PA/FC):
+- Canais de contato e horários:
+- Reavaliação formal em: 3 / 6 / 12 meses.
+
+6. CONDUTA
+- Esquema definido: {{conduta}}
 - Retorno: {{retorno}}`,
   },
   {
