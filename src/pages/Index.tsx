@@ -21,6 +21,7 @@ const Index = () => (
     <ReplyFormulator />
     <Scales />
     <Anamnese />
+    <PsychOutreach />
     <Services />
     <Faqs />
     <Footer />
