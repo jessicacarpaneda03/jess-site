@@ -6,6 +6,7 @@ import { QuickReplies } from "@/components/protocol/QuickReplies";
 import { ReplyFormulator } from "@/components/protocol/ReplyFormulator";
 import { Scales } from "@/components/protocol/Scales";
 import { Anamnese } from "@/components/protocol/Anamnese";
+import { PsychOutreach } from "@/components/protocol/PsychOutreach";
 import { Services } from "@/components/protocol/Services";
 import { Faqs } from "@/components/protocol/Faqs";
 import { Footer } from "@/components/protocol/Footer";
@@ -20,6 +21,7 @@ const Index = () => (
     <ReplyFormulator />
     <Scales />
     <Anamnese />
+    <PsychOutreach />
     <Services />
     <Faqs />
     <Footer />
