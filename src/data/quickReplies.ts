@@ -408,6 +408,23 @@ Se quiser checar: ${LINK}`,
     label: "\"Achei mais barato em outro lugar\"",
     text: `Faz sentido pesquisar, {{nome}} 🌿. Só vale comparar o que está incluído: 70 minutos de primeira consulta, retorno acessível, suporte por WhatsApp entre consultas e documentos sem custo extra quando indicados (exceto envio físico de receita A/B). Se ainda assim preferir outra opção, tudo bem — fica o convite. ${LINK}`,
   },
+  {
+    id: "o-plano-saude",
+    tab: "objecoes",
+    label: '"Atende meu plano / SulAmérica?"',
+    text: `Oi, {{nome}}! Entendo perfeitamente — ter plano de saúde e querer usá-lo faz todo sentido. 🌿
+
+Não tenho vínculo com convênios no momento, mas atendo por telemedicina e, por não ter os custos de uma clínica física, consigo praticar valores mais acessíveis sem abrir mão da qualidade:
+
+• Primeira consulta — R$ 320 (70 min)
+• Retorno — R$ 210 (60 min)
+• Suporte por WhatsApp entre consultas
+• Documentos sem custo extra quando indicados
+
+Além disso, emito recibo com CRM e CID, que você pode usar para pedir reembolso ao SulAmérica (ou outro plano) — a maioria oferece reembolso parcial, e vale a pena verificar o percentual no SAC do seu plano.
+
+A teleconsulta tem a mesma validade legal da presencial, e muitos pacientes relatam se sentir mais à vontade no conforto de casa. Se quiser experimentar: ${LINK}`,
+  },
 
   // ---------------- TRIAGEM (1ª pessoa) ----------------
   {
