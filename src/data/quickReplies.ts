@@ -409,21 +409,89 @@ Se quiser checar: ${LINK}`,
     text: `Faz sentido pesquisar, {{nome}} 🌿. Só vale comparar o que está incluído: 70 minutos de primeira consulta, retorno acessível, suporte por WhatsApp entre consultas e documentos sem custo extra quando indicados (exceto envio físico de receita A/B). Se ainda assim preferir outra opção, tudo bem — fica o convite. ${LINK}`,
   },
   {
-    id: "o-plano-saude",
+    id: "o-plano-sulamerica",
     tab: "objecoes",
-    label: '"Atende meu plano / SulAmérica?"',
-    text: `Oi, {{nome}}! Entendo perfeitamente — ter plano de saúde e querer usá-lo faz todo sentido. 🌿
+    label: '"Atende SulAmérica?"',
+    text: `Oi, {{nome}}! Entendo perfeitamente — ter plano e querer usá-lo faz todo sentido. 🌿
 
-Não tenho vínculo com convênios no momento, mas atendo por telemedicina e, por não ter os custos de uma clínica física, consigo praticar valores mais acessíveis sem abrir mão da qualidade:
+Não tenho vínculo com a SulAmérica nem com outros convênios no momento. Atendo por telemedicina e, por não ter custos de clínica física, consigo praticar valores mais acessíveis sem abrir mão da qualidade:
 
 • Primeira consulta — R$ 320 (70 min)
 • Retorno — R$ 210 (60 min)
 • Suporte por WhatsApp entre consultas
 • Documentos sem custo extra quando indicados
 
-Além disso, emito recibo com CRM e CID, que você pode usar para pedir reembolso ao SulAmérica (ou outro plano) — a maioria oferece reembolso parcial, e vale a pena verificar o percentual no SAC do seu plano.
+Emito recibo com CRM e CID, que você usa para pedir reembolso à SulAmérica — costuma cobrir uma parte (vale conferir o percentual no app ou SAC do plano).
 
-A teleconsulta tem a mesma validade legal da presencial, e muitos pacientes relatam se sentir mais à vontade no conforto de casa. Se quiser experimentar: ${LINK}`,
+A teleconsulta tem a mesma validade legal da presencial, e muitos pacientes se sentem mais à vontade no conforto de casa. Se quiser experimentar: ${LINK}`,
+  },
+  {
+    id: "o-plano-amil",
+    tab: "objecoes",
+    label: '"Atende Amil?"',
+    text: `Oi, {{nome}}! Faz total sentido a pergunta. 🌿
+
+Não atendo pela Amil — não tenho vínculo com convênios. Mas atendo 100% por telemedicina, e por isso consigo manter valores mais acessíveis sem perder qualidade:
+
+• Primeira consulta — R$ 320 (70 min)
+• Retorno — R$ 210 (60 min)
+• Suporte por WhatsApp entre consultas
+• Documentos sem custo extra quando indicados
+
+Emito recibo com CRM e CID para você solicitar reembolso à Amil (a maioria dos planos cobre uma parte — vale conferir no app ou SAC).
+
+A teleconsulta tem a mesma validade da presencial e muitos pacientes preferem pelo conforto de casa. Se quiser experimentar: ${LINK}`,
+  },
+  {
+    id: "o-plano-bradesco",
+    tab: "objecoes",
+    label: '"Atende Bradesco Saúde?"',
+    text: `Oi, {{nome}}! Entendo a sua dúvida. 🌿
+
+Não tenho vínculo com o Bradesco Saúde nem com outros convênios. O atendimento é 100% por telemedicina, o que me permite praticar valores mais acessíveis sem abrir mão da qualidade:
+
+• Primeira consulta — R$ 320 (70 min)
+• Retorno — R$ 210 (60 min)
+• Suporte por WhatsApp entre consultas
+• Documentos sem custo extra quando indicados
+
+Emito recibo com CRM e CID, que você envia ao Bradesco Saúde para solicitar reembolso — costuma cobrir uma parte (confira o percentual no app Meu Bradesco Saúde).
+
+A teleconsulta tem a mesma validade legal da presencial e oferece o conforto de estar em casa. Se quiser experimentar: ${LINK}`,
+  },
+  {
+    id: "o-plano-unimed",
+    tab: "objecoes",
+    label: '"Atende Unimed?"',
+    text: `Oi, {{nome}}! Faz sentido perguntar. 🌿
+
+Não atendo pela Unimed — não tenho vínculo com convênios. Atendo por telemedicina e, por não ter custos de clínica física, consigo praticar valores mais acessíveis sem perder qualidade:
+
+• Primeira consulta — R$ 320 (70 min)
+• Retorno — R$ 210 (60 min)
+• Suporte por WhatsApp entre consultas
+• Documentos sem custo extra quando indicados
+
+Emito recibo com CRM e CID para você solicitar reembolso à Unimed (a maioria das modalidades cobre uma parte — vale conferir no app ou central do plano).
+
+A teleconsulta tem a mesma validade da presencial e muitos pacientes preferem o conforto de casa. Se quiser experimentar: ${LINK}`,
+  },
+  {
+    id: "o-plano-outros",
+    tab: "objecoes",
+    label: '"Atende outro plano (Hapvida, Amil Dental, Porto, etc.)?"',
+    text: `Oi, {{nome}}! 🌿 Não tenho vínculo com convênios no momento — o atendimento é particular, 100% por telemedicina.
+
+Por não ter custos de clínica física, mantenho valores mais acessíveis sem perder qualidade:
+
+• Primeira consulta — R$ 320 (70 min)
+• Retorno — R$ 210 (60 min)
+• Suporte por WhatsApp entre consultas
+• Documentos sem custo extra quando indicados
+
+Emito recibo com CRM e CID, que costuma ser aceito pela maioria dos planos para reembolso parcial. Vale conferir o percentual direto com o SAC do seu convênio.
+
+A teleconsulta tem a mesma validade da presencial. Se quiser experimentar: ${LINK}`,
   },
 
   // ---------------- TRIAGEM (1ª pessoa) ----------------
