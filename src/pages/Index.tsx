@@ -7,6 +7,7 @@ import { ReplyFormulator } from "@/components/protocol/ReplyFormulator";
 import { Scales } from "@/components/protocol/Scales";
 import { Anamnese } from "@/components/protocol/Anamnese";
 import { PsychOutreach } from "@/components/protocol/PsychOutreach";
+import { BusinessCard } from "@/components/protocol/BusinessCard";
 import { Services } from "@/components/protocol/Services";
 import { Faqs } from "@/components/protocol/Faqs";
 import { Footer } from "@/components/protocol/Footer";
