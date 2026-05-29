@@ -30,7 +30,7 @@ export const BusinessCard = () => {
   };
 
   const downloadQR = () => {
-    const svg = document.getElementById("wa-qr-svg") as SVGSVGElement | null;
+    const svg = document.getElementById("wa-qr-svg") as unknown as SVGSVGElement | null;
     if (!svg) return;
     const xml = new XMLSerializer().serializeToString(svg);
     const blob = new Blob([xml], { type: "image/svg+xml;charset=utf-8" });
