@@ -23,6 +23,7 @@ const Index = () => (
     <Scales />
     <Anamnese />
     <PsychOutreach />
+    <BusinessCard />
     <Services />
     <Faqs />
     <Footer />
