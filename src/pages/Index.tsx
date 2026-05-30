@@ -19,6 +19,7 @@ const Index = () => (
     <Stages />
     <Scripts />
     <PublicReplies />
+    <DoctoraliaReviewReplies />
     <QuickReplies />
     <ReplyFormulator />
     <Scales />
