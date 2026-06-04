@@ -101,6 +101,38 @@ const SCALES: Scale[] = [
     },
   },
   {
+    id: "ybocs",
+    name: "Y-BOCS",
+    full: "Yale-Brown Obsessive Compulsive Scale (auto-aplicada)",
+    description: "Nas últimas semanas, considere obsessões (pensamentos intrusivos) e compulsões (rituais):",
+    options: [
+      { label: "Nenhum (0)", value: 0 },
+      { label: "Leve (1)", value: 1 },
+      { label: "Moderado (2)", value: 2 },
+      { label: "Grave (3)", value: 3 },
+      { label: "Extremo (4)", value: 4 },
+    ],
+    questions: [
+      "Tempo gasto com obsessões (horas/dia)",
+      "Interferência das obsessões na rotina/trabalho",
+      "Sofrimento causado pelas obsessões",
+      "Resistência às obsessões",
+      "Controle sobre as obsessões",
+      "Tempo gasto com compulsões/rituais",
+      "Interferência das compulsões na rotina",
+      "Ansiedade se impedido de realizar compulsões",
+      "Resistência às compulsões",
+      "Controle sobre as compulsões",
+    ],
+    interpret: (s) => {
+      if (s <= 7) return { label: `Subclínico (${s})`, tone: "ok", note: "Sintomas mínimos — sem TOC clínico." };
+      if (s <= 15) return { label: `Leve (${s})`, tone: "mild", note: "TOC leve — psicoeducação + TCC/ERP." };
+      if (s <= 23) return { label: `Moderado (${s})`, tone: "mod", note: "TOC moderado — ISRS + TCC/ERP." };
+      if (s <= 31) return { label: `Grave (${s})`, tone: "high", note: "TOC grave — ISRS em dose alta + ERP intensivo." };
+      return { label: `Extremo (${s})`, tone: "severe", note: "TOC extremo — considerar potencialização/encaminhamento." };
+    },
+  },
+  {
     id: "audit",
     name: "AUDIT-C",
     full: "Alcohol Use Disorders Identification Test (curto)",
