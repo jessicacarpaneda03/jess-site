@@ -277,7 +277,7 @@ export const Scales = () => {
               <Label className="text-sm font-medium">Escalas clínicas</Label>
             </div>
             <Tabs value={active} onValueChange={setActive}>
-              <TabsList className="mb-5 grid w-full grid-cols-4">
+              <TabsList className="mb-5 grid w-full grid-cols-5">
                 {SCALES.map((s) => (
                   <TabsTrigger key={s.id} value={s.id}>{s.name}</TabsTrigger>
                 ))}
