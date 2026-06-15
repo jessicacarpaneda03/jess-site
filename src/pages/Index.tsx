@@ -8,6 +8,7 @@ import { Scales } from "@/components/protocol/Scales";
 import { Anamnese } from "@/components/protocol/Anamnese";
 import { PsychOutreach } from "@/components/protocol/PsychOutreach";
 import { DoctoraliaReviewReplies } from "@/components/protocol/DoctoraliaReviewReplies";
+import { DoctoraliaTopics } from "@/components/protocol/DoctoraliaTopics";
 import { BusinessCard } from "@/components/protocol/BusinessCard";
 import { Services } from "@/components/protocol/Services";
 import { Faqs } from "@/components/protocol/Faqs";
@@ -20,6 +21,7 @@ const Index = () => (
     <Scripts />
     <PublicReplies />
     <DoctoraliaReviewReplies />
+    <DoctoraliaTopics />
     <QuickReplies />
     <ReplyFormulator />
     <Scales />
