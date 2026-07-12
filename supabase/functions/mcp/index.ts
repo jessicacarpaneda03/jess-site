@@ -97,7 +97,7 @@ var quickReplies = [
     label: "Boas-vindas (mensagem autom\xE1tica)",
     text: `Ol\xE1! Que bom ter seu contato por aqui \u{1F33F}
 
-Sou a *Dra. J\xE9ssica Carpaneda* \u2014 Psiquiatra (CRM/DF). Recebi sua mensagem e vou te responder pessoalmente assim que poss\xEDvel.
+Sou a *Dra. J\xE9ssica Carpaneda* \u2014 M\xE9dica em Sa\xFAde Mental (CRM GO 31189). Recebi sua mensagem e vou te responder pessoalmente assim que poss\xEDvel.
 
 Enquanto isso, minha *agenda online segue aberta* \u2014 voc\xEA n\xE3o precisa esperar pra garantir seu hor\xE1rio \u{1F499}
 
@@ -144,7 +144,7 @@ Por aqui, *leio todas as mensagens* e respondo assim que poss\xEDvel \u2014 pode
 
 Com carinho,
 *Dra. J\xE9ssica Carpaneda*
-Psiquiatra \u2014 CRM/DF`
+M\xE9dica em Sa\xFAde Mental \u2014 CRM/DF`
   },
   {
     id: "auto-fora-horario",
@@ -160,7 +160,7 @@ Se preferir j\xE1 garantir seu hor\xE1rio, minha agenda online est\xE1 aberta 24
 \u26A0\uFE0F *Em caso de emerg\xEAncia*: pronto-socorro, *SAMU 192* ou *CVV 188* (24h, gratuito e sigiloso).
 
 Com carinho,
-*Dra. J\xE9ssica Carpaneda* \u2014 Psiquiatra (CRM/DF)`
+*Dra. J\xE9ssica Carpaneda* \u2014 M\xE9dica em Sa\xFAde Mental (CRM GO 31189)`
   },
   {
     id: "auto-feriado",
@@ -177,7 +177,7 @@ Cancelamento com reembolso total at\xE9 24h antes da consulta.
 \u26A0\uFE0F Emerg\xEAncia: pronto-socorro, *SAMU 192* ou *CVV 188*.
 
 Com carinho,
-*Dra. J\xE9ssica Carpaneda* \u2014 Psiquiatra (CRM/DF)`
+*Dra. J\xE9ssica Carpaneda* \u2014 M\xE9dica em Sa\xFAde Mental (CRM GO 31189)`
   },
   {
     id: "auto-pos-consulta",
@@ -267,11 +267,11 @@ Pra reagendar: ${LINK}`
     text: `Oi, {{nome}}! Que bacana saber que veio por indica\xE7\xE3o. \u{1F49A} Conta um pouquinho do que est\xE1 te trazendo aqui que eu te oriento sobre o melhor caminho \u2014 ou, se preferir j\xE1 agendar, \xE9 por aqui: ${LINK}`
   },
   // ---------------- ATALHOS (sintéticos, 1ª pessoa) ----------------
-  { id: "a-valor", tab: "atalhos", tag: "Valor", label: "Valor da consulta", text: `Primeira consulta R$ 320 (70 min) e retorno R$ 210 (60 min), {{nome}}. Tudo online. Agendamento: ${LINK}` },
+  { id: "a-valor", tab: "atalhos", tag: "Valor", label: "Valor da consulta", text: `Primeira consulta R$ 400 (90 min) e retorno R$ 230 (60 min), {{nome}}. Tudo online. Agendamento: ${LINK}` },
   { id: "a-convenio", tab: "atalhos", tag: "Conv\xEAnio", label: "Conv\xEAnio (curto)", text: `N\xE3o atendo conv\xEAnio, {{nome}} \u2014 s\xF3 particular. Emito recibo pra voc\xEA pedir reembolso ao seu plano de sa\xFAde, quando aplic\xE1vel. Agendamento: ${LINK}` },
   { id: "a-online", tab: "atalhos", tag: "Telemedicina", label: "S\xF3 online?", text: `Sim, {{nome}}, atendimento 100% online por videochamada \u2014 mesma validade legal de consulta presencial. Atendo todo o Brasil. ${LINK}` },
   { id: "a-receita", tab: "atalhos", tag: "Receita", label: "Receita controlada", text: `{{nome}}, condutas e encaminhamentos s\xE3o definidos com base na avalia\xE7\xE3o cl\xEDnica feita na consulta \u2014 tudo conversado com voc\xEA. ${LINK}` },
-  { id: "a-tdah", tab: "atalhos", tag: "TDAH", label: "TDAH adulto", text: `Sim, {{nome}}! TDAH no adulto \xE9 uma das minhas \xE1reas de foco. Primeira consulta R$ 320, online. ${LINK}` },
+  { id: "a-tdah", tab: "atalhos", tag: "TDAH", label: "TDAH adulto", text: `Sim, {{nome}}! TDAH no adulto \xE9 uma das minhas \xE1reas de foco. Primeira consulta R$ 400, online. ${LINK}` },
   { id: "a-ansiedade", tab: "atalhos", tag: "Ansiedade", label: "Ansiedade", text: `Sim, {{nome}}, acompanho ansiedade e crises de p\xE2nico com plano individualizado. Online, em todo o Brasil. ${LINK}` },
   { id: "a-depressao", tab: "atalhos", tag: "Depress\xE3o", label: "Depress\xE3o", text: `Sim, {{nome}}, acompanho quadros depressivos \u2014 leves a graves \u2014 com escuta cuidadosa e plano individualizado. ${LINK}` },
   { id: "a-sono", tab: "atalhos", tag: "Sono", label: "Ins\xF4nia", text: `Sim, {{nome}}, dificuldades de sono s\xE3o avaliadas e o plano \xE9 individualizado. ${LINK}` },
@@ -288,7 +288,7 @@ Pra reagendar: ${LINK}`
   { id: "a-cancelar", tab: "atalhos", tag: "Agenda", label: "Cancelar / reagendar", text: `Sem problema, {{nome}} \u2014 cancelamentos com mais de 24h t\xEAm reembolso integral pela Doctoralia. Pra reagendar: ${LINK}` },
   { id: "a-atestado", tab: "atalhos", tag: "Documentos", label: "Atestado", text: `Sim, {{nome}}, emito atestados, relat\xF3rios e laudos quando clinicamente indicado, com assinatura digital v\xE1lida.` },
   { id: "a-recibo", tab: "atalhos", tag: "Documentos", label: "Recibo IR", text: `Sim, {{nome}}, o recibo serve pra dedu\xE7\xE3o no IR e tamb\xE9m pra pedido de reembolso ao plano de sa\xFAde.` },
-  { id: "a-renovar", tab: "atalhos", tag: "Receita", label: "Renovar receita", text: `Renova\xE7\xF5es e ajustes de conduta exigem uma consulta de retorno, {{nome}} \u2014 quest\xE3o \xE9tica. Pacientes em acompanhamento agendam um retorno (R$ 210). ${LINK}` },
+  { id: "a-renovar", tab: "atalhos", tag: "Receita", label: "Renovar receita", text: `Renova\xE7\xF5es e ajustes de conduta exigem uma consulta de retorno, {{nome}} \u2014 quest\xE3o \xE9tica. Pacientes em acompanhamento agendam um retorno (R$ 230). ${LINK}` },
   { id: "a-fora-brasil", tab: "atalhos", tag: "Telemedicina", label: "Fora do Brasil", text: `Sim, {{nome}}, brasileiros morando fora podem se consultar normalmente \u2014 basta CPF ativo. ${LINK}` },
   { id: "a-urgencia", tab: "atalhos", tag: "Urg\xEAncia", label: "Crise / urg\xEAncia", text: `{{nome}}, se houver risco agora, por favor ligue no CVV 188 (24h) ou procure um pronto-socorro. Meu atendimento \xE9 ambulatorial e agendado. \u{1F49A}` },
   // NOVOS — Receita A/B Sedex
@@ -353,7 +353,7 @@ Tranquilidade total: cancelamento com reembolso total at\xE9 24h antes da consul
     id: "o-caro",
     tab: "objecoes",
     label: '"T\xE1 caro pra mim"',
-    text: `Entendo perfeitamente, {{nome}}. \u{1F33F} Meu valor est\xE1 alinhado com a m\xE9dia de profissionais de sa\xFAde mental com a mesma forma\xE7\xE3o, e cobre uma consulta longa (70 min na primeira), documentos quando indicados e suporte p\xF3s-consulta.
+    text: `Entendo perfeitamente, {{nome}}. \u{1F33F} Meu valor est\xE1 alinhado com a m\xE9dia de profissionais de sa\xFAde mental com a mesma forma\xE7\xE3o, e cobre uma consulta longa (90 min na primeira), documentos quando indicados e suporte p\xF3s-consulta.
 
 Algumas op\xE7\xF5es que ajudam:
 \u2022 Parcelamento no cart\xE3o pelo checkout da Doctoralia
@@ -384,7 +384,7 @@ Se topar testar: ${LINK}`
     id: "o-sem-tempo",
     tab: "objecoes",
     label: '"N\xE3o tenho tempo"',
-    text: `Entendo, {{nome}}. \u{1F49A} Por isso atendo 100% online \u2014 sem deslocamento, sem sala de espera. S\xE3o 70 minutos do seu pr\xF3prio ambiente, e tenho hor\xE1rios alternativos (manh\xE3 cedo / fim de tarde) pra quem trabalha.
+    text: `Entendo, {{nome}}. \u{1F49A} Por isso atendo 100% online \u2014 sem deslocamento, sem sala de espera. S\xE3o 90 minutos do seu pr\xF3prio ambiente, e tenho hor\xE1rios alternativos (manh\xE3 cedo / fim de tarde) pra quem trabalha.
 
 D\xE1 uma olhada na agenda: ${LINK}`
   },
@@ -448,7 +448,7 @@ Se quiser checar: ${LINK}`
     id: "o-comparou",
     tab: "objecoes",
     label: '"Achei mais barato em outro lugar"',
-    text: `Faz sentido pesquisar, {{nome}} \u{1F33F}. S\xF3 vale comparar o que est\xE1 inclu\xEDdo: 70 minutos de primeira consulta, retorno acess\xEDvel, suporte por WhatsApp entre consultas e documentos sem custo extra quando indicados (exceto envio f\xEDsico de receita A/B). Se ainda assim preferir outra op\xE7\xE3o, tudo bem \u2014 fica o convite. ${LINK}`
+    text: `Faz sentido pesquisar, {{nome}} \u{1F33F}. S\xF3 vale comparar o que est\xE1 inclu\xEDdo: 90 minutos de primeira consulta, retorno acess\xEDvel, suporte por WhatsApp entre consultas e documentos sem custo extra quando indicados (exceto envio f\xEDsico de receita A/B). Se ainda assim preferir outra op\xE7\xE3o, tudo bem \u2014 fica o convite. ${LINK}`
   },
   {
     id: "o-plano-sulamerica",
@@ -458,8 +458,8 @@ Se quiser checar: ${LINK}`
 
 N\xE3o tenho v\xEDnculo com a SulAm\xE9rica nem com outros conv\xEAnios no momento. Atendo por telemedicina e, por n\xE3o ter custos de cl\xEDnica f\xEDsica, consigo praticar valores mais acess\xEDveis sem abrir m\xE3o da qualidade:
 
-\u2022 Primeira consulta \u2014 R$ 320 (70 min)
-\u2022 Retorno \u2014 R$ 210 (60 min)
+\u2022 Primeira consulta \u2014 R$ 400 (90 min)
+\u2022 Retorno \u2014 R$ 230 (60 min)
 \u2022 Suporte por WhatsApp entre consultas
 \u2022 Documentos sem custo extra quando indicados
 
@@ -475,8 +475,8 @@ A teleconsulta tem a mesma validade legal da presencial, e muitos pacientes se s
 
 N\xE3o atendo pela Amil \u2014 n\xE3o tenho v\xEDnculo com conv\xEAnios. Mas atendo 100% por telemedicina, e por isso consigo manter valores mais acess\xEDveis sem perder qualidade:
 
-\u2022 Primeira consulta \u2014 R$ 320 (70 min)
-\u2022 Retorno \u2014 R$ 210 (60 min)
+\u2022 Primeira consulta \u2014 R$ 400 (90 min)
+\u2022 Retorno \u2014 R$ 230 (60 min)
 \u2022 Suporte por WhatsApp entre consultas
 \u2022 Documentos sem custo extra quando indicados
 
@@ -492,8 +492,8 @@ A teleconsulta tem a mesma validade da presencial e muitos pacientes preferem pe
 
 N\xE3o tenho v\xEDnculo com o Bradesco Sa\xFAde nem com outros conv\xEAnios. O atendimento \xE9 100% por telemedicina, o que me permite praticar valores mais acess\xEDveis sem abrir m\xE3o da qualidade:
 
-\u2022 Primeira consulta \u2014 R$ 320 (70 min)
-\u2022 Retorno \u2014 R$ 210 (60 min)
+\u2022 Primeira consulta \u2014 R$ 400 (90 min)
+\u2022 Retorno \u2014 R$ 230 (60 min)
 \u2022 Suporte por WhatsApp entre consultas
 \u2022 Documentos sem custo extra quando indicados
 
@@ -509,8 +509,8 @@ A teleconsulta tem a mesma validade legal da presencial e oferece o conforto de 
 
 N\xE3o atendo pela Unimed \u2014 n\xE3o tenho v\xEDnculo com conv\xEAnios. Atendo por telemedicina e, por n\xE3o ter custos de cl\xEDnica f\xEDsica, consigo praticar valores mais acess\xEDveis sem perder qualidade:
 
-\u2022 Primeira consulta \u2014 R$ 320 (70 min)
-\u2022 Retorno \u2014 R$ 210 (60 min)
+\u2022 Primeira consulta \u2014 R$ 400 (90 min)
+\u2022 Retorno \u2014 R$ 230 (60 min)
 \u2022 Suporte por WhatsApp entre consultas
 \u2022 Documentos sem custo extra quando indicados
 
@@ -526,8 +526,8 @@ A teleconsulta tem a mesma validade da presencial e muitos pacientes preferem o 
 
 Por n\xE3o ter custos de cl\xEDnica f\xEDsica, mantenho valores mais acess\xEDveis sem perder qualidade:
 
-\u2022 Primeira consulta \u2014 R$ 320 (70 min)
-\u2022 Retorno \u2014 R$ 210 (60 min)
+\u2022 Primeira consulta \u2014 R$ 400 (90 min)
+\u2022 Retorno \u2014 R$ 230 (60 min)
 \u2022 Suporte por WhatsApp entre consultas
 \u2022 Documentos sem custo extra quando indicados
 
@@ -605,7 +605,7 @@ A teleconsulta tem a mesma validade da presencial. Se quiser experimentar: ${LIN
     label: "Encaixe \u2014 perfil TDAH",
     text: `Pelo que voc\xEA me conta, {{nome}}, faz muito sentido a gente investigar TDAH \u2014 \xE9 uma das minhas \xE1reas de foco. \u{1F49A}
 
-A primeira consulta \xE9 online (70 min, R$ 320) e j\xE1 inicio a investiga\xE7\xE3o com escalas validadas (ASRS-18). Sem precisar de exames antes.
+A primeira consulta \xE9 online (90 min, R$ 400) e j\xE1 inicio a investiga\xE7\xE3o com escalas validadas (ASRS-18). Sem precisar de exames antes.
 
 Quer que eu te mostre os hor\xE1rios dispon\xEDveis? ${LINK}`
   },
@@ -616,7 +616,7 @@ Quer que eu te mostre os hor\xE1rios dispon\xEDveis? ${LINK}`
     label: "Encaixe \u2014 ansiedade/p\xE2nico",
     text: `{{nome}}, o que voc\xEA descreve \xE9 muito compat\xEDvel com um quadro ansioso \u2014 e tem tratamento, viu? \u{1F33F} Trabalho com escuta cuidadosa + plano individualizado, conversado com voc\xEA.
 
-Primeira consulta online, 70 min, R$ 320. Posso te ajudar a marcar? ${LINK}`
+Primeira consulta online, 90 min, R$ 400. Posso te ajudar a marcar? ${LINK}`
   },
   {
     id: "t-08-encaixe-burnout",
@@ -625,7 +625,7 @@ Primeira consulta online, 70 min, R$ 320. Posso te ajudar a marcar? ${LINK}`
     label: "Encaixe \u2014 burnout",
     text: `Pelo que voc\xEA relata, {{nome}}, parece quadro de esgotamento (burnout). \u{1F49A} Eu avalio, oriento sobre afastamento se necess\xE1rio e monto o plano de cuidado com voc\xEA.
 
-Primeira consulta online, 70 min, R$ 320. Quer ver os hor\xE1rios? ${LINK}`
+Primeira consulta online, 90 min, R$ 400. Quer ver os hor\xE1rios? ${LINK}`
   },
   {
     id: "t-08-encaixe-depressao",
@@ -634,7 +634,7 @@ Primeira consulta online, 70 min, R$ 320. Quer ver os hor\xE1rios? ${LINK}`
     label: "Encaixe \u2014 depress\xE3o",
     text: `{{nome}}, o que voc\xEA compartilhou tem cara de quadro depressivo \u2014 e \xE9 totalmente trat\xE1vel. \u{1F33F} Voc\xEA n\xE3o precisa estar "no fundo" pra come\xE7ar; quanto antes, melhor.
 
-Primeira consulta online, 70 min, R$ 320. Te ajudo a agendar? ${LINK}`
+Primeira consulta online, 90 min, R$ 400. Te ajudo a agendar? ${LINK}`
   },
   {
     id: "t-08-encaixe-fora-escopo",
@@ -859,8 +859,8 @@ Manda preenchido por aqui que eu reviso com voc\xEA. \u{1F49A}`
   { id: "n02", tab: "atalhos", tag: "02. Sauda\xE7\xE3o", label: "02. Fora do hor\xE1rio", text: `Oi, {{nome}}! \u{1F319} Recebi sua mensagem fora do meu hor\xE1rio comercial (seg-sex, 9h-18h). Amanh\xE3 cedo te respondo com calma. Em urg\xEAncia: CVV 188.` },
   { id: "n03", tab: "atalhos", tag: "03. Sauda\xE7\xE3o", label: "03. Reapresenta\xE7\xE3o", text: `Oi, {{nome}}! \u{1F49A} Que bom te ver de volta. Em que posso te ajudar hoje \u2014 quer agendar, tirar uma d\xFAvida, ou outra coisa?` },
   // ── Valores (04–08)
-  { id: "n04", tab: "atalhos", tag: "04. Valor", label: "04. Valor 1\xAA consulta", text: `Primeira consulta: R$ 320 (70 min, online), {{nome}}. Inclui avalia\xE7\xE3o completa e plano de cuidado individualizado. Agendamento: ${LINK}` },
-  { id: "n05", tab: "atalhos", tag: "05. Valor", label: "05. Valor retorno", text: `Retorno: R$ 210 (60 min, online), {{nome}}. Indicado para acompanhamento, ajustes e renova\xE7\xE3o de conduta. ${LINK}` },
+  { id: "n04", tab: "atalhos", tag: "04. Valor", label: "04. Valor 1\xAA consulta", text: `Primeira consulta: R$ 400 (90 min, online), {{nome}}. Inclui avalia\xE7\xE3o completa e plano de cuidado individualizado. Agendamento: ${LINK}` },
+  { id: "n05", tab: "atalhos", tag: "05. Valor", label: "05. Valor retorno", text: `Retorno: R$ 230 (60 min, online), {{nome}}. Indicado para acompanhamento, ajustes e renova\xE7\xE3o de conduta. ${LINK}` },
   { id: "n06", tab: "atalhos", tag: "06. Valor", label: "06. Por que esse valor", text: `O valor reflete forma\xE7\xE3o especializada, consulta longa, suporte p\xF3s-consulta por WhatsApp e documentos sem custo extra quando indicados (exceto envio f\xEDsico de receita A/B), {{nome}}. \u{1F33F}` },
   { id: "n07", tab: "atalhos", tag: "07. Valor", label: "07. Parcelamento", text: `Sim, {{nome}}! O checkout da Doctoralia permite parcelar no cart\xE3o de cr\xE9dito (sujeito \xE0s condi\xE7\xF5es da operadora). ${LINK}` },
   { id: "n08", tab: "atalhos", tag: "08. Valor", label: "08. Desconto / social", text: `{{nome}}, hoje n\xE3o trabalho com descontos individuais \u2014 pra manter equidade entre pacientes. Se o valor pesar, posso te indicar servi\xE7os p\xFAblicos (CAPS, UBS) ou cl\xEDnicas-escola. \u{1F49A}` },
@@ -883,7 +883,7 @@ Manda preenchido por aqui que eu reviso com voc\xEA. \u{1F49A}`
   { id: "n22", tab: "atalhos", tag: "22. Pagamento", label: "22. Recibo para reembolso", text: `Sim, {{nome}}, emito recibo logo ap\xF3s a consulta \u2014 serve para reembolso pelo plano (quando aplic\xE1vel) e dedu\xE7\xE3o no IR.` },
   { id: "n23", tab: "atalhos", tag: "23. Pagamento", label: "23. Pagamento direto?", text: `{{nome}}, o pagamento da consulta \xE9 via Doctoralia (mais seguran\xE7a pra voc\xEA e pra mim). S\xF3 recebo PIX direto na taxa de envio f\xEDsico de receita A/B (R$ 100). \u{1F33F}` },
   // ── Sobre a Consulta (24–30)
-  { id: "n24", tab: "atalhos", tag: "24. Consulta", label: "24. Quanto tempo dura", text: `Primeira consulta: 70 minutos. Retornos: 60 minutos, {{nome}}. Tempo confort\xE1vel pra conversar sem pressa. \u{1F33F}` },
+  { id: "n24", tab: "atalhos", tag: "24. Consulta", label: "24. Quanto tempo dura", text: `Primeira consulta: 90 minutos. Retornos: 60 minutos, {{nome}}. Tempo confort\xE1vel pra conversar sem pressa. \u{1F33F}` },
   { id: "n25", tab: "atalhos", tag: "25. Consulta", label: "25. O que precisa preparar", text: `Nada formal, {{nome}}! Se tiver exames, relat\xF3rios anteriores ou lista de medica\xE7\xF5es em uso, deixa em m\xE3os. O resto \xE9 s\xF3 conversa. \u{1F49A}` },
   { id: "n26", tab: "atalhos", tag: "26. Consulta", label: "26. Posso ter acompanhante", text: `Sim, {{nome}}, se voc\xEA se sentir mais segura(o) com algu\xE9m presente \u2014 sem problema. S\xF3 me avise no in\xEDcio pra alinhar a privacidade do que ser\xE1 compartilhado.` },
   { id: "n27", tab: "atalhos", tag: "27. Consulta", label: "27. Sigilo m\xE9dico", text: `Sigilo absoluto, {{nome}}. \u{1F33F} Tudo que conversamos fica entre n\xF3s, protegido por lei (CFM e LGPD).` },
@@ -905,14 +905,14 @@ Manda preenchido por aqui que eu reviso com voc\xEA. \u{1F49A}`
   { id: "n41", tab: "atalhos", tag: "41. Doc", label: "41. Recibo IR", text: `Sim, {{nome}}, o recibo serve para dedu\xE7\xE3o no Imposto de Renda e reembolso parcial pelo plano de sa\xFAde, quando aplic\xE1vel.` },
   { id: "n42", tab: "atalhos", tag: "42. Doc", label: "42. Laudo INSS", text: `Laudo para INSS \xE9 emitido quando h\xE1 indica\xE7\xE3o cl\xEDnica de afastamento, {{nome}}. Pode requerer mais de uma consulta para hist\xF3rico consistente. \u{1F33F}` },
   { id: "n43", tab: "atalhos", tag: "43. Doc", label: "43. Declara\xE7\xE3o de comparecimento", text: `Claro, {{nome}}! Declara\xE7\xE3o de comparecimento \xE9 gratuita e enviada por e-mail logo ap\xF3s a consulta.` },
-  { id: "n44", tab: "atalhos", tag: "44. Doc", label: "44. 2\xAA via de receita", text: `Para 2\xAA via de receita digital n\xE3o vencida, {{nome}}, basta solicitar por aqui. Para renova\xE7\xE3o ap\xF3s vencimento, \xE9 necess\xE1ria consulta de retorno (R$ 210). \u{1F33F}` },
+  { id: "n44", tab: "atalhos", tag: "44. Doc", label: "44. 2\xAA via de receita", text: `Para 2\xAA via de receita digital n\xE3o vencida, {{nome}}, basta solicitar por aqui. Para renova\xE7\xE3o ap\xF3s vencimento, \xE9 necess\xE1ria consulta de retorno (R$ 230). \u{1F33F}` },
   { id: "n45", tab: "atalhos", tag: "45. Doc", label: "45. Documentos para advogado/escola", text: `Documentos para terceiros (advogado, escola, RH) s\xE3o emitidos com sua autoriza\xE7\xE3o expressa por escrito, {{nome}} \u2014 sigilo \xE9 prioridade. \u{1F49A}` },
   // ── Cancelamento, Remarcação e Retornos (46–51)
   { id: "n46", tab: "atalhos", tag: "46. Cancel", label: "46. Como cancelar", text: `Sem problema, {{nome}}. Cancele direto no link da Doctoralia ou me avise por aqui. Mais de 24h de anteced\xEAncia = reembolso integral. ${LINK}` },
   { id: "n47", tab: "atalhos", tag: "47. Cancel", label: "47. Remarcar", text: `Claro, {{nome}}! Me confirma o melhor dia/per\xEDodo e vejo o que tenho dispon\xEDvel. \u{1F33F}` },
   { id: "n48", tab: "atalhos", tag: "48. Cancel", label: "48. Faltei sem avisar", text: `Tudo bem acontecer, {{nome}}. \u{1F49A} Faltas sem aviso pr\xE9vio (no-show) n\xE3o geram reembolso, mas posso te ajudar a reagendar uma nova consulta. Quer marcar?` },
   { id: "n49", tab: "atalhos", tag: "49. Retorno", label: "49. Quando marcar retorno", text: `Em geral, primeiro retorno em 30 dias, {{nome}} \u2014 depois espa\xE7amos conforme estabilidade. Alinho com voc\xEA na consulta. \u{1F33F}` },
-  { id: "n50", tab: "atalhos", tag: "50. Retorno", label: "50. Retorno tardio (sumi)", text: `Que bom te ver de volta, {{nome}}! \u{1F49A} Se a \xFAltima consulta foi h\xE1 mais de 6 meses, conto como nova primeira consulta (R$ 320). At\xE9 l\xE1, \xE9 retorno (R$ 210).` },
+  { id: "n50", tab: "atalhos", tag: "50. Retorno", label: "50. Retorno tardio (sumi)", text: `Que bom te ver de volta, {{nome}}! \u{1F49A} Se a \xFAltima consulta foi h\xE1 mais de 6 meses, conto como nova primeira consulta (R$ 400). At\xE9 l\xE1, \xE9 retorno (R$ 230).` },
   { id: "n51", tab: "atalhos", tag: "51. Cancel", label: "51. Cancelei e quero remarcar", text: `Claro, {{nome}}! Posso reativar seu agendamento \u2014 s\xF3 me confirma o melhor hor\xE1rio e te envio o novo link. \u{1F33F}` },
   // ── Urgência e Crises (52–54)
   { id: "n52", tab: "atalhos", tag: "52. Urg\xEAncia", label: "52. Crise agora", text: `{{nome}}, meu atendimento por aqui \xE9 ambulatorial. Em crise AGORA: CVV 188 (24h) | SAMU 192 | pronto-socorro mais pr\xF3ximo. \u{1F49A} Estou aqui pra te orientar.` },
@@ -1006,7 +1006,7 @@ Vou seguir conforme o caso. \u{1F49A}`
 \u{1F4B3} 2. Pagamento \u2192 PIX, d\xE9bito ou cr\xE9dito (parcel\xE1vel) pelo checkout da Doctoralia
 \u2709\uFE0F 3. Confirma\xE7\xE3o \u2192 chega por e-mail e WhatsApp
 \u{1F517} 4. Link da videochamada \u2192 enviado 30 min antes
-\u{1F469}\u200D\u2695\uFE0F 5. Consulta \u2192 70 min (1\xAA) ou 60 min (retorno) comigo
+\u{1F469}\u200D\u2695\uFE0F 5. Consulta \u2192 90 min (1\xAA) ou 60 min (retorno) comigo
 \u{1F4CB} 6. Plano de cuidado \u2192 conduta + documentos enviados ap\xF3s a consulta
 
 Simples assim. \u{1F49A}`
@@ -1313,7 +1313,7 @@ Sem cobran\xE7a, sem julgamento. Quando quiser come\xE7ar: ${LINK} \u{1F33F}`
     label: '"Minha mente n\xE3o para"',
     text: `Entendo, {{nome}}. \u{1F33F} Esse turbilh\xE3o na cabe\xE7a \u2014 pensamentos acelerados, sensa\xE7\xE3o de que voc\xEA n\xE3o consegue desligar \u2014 \xE9 exaustivo e tem nome, tem causa e tem tratamento.
 
-Posso te ajudar a entender o que est\xE1 acontecendo. Primeira consulta online, 70 min: ${LINK} \u{1F49A}`
+Posso te ajudar a entender o que est\xE1 acontecendo. Primeira consulta online, 90 min: ${LINK} \u{1F49A}`
   },
   {
     id: "c-sem-leveza",
@@ -1355,7 +1355,7 @@ Meu papel n\xE3o \xE9 te trazer mais cobran\xE7a, \xE9 amparar. Quando quiser: $
   { id: "n89", tab: "atalhos", tag: "89. Receita", label: "89. Receita digital \u2014 como recebo?", text: `Receitas digitais (com assinatura ICP-Brasil) chegam por e-mail logo ap\xF3s a consulta, {{nome}}. Voc\xEA apresenta no celular ou imprime \u2014 vale em qualquer farm\xE1cia do Brasil. \u{1F33F}` },
   { id: "n90", tab: "atalhos", tag: "90. Receita", label: "90. Receita controlada A/B (Sedex)", text: `{{nome}}, receita controlada tipo A (amarela) e B (azul) com reten\xE7\xE3o precisa ser enviada f\xEDsica. Taxa fixa de R$ 100 (Sedex), pagamento por PIX, postagem em at\xE9 2 dias \xFAteis e c\xF3digo de rastreamento te enviado por aqui. \u{1F49A}` },
   { id: "n91", tab: "atalhos", tag: "91. Receita", label: "91. Validade da receita", text: `{{nome}}: receita comum vale 6 meses; receita B (azul) vale 30 dias; receita A (amarela, retinoides/opioides) vale 30 dias e \xE9 retida na farm\xE1cia. \u{1F33F}` },
-  { id: "n92", tab: "atalhos", tag: "92. 1\xAA consulta", label: "92. O que esperar da 1\xAA consulta", text: `{{nome}}, na 1\xAA consulta (70 min) eu te ou\xE7o com calma, fa\xE7o perguntas sobre seu hist\xF3rico, sintomas e contexto, e constru\xEDmos juntas(os) uma hip\xF3tese inicial e o primeiro plano de cuidado. Sem pressa, sem r\xF3tulo apressado. \u{1F49A}` },
+  { id: "n92", tab: "atalhos", tag: "92. 1\xAA consulta", label: "92. O que esperar da 1\xAA consulta", text: `{{nome}}, na 1\xAA consulta (90 min) eu te ou\xE7o com calma, fa\xE7o perguntas sobre seu hist\xF3rico, sintomas e contexto, e constru\xEDmos juntas(os) uma hip\xF3tese inicial e o primeiro plano de cuidado. Sem pressa, sem r\xF3tulo apressado. \u{1F49A}` },
   { id: "n93", tab: "atalhos", tag: "93. 1\xAA consulta", label: "93. Preciso levar exames?", text: `Se tiver, traz! {{nome}}, exames recentes (sangue, tireoide, B12, vit D), relat\xF3rios anteriores e lista de medica\xE7\xF5es em uso ajudam muito. Se n\xE3o tiver, sem problema \u2014 pe\xE7o o que precisar. \u{1F33F}` },
   { id: "n94", tab: "atalhos", tag: "94. 1\xAA consulta", label: "94. Vou precisar de exames depois?", text: `{{nome}}, em alguns casos sim \u2014 sangue, tireoide, B12, vit D pra descartar causas cl\xEDnicas. Eu prescrevo na consulta se for o caso, e a gente revisa no retorno. \u{1F49A}` },
   { id: "n95", tab: "atalhos", tag: "95. Retorno", label: "95. Quanto tempo dura o retorno", text: `60 minutos, {{nome}}. Tempo focado em revisar evolu\xE7\xE3o, ajustar plano e renovar receita quando necess\xE1rio. \u{1F33F}` },
@@ -1369,7 +1369,7 @@ Meu papel n\xE3o \xE9 te trazer mais cobran\xE7a, \xE9 amparar. Quando quiser: $
   { id: "n103", tab: "atalhos", tag: "103. Privacidade", label: "103. Vai aparecer no meu nome em algum lugar?", text: `N\xE3o, {{nome}}. \u{1F512} A consulta \xE9 sigilosa e n\xE3o aparece em sistemas p\xFAblicos, do trabalho ou em buscas. O recibo e a receita ficam s\xF3 com voc\xEA. \u{1F49A}` },
   { id: "n104", tab: "atalhos", tag: "104. Privacidade", label: "104. Empresa vai saber?", text: `N\xE3o, {{nome}}. Sua consulta n\xE3o \xE9 informada a empregador, escola ou plano sem sua autoriza\xE7\xE3o expressa. Atestado e laudo s\xE3o entregues a voc\xEA, e voc\xEA decide se apresenta. \u{1F33F}` },
   { id: "n105", tab: "atalhos", tag: "105. Fam\xEDlia", label: "105. Posso marcar pra outra pessoa?", text: `Pode iniciar o contato, {{nome}}, mas o agendamento precisa ser confirmado pelo(a) pr\xF3prio(a) paciente (acima de 16 anos), por quest\xE3o \xE9tica e de v\xEDnculo. \u{1F49A}` },
-  { id: "n106", tab: "atalhos", tag: "106. Anti-fraude", label: '106. "Atendem por R$ 50?"', text: `{{nome}}, meu valor \xE9 R$ 320 (1\xAA) e R$ 210 (retorno). Se viu valor diferente em algum lugar fora da Doctoralia, provavelmente \xE9 golpe \u2014 s\xF3 agendo pelo link oficial: ${LINK}` },
+  { id: "n106", tab: "atalhos", tag: "106. Anti-fraude", label: '106. "Atendem por R$ 50?"', text: `{{nome}}, meu valor \xE9 R$ 400 (1\xAA) e R$ 230 (retorno). Se viu valor diferente em algum lugar fora da Doctoralia, provavelmente \xE9 golpe \u2014 s\xF3 agendo pelo link oficial: ${LINK}` },
   { id: "n107", tab: "atalhos", tag: "107. Anti-fraude", label: "107. Outra pessoa pediu PIX em meu nome", text: `{{nome}}, aten\xE7\xE3o: nunca pe\xE7o PIX pra agendar consulta \u2014 o pagamento \xE9 sempre pelo checkout da Doctoralia. S\xF3 recebo PIX direto na taxa de envio f\xEDsico de receita A/B (R$ 100), e sempre confirmo a chave por aqui. \u{1F6E1}\uFE0F` },
   { id: "n108", tab: "atalhos", tag: "108. Diversos", label: "108. Acompanhamento por quanto tempo?", text: `Varia, {{nome}}: alguns quadros estabilizam em 6-12 meses; outros (TDAH, bipolar, recorrentes) pedem acompanhamento cont\xEDnuo, com retornos espa\xE7ados. A gente revisa juntas(os) sempre. \u{1F33F}` },
   { id: "n109", tab: "atalhos", tag: "109. Diversos", label: "109. Mudei de cidade \u2014 continua?", text: `Continua, {{nome}}! \u{1F49A} Como atendo s\xF3 online, mudan\xE7a de cidade n\xE3o interrompe \u2014 basta manter o CPF ativo. Se for pra fora do Brasil, tamb\xE9m atendo brasileiros no exterior.` },
@@ -1442,7 +1442,7 @@ Meu papel n\xE3o \xE9 te trazer mais cobran\xE7a, \xE9 amparar. Quando quiser: $
   { id: "n156", tab: "atalhos", tag: "156. Quadros", label: "156. Climat\xE9rio / menopausa", text: `Sim, {{nome}}, sintomas psiqui\xE1tricos do climat\xE9rio (humor, sono, ansiedade) entram no meu escopo. Trabalho em conjunto com a(o) ginecologista. \u{1F33F}` },
   { id: "n157", tab: "atalhos", tag: "157. Primeira consulta", label: "157. Como me preparar?", text: `N\xE3o precisa preparar nada, {{nome}}! \u{1F33F} Se tiver exames recentes ou laudos, manda no WhatsApp antes \u2014 facilita. O resto a gente conversa.` },
   { id: "n158", tab: "atalhos", tag: "158. Primeira consulta", label: "158. Vou levar bronca?", text: `De jeito nenhum, {{nome}}. \u{1F49A} Consult\xF3rio \xE9 zona livre de julgamento \u2014 pode contar tudo, inclusive o que normalmente n\xE3o conta pra ningu\xE9m.` },
-  { id: "n159", tab: "atalhos", tag: "159. Primeira consulta", label: "159. Quanto tempo dura?", text: `Primeira consulta dura cerca de 70 minutos, {{nome}} \u2014 pra eu conhecer voc\xEA sem pressa. Retornos duram 60 min. \u{1F33F}` },
+  { id: "n159", tab: "atalhos", tag: "159. Primeira consulta", label: "159. Quanto tempo dura?", text: `Primeira consulta dura cerca de 90 minutos, {{nome}} \u2014 pra eu conhecer voc\xEA sem pressa. Retornos duram 60 min. \u{1F33F}` },
   { id: "n160", tab: "atalhos", tag: "160. Primeira consulta", label: "160. J\xE1 saio com receita?", text: `Pode ser, {{nome}}, se for o caso cl\xEDnico. Mas n\xE3o \xE9 regra \u2014 \xE0s vezes come\xE7amos com observa\xE7\xE3o ou s\xF3 com mudan\xE7as de h\xE1bito. Plano individualizado. \u{1F49A}` },
   { id: "n161", tab: "atalhos", tag: "161. Primeira consulta", label: "161. Vou ter que voltar?", text: `Depende do caso, {{nome}}. Geralmente o primeiro retorno \xE9 em 30-45 dias pra ajustar conduta. Em quadros leves, alta pode ser r\xE1pida. \u{1F33F}` },
   { id: "n162", tab: "atalhos", tag: "162. Sigilo", label: "162. Voc\xEA guarda anota\xE7\xF5es?", text: `Sim, {{nome}}, prontu\xE1rio digital e seguro (LGPD), de acesso s\xF3 meu. Voc\xEA pode pedir c\xF3pia quando quiser. \u{1F512}` },

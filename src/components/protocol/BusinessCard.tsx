@@ -155,7 +155,7 @@ export const BusinessCard = () => {
             >
               <div className="relative px-8 pt-8 pb-6">
                 <div className="inline-flex items-center gap-2 rounded-full border border-border bg-background/70 px-3 py-1 text-[10px] uppercase tracking-widest text-muted-foreground">
-                  <Stethoscope className="h-3 w-3 text-primary" /> Médica psiquiatra
+                  <Stethoscope className="h-3 w-3 text-primary" /> Médica em Saúde Mental
                 </div>
 
                 <h3 className="mt-5 font-display text-3xl leading-tight">

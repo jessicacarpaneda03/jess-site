@@ -10,7 +10,7 @@ export const outreachVersions: OutreachVersion[] = [
     label: "Curta (post direto)",
     text: `Oi, colegas psicólogas(os) 🌿
 
-Me chamo Jéssica Carpaneda, sou psiquiatra e atendo adultos por telemedicina em todo o Brasil.
+Me chamo Jéssica Carpaneda, sou médica em saúde mental (CRM GO 31189, pós-graduanda em Psiquiatria e Saúde Mental pela Afya) e atendo adultos por telemedicina em todo o Brasil.
 
 Se você tem pacientes que precisam de avaliação psiquiátrica, ajuste de medicação ou encaminhamento para psiquiatra, fico à disposição para uma parceria de cuidado.
 
@@ -32,7 +32,7 @@ Me chama no privado se quiser trocar uma ideia 💚`,
     label: "Média (mais completa)",
     text: `Olá, colegas psicólogas(os)! 💚
 
-Meu nome é Jéssica Carpaneda, sou psiquiatra e atendo adultos por telemedicina, com pacientes de todo o Brasil.
+Meu nome é Jéssica Carpaneda, sou médica em saúde mental (CRM GO 31189, pós-graduanda em Psiquiatria e Saúde Mental pela Afya) e atendo adultos por telemedicina, com pacientes de todo o Brasil.
 
 Escrevo aqui porque acredito que a colaboração psicólogo-psiquiatra é uma das coisas mais potentes que existe na saúde mental. Quando a gente se fala, o paciente ganha.
 
@@ -56,14 +56,14 @@ Link da agenda: https://www.doctoralia.com.br/z/FcjTe4
 
 Um abraço,
 Jéssica Carpaneda
-Psiquiatra — CRM GO 31189`,
+Médica em Saúde Mental — CRM GO 31189`,
   },
   {
     id: "sofisticada",
     label: "Sofisticada (LinkedIn / grupo fechado)",
     text: `Prezadas(os) colegas psicólogas(os),
 
-Escrevo para me apresentar e propor uma colaboração clínica. Meu nome é Jéssica Carpaneda, sou psiquiatra e atendo adultos por telemedicina em todo o Brasil.
+Escrevo para me apresentar e propor uma colaboração clínica. Meu nome é Jéssica Carpaneda, sou médica em saúde mental (CRM GO 31189, pós-graduanda em Psiquiatria e Saúde Mental pela Afya) e atendo adultos por telemedicina em todo o Brasil.
 
 Ao longo da prática, tenho visto com clareza que os melhores resultados em saúde mental acontecem quando psicólogo e psiquiatra caminham juntos — não como competidores, mas como parceiros de um mesmo cuidado. O paciente sente quando a equipe se conversa.
 
@@ -85,6 +85,6 @@ Agenda: https://www.doctoralia.com.br/z/FcjTe4
 
 Atenciosamente,
 Jéssica Carpaneda
-Psiquiatra — CRM GO 31189`,
+Médica em Saúde Mental — CRM GO 31189`,
   },
 ];
