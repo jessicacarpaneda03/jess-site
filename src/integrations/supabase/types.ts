@@ -14,7 +14,45 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      quick_reply_overrides: {
+        Row: {
+          active: boolean | null
+          created_at: string
+          expires_at: string | null
+          id: string
+          label: string | null
+          reply_id: string
+          tag: string | null
+          text: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          active?: boolean | null
+          created_at?: string
+          expires_at?: string | null
+          id?: string
+          label?: string | null
+          reply_id: string
+          tag?: string | null
+          text: string
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          active?: boolean | null
+          created_at?: string
+          expires_at?: string | null
+          id?: string
+          label?: string | null
+          reply_id?: string
+          tag?: string | null
+          text?: string
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
