@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState } from "react";
-import { Copy, Plus, Pencil, Trash2, Save, X, Search, Download, Upload, RotateCcw } from "lucide-react";
+import { Copy, Plus, Pencil, Trash2, Save, X, Search, Download, Upload, RotateCcw, Wand2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -7,6 +7,43 @@ import { Badge } from "@/components/ui/badge";
 import { Card } from "@/components/ui/card";
 import { toast } from "sonner";
 import { librarySeed, type LibraryMessage } from "@/data/messageLibrarySeed";
+
+// Variáveis dinâmicas: {{nome}}, {{data}}, {{hora}}, {{preço}}, etc.
+const VAR_REGEX = /\{\{\s*([\wçãáéíóúâêôà]+)\s*\}\}/gi;
+
+const VAR_DEFAULTS: Record<string, string> = {
+  nome: "",
+  data: "",
+  hora: "",
+  preço: "R$ 400",
+  preco: "R$ 400",
+  valor: "R$ 400",
+  link: "drajessicacarpaneda.com.br",
+  site: "drajessicacarpaneda.com.br",
+  medicação: "",
+  medicacao: "",
+  dosagem: "",
+};
+
+const VAR_STORAGE_KEY = "whatsapp-message-library-vars-v1";
+
+function extractVars(text: string): string[] {
+  const found = new Set<string>();
+  text.replace(VAR_REGEX, (_m, name) => {
+    found.add(String(name).toLowerCase());
+    return "";
+  });
+  return Array.from(found);
+}
+
+function applyVars(text: string, values: Record<string, string>): string {
+  return text.replace(VAR_REGEX, (_m, name) => {
+    const key = String(name).toLowerCase();
+    const v = values[key];
+    return v && v.trim() ? v : `{{${name}}}`;
+  });
+}
+
 
 const STORAGE_KEY = "whatsapp-message-library-v1";
 
