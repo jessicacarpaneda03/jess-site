@@ -1,62 +1,38 @@
-# Plano: Seção "Temas em que atua" para Doctoralia
+## Objetivo
+Aumentar a conversão do guia `/guia-conversao-whatsapp` levando o leitor direto para os scripts prontos da Biblioteca de Mensagens, já filtrados pela categoria certa para o momento da leitura.
 
-Adicionar uma nova seção visual no app com os 15 temas de atuação prontos para copiar e colar no perfil do Doctoralia, já ordenados por prioridade de captação e com texto reescrito para SEO (linguagem natural, sem jargão, sem termos comerciais, sem dados de contato).
+## Como vai funcionar
 
-## Ordem de prioridade (volume de busca + conversão em psiquiatria BR)
+1. **Âncora + deep link na Biblioteca**
+   - Adicionar `id="biblioteca"` na `<section>` da `MessageLibrary` (dentro de `src/components/protocol/MessageLibrary.tsx`).
+   - `MessageLibrary` passa a ler `?category=<nome>` da URL na montagem, e se a categoria existir, já aplica no filtro `activeCategory` e faz `scrollIntoView` suave até a seção.
+   - Suporta também `?q=<busca>` para pré-preencher o campo de busca (opcional, útil para CTAs mais específicos).
 
-**Tier 1 — Âncoras (cole primeiro, geram tráfego frio)**
-1. Ansiedade
-2. Depressão
-3. Insônia
-4. TDAH em adultos
-5. Síndrome de Pânico
+2. **CTAs contextuais dentro do guia** (`src/pages/GuiaConversaoWhatsapp.tsx`)
+   Cada seção ganha um botão discreto “Copiar script pronto” logo abaixo do checklist, mirando a categoria da Biblioteca que resolve aquele ponto:
 
-**Tier 2 — Alta conversão (paciente já decidido)**
-6. Burnout / Esgotamento profissional
-7. Estresse e qualidade de vida
-8. Saúde mental da mulher
-9. Depressão pós-parto
-10. Fobia social
+   | Seção do guia | CTA | Deep link |
+   | --- | --- | --- |
+   | 1. Velocidade de resposta | Ver scripts de boas-vindas e ausência | `/#biblioteca?category=Boas-vindas` e `?category=Ausência` |
+   | 2. Tom humanizado | Ver scripts de primeira vez | `/#biblioteca?category=Primeira vez` |
+   | 3. Scripts para objeções | Botões separados: Valores · Objeções · Logística · Receitas | um por categoria |
+   | 4. Métricas | Ver scripts de confirmação e lembrete | `?category=Confirmação` e `?category=Lembrete` |
 
-**Tier 3 — Cauda longa (menos buscas, ticket alto, diferenciação)**
-11. Transtorno bipolar
-12. TOC (Transtorno obsessivo-compulsivo)
-13. Saúde mental de jovens adultos
-14. Revisão e ajuste de medicação psiquiátrica
-15. Avaliação para afastamento do trabalho
+3. **CTA principal reforçado no fim do guia**
+   O bloco “Como aplicar isso no seu consultório hoje” ganha dois botões lado a lado:
+   - Primário: **“Abrir biblioteca de scripts”** → `/#biblioteca`
+   - Secundário: **“Ver protocolo completo”** → `/`
 
-## Ajustes de SEO aplicados em cada descrição
+4. **Barra sticky de conversão (topo do artigo)**
+   Uma faixa fina no topo do guia com um único botão “Copiar meus scripts de WhatsApp” → `/#biblioteca`, visível durante a leitura sem interromper o conteúdo. Reforça a conversão mesmo para quem só lê o começo.
 
-- Palavra-chave principal nas **primeiras 10 palavras** do texto (Doctoralia indexa o início).
-- Remoção de termos técnicos: "TAG", "TDPM", "perimenopausa", "TCC", "Y-BOCS", "psicoeducação", "desprescrição", "comorbidade" → trocados por linguagem do paciente.
-- Remoção de qualquer chamada comercial ("agende", "entre em contato", "no meu consultório") — proibido pelo Doctoralia.
-- Frases curtas (média 15–20 palavras), voz ativa, primeira pessoa.
-- 1 sinônimo natural por descrição (ex: "pânico / crises de pânico", "insônia / dificuldade para dormir") para capturar variações de busca.
-- Tamanho entre 350–500 caracteres (faixa que o Doctoralia marca como "perfil completo" sem cortar na preview mobile).
+## Detalhes técnicos
 
-## Implementação técnica
-
-**Novo arquivo:** `src/data/doctoraliaTopics.ts`
-- Exporta `topics: { id, rank, tier: 'ancora'|'conversao'|'cauda', title, keyword, description, chars }[]`
-- 15 itens na ordem acima.
-
-**Novo componente:** `src/components/protocol/DoctoraliaTopics.tsx`
-- Cabeçalho explicando as 3 tiers e como usar.
-- Filtro por tier (Todos / Âncoras / Alta conversão / Cauda longa).
-- Grid de cards (responsivo: 1 col mobile, 2 col tablet, 3 col desktop) com:
-  - Badge de tier + número de prioridade
-  - Título
-  - Descrição
-  - Contador de caracteres
-  - Botão "Copiar título" e "Copiar descrição" (usa `navigator.clipboard` + toast).
-- Mesmo padrão visual de `DoctoraliaReviewReplies.tsx` para manter coerência.
-
-**Edição:** `src/pages/Index.tsx`
-- Importar `DoctoraliaTopics` e renderizar logo após `DoctoraliaReviewReplies`.
-- Adicionar link de âncora no menu/navegação se houver.
+- Uso de `<Link to={{ pathname: "/", hash: "biblioteca", search: "?category=Valores" }}>` do `react-router-dom`.
+- Em `MessageLibrary`, usar `useLocation()` + `useEffect` para aplicar `category`/`q` uma única vez e chamar `document.getElementById("biblioteca")?.scrollIntoView({ behavior: "smooth", block: "start" })`.
+- Se a categoria da URL não existir na lista atual, cai silenciosamente em “Todas”.
+- Nenhuma alteração em `messageLibrarySeed.ts`, edge functions ou lógica de negócio.
 
 ## Fora de escopo
-
-- Não altero descrições já existentes em outras seções.
-- Não mexo no backend nem em dados do Supabase.
-- Não publico o site.
+- Rastreamento analítico dos cliques (pode ser adicionado depois).
+- Novas mensagens ou reorganização de categorias existentes.

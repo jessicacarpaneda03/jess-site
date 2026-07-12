@@ -1,4 +1,5 @@
 import { useEffect, useMemo, useState } from "react";
+import { useLocation } from "react-router-dom";
 import { Copy, Plus, Pencil, Trash2, Save, X, Search, Download, Upload, RotateCcw, Wand2, Sparkles } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -128,6 +129,28 @@ export const MessageLibrary = () => {
     localStorage.setItem(VAR_STORAGE_KEY, JSON.stringify(varValues));
   }, [varValues]);
 
+  // Deep-link: /?category=X&q=Y#biblioteca vindo do guia de conversão
+  const location = useLocation();
+  useEffect(() => {
+    const params = new URLSearchParams(location.search);
+    const cat = params.get("category");
+    const q = params.get("q");
+    if (cat) {
+      const known = Array.from(new Set(messages.map((m) => m.category)));
+      if (known.some((k) => k.toLowerCase() === cat.toLowerCase())) {
+        setActiveCategory(known.find((k) => k.toLowerCase() === cat.toLowerCase()) || "Todas");
+      }
+    }
+    if (q) setQuery(q);
+    if ((cat || q) && location.hash === "#biblioteca") {
+      setTimeout(() => {
+        document.getElementById("biblioteca")?.scrollIntoView({ behavior: "smooth", block: "start" });
+      }, 50);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [location.search, location.hash]);
+
+
 
   const categories = useMemo(() => {
     const set = new Set(messages.map((m) => m.category));
@@ -252,7 +275,7 @@ export const MessageLibrary = () => {
   };
 
   return (
-    <section className="py-16 px-4 bg-background border-t border-border">
+    <section id="biblioteca" className="py-16 px-4 bg-background border-t border-border scroll-mt-20">
       <div className="max-w-6xl mx-auto">
         <div className="mb-8">
           <h2 className="text-3xl md:text-4xl font-serif font-medium text-foreground mb-2">
