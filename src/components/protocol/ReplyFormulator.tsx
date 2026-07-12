@@ -216,15 +216,52 @@ export const ReplyFormulator = () => {
             </Button>
 
             {resposta && (
-              <div className="mt-4 rounded-lg border bg-background p-4">
-                <div className="flex items-center justify-between mb-2">
-                  <span className="text-sm font-medium">Resposta sugerida</span>
-                  <Button variant="outline" size="sm" onClick={copiar}>
-                    {copied ? <Check className="h-4 w-4" /> : <Copy className="h-4 w-4" />}
-                    {copied ? "Copiado" : "Copiar"}
-                  </Button>
+              <div className="mt-4 rounded-lg border bg-background p-4 space-y-3">
+                <div className="flex flex-wrap items-center justify-between gap-2">
+                  <div>
+                    <div className="text-sm font-medium">Pré-visualização editável</div>
+                    <p className="text-xs text-muted-foreground">
+                      Ajuste o texto abaixo antes de copiar. As mudanças ficam só aqui.
+                    </p>
+                  </div>
+                  <div className="flex flex-wrap gap-2">
+                    <Button variant="ghost" size="sm" onClick={aplicarFormatoWhatsApp} title="Converte **negrito**/__itálico__ e normaliza bullets">
+                      <Wand2 className="h-4 w-4" /> Formato WhatsApp
+                    </Button>
+                    <Button
+                      variant="ghost"
+                      size="sm"
+                      onClick={restaurar}
+                      disabled={rascunho === resposta}
+                      title="Voltar ao texto original gerado"
+                    >
+                      <RotateCcw className="h-4 w-4" /> Restaurar
+                    </Button>
+                    <Button variant="outline" size="sm" onClick={copiar}>
+                      {copied ? <Check className="h-4 w-4" /> : <Copy className="h-4 w-4" />}
+                      {copied ? "Copiado" : "Copiar"}
+                    </Button>
+                  </div>
                 </div>
-                <p className="whitespace-pre-wrap text-sm leading-relaxed">{resposta}</p>
+
+                <Textarea
+                  value={rascunho}
+                  onChange={(e) => setRascunho(e.target.value)}
+                  rows={Math.min(16, Math.max(6, rascunho.split("\n").length + 1))}
+                  className="font-sans text-sm leading-relaxed"
+                />
+
+                <div className="flex items-center justify-between text-xs text-muted-foreground">
+                  <span>
+                    {rascunho.length} caracteres · {rascunho.trim().split(/\s+/).filter(Boolean).length} palavras
+                  </span>
+                  {rascunho !== resposta && <span className="text-primary">Editado</span>}
+                </div>
+
+                <div className="rounded-md border bg-muted/40 p-3">
+                  <div className="text-xs font-medium text-muted-foreground mb-1">Prévia final</div>
+                  <p className="whitespace-pre-wrap text-sm leading-relaxed">{rascunho}</p>
+                </div>
               </div>
             )}
           </CardContent>
