@@ -441,9 +441,14 @@ export const MessageLibrary = () => {
                         />
                       </div>
                     ))}
-                    <Button size="sm" onClick={() => copyText(m.text)} className="gap-2 mt-1">
-                      <Copy className="h-3.5 w-3.5" /> Copiar personalizada
-                    </Button>
+                    <div className="flex gap-2 mt-1">
+                      <Button size="sm" variant="outline" onClick={() => copyText(m.text)} className="gap-2 flex-1">
+                        <Copy className="h-3.5 w-3.5" /> Copiar
+                      </Button>
+                      <Button size="sm" onClick={() => copyFinal(m.text)} className="gap-2 flex-1">
+                        <Sparkles className="h-3.5 w-3.5" /> Versão final
+                      </Button>
+                    </div>
                   </div>
                 )}
 
