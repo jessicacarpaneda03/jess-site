@@ -8,15 +8,15 @@ export const doctor = {
 };
 
 export const services = [
-  { name: "Primeira consulta — Saúde mental", price: "R$ 320", duration: "70 min" },
-  { name: "Teleconsulta", price: "R$ 320", duration: "70 min" },
-  { name: "Diagnóstico e tratamento do TDAH em adultos", price: "R$ 320", duration: "70 min" },
-  { name: "Tratamento de ansiedade", price: "R$ 320", duration: "70 min" },
-  { name: "Tratamento da depressão", price: "R$ 320", duration: "70 min" },
-  { name: "Tratamento da insônia", price: "R$ 320", duration: "70 min" },
-  { name: "Tratamento para síndrome de burnout", price: "R$ 320", duration: "70 min" },
-  { name: "Retorno — Saúde mental", price: "R$ 210", duration: "60 min" },
-  { name: "Retorno (telemedicina)", price: "R$ 210", duration: "60 min" },
+  { name: "Primeira consulta — Saúde mental", price: "R$ 400", duration: "90 min" },
+  { name: "Teleconsulta", price: "R$ 400", duration: "90 min" },
+  { name: "Diagnóstico e tratamento do TDAH em adultos", price: "R$ 400", duration: "90 min" },
+  { name: "Tratamento de ansiedade", price: "R$ 400", duration: "90 min" },
+  { name: "Tratamento da depressão", price: "R$ 400", duration: "90 min" },
+  { name: "Tratamento da insônia", price: "R$ 400", duration: "90 min" },
+  { name: "Tratamento para síndrome de burnout", price: "R$ 400", duration: "90 min" },
+  { name: "Retorno — Saúde mental", price: "R$ 230", duration: "60 min" },
+  { name: "Retorno (telemedicina)", price: "R$ 230", duration: "60 min" },
   { name: "Renovação de receita", price: "R$ 150", duration: "avaliação online" },
 ];
 
@@ -114,8 +114,8 @@ Que bom que você chegou até aqui. Antes de qualquer coisa, quero te dizer: ped
 
 A Dra. Jéssica é especialista em {{especialidade}} e atende exclusivamente por telemedicina, com foco em ansiedade, TDAH no adulto, insônia, depressão e burnout.
 
-• Primeira consulta: R$ 320 (70 min)
-• Retorno: R$ 210 (60 min)
+• Primeira consulta: R$ 400 (90 min)
+• Retorno: R$ 230 (60 min)
 • Agendamento e pagamento: https://www.doctoralia.com.br/z/FcjTe4
 
 Posso te ajudar a escolher o melhor horário? (Resposta via {{canal}})`,
