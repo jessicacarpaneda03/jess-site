@@ -14,6 +14,45 @@ export type Database = {
   }
   public: {
     Tables: {
+      quick_reply_override_audit: {
+        Row: {
+          action: string
+          changed_at: string
+          changed_by: string | null
+          id: string
+          new_data: Json | null
+          old_data: Json | null
+          override_id: string
+          reply_id: string
+          user_id: string
+          version: number
+        }
+        Insert: {
+          action: string
+          changed_at?: string
+          changed_by?: string | null
+          id?: string
+          new_data?: Json | null
+          old_data?: Json | null
+          override_id: string
+          reply_id: string
+          user_id: string
+          version: number
+        }
+        Update: {
+          action?: string
+          changed_at?: string
+          changed_by?: string | null
+          id?: string
+          new_data?: Json | null
+          old_data?: Json | null
+          override_id?: string
+          reply_id?: string
+          user_id?: string
+          version?: number
+        }
+        Relationships: []
+      }
       quick_reply_overrides: {
         Row: {
           active: boolean | null
@@ -26,6 +65,7 @@ export type Database = {
           text: string
           updated_at: string
           user_id: string
+          version: number
         }
         Insert: {
           active?: boolean | null
@@ -38,6 +78,7 @@ export type Database = {
           text: string
           updated_at?: string
           user_id: string
+          version?: number
         }
         Update: {
           active?: boolean | null
@@ -50,6 +91,7 @@ export type Database = {
           text?: string
           updated_at?: string
           user_id?: string
+          version?: number
         }
         Relationships: []
       }
