@@ -12,7 +12,7 @@
   "mcp": {
     "server": {
       "name": "dra-jessica-mcp",
-      "version": "0.1.0",
+      "version": "0.2.0",
       "title": "Dra. Jéssica — Protocolo de Atendimento"
     },
     "tools": [
@@ -79,6 +79,133 @@
           "$schema": "http://json-schema.org/draft-07/schema#",
           "type": "object",
           "properties": {}
+        },
+        "outputSchema": null
+      },
+      {
+        "name": "list_quick_replies",
+        "title": "Listar respostas rápidas",
+        "description": "Lista os templates de resposta rápida (WhatsApp/Doctoralia) da Dra. Jéssica, aplicando personalizações do usuário quando existirem. Filtra por aba (auto, triagem, risco, fillers, casuais, atalhos, objecoes, modulos) e/ou termo de busca.",
+        "annotations": {
+          "readOnlyHint": true,
+          "openWorldHint": false
+        },
+        "inputSchema": {
+          "$schema": "http://json-schema.org/draft-07/schema#",
+          "type": "object",
+          "properties": {
+            "tab": {
+              "description": "Filtra por aba.",
+              "type": "string",
+              "enum": [
+                "auto",
+                "fillers",
+                "casuais",
+                "atalhos",
+                "objecoes",
+                "triagem",
+                "risco",
+                "modulos"
+              ]
+            },
+            "search": {
+              "description": "Termo de busca (aplicado a rótulo, tag e texto).",
+              "type": "string"
+            },
+            "limit": {
+              "default": 50,
+              "description": "Máximo de itens retornados.",
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 200
+            }
+          }
+        },
+        "outputSchema": null
+      },
+      {
+        "name": "update_quick_reply",
+        "title": "Atualizar resposta rápida",
+        "description": "Salva uma personalização (override) para um template de resposta rápida existente da Dra. Jéssica. Não altera o template base — grava uma versão do usuário que a Biblioteca e o list_quick_replies passam a exibir. Só o próprio usuário vê e edita seus overrides.",
+        "annotations": {
+          "readOnlyHint": false,
+          "destructiveHint": false,
+          "idempotentHint": true
+        },
+        "inputSchema": {
+          "$schema": "http://json-schema.org/draft-07/schema#",
+          "type": "object",
+          "properties": {
+            "reply_id": {
+              "type": "string",
+              "minLength": 1,
+              "description": "ID do template original (ex.: 'auto-boas-vindas')."
+            },
+            "text": {
+              "type": "string",
+              "minLength": 1,
+              "description": "Novo texto do template."
+            },
+            "label": {
+              "description": "Rótulo alternativo.",
+              "type": "string"
+            },
+            "tag": {
+              "description": "Sub-categoria.",
+              "type": "string"
+            },
+            "active": {
+              "description": "Marcar como ativa (auto-resposta).",
+              "type": "boolean"
+            },
+            "expires_at": {
+              "description": "Data de expiração YYYY-MM-DD.",
+              "type": "string",
+              "pattern": "^\\d{4}-\\d{2}-\\d{2}$"
+            }
+          },
+          "required": [
+            "reply_id",
+            "text"
+          ]
+        },
+        "outputSchema": null
+      },
+      {
+        "name": "suggest_quick_reply",
+        "title": "Sugerir resposta rápida",
+        "description": "Dado o contexto/mensagem recebida, escolhe o melhor template da biblioteca da Dra. Jéssica e retorna uma versão adaptada em primeira pessoa, pronta para enviar no WhatsApp.",
+        "annotations": {
+          "readOnlyHint": true,
+          "openWorldHint": false
+        },
+        "inputSchema": {
+          "$schema": "http://json-schema.org/draft-07/schema#",
+          "type": "object",
+          "properties": {
+            "context": {
+              "type": "string",
+              "minLength": 1,
+              "description": "Mensagem do paciente ou contexto da conversa."
+            },
+            "tab": {
+              "description": "Restringir a busca a uma aba.",
+              "type": "string",
+              "enum": [
+                "auto",
+                "fillers",
+                "casuais",
+                "atalhos",
+                "objecoes",
+                "triagem",
+                "risco",
+                "modulos"
+              ]
+            }
+          },
+          "required": [
+            "context"
+          ]
         },
         "outputSchema": null
       }
