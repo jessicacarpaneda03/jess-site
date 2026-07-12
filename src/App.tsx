@@ -8,6 +8,7 @@ import GuiaConversaoWhatsapp from "./pages/GuiaConversaoWhatsapp.tsx";
 import NotFound from "./pages/NotFound.tsx";
 import Login from "./pages/Login.tsx";
 import OAuthConsent from "./pages/OAuthConsent.tsx";
+import ValidacaoMcp from "./pages/ValidacaoMcp.tsx";
 
 const queryClient = new QueryClient();
 
