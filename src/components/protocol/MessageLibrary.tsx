@@ -73,10 +73,24 @@ export const MessageLibrary = () => {
   const [activeCategory, setActiveCategory] = useState<string>("Todas");
   const [editingId, setEditingId] = useState<string | null>(null);
   const [draft, setDraft] = useState<LibraryMessage | null>(null);
+  const [customizingId, setCustomizingId] = useState<string | null>(null);
+  const [varValues, setVarValues] = useState<Record<string, string>>(() => {
+    try {
+      const raw = localStorage.getItem(VAR_STORAGE_KEY);
+      return raw ? { ...VAR_DEFAULTS, ...JSON.parse(raw) } : { ...VAR_DEFAULTS };
+    } catch {
+      return { ...VAR_DEFAULTS };
+    }
+  });
 
   useEffect(() => {
     saveMessages(messages);
   }, [messages]);
+
+  useEffect(() => {
+    localStorage.setItem(VAR_STORAGE_KEY, JSON.stringify(varValues));
+  }, [varValues]);
+
 
   const categories = useMemo(() => {
     const set = new Set(messages.map((m) => m.category));
