@@ -80,18 +80,1604 @@ var get_contact_info_default = defineTool3({
   })
 });
 
+// src/lib/mcp/tools/list-quick-replies.ts
+import { createClient } from "npm:@supabase/supabase-js@^2.105.3";
+import { defineTool as defineTool4 } from "npm:@lovable.dev/mcp-js@0.20.1";
+import { z as z2 } from "npm:zod@^4.4.3";
+
+// src/data/quickReplies.ts
+var LINK = "https://www.doctoralia.com.br/z/FcjTe4";
+var quickReplies = [
+  // ---------------- AUTO-RESPOSTA (ATIVAS) ----------------
+  {
+    id: "auto-boas-vindas",
+    tab: "auto",
+    tag: "Ativa",
+    active: true,
+    label: "Boas-vindas (mensagem autom\xE1tica)",
+    text: `Ol\xE1! Que bom ter seu contato por aqui \u{1F33F}
+
+Sou a *Dra. J\xE9ssica Carpaneda* \u2014 Psiquiatra (CRM/DF). Recebi sua mensagem e vou te responder pessoalmente assim que poss\xEDvel.
+
+Enquanto isso, minha *agenda online segue aberta* \u2014 voc\xEA n\xE3o precisa esperar pra garantir seu hor\xE1rio \u{1F499}
+
+\u{1F449} *Agende em 1 minuto:* ${LINK}
+
+*Atendimento online:*
+\u2022 Primeira consulta
+\u2022 Retorno
+\u2022 Tirar uma d\xFAvida r\xE1pida
+
+*Tranquilidade pra agendar:* voc\xEA pode cancelar com *reembolso total at\xE9 24h antes da consulta*, sem burocracia.
+
+Por aqui, *leio todas as mensagens* e respondo assim que poss\xEDvel \u2014 pode me escrever \xE0 vontade \u{1F4AC}
+
+\u26A0\uFE0F *Em caso de emerg\xEAncia*: pronto-socorro, *SAMU 192* ou *CVV 188* (24h, gratuito e sigiloso).
+
+Com carinho,
+*Dra. J\xE9ssica Carpaneda*`
+  },
+  {
+    id: "auto-ausencia-congresso",
+    tab: "auto",
+    tag: "Ativa",
+    active: true,
+    label: "Aus\xEAncia \u2014 agenda aberta 18/05",
+    text: `Ol\xE1! Que bom ter seu contato por aqui \u{1F33F}
+
+Estou em congresso at\xE9 *17/05* e retorno com agenda aberta a partir de *18/05*. Enquanto isso, voc\xEA j\xE1 pode garantir seu hor\xE1rio \u2014 n\xE3o precisa esperar eu voltar \u{1F499}
+
+\u{1F449} *Agende em 1 minuto:* ${LINK}
+
+*Atendimento online:*
+\u2022 Primeira consulta
+\u2022 Retorno
+\u2022 Tirar uma d\xFAvida r\xE1pida
+
+*Tranquilidade pra agendar:* voc\xEA pode cancelar com *reembolso total at\xE9 24h antes da consulta*, sem burocracia.
+
+\u{1F4A1} *Dica:* h\xE1 um prov\xE1vel reajuste de valores em junho. Agendando agora, voc\xEA garante o valor atual \u2014 e, se precisar remarcar depois, \xE9 s\xF3 avisar com anteced\xEAncia.
+
+Por aqui, *leio todas as mensagens* e respondo assim que poss\xEDvel \u2014 pode me escrever \xE0 vontade \u{1F4AC}
+
+\u26A0\uFE0F *Em caso de emerg\xEAncia*: pronto-socorro, *SAMU 192* ou *CVV 188* (24h, gratuito e sigiloso).
+
+Com carinho,
+*Dra. J\xE9ssica Carpaneda*
+Psiquiatra \u2014 CRM/DF`
+  },
+  {
+    id: "auto-fora-horario",
+    tab: "auto",
+    tag: "Ativa",
+    active: true,
+    label: "Fora do hor\xE1rio comercial",
+    text: `Oi! \u{1F319} Recebi sua mensagem fora do meu hor\xE1rio de atendimento (seg\u2013sex, 9h\u201318h). Te respondo pessoalmente no pr\xF3ximo hor\xE1rio comercial.
+
+Se preferir j\xE1 garantir seu hor\xE1rio, minha agenda online est\xE1 aberta 24h:
+\u{1F449} ${LINK}
+
+\u26A0\uFE0F *Em caso de emerg\xEAncia*: pronto-socorro, *SAMU 192* ou *CVV 188* (24h, gratuito e sigiloso).
+
+Com carinho,
+*Dra. J\xE9ssica Carpaneda* \u2014 Psiquiatra (CRM/DF)`
+  },
+  {
+    id: "auto-feriado",
+    tab: "auto",
+    tag: "Modelo",
+    label: "Feriado / recesso (modelo)",
+    text: `Oi! \u{1F33F} Estou de recesso at\xE9 *{{data}}* e respondo as mensagens com um pouquinho mais de calma.
+
+Minha agenda online segue aberta normalmente \u2014 voc\xEA j\xE1 pode garantir seu hor\xE1rio sem precisar esperar:
+\u{1F449} ${LINK}
+
+Cancelamento com reembolso total at\xE9 24h antes da consulta.
+
+\u26A0\uFE0F Emerg\xEAncia: pronto-socorro, *SAMU 192* ou *CVV 188*.
+
+Com carinho,
+*Dra. J\xE9ssica Carpaneda* \u2014 Psiquiatra (CRM/DF)`
+  },
+  {
+    id: "auto-pos-consulta",
+    tab: "auto",
+    tag: "Modelo",
+    label: "P\xF3s-consulta (agradecimento)",
+    text: `Oi, {{nome}}! \u{1F49A} Foi muito bom te atender hoje.
+
+\u2022 Sua *receita* e *orienta\xE7\xF5es* chegam por aqui em at\xE9 24h.
+\u2022 Qualquer d\xFAvida sobre o que conversamos, \xE9 s\xF3 me chamar \u2014 respondo no hor\xE1rio comercial.
+\u2022 Pra *retorno*, agende quando se sentir confort\xE1vel: ${LINK}
+
+Cuida de voc\xEA. T\xF4 por aqui. \u{1F33F}`
+  },
+  // ---------------- FILLERS / CORINGAS (1ª pessoa) ----------------
+  { id: "f-oi", tab: "fillers", label: "Sauda\xE7\xE3o inicial", text: `Oi, {{nome}}! Tudo bem? \u{1F33F} Recebi sua mensagem \u2014 me d\xE1 s\xF3 um instante que j\xE1 te respondo com calma.` },
+  { id: "f-conferir", tab: "fillers", label: "Conferindo agenda", text: `Deixa eu dar uma olhadinha na minha agenda e j\xE1 te confirmo, t\xE1? Um minutinho. \u{1F49A}` },
+  { id: "f-confirmar", tab: "fillers", label: "Confirmando informa\xE7\xE3o", text: `Pra te passar a informa\xE7\xE3o certinha, deixa eu checar uma coisa rapidinho. J\xE1 volto.` },
+  { id: "f-entendi", tab: "fillers", label: "Entendi a d\xFAvida", text: `Entendi, {{nome}}. Faz todo sentido sua d\xFAvida \u2014 me d\xE1 s\xF3 um momento que te explico direitinho.` },
+  { id: "f-obrigado", tab: "fillers", label: "Agradecimento", text: `Que bom, {{nome}}! Obrigada pela confian\xE7a. \u{1F49A} Qualquer coisa, \xE9 s\xF3 me chamar por aqui.` },
+  { id: "f-aguardo", tab: "fillers", label: "Aguardando retorno", text: `Fico no aguardo, {{nome}}. Sem pressa \u2014 quando puder, me avisa por aqui. \u{1F33F}` },
+  { id: "f-sumiu", tab: "fillers", label: "Reengajamento gentil", text: `Oi, {{nome}}! Tudo bem por a\xED? Passando s\xF3 pra saber se voc\xEA ainda quer agendar comigo ou se posso te ajudar com mais alguma d\xFAvida. \u{1F49A}` },
+  { id: "f-fim-dia", tab: "fillers", label: "Fora do hor\xE1rio", text: `Oi, {{nome}}! Vi sua mensagem agora, mas o atendimento administrativo j\xE1 encerrou hoje. Amanh\xE3 cedo te respondo com calma, t\xE1? \u{1F319}` },
+  // ---------------- CASUAIS / ACOLHIMENTO (1ª pessoa) ----------------
+  {
+    id: "c-primeira-vez",
+    tab: "casuais",
+    label: "Primeiro contato com sa\xFAde mental",
+    text: `Oi, {{nome}}. Antes de qualquer coisa: que bom que voc\xEA se permitiu mandar essa mensagem. \u{1F49A}
+
+Buscar cuidado em sa\xFAde mental pela primeira vez mexe com a gente \u2014 \xE9 normal sentir um friozinho. Eu conduzo a primeira conversa com calma, sem pressa, pra voc\xEA se sentir \xE0 vontade pra contar o que est\xE1 sentindo.
+
+Se quiser, te explico como funciona o agendamento: ${LINK}`
+  },
+  {
+    id: "c-medo-rotulo",
+    tab: "casuais",
+    label: "Medo de ser 'rotulado'",
+    text: `{{nome}}, entendo perfeitamente esse receio \u2014 muita gente sente o mesmo. \u{1F33F}
+
+Diagn\xF3stico em sa\xFAde mental n\xE3o \xE9 um r\xF3tulo, \xE9 uma chave pra entender o que est\xE1 acontecendo e poder cuidar. Trabalho com escuta cuidadosa, sem pressa de "carimbar" nada. Tudo \xE9 sigiloso, e nada \xE9 compartilhado fora da consulta.
+
+Se quiser dar esse passo: ${LINK}`
+  },
+  {
+    id: "c-cansado",
+    tab: "casuais",
+    label: "Paciente exausto",
+    text: `Oi, {{nome}}. Pelo que voc\xEA descreve, d\xE1 pra sentir o cansa\xE7o a\xED. \u{1F49A}
+
+Voc\xEA n\xE3o precisa "estar pronta(o)" pra marcar \u2014 s\xF3 precisa querer come\xE7ar a se sentir melhor. A primeira consulta \xE9 online, no conforto da sua casa, e eu te escuto com calma.
+
+Quando puder: ${LINK}`
+  },
+  {
+    id: "c-vergonha",
+    tab: "casuais",
+    label: "Vergonha de falar",
+    text: `{{nome}}, fica tranquila(o). \u{1F33F} Tudo o que voc\xEA me contar fica entre n\xF3s \u2014 sigilo absoluto, sem julgamento. J\xE1 ouvi muita coisa, e meu objetivo \xE9 s\xF3 te ajudar.
+
+N\xE3o precisa se preparar nem ensaiar nada. \xC9 conversa.
+
+Se quiser come\xE7ar: ${LINK}`
+  },
+  {
+    id: "c-familia-empurrou",
+    tab: "casuais",
+    label: "Veio empurrado por algu\xE9m",
+    text: `Oi, {{nome}}! Mesmo que tenha sido por sugest\xE3o de algu\xE9m, o fato de voc\xEA estar aqui j\xE1 conta. \u{1F49A}
+
+Eu respeito o seu tempo \u2014 voc\xEA n\xE3o precisa "topar" tudo de cara. A primeira consulta serve pra a gente se conhecer e voc\xEA decidir se faz sentido seguir.
+
+Se quiser experimentar: ${LINK}`
+  },
+  {
+    id: "c-recaida",
+    tab: "casuais",
+    label: "Voltando ap\xF3s pausa",
+    text: `Que bom te ver de volta, {{nome}}. \u{1F33F} Reca\xEDda ou pausa fazem parte do processo, n\xE3o s\xE3o fracasso. A gente retoma de onde parou, sem cobran\xE7a.
+
+Pra reagendar: ${LINK}`
+  },
+  {
+    id: "c-amigo-indicacao",
+    tab: "casuais",
+    label: "Veio por indica\xE7\xE3o",
+    text: `Oi, {{nome}}! Que bacana saber que veio por indica\xE7\xE3o. \u{1F49A} Conta um pouquinho do que est\xE1 te trazendo aqui que eu te oriento sobre o melhor caminho \u2014 ou, se preferir j\xE1 agendar, \xE9 por aqui: ${LINK}`
+  },
+  // ---------------- ATALHOS (sintéticos, 1ª pessoa) ----------------
+  { id: "a-valor", tab: "atalhos", tag: "Valor", label: "Valor da consulta", text: `Primeira consulta R$ 320 (70 min) e retorno R$ 210 (60 min), {{nome}}. Tudo online. Agendamento: ${LINK}` },
+  { id: "a-convenio", tab: "atalhos", tag: "Conv\xEAnio", label: "Conv\xEAnio (curto)", text: `N\xE3o atendo conv\xEAnio, {{nome}} \u2014 s\xF3 particular. Emito recibo pra voc\xEA pedir reembolso ao seu plano de sa\xFAde, quando aplic\xE1vel. Agendamento: ${LINK}` },
+  { id: "a-online", tab: "atalhos", tag: "Telemedicina", label: "S\xF3 online?", text: `Sim, {{nome}}, atendimento 100% online por videochamada \u2014 mesma validade legal de consulta presencial. Atendo todo o Brasil. ${LINK}` },
+  { id: "a-receita", tab: "atalhos", tag: "Receita", label: "Receita controlada", text: `{{nome}}, condutas e encaminhamentos s\xE3o definidos com base na avalia\xE7\xE3o cl\xEDnica feita na consulta \u2014 tudo conversado com voc\xEA. ${LINK}` },
+  { id: "a-tdah", tab: "atalhos", tag: "TDAH", label: "TDAH adulto", text: `Sim, {{nome}}! TDAH no adulto \xE9 uma das minhas \xE1reas de foco. Primeira consulta R$ 320, online. ${LINK}` },
+  { id: "a-ansiedade", tab: "atalhos", tag: "Ansiedade", label: "Ansiedade", text: `Sim, {{nome}}, acompanho ansiedade e crises de p\xE2nico com plano individualizado. Online, em todo o Brasil. ${LINK}` },
+  { id: "a-depressao", tab: "atalhos", tag: "Depress\xE3o", label: "Depress\xE3o", text: `Sim, {{nome}}, acompanho quadros depressivos \u2014 leves a graves \u2014 com escuta cuidadosa e plano individualizado. ${LINK}` },
+  { id: "a-sono", tab: "atalhos", tag: "Sono", label: "Ins\xF4nia", text: `Sim, {{nome}}, dificuldades de sono s\xE3o avaliadas e o plano \xE9 individualizado. ${LINK}` },
+  { id: "a-bipolar", tab: "atalhos", tag: "Bipolar", label: "Bipolar", text: `Sim, {{nome}}, transtorno bipolar \xE9 uma das minhas \xE1reas. Acompanhamento cont\xEDnuo e cuidadoso. ${LINK}` },
+  { id: "a-toc", tab: "atalhos", tag: "TOC", label: "TOC", text: `Sim, {{nome}}, acompanho TOC com plano individualizado, incluindo indica\xE7\xE3o de psicoterapia (TCC) quando pertinente. ${LINK}` },
+  { id: "a-burnout", tab: "atalhos", tag: "Burnout", label: "Burnout", text: `Sim, {{nome}}, avalio burnout com cuidado, incluindo orienta\xE7\xE3o sobre afastamento quando necess\xE1rio. ${LINK}` },
+  { id: "a-crianca", tab: "atalhos", tag: "Idade", label: "Atende crian\xE7a?", text: `Atendo a partir de 16 anos, {{nome}}. Pra crian\xE7as, indico colega da sa\xFAde mental da inf\xE2ncia \u2014 se quiser, te passo sugest\xF5es.` },
+  { id: "a-idoso", tab: "atalhos", tag: "Idade", label: "Atende idoso?", text: `Sim, {{nome}}, atendo adultos e idosos. O online costuma ser bem confort\xE1vel \u2014 se precisar, um familiar pode acompanhar.` },
+  { id: "a-gestante", tab: "atalhos", tag: "Gesta\xE7\xE3o", label: "Gr\xE1vida / amamentando", text: `Sim, {{nome}}, h\xE1 op\xE7\xF5es seguras na gesta\xE7\xE3o e amamenta\xE7\xE3o. Avalio caso a caso, em parceria com o(a) obstetra. ${LINK}` },
+  { id: "a-horarios", tab: "atalhos", tag: "Agenda", label: "Hor\xE1rios", text: `Os hor\xE1rios atualizados aparecem aqui, {{nome}}: ${LINK} \u2014 se n\xE3o achar hor\xE1rio, me avisa que tento encaixar.` },
+  { id: "a-data", tab: "atalhos", tag: "Agenda", label: "Disponibilidade pr\xF3xima", text: `Tenho disponibilidade pr\xF3xima de {{data}}, {{nome}}! Pra confirmar: ${LINK}` },
+  { id: "a-link-video", tab: "atalhos", tag: "Telemedicina", label: "Link da videochamada", text: `O link chega no seu e-mail e WhatsApp 30 minutos antes da consulta, {{nome}}. Abre direto no navegador, sem precisar instalar nada.` },
+  { id: "a-pagamento", tab: "atalhos", tag: "Pagamento", label: "Pagamento", text: `O pagamento \xE9 direto na Doctoralia, {{nome}} \u2014 PIX, d\xE9bito ou cr\xE9dito (com op\xE7\xE3o de parcelar). ${LINK}` },
+  { id: "a-cancelar", tab: "atalhos", tag: "Agenda", label: "Cancelar / reagendar", text: `Sem problema, {{nome}} \u2014 cancelamentos com mais de 24h t\xEAm reembolso integral pela Doctoralia. Pra reagendar: ${LINK}` },
+  { id: "a-atestado", tab: "atalhos", tag: "Documentos", label: "Atestado", text: `Sim, {{nome}}, emito atestados, relat\xF3rios e laudos quando clinicamente indicado, com assinatura digital v\xE1lida.` },
+  { id: "a-recibo", tab: "atalhos", tag: "Documentos", label: "Recibo IR", text: `Sim, {{nome}}, o recibo serve pra dedu\xE7\xE3o no IR e tamb\xE9m pra pedido de reembolso ao plano de sa\xFAde.` },
+  { id: "a-renovar", tab: "atalhos", tag: "Receita", label: "Renovar receita", text: `Renova\xE7\xF5es e ajustes de conduta exigem uma consulta de retorno, {{nome}} \u2014 quest\xE3o \xE9tica. Pacientes em acompanhamento agendam um retorno (R$ 210). ${LINK}` },
+  { id: "a-fora-brasil", tab: "atalhos", tag: "Telemedicina", label: "Fora do Brasil", text: `Sim, {{nome}}, brasileiros morando fora podem se consultar normalmente \u2014 basta CPF ativo. ${LINK}` },
+  { id: "a-urgencia", tab: "atalhos", tag: "Urg\xEAncia", label: "Crise / urg\xEAncia", text: `{{nome}}, se houver risco agora, por favor ligue no CVV 188 (24h) ou procure um pronto-socorro. Meu atendimento \xE9 ambulatorial e agendado. \u{1F49A}` },
+  // NOVOS — Receita A/B Sedex
+  {
+    id: "a-receita-ab-sedex",
+    tab: "atalhos",
+    tag: "Receita A/B",
+    label: "Receita A/B (envio f\xEDsico)",
+    text: `{{nome}}, receitas controladas tipo A (amarela) e B (azul) precisam ser enviadas em via f\xEDsica. Como funciona aqui:
+
+\u{1F4E6} Envio por Sedex \u2014 taxa fixa de R$ 100,00
+\u{1F4B8} Pagamento exclusivamente por PIX (envio s\xF3 ap\xF3s confirma\xE7\xE3o)
+\u{1F50E} C\xF3digo de rastreamento enviado por aqui assim que postado
+\u{1F5D3}\uFE0F Postagem em at\xE9 2 dias \xFAteis ap\xF3s o pagamento confirmado
+
+Posso te enviar a chave PIX e o endere\xE7o de entrega?`
+  },
+  {
+    id: "a-receita-ab-prazo",
+    tab: "atalhos",
+    tag: "Receita A/B",
+    label: "Prazo de entrega Sedex",
+    text: `O prazo do Sedex varia conforme sua cidade, {{nome}} \u2014 em m\xE9dia 1 a 4 dias \xFAteis ap\xF3s a postagem. Assim que posto, te mando o c\xF3digo de rastreamento por aqui. \u{1F33F}`
+  },
+  {
+    id: "a-receita-ab-pix",
+    tab: "atalhos",
+    tag: "Receita A/B",
+    label: "Confirma\xE7\xE3o PIX da receita",
+    text: `{{nome}}, recebi o comprovante do PIX (R$ 100,00 \u2014 Sedex da receita). \u2705 Vou postar em at\xE9 2 dias \xFAteis e te mando o c\xF3digo de rastreamento assim que sair. \u{1F49A}`
+  },
+  {
+    id: "a-receita-ab-rastreio",
+    tab: "atalhos",
+    tag: "Receita A/B",
+    label: "C\xF3digo de rastreamento",
+    text: `Postada hoje, {{nome}}! \u{1F4E6} C\xF3digo de rastreio Sedex: [c\xF3digo]. Pode acompanhar em https://rastreamento.correios.com.br. Qualquer coisa, me avisa por aqui. \u{1F33F}`
+  },
+  {
+    id: "a-receita-b-digital",
+    tab: "atalhos",
+    tag: "Receita digital",
+    label: "Receita comum/B1 digital",
+    text: `{{nome}}, receitas comuns e algumas controladas (B1, sem reten\xE7\xE3o em algumas farm\xE1cias) podem ir digital, com assinatura ICP-Brasil \u2014 chega no seu e-mail e vale em qualquer farm\xE1cia do Brasil. Se for receita A ou B amarela/azul retida, \xE9 envio f\xEDsico via Sedex (taxa R$ 100, PIX). \u{1F49A}`
+  },
+  {
+    id: "a-agenda-aberta-reajuste",
+    tab: "atalhos",
+    tag: "Agenda",
+    label: "Agenda aberta + aviso de reajuste",
+    expiresAt: "2025-05-31",
+    text: `Oi, {{nome}}! Minha agenda est\xE1 aberta pra consultas a partir de *18/05* \u2014 voc\xEA j\xE1 pode agendar agora e n\xE3o precisa esperar \u{1F499}
+
+\u{1F449} ${LINK}
+
+S\xF3 um aviso carinhoso: devo fazer um reajuste de valores em *junho*. Ainda n\xE3o est\xE1 100% confirmado, mas se voc\xEA quiser garantir o valor atual, \xE9 s\xF3 agendar \u2014 pode remarcar depois sem problema, desde que avise com anteced\xEAncia.
+
+Tranquilidade total: cancelamento com reembolso total at\xE9 24h antes da consulta.`
+  },
+  // ---------------- OBJEÇÕES (1ª pessoa) ----------------
+  {
+    id: "o-caro",
+    tab: "objecoes",
+    label: '"T\xE1 caro pra mim"',
+    text: `Entendo perfeitamente, {{nome}}. \u{1F33F} Meu valor est\xE1 alinhado com a m\xE9dia de profissionais de sa\xFAde mental com a mesma forma\xE7\xE3o, e cobre uma consulta longa (70 min na primeira), documentos quando indicados e suporte p\xF3s-consulta.
+
+Algumas op\xE7\xF5es que ajudam:
+\u2022 Parcelamento no cart\xE3o pelo checkout da Doctoralia
+\u2022 Recibo para reembolso parcial pelo seu plano de sa\xFAde, quando aplic\xE1vel
+\u2022 Espa\xE7ar mais os retornos depois da fase inicial
+
+Se fizer sentido: ${LINK}`
+  },
+  {
+    id: "o-pensar",
+    tab: "objecoes",
+    label: '"Vou pensar"',
+    text: `Claro, {{nome}}, pensa com calma. \u{1F49A} S\xF3 te deixo um lembrete carinhoso: a maioria das pessoas que adia uma consulta de sa\xFAde mental se arrepende de n\xE3o ter marcado antes \u2014 n\xE3o pela conduta em si, mas pelo al\xEDvio de finalmente conversar com algu\xE9m que entende.
+
+Quando se sentir pronta(o), t\xF4 por aqui: ${LINK}`
+  },
+  {
+    id: "o-presencial",
+    tab: "objecoes",
+    label: '"Prefiro presencial"',
+    text: `Faz total sentido, {{nome}} \u2014 muita gente pensa assim antes de experimentar. \u{1F33F}
+
+A teleconsulta tem a mesma validade legal e, na pr\xE1tica, pacientes relatam se sentir at\xE9 mais \xE0 vontade falando do conforto de casa. Se n\xE3o rolar, voc\xEA n\xE3o fica preso(a) \u2014 \xE9 s\xF3 uma consulta.
+
+Se topar testar: ${LINK}`
+  },
+  {
+    id: "o-sem-tempo",
+    tab: "objecoes",
+    label: '"N\xE3o tenho tempo"',
+    text: `Entendo, {{nome}}. \u{1F49A} Por isso atendo 100% online \u2014 sem deslocamento, sem sala de espera. S\xE3o 70 minutos do seu pr\xF3prio ambiente, e tenho hor\xE1rios alternativos (manh\xE3 cedo / fim de tarde) pra quem trabalha.
+
+D\xE1 uma olhada na agenda: ${LINK}`
+  },
+  {
+    id: "o-sozinho",
+    tab: "objecoes",
+    label: '"Acho que dou conta sozinho"',
+    text: `Respeito muito isso, {{nome}}. \u{1F33F} E quero te dizer: pedir ajuda n\xE3o \xE9 o oposto de dar conta \u2014 \xE9 parte de dar conta. Mesmo pessoas muito funcionais se beneficiam de uma escuta especializada.
+
+Se em algum momento mudar de ideia, \xE9 por aqui: ${LINK}`
+  },
+  {
+    id: "o-ja-tentou",
+    tab: "objecoes",
+    label: '"J\xE1 tentei e n\xE3o funcionou"',
+    text: `Sinto muito que tenha vivido isso, {{nome}}. \u{1F49A} Tratamento em sa\xFAde mental n\xE3o \xE9 tamanho \xFAnico \u2014 \xE0s vezes \xE9 quest\xE3o de ajuste de abordagem, de plano, ou simplesmente de encontrar um(a) profissional que combine com voc\xEA.
+
+Costumo revisar o hist\xF3rico com calma antes de propor mudan\xE7as. Se quiser dar mais uma chance: ${LINK}`
+  },
+  {
+    id: "o-medo-remedio",
+    tab: "objecoes",
+    label: '"Tenho medo de rem\xE9dio"',
+    text: `Esse medo \xE9 super comum e leg\xEDtimo, {{nome}}. \u{1F33F} Eu n\xE3o proponho condutas "autom\xE1ticas" \u2014 qualquer indica\xE7\xE3o \xE9 conversada com voc\xEA, com transpar\xEAncia sobre o que esperar, e em muitos casos o cuidado envolve s\xF3 mudan\xE7as de h\xE1bito e psicoterapia.
+
+A decis\xE3o \xE9 sempre conjunta. Pra conversar: ${LINK}`
+  },
+  {
+    id: "o-vergonha-online",
+    tab: "objecoes",
+    label: '"N\xE3o me sinto \xE0 vontade no v\xEDdeo"',
+    text: `Tudo bem, {{nome}}. \u{1F49A} Voc\xEA pode ficar com a c\xE2mera ligada s\xF3 na parte inicial, ou em ambiente que te deixe mais \xE0 vontade (carro estacionado, quarto, etc.). O importante \xE9 voc\xEA se sentir segura(o) pra falar.
+
+Se quiser experimentar: ${LINK}`
+  },
+  {
+    id: "o-marido-nao-deixa",
+    tab: "objecoes",
+    label: '"Meu parceiro(a) n\xE3o aceita"',
+    text: `{{nome}}, sinto muito que esteja vivendo isso. \u{1F33F} Cuidar da sua sa\xFAde mental \xE9 um direito seu \u2014 a consulta \xE9 sigilosa, online, e n\xE3o aparece em nada vis\xEDvel. Se quiser, agendamos em hor\xE1rio discreto.
+
+Quando puder: ${LINK}`
+  },
+  {
+    id: "o-religiao",
+    tab: "objecoes",
+    label: '"Minha f\xE9 resolve"',
+    text: `Respeito muito sua f\xE9, {{nome}} \u2014 ela pode caminhar junto com o tratamento, n\xE3o \xE9 "ou um ou outro". Eu n\xE3o interfiro em cren\xE7as; meu trabalho \xE9 cuidar do que \xE9 qu\xEDmico/cl\xEDnico no c\xE9rebro.
+
+Se quiser conversar: ${LINK}`
+  },
+  {
+    id: "o-melhorou",
+    tab: "objecoes",
+    label: '"Acho que melhorei sozinho"',
+    text: `Que \xF3timo ouvir isso, {{nome}}! \u{1F49A} S\xF3 uma observa\xE7\xE3o: oscila\xE7\xF5es de melhora fazem parte de v\xE1rios quadros \u2014 uma avalia\xE7\xE3o ajuda a entender se \xE9 melhora real ou ciclo. Sem compromisso de tratar.
+
+Se quiser checar: ${LINK}`
+  },
+  {
+    id: "o-comparou",
+    tab: "objecoes",
+    label: '"Achei mais barato em outro lugar"',
+    text: `Faz sentido pesquisar, {{nome}} \u{1F33F}. S\xF3 vale comparar o que est\xE1 inclu\xEDdo: 70 minutos de primeira consulta, retorno acess\xEDvel, suporte por WhatsApp entre consultas e documentos sem custo extra quando indicados (exceto envio f\xEDsico de receita A/B). Se ainda assim preferir outra op\xE7\xE3o, tudo bem \u2014 fica o convite. ${LINK}`
+  },
+  {
+    id: "o-plano-sulamerica",
+    tab: "objecoes",
+    label: '"Atende SulAm\xE9rica?"',
+    text: `Oi, {{nome}}! Entendo perfeitamente \u2014 ter plano e querer us\xE1-lo faz todo sentido. \u{1F33F}
+
+N\xE3o tenho v\xEDnculo com a SulAm\xE9rica nem com outros conv\xEAnios no momento. Atendo por telemedicina e, por n\xE3o ter custos de cl\xEDnica f\xEDsica, consigo praticar valores mais acess\xEDveis sem abrir m\xE3o da qualidade:
+
+\u2022 Primeira consulta \u2014 R$ 320 (70 min)
+\u2022 Retorno \u2014 R$ 210 (60 min)
+\u2022 Suporte por WhatsApp entre consultas
+\u2022 Documentos sem custo extra quando indicados
+
+Emito recibo com CRM e CID, que voc\xEA usa para pedir reembolso \xE0 SulAm\xE9rica \u2014 costuma cobrir uma parte (vale conferir o percentual no app ou SAC do plano).
+
+A teleconsulta tem a mesma validade legal da presencial, e muitos pacientes se sentem mais \xE0 vontade no conforto de casa. Se quiser experimentar: ${LINK}`
+  },
+  {
+    id: "o-plano-amil",
+    tab: "objecoes",
+    label: '"Atende Amil?"',
+    text: `Oi, {{nome}}! Faz total sentido a pergunta. \u{1F33F}
+
+N\xE3o atendo pela Amil \u2014 n\xE3o tenho v\xEDnculo com conv\xEAnios. Mas atendo 100% por telemedicina, e por isso consigo manter valores mais acess\xEDveis sem perder qualidade:
+
+\u2022 Primeira consulta \u2014 R$ 320 (70 min)
+\u2022 Retorno \u2014 R$ 210 (60 min)
+\u2022 Suporte por WhatsApp entre consultas
+\u2022 Documentos sem custo extra quando indicados
+
+Emito recibo com CRM e CID para voc\xEA solicitar reembolso \xE0 Amil (a maioria dos planos cobre uma parte \u2014 vale conferir no app ou SAC).
+
+A teleconsulta tem a mesma validade da presencial e muitos pacientes preferem pelo conforto de casa. Se quiser experimentar: ${LINK}`
+  },
+  {
+    id: "o-plano-bradesco",
+    tab: "objecoes",
+    label: '"Atende Bradesco Sa\xFAde?"',
+    text: `Oi, {{nome}}! Entendo a sua d\xFAvida. \u{1F33F}
+
+N\xE3o tenho v\xEDnculo com o Bradesco Sa\xFAde nem com outros conv\xEAnios. O atendimento \xE9 100% por telemedicina, o que me permite praticar valores mais acess\xEDveis sem abrir m\xE3o da qualidade:
+
+\u2022 Primeira consulta \u2014 R$ 320 (70 min)
+\u2022 Retorno \u2014 R$ 210 (60 min)
+\u2022 Suporte por WhatsApp entre consultas
+\u2022 Documentos sem custo extra quando indicados
+
+Emito recibo com CRM e CID, que voc\xEA envia ao Bradesco Sa\xFAde para solicitar reembolso \u2014 costuma cobrir uma parte (confira o percentual no app Meu Bradesco Sa\xFAde).
+
+A teleconsulta tem a mesma validade legal da presencial e oferece o conforto de estar em casa. Se quiser experimentar: ${LINK}`
+  },
+  {
+    id: "o-plano-unimed",
+    tab: "objecoes",
+    label: '"Atende Unimed?"',
+    text: `Oi, {{nome}}! Faz sentido perguntar. \u{1F33F}
+
+N\xE3o atendo pela Unimed \u2014 n\xE3o tenho v\xEDnculo com conv\xEAnios. Atendo por telemedicina e, por n\xE3o ter custos de cl\xEDnica f\xEDsica, consigo praticar valores mais acess\xEDveis sem perder qualidade:
+
+\u2022 Primeira consulta \u2014 R$ 320 (70 min)
+\u2022 Retorno \u2014 R$ 210 (60 min)
+\u2022 Suporte por WhatsApp entre consultas
+\u2022 Documentos sem custo extra quando indicados
+
+Emito recibo com CRM e CID para voc\xEA solicitar reembolso \xE0 Unimed (a maioria das modalidades cobre uma parte \u2014 vale conferir no app ou central do plano).
+
+A teleconsulta tem a mesma validade da presencial e muitos pacientes preferem o conforto de casa. Se quiser experimentar: ${LINK}`
+  },
+  {
+    id: "o-plano-outros",
+    tab: "objecoes",
+    label: '"Atende outro plano (Hapvida, Amil Dental, Porto, etc.)?"',
+    text: `Oi, {{nome}}! \u{1F33F} N\xE3o tenho v\xEDnculo com conv\xEAnios no momento \u2014 o atendimento \xE9 particular, 100% por telemedicina.
+
+Por n\xE3o ter custos de cl\xEDnica f\xEDsica, mantenho valores mais acess\xEDveis sem perder qualidade:
+
+\u2022 Primeira consulta \u2014 R$ 320 (70 min)
+\u2022 Retorno \u2014 R$ 210 (60 min)
+\u2022 Suporte por WhatsApp entre consultas
+\u2022 Documentos sem custo extra quando indicados
+
+Emito recibo com CRM e CID, que costuma ser aceito pela maioria dos planos para reembolso parcial. Vale conferir o percentual direto com o SAC do seu conv\xEAnio.
+
+A teleconsulta tem a mesma validade da presencial. Se quiser experimentar: ${LINK}`
+  },
+  // ---------------- TRIAGEM (1ª pessoa) ----------------
+  {
+    id: "t-01-abertura",
+    tab: "triagem",
+    tag: "1. Abertura",
+    label: "Abertura + permiss\xE3o",
+    text: `Oi, {{nome}}! Tudo bem? \u{1F49A} Sou a Dra. J\xE9ssica Carpaneda, da \xE1rea de sa\xFAde mental. Vi que voc\xEA se interessou pelo atendimento \u2014 posso te fazer 3 perguntinhas r\xE1pidas pra entender o que est\xE1 acontecendo e te orientar do melhor jeito? \u{1F33F}`
+  },
+  {
+    id: "t-02-queixa",
+    tab: "triagem",
+    tag: "2. Queixa",
+    label: "Pergunta 1: queixa principal",
+    text: `Perfeito! \u{1F64F}
+
+1) De forma bem livre, o que te fez buscar cuidado em sa\xFAde mental agora? Pode ser uma frase s\xF3 (ex.: "t\xF4 muito ansiosa", "n\xE3o consigo dormir", "suspeita de TDAH", "t\xF4 esgotada no trabalho"...).`
+  },
+  {
+    id: "t-03-tempo",
+    tab: "triagem",
+    tag: "3. Tempo",
+    label: "Pergunta 2: h\xE1 quanto tempo",
+    text: `Obrigada por compartilhar, {{nome}}. \u{1F49A}
+
+2) H\xE1 quanto tempo voc\xEA sente isso? (dias, semanas, meses, anos?)`
+  },
+  {
+    id: "t-04-tratamento-previo",
+    tab: "triagem",
+    tag: "4. Hist\xF3rico",
+    label: "Pergunta 3: j\xE1 tratou antes?",
+    text: `Entendi. \u{1F33F}
+
+3) Voc\xEA j\xE1 fez algum acompanhamento em sa\xFAde mental antes (psic\xF3logo, psicoterapia, outro profissional)? Est\xE1 em uso de algum tratamento ou medica\xE7\xE3o no momento? (Se n\xE3o lembrar o nome certinho, sem problema.)`
+  },
+  {
+    id: "t-05-risco",
+    tab: "triagem",
+    tag: "5. Risco",
+    label: "Triagem de risco (sondagem)",
+    text: `{{nome}}, mais uma rapidinha pra eu te orientar com seguran\xE7a: voc\xEA tem tido pensamentos de se machucar ou de n\xE3o querer mais estar aqui? Pode ser sincera(o) \u2014 esse espa\xE7o \xE9 seguro. \u{1F49A}`
+  },
+  {
+    id: "t-05b-risco-positivo",
+    tab: "triagem",
+    tag: "5. Risco",
+    label: "Resposta a risco positivo",
+    text: `{{nome}}, fico muito grata por ter confiado em me contar. \u{1F49A} Quero te pedir, por favor: se houver risco agora, ligue no CVV 188 (24h, gratuito) ou v\xE1 ao pronto-socorro mais pr\xF3ximo / CAPS. Eu atendo ambulatorialmente e vou te encaixar o quanto antes \u2014 mas o cuidado de urg\xEAncia precisa ser presencial. Estou aqui com voc\xEA. \u{1F33F}`
+  },
+  {
+    id: "t-06-perfil",
+    tab: "triagem",
+    tag: "6. Perfil",
+    label: "Idade + cidade",
+    text: `S\xF3 pra fechar o cadastro, {{nome}}: qual sua idade e em que cidade/estado voc\xEA mora? (Atendo a partir de 16 anos, online, em todo o Brasil \u{1F1E7}\u{1F1F7})`
+  },
+  {
+    id: "t-07-rotina",
+    tab: "triagem",
+    tag: "7. Rotina",
+    label: "Melhor hor\xE1rio",
+    text: `E qual per\xEDodo costuma ser melhor pra voc\xEA ser atendida(o)? (manh\xE3 / tarde / noite / fim de semana \u2014 tenho op\xE7\xF5es)`
+  },
+  {
+    id: "t-08-encaixe-tdah",
+    tab: "triagem",
+    tag: "8. Encaixe",
+    label: "Encaixe \u2014 perfil TDAH",
+    text: `Pelo que voc\xEA me conta, {{nome}}, faz muito sentido a gente investigar TDAH \u2014 \xE9 uma das minhas \xE1reas de foco. \u{1F49A}
+
+A primeira consulta \xE9 online (70 min, R$ 320) e j\xE1 inicio a investiga\xE7\xE3o com escalas validadas (ASRS-18). Sem precisar de exames antes.
+
+Quer que eu te mostre os hor\xE1rios dispon\xEDveis? ${LINK}`
+  },
+  {
+    id: "t-08-encaixe-ansiedade",
+    tab: "triagem",
+    tag: "8. Encaixe",
+    label: "Encaixe \u2014 ansiedade/p\xE2nico",
+    text: `{{nome}}, o que voc\xEA descreve \xE9 muito compat\xEDvel com um quadro ansioso \u2014 e tem tratamento, viu? \u{1F33F} Trabalho com escuta cuidadosa + plano individualizado, conversado com voc\xEA.
+
+Primeira consulta online, 70 min, R$ 320. Posso te ajudar a marcar? ${LINK}`
+  },
+  {
+    id: "t-08-encaixe-burnout",
+    tab: "triagem",
+    tag: "8. Encaixe",
+    label: "Encaixe \u2014 burnout",
+    text: `Pelo que voc\xEA relata, {{nome}}, parece quadro de esgotamento (burnout). \u{1F49A} Eu avalio, oriento sobre afastamento se necess\xE1rio e monto o plano de cuidado com voc\xEA.
+
+Primeira consulta online, 70 min, R$ 320. Quer ver os hor\xE1rios? ${LINK}`
+  },
+  {
+    id: "t-08-encaixe-depressao",
+    tab: "triagem",
+    tag: "8. Encaixe",
+    label: "Encaixe \u2014 depress\xE3o",
+    text: `{{nome}}, o que voc\xEA compartilhou tem cara de quadro depressivo \u2014 e \xE9 totalmente trat\xE1vel. \u{1F33F} Voc\xEA n\xE3o precisa estar "no fundo" pra come\xE7ar; quanto antes, melhor.
+
+Primeira consulta online, 70 min, R$ 320. Te ajudo a agendar? ${LINK}`
+  },
+  {
+    id: "t-08-encaixe-fora-escopo",
+    tab: "triagem",
+    tag: "8. Encaixe",
+    label: "Fora do escopo (encaminhar)",
+    text: `{{nome}}, pelo que voc\xEA descreve, o ideal \xE9 um(a) profissional com outro foco (ex.: sa\xFAde mental infantil / neurologia / depend\xEAncia qu\xEDmica em interna\xE7\xE3o). N\xE3o sou a melhor indica\xE7\xE3o pra esse caso espec\xEDfico, mas posso te sugerir caminhos. \u{1F49A}`
+  },
+  {
+    id: "t-09-fechamento-link",
+    tab: "triagem",
+    tag: "9. Fechamento",
+    label: "Fechamento com link",
+    text: `Show, {{nome}}! Pra agendar \xE9 direto por aqui (voc\xEA escolhe hor\xE1rio, paga e recebe o link da videochamada): ${LINK}
+
+Qualquer d\xFAvida no caminho, me chama. \u{1F49A}`
+  },
+  {
+    id: "t-09-fechamento-data",
+    tab: "triagem",
+    tag: "9. Fechamento",
+    label: "Sugest\xE3o de data",
+    text: `Tenho um hor\xE1rio bom pra voc\xEA em {{data}}, {{nome}}. Posso reservar? Se confirmar, te mando o link de pagamento da Doctoralia. \u{1F33F}`
+  },
+  {
+    id: "t-10-pos-agendamento",
+    tab: "triagem",
+    tag: "10. P\xF3s",
+    label: "Confirma\xE7\xE3o p\xF3s-agendamento",
+    text: `Tudo certo, {{nome}}! \u2705 Sua consulta comigo est\xE1 marcada para {{data}}.
+
+\u{1F4CD} 100% online (link chega 30 min antes por e-mail e WhatsApp)
+\u{1F4DD} Se tiver exames, relat\xF3rios ou laudos antigos, deixa em m\xE3os
+\u23F0 Entra 5 min antes pra testar \xE1udio/v\xEDdeo
+
+Qualquer coisa, me chama por aqui. \u{1F49A}`
+  },
+  {
+    id: "t-11-lembrete-vespera",
+    tab: "triagem",
+    tag: "10. P\xF3s",
+    label: "Lembrete v\xE9spera",
+    text: `Oi, {{nome}}! \u{1F33F} Passando s\xF3 pra lembrar da nossa consulta amanh\xE3 ({{data}}). O link chegar\xE1 30 min antes. Tudo certo por a\xED?`
+  },
+  {
+    id: "t-12-no-show",
+    tab: "triagem",
+    tag: "10. P\xF3s",
+    label: "N\xE3o compareceu",
+    text: `Oi, {{nome}}! Vi que n\xE3o consegui te encontrar na consulta de hoje. Tudo bem por a\xED? \u{1F49A} Se quiser, te ajudo a remarcar \u2014 me avisa o melhor dia.`
+  },
+  {
+    id: "t-13-sem-resposta",
+    tab: "triagem",
+    tag: "10. P\xF3s",
+    label: "Follow-up (sem resposta)",
+    text: `Oi, {{nome}}! \u{1F33F} S\xF3 passando pra saber se ainda faz sentido marcar comigo ou se voc\xEA preferiu outro caminho. Sem cobran\xE7a \u2014 t\xF4 por aqui se precisar. \u{1F49A}`
+  },
+  // ============================================================
+  // RISCO — Sub-abas: Sondagem / Ideação / Crise / Terceiros / Pós
+  // ============================================================
+  {
+    id: "r-01-sondagem",
+    tab: "risco",
+    tag: "1. Sondagem",
+    label: "Sondagem inicial de risco",
+    text: `{{nome}}, antes de seguirmos, preciso te fazer uma pergunta sincera \u2014 pode responder com toda liberdade: voc\xEA tem tido pensamentos de se machucar ou de n\xE3o querer mais estar aqui? \u{1F49A}
+
+Esse espa\xE7o \xE9 seguro e sem julgamento.`
+  },
+  {
+    id: "r-01b-sondagem-aprofundar",
+    tab: "risco",
+    tag: "1. Sondagem",
+    label: "Aprofundar (Columbia adaptado)",
+    text: `Obrigada por confiar, {{nome}}. \u{1F33F} Pra eu te ajudar do melhor jeito, posso te perguntar mais um pouco?
+
+\u2022 Esses pensamentos t\xEAm sido frequentes? (raros / \xE0s vezes / quase todo dia)
+\u2022 Voc\xEA j\xE1 pensou em COMO faria isso?
+\u2022 Voc\xEA tem acesso a algum meio (medica\xE7\xE3o, arma, etc.)?
+\u2022 J\xE1 tentou em algum momento da vida? (recente ou antigo)
+
+Pode responder no seu tempo. \u{1F49A}`
+  },
+  {
+    id: "r-02-ideacao-passiva",
+    tab: "risco",
+    tag: "2. Idea\xE7\xE3o passiva",
+    label: 'Idea\xE7\xE3o passiva ("queria sumir")',
+    text: `Obrigada por confiar em mim com isso, {{nome}}. \u{1F33F} O que voc\xEA descreve \u2014 esse cansa\xE7o de existir, vontade de "sumir" \u2014 \xE9 um sinal importante de que voc\xEA precisa de cuidado AGORA, n\xE3o daqui a semanas.
+
+Vou te encaixar comigo o quanto antes. Enquanto isso, se piorar:
+\u2022 CVV \u2014 188 (24h, gratuito, liga\xE7\xE3o ou chat em cvv.org.br)
+\u2022 Pronto-socorro mais pr\xF3ximo
+\u2022 CAPS da sua regi\xE3o
+
+Voc\xEA n\xE3o est\xE1 sozinha(o). \u{1F49A}`
+  },
+  {
+    id: "r-03-ideacao-ativa",
+    tab: "risco",
+    tag: "3. Idea\xE7\xE3o ativa",
+    label: "Idea\xE7\xE3o ativa SEM plano",
+    text: `{{nome}}, fico muito grata por ter me contado. \u{1F49A} Isso que voc\xEA est\xE1 sentindo \xE9 um pedido de socorro leg\xEDtimo, e merece resposta agora \u2014 n\xE3o depois.
+
+Por favor, fa\xE7a AGORA uma destas op\xE7\xF5es:
+1\uFE0F\u20E3 Ligue no CVV: 188 (gratuito, 24h, sigiloso)
+2\uFE0F\u20E3 Chat: cvv.org.br
+3\uFE0F\u20E3 CAPS da sua cidade
+
+Vou priorizar seu encaixe na minha agenda. Posso te ligar? Me manda um "pode" que eu te chamo. \u{1F33F}`
+  },
+  {
+    id: "r-04-plano-meio",
+    tab: "risco",
+    tag: "4. Plano/meio",
+    label: "Plano OU meio acess\xEDvel \u2014 vermelho",
+    text: `{{nome}}, preciso ser muito direta com voc\xEA porque me importo. \u{1F49A}
+
+Pelo que voc\xEA descreve (plano / meio em m\xE3os), o cuidado certo agora N\xC3O \xE9 uma teleconsulta marcada \u2014 \xE9 avalia\xE7\xE3o presencial imediata.
+
+Por favor, AGORA:
+\u{1F691} SAMU 192 \u2014 ou
+\u{1F3E5} Pronto-socorro psiqui\xE1trico mais pr\xF3ximo \u2014 ou
+\u260E\uFE0F CVV 188 enquanto se desloca
+
+Se poss\xEDvel, pe\xE7a pra algu\xE9m de confian\xE7a ficar com voc\xEA at\xE9 chegar ao servi\xE7o. Se quiser, fico aqui no chat enquanto voc\xEA se organiza. Voc\xEA importa. \u{1F33F}`
+  },
+  {
+    id: "r-05-tentativa-recente",
+    tab: "risco",
+    tag: "5. Tentativa",
+    label: "Tentativa recente / autoles\xE3o atual",
+    text: `{{nome}}, isso \xE9 uma emerg\xEAncia m\xE9dica. Por favor, AGORA:
+
+\u{1F691} Ligue 192 (SAMU) ou pe\xE7a que algu\xE9m te leve ao pronto-socorro mais pr\xF3ximo.
+
+Se estiver sozinha(o), ligue para algu\xE9m de confian\xE7a AGORA \u2014 qualquer pessoa \u2014 e pe\xE7a pra ficar contigo at\xE9 chegar ajuda.
+
+CVV 188 tamb\xE9m atende em situa\xE7\xF5es de risco iminente. Estou aqui. \u{1F49A}`
+  },
+  {
+    id: "r-06-terceiro-relata",
+    tab: "risco",
+    tag: "6. Terceiro",
+    label: "Familiar relata risco do paciente",
+    text: `Que bom que voc\xEA buscou ajuda, {{nome}}. \u{1F49A} Pelo que descreve, \xE9 uma situa\xE7\xE3o de risco e o cuidado mais seguro AGORA \xE9 avalia\xE7\xE3o presencial:
+
+\u2022 SAMU 192
+\u2022 Pronto-socorro psiqui\xE1trico (CAPS III ou hospital geral com psiquiatria)
+\u2022 CVV 188 (24h) \u2014 pode ligar voc\xEA tamb\xE9m, para se orientar
+
+N\xE3o deixe a pessoa sozinha, e se houver acesso a meios (medicamentos, armas, etc.), retire do alcance. Ap\xF3s estabilizar, podemos agendar acompanhamento ambulatorial comigo. \u{1F33F}`
+  },
+  {
+    id: "r-07-menor-risco",
+    tab: "risco",
+    tag: "7. Menor",
+    label: "Menor de idade em risco",
+    text: `{{nome}}, obrigada por me contar. \u{1F49A} Por se tratar de menor de idade em situa\xE7\xE3o de risco, o cuidado urgente passa por:
+
+\u{1F691} SAMU 192 ou pronto-socorro pedi\xE1trico/psiqui\xE1trico
+\u{1F468}\u200D\u{1F469}\u200D\u{1F467} Comunicar imediatamente o(a) respons\xE1vel legal
+\u260E\uFE0F CVV 188 (atende qualquer idade)
+\u{1F6E1}\uFE0F Conselho Tutelar 100, se houver viol\xEAncia envolvida
+
+Ap\xF3s estabiliza\xE7\xE3o, encaminho para profissional de sa\xFAde mental da inf\xE2ncia e adolesc\xEAncia. \u{1F33F}`
+  },
+  {
+    id: "r-08-pos-alta",
+    tab: "risco",
+    tag: "8. P\xF3s-alta",
+    label: "Recebeu alta hospitalar \u2014 encaixe",
+    text: `Que bom que voc\xEA est\xE1 num momento mais seguro, {{nome}}. \u{1F49A} P\xF3s-alta \xE9 uma fase delicada e merece acompanhamento pr\xF3ximo.
+
+Vou priorizar seu encaixe nos pr\xF3ximos dias. Por favor, traga na consulta:
+\u{1F4CB} Relat\xF3rio de alta
+\u{1F48A} Lista de medica\xE7\xF5es em uso
+\u{1F465} Quem \xE9 sua rede de apoio agora
+
+Enquanto isso, qualquer piora: CVV 188 ou volte ao servi\xE7o de origem. \u{1F33F}`
+  },
+  {
+    id: "r-09-recusa-ajuda",
+    tab: "risco",
+    tag: "9. Recusa",
+    label: "Recusa qualquer ajuda",
+    text: `{{nome}}, respeito sua autonomia. \u{1F49A} S\xF3 te pe\xE7o uma coisa: salva esse n\xFAmero \u2014 CVV 188 \u2014 em qualquer momento, mesmo s\xF3 pra desabafar. \xC9 24h, gratuito, an\xF4nimo.
+
+Quando (e se) quiser conversar comigo, t\xF4 aqui. Sem pressa, sem cobran\xE7a. \u{1F33F}`
+  },
+  {
+    id: "r-10-disclaimer",
+    tab: "risco",
+    tag: "10. Disclaimer",
+    label: "Disclaimer fixo de telemedicina",
+    text: `\u26A0\uFE0F IMPORTANTE: minha teleconsulta \xE9 ambulatorial e agendada. N\xE3o atendo URG\xCANCIAS pelo WhatsApp.
+
+Em situa\xE7\xE3o de crise: CVV 188 (24h) | SAMU 192 | pronto-socorro mais pr\xF3ximo.`
+  },
+  {
+    id: "r-11-plano-seguranca",
+    tab: "risco",
+    tag: "10. Disclaimer",
+    label: "Plano de seguran\xE7a breve (Stanley-Brown)",
+    text: `{{nome}}, vamos montar juntas(os) um plano de seguran\xE7a rapidinho \u2014 pra voc\xEA ter na m\xE3o se a crise vier:
+
+1) Sinais de alerta meus (o que sinto antes da crise piorar):
+2) Coisas que me distraem ou acalmam (atividades, lugares, sons):
+3) Pessoas/lugares sociais que me ajudam a sair da espiral:
+4) Pessoas que posso pedir ajuda direta (nome + telefone):
+5) Profissionais e servi\xE7os (eu, CVV 188, PS mais pr\xF3ximo):
+6) Tornar o ambiente seguro (afastar meios, deixar com algu\xE9m):
+
+Manda preenchido por aqui que eu reviso com voc\xEA. \u{1F49A}`
+  },
+  // ============================================================
+  // ATALHOS — 68 RESPOSTAS NUMERADAS (1ª pessoa)
+  // ============================================================
+  // ── Saudações e Primeiro Contato (01–03)
+  { id: "n01", tab: "atalhos", tag: "01. Sauda\xE7\xE3o", label: "01. Boas-vindas", text: `Oi, {{nome}}! \u{1F49A} Sou a Dra. J\xE9ssica Carpaneda \u2014 sa\xFAde mental. Que bom te ver por aqui! Como posso te ajudar hoje?` },
+  { id: "n02", tab: "atalhos", tag: "02. Sauda\xE7\xE3o", label: "02. Fora do hor\xE1rio", text: `Oi, {{nome}}! \u{1F319} Recebi sua mensagem fora do meu hor\xE1rio comercial (seg-sex, 9h-18h). Amanh\xE3 cedo te respondo com calma. Em urg\xEAncia: CVV 188.` },
+  { id: "n03", tab: "atalhos", tag: "03. Sauda\xE7\xE3o", label: "03. Reapresenta\xE7\xE3o", text: `Oi, {{nome}}! \u{1F49A} Que bom te ver de volta. Em que posso te ajudar hoje \u2014 quer agendar, tirar uma d\xFAvida, ou outra coisa?` },
+  // ── Valores (04–08)
+  { id: "n04", tab: "atalhos", tag: "04. Valor", label: "04. Valor 1\xAA consulta", text: `Primeira consulta: R$ 320 (70 min, online), {{nome}}. Inclui avalia\xE7\xE3o completa e plano de cuidado individualizado. Agendamento: ${LINK}` },
+  { id: "n05", tab: "atalhos", tag: "05. Valor", label: "05. Valor retorno", text: `Retorno: R$ 210 (60 min, online), {{nome}}. Indicado para acompanhamento, ajustes e renova\xE7\xE3o de conduta. ${LINK}` },
+  { id: "n06", tab: "atalhos", tag: "06. Valor", label: "06. Por que esse valor", text: `O valor reflete forma\xE7\xE3o especializada, consulta longa, suporte p\xF3s-consulta por WhatsApp e documentos sem custo extra quando indicados (exceto envio f\xEDsico de receita A/B), {{nome}}. \u{1F33F}` },
+  { id: "n07", tab: "atalhos", tag: "07. Valor", label: "07. Parcelamento", text: `Sim, {{nome}}! O checkout da Doctoralia permite parcelar no cart\xE3o de cr\xE9dito (sujeito \xE0s condi\xE7\xF5es da operadora). ${LINK}` },
+  { id: "n08", tab: "atalhos", tag: "08. Valor", label: "08. Desconto / social", text: `{{nome}}, hoje n\xE3o trabalho com descontos individuais \u2014 pra manter equidade entre pacientes. Se o valor pesar, posso te indicar servi\xE7os p\xFAblicos (CAPS, UBS) ou cl\xEDnicas-escola. \u{1F49A}` },
+  // ── Agendamento (09–12)
+  { id: "n09", tab: "atalhos", tag: "09. Agenda", label: "09. Como agendar", text: `Super simples, {{nome}}: voc\xEA escolhe hor\xE1rio, paga (PIX/cart\xE3o) e recebe o link da videochamada por e-mail e WhatsApp. Tudo por aqui: ${LINK}` },
+  { id: "n10", tab: "atalhos", tag: "10. Agenda", label: "10. Pr\xF3ximas datas", text: `Tenho disponibilidade pr\xF3xima de {{data}}, {{nome}}! Os hor\xE1rios atualizados ficam aqui: ${LINK}` },
+  { id: "n11", tab: "atalhos", tag: "11. Agenda", label: "11. Sem hor\xE1rio dispon\xEDvel", text: `{{nome}}, no momento minha agenda da semana est\xE1 cheia. Posso te avisar assim que abrir uma vaga? Me confirma o melhor per\xEDodo (manh\xE3/tarde/noite). \u{1F49A}` },
+  { id: "n12", tab: "atalhos", tag: "12. Agenda", label: "12. Encaixe / urg\xEAncia leve", text: `{{nome}}, vou ver o que consigo de encaixe nos pr\xF3ximos dias. J\xE1 me adianta: voc\xEA consegue qualquer hor\xE1rio, ou tem restri\xE7\xE3o? \u{1F33F}` },
+  // ── Formato do Atendimento (13–18)
+  { id: "n13", tab: "atalhos", tag: "13. Formato", label: "13. Como funciona online", text: `100% por videochamada, {{nome}}. Voc\xEA recebe o link 30 min antes \u2014 abre direto no navegador (celular ou computador), sem instalar nada. ${LINK}` },
+  { id: "n14", tab: "atalhos", tag: "14. Formato", label: "14. Validade legal", text: `Sim, {{nome}}, a teleconsulta tem a mesma validade legal da consulta presencial (Resolu\xE7\xE3o CFM 2.314/2022). \u{1F33F}` },
+  { id: "n15", tab: "atalhos", tag: "15. Formato", label: "15. Plataforma usada", text: `Uso plataforma pr\xF3pria de telemedicina, {{nome}} \u2014 segura, criptografada e sem precisar baixar app. Link chega no seu e-mail e WhatsApp.` },
+  { id: "n16", tab: "atalhos", tag: "16. Formato", label: "16. Internet ruim", text: `Sem problema, {{nome}} \u2014 a plataforma se adapta a internet mais lenta. Se cair, a gente reconecta. Se necess\xE1rio, eu ligo por telefone pra continuar. \u{1F49A}` },
+  { id: "n17", tab: "atalhos", tag: "17. Formato", label: "17. Onde ficar durante a consulta", text: `Escolha um lugar tranquilo, com privacidade e fone de ouvido se poss\xEDvel, {{nome}}. Carro estacionado tamb\xE9m serve! O importante \xE9 voc\xEA se sentir \xE0 vontade. \u{1F33F}` },
+  { id: "n18", tab: "atalhos", tag: "18. Formato", label: "18. Atende presencial?", text: `{{nome}}, hoje atendo exclusivamente online \u2014 facilita acesso em todo o Brasil e flexibiliza hor\xE1rios. ${LINK}` },
+  // ── Pagamento (19–23)
+  { id: "n19", tab: "atalhos", tag: "19. Pagamento", label: "19. Formas de pagamento", text: `PIX, d\xE9bito ou cr\xE9dito (com parcelamento), {{nome}} \u2014 direto pelo checkout seguro da Doctoralia. ${LINK}` },
+  { id: "n20", tab: "atalhos", tag: "20. Pagamento", label: "20. Confirmar pagamento", text: `Assim que o pagamento \xE9 confirmado, voc\xEA recebe a confirma\xE7\xE3o autom\xE1tica por e-mail, {{nome}}. Se n\xE3o chegou, me avisa que verifico. \u{1F33F}` },
+  { id: "n21", tab: "atalhos", tag: "21. Pagamento", label: "21. Reembolso (regra)", text: `Cancelamentos com mais de 24h de anteced\xEAncia t\xEAm reembolso integral pela Doctoralia, {{nome}}. Abaixo disso, avalio caso a caso. \u{1F49A}` },
+  { id: "n22", tab: "atalhos", tag: "22. Pagamento", label: "22. Recibo para reembolso", text: `Sim, {{nome}}, emito recibo logo ap\xF3s a consulta \u2014 serve para reembolso pelo plano (quando aplic\xE1vel) e dedu\xE7\xE3o no IR.` },
+  { id: "n23", tab: "atalhos", tag: "23. Pagamento", label: "23. Pagamento direto?", text: `{{nome}}, o pagamento da consulta \xE9 via Doctoralia (mais seguran\xE7a pra voc\xEA e pra mim). S\xF3 recebo PIX direto na taxa de envio f\xEDsico de receita A/B (R$ 100). \u{1F33F}` },
+  // ── Sobre a Consulta (24–30)
+  { id: "n24", tab: "atalhos", tag: "24. Consulta", label: "24. Quanto tempo dura", text: `Primeira consulta: 70 minutos. Retornos: 60 minutos, {{nome}}. Tempo confort\xE1vel pra conversar sem pressa. \u{1F33F}` },
+  { id: "n25", tab: "atalhos", tag: "25. Consulta", label: "25. O que precisa preparar", text: `Nada formal, {{nome}}! Se tiver exames, relat\xF3rios anteriores ou lista de medica\xE7\xF5es em uso, deixa em m\xE3os. O resto \xE9 s\xF3 conversa. \u{1F49A}` },
+  { id: "n26", tab: "atalhos", tag: "26. Consulta", label: "26. Posso ter acompanhante", text: `Sim, {{nome}}, se voc\xEA se sentir mais segura(o) com algu\xE9m presente \u2014 sem problema. S\xF3 me avise no in\xEDcio pra alinhar a privacidade do que ser\xE1 compartilhado.` },
+  { id: "n27", tab: "atalhos", tag: "27. Consulta", label: "27. Sigilo m\xE9dico", text: `Sigilo absoluto, {{nome}}. \u{1F33F} Tudo que conversamos fica entre n\xF3s, protegido por lei (CFM e LGPD).` },
+  { id: "n28", tab: "atalhos", tag: "28. Consulta", label: "28. Posso gravar?", text: `Por quest\xF5es \xE9ticas e de privacidade, grava\xE7\xF5es n\xE3o s\xE3o permitidas, {{nome}}. Mas posso te enviar resumo escrito da conduta ap\xF3s a consulta. \u{1F33F}` },
+  { id: "n29", tab: "atalhos", tag: "29. Consulta", label: "29. E se eu travar / chorar", text: `Tudo bem, {{nome}}. \u{1F49A} Eu respeito seu tempo \u2014 sil\xEAncio, choro, pausa, tudo faz parte. Voc\xEA n\xE3o precisa "performar" nada.` },
+  { id: "n30", tab: "atalhos", tag: "30. Consulta", label: "30. Vai me dar diagn\xF3stico j\xE1?", text: `Diagn\xF3stico precisa de tempo e cuidado, {{nome}} \u2014 em geral come\xE7o com uma hip\xF3tese inicial na 1\xAA consulta, refinada nos retornos. Sem r\xF3tulos apressados. \u{1F33F}` },
+  // ── Público Atendido (31–36)
+  { id: "n31", tab: "atalhos", tag: "31. P\xFAblico", label: "31. Idade m\xEDnima", text: `Atendo a partir de 16 anos, {{nome}}.` },
+  { id: "n32", tab: "atalhos", tag: "32. P\xFAblico", label: "32. Crian\xE7as", text: `{{nome}}, para crian\xE7as, indico profissional de sa\xFAde mental da inf\xE2ncia. Se quiser, posso sugerir nomes de confian\xE7a. \u{1F49A}` },
+  { id: "n33", tab: "atalhos", tag: "33. P\xFAblico", label: "33. Idosos", text: `Sim, {{nome}}, atendo adultos e idosos. Online costuma ser confort\xE1vel \u2014 familiar pode acompanhar se quiser.` },
+  { id: "n34", tab: "atalhos", tag: "34. P\xFAblico", label: "34. Gestantes/lactantes", text: `Sim, {{nome}}, h\xE1 cuidado adaptado para gesta\xE7\xE3o e amamenta\xE7\xE3o, em parceria com seu obstetra quando necess\xE1rio. \u{1F33F}` },
+  { id: "n35", tab: "atalhos", tag: "35. P\xFAblico", label: "35. Brasileiros no exterior", text: `Sim, {{nome}}! Brasileiros morando fora podem se consultar \u2014 basta CPF ativo e internet boa. ${LINK}` },
+  { id: "n36", tab: "atalhos", tag: "36. P\xFAblico", label: "36. LGBTQIA+ friendly", text: `Sim, {{nome}}. \u{1F3F3}\uFE0F\u200D\u{1F308} Espa\xE7o seguro, sem julgamento, com escuta afirmativa. Pronome de sua prefer\xEAncia respeitado.` },
+  // ── Documentos (37–45) — atualizado com Sedex
+  { id: "n37", tab: "atalhos", tag: "37. Doc", label: "37. Atestado", text: `Sim, {{nome}}, atestados s\xE3o emitidos quando clinicamente indicados, com assinatura digital v\xE1lida. \u{1F33F}` },
+  { id: "n38", tab: "atalhos", tag: "38. Doc", label: "38. Relat\xF3rio", text: `Sim, relat\xF3rios m\xE9dicos s\xE3o emitidos quando necess\xE1rios, {{nome}} \u2014 geralmente entrego em at\xE9 7 dias \xFAteis ap\xF3s a consulta.` },
+  { id: "n39", tab: "atalhos", tag: "39. Doc", label: "39. Laudo", text: `Laudos para escola, trabalho, per\xEDcia ou benef\xEDcio s\xE3o emitidos com base na avalia\xE7\xE3o cl\xEDnica, {{nome}}. Em casos complexos, pode ser necess\xE1ria mais de uma consulta. \u{1F49A}` },
+  { id: "n40", tab: "atalhos", tag: "40. Doc", label: "40. Receita digital", text: `Receitas digitais (quando indicadas) t\xEAm assinatura ICP-Brasil, validade nacional e podem ser usadas em qualquer farm\xE1cia, {{nome}}. Para receitas A (amarela) e B (azul) com reten\xE7\xE3o, \xE9 envio f\xEDsico via Sedex (R$ 100, PIX).` },
+  { id: "n41", tab: "atalhos", tag: "41. Doc", label: "41. Recibo IR", text: `Sim, {{nome}}, o recibo serve para dedu\xE7\xE3o no Imposto de Renda e reembolso parcial pelo plano de sa\xFAde, quando aplic\xE1vel.` },
+  { id: "n42", tab: "atalhos", tag: "42. Doc", label: "42. Laudo INSS", text: `Laudo para INSS \xE9 emitido quando h\xE1 indica\xE7\xE3o cl\xEDnica de afastamento, {{nome}}. Pode requerer mais de uma consulta para hist\xF3rico consistente. \u{1F33F}` },
+  { id: "n43", tab: "atalhos", tag: "43. Doc", label: "43. Declara\xE7\xE3o de comparecimento", text: `Claro, {{nome}}! Declara\xE7\xE3o de comparecimento \xE9 gratuita e enviada por e-mail logo ap\xF3s a consulta.` },
+  { id: "n44", tab: "atalhos", tag: "44. Doc", label: "44. 2\xAA via de receita", text: `Para 2\xAA via de receita digital n\xE3o vencida, {{nome}}, basta solicitar por aqui. Para renova\xE7\xE3o ap\xF3s vencimento, \xE9 necess\xE1ria consulta de retorno (R$ 210). \u{1F33F}` },
+  { id: "n45", tab: "atalhos", tag: "45. Doc", label: "45. Documentos para advogado/escola", text: `Documentos para terceiros (advogado, escola, RH) s\xE3o emitidos com sua autoriza\xE7\xE3o expressa por escrito, {{nome}} \u2014 sigilo \xE9 prioridade. \u{1F49A}` },
+  // ── Cancelamento, Remarcação e Retornos (46–51)
+  { id: "n46", tab: "atalhos", tag: "46. Cancel", label: "46. Como cancelar", text: `Sem problema, {{nome}}. Cancele direto no link da Doctoralia ou me avise por aqui. Mais de 24h de anteced\xEAncia = reembolso integral. ${LINK}` },
+  { id: "n47", tab: "atalhos", tag: "47. Cancel", label: "47. Remarcar", text: `Claro, {{nome}}! Me confirma o melhor dia/per\xEDodo e vejo o que tenho dispon\xEDvel. \u{1F33F}` },
+  { id: "n48", tab: "atalhos", tag: "48. Cancel", label: "48. Faltei sem avisar", text: `Tudo bem acontecer, {{nome}}. \u{1F49A} Faltas sem aviso pr\xE9vio (no-show) n\xE3o geram reembolso, mas posso te ajudar a reagendar uma nova consulta. Quer marcar?` },
+  { id: "n49", tab: "atalhos", tag: "49. Retorno", label: "49. Quando marcar retorno", text: `Em geral, primeiro retorno em 30 dias, {{nome}} \u2014 depois espa\xE7amos conforme estabilidade. Alinho com voc\xEA na consulta. \u{1F33F}` },
+  { id: "n50", tab: "atalhos", tag: "50. Retorno", label: "50. Retorno tardio (sumi)", text: `Que bom te ver de volta, {{nome}}! \u{1F49A} Se a \xFAltima consulta foi h\xE1 mais de 6 meses, conto como nova primeira consulta (R$ 320). At\xE9 l\xE1, \xE9 retorno (R$ 210).` },
+  { id: "n51", tab: "atalhos", tag: "51. Cancel", label: "51. Cancelei e quero remarcar", text: `Claro, {{nome}}! Posso reativar seu agendamento \u2014 s\xF3 me confirma o melhor hor\xE1rio e te envio o novo link. \u{1F33F}` },
+  // ── Urgência e Crises (52–54)
+  { id: "n52", tab: "atalhos", tag: "52. Urg\xEAncia", label: "52. Crise agora", text: `{{nome}}, meu atendimento por aqui \xE9 ambulatorial. Em crise AGORA: CVV 188 (24h) | SAMU 192 | pronto-socorro mais pr\xF3ximo. \u{1F49A} Estou aqui pra te orientar.` },
+  { id: "n53", tab: "atalhos", tag: "53. Urg\xEAncia", label: "53. Pensamentos suicidas", text: `{{nome}}, obrigada por confiar em mim. \u{1F49A} Por favor, ligue AGORA no CVV 188 (24h, gratuito, sigiloso). Vou priorizar seu encaixe na minha agenda.` },
+  { id: "n54", tab: "atalhos", tag: "54. Urg\xEAncia", label: "54. Familiar em crise", text: `{{nome}}, pe\xE7a ajuda AGORA: SAMU 192, pronto-socorro psiqui\xE1trico ou CAPS. N\xE3o deixe a pessoa sozinha. CVV 188 tamb\xE9m orienta familiares. \u{1F33F}` },
+  // ── Após o Agendamento (55–58)
+  { id: "n55", tab: "atalhos", tag: "55. P\xF3s-agend", label: "55. Confirma\xE7\xE3o de agendamento", text: `Tudo certo, {{nome}}! \u2705 Consulta marcada para {{data}}. Link chega no e-mail e WhatsApp 30 min antes. Qualquer d\xFAvida, me chama. \u{1F49A}` },
+  { id: "n56", tab: "atalhos", tag: "56. P\xF3s-agend", label: "56. Lembrete v\xE9spera", text: `Oi, {{nome}}! \u{1F33F} Passando pra lembrar da nossa consulta amanh\xE3 ({{data}}). Tudo certo por a\xED?` },
+  { id: "n57", tab: "atalhos", tag: "57. P\xF3s-agend", label: "57. Lembrete 1h antes", text: `{{nome}}, sua consulta \xE9 em 1 hora! \u23F0 Link da videochamada j\xE1 est\xE1 no seu e-mail. Recomendo entrar 5 min antes pra testar \xE1udio/v\xEDdeo. \u{1F49A}` },
+  { id: "n58", tab: "atalhos", tag: "58. P\xF3s-agend", label: "58. Link n\xE3o chegou", text: `Vou te enviar agora mesmo, {{nome}}! \u{1F33F} Verifica tamb\xE9m a caixa de spam/promo\xE7\xF5es, t\xE1? Qualquer coisa, me avisa.` },
+  // ── Pós-Consulta (59–61)
+  { id: "n59", tab: "atalhos", tag: "59. P\xF3s-consulta", label: "59. Como foi a consulta?", text: `Oi, {{nome}}! \u{1F49A} Como voc\xEA se sentiu na nossa consulta? Seu retorno \xE9 importante pra eu cuidar bem de voc\xEA.` },
+  { id: "n60", tab: "atalhos", tag: "60. P\xF3s-consulta", label: "60. Avalia\xE7\xE3o Doctoralia", text: `{{nome}}, se a consulta fez sentido pra voc\xEA, sua avalia\xE7\xE3o na Doctoralia ajuda muito outras pessoas a chegarem at\xE9 mim. \u{1F33F}\u{1F49A} ${LINK}` },
+  { id: "n61", tab: "atalhos", tag: "61. P\xF3s-consulta", label: "61. D\xFAvida p\xF3s-consulta", text: `Claro, {{nome}}! \u{1F33F} Pode mandar a d\xFAvida por aqui \u2014 te respondo em hor\xE1rio comercial. Lembrando: d\xFAvidas que mudem conduta requerem retorno.` },
+  // ── Diversos (62–68)
+  { id: "n62", tab: "atalhos", tag: "62. Diversos", label: "62. Indica\xE7\xE3o de psicoterapia", text: `Sim, {{nome}}! Trabalho junto com psic\xF3logos(as) de confian\xE7a. Posso te indicar nomes alinhados ao seu caso ap\xF3s a primeira consulta. \u{1F49A}` },
+  { id: "n63", tab: "atalhos", tag: "63. Diversos", label: "63. Indica\xE7\xE3o para outro especialista", text: `Sem problema, {{nome}}! Ap\xF3s avalia\xE7\xE3o, te oriento sobre o(a) especialista certo(a) pro seu caso. \u{1F33F}` },
+  { id: "n64", tab: "atalhos", tag: "64. Diversos", label: "64. Conte\xFAdo das redes sociais", text: `Que bom que acompanha, {{nome}}! \u{1F49A} Minhas publica\xE7\xF5es s\xE3o informativas e n\xE3o substituem consulta. Pra cuidado individual: ${LINK}` },
+  { id: "n65", tab: "atalhos", tag: "65. Diversos", label: "65. Parceria/imprensa", text: `Ol\xE1, {{nome}}! Para parcerias, imprensa ou eventos, por favor envie sua proposta para o e-mail comercial \u2014 eu retorno assim que poss\xEDvel. \u{1F33F}` },
+  { id: "n66", tab: "atalhos", tag: "66. Diversos", label: "66. Reclama\xE7\xE3o", text: `Sinto muito que voc\xEA passou por isso, {{nome}}. \u{1F49A} Sua percep\xE7\xE3o \xE9 importante \u2014 me conta o que aconteceu pra eu entender e buscar a melhor solu\xE7\xE3o com voc\xEA.` },
+  { id: "n67", tab: "atalhos", tag: "67. Diversos", label: "67. Elogio / agradecimento", text: `Que alegria ler isso, {{nome}}! \u{1F49A} Muito obrigada por confiar \u2014 fica comigo no cora\xE7\xE3o.` },
+  { id: "n68", tab: "atalhos", tag: "68. Diversos", label: "68. Despedida cordial", text: `Qualquer coisa, \xE9 s\xF3 me chamar por aqui, {{nome}}! \u{1F33F} Cuide-se com carinho. \u{1F49A}` },
+  // ============================================================
+  // MÓDULOS CX — Arquitetura para telemedicina (1ª pessoa, expandido)
+  // ============================================================
+  // ── Módulo A — Saudação, Triagem e Emergência
+  {
+    id: "m-A-1",
+    tab: "modulos",
+    tag: "A. Sauda\xE7\xE3o",
+    label: "A.1 \u2014 Mensagem de boas-vindas (auto)",
+    text: `Ol\xE1! \u{1F49A} Sou a Dra. J\xE9ssica Carpaneda \u2014 sa\xFAde mental.
+
+Pra te atender melhor, escolha:
+1\uFE0F\u20E3 Quero agendar uma consulta
+2\uFE0F\u20E3 J\xE1 sou paciente (d\xFAvida / receita / atestado)
+3\uFE0F\u20E3 Outras informa\xE7\xF5es (valores, formato, documentos)
+4\uFE0F\u20E3 Estou em crise / preciso de ajuda urgente
+
+Responda com o n\xFAmero \u{1F33F}`
+  },
+  {
+    id: "m-A-2",
+    tab: "modulos",
+    tag: "A. Triagem",
+    label: "A.2 \u2014 Triagem cl\xEDnica curta (3 perguntas)",
+    text: `Perfeito, {{nome}}! Pra te orientar bem, me conta rapidinho:
+
+1) O que est\xE1 te trazendo aqui hoje? (uma frase basta)
+2) H\xE1 quanto tempo isso acontece?
+3) J\xE1 fez algum acompanhamento em sa\xFAde mental antes? Est\xE1 em uso de alguma medica\xE7\xE3o?
+
+Pode responder no seu tempo. \u{1F49A}`
+  },
+  {
+    id: "m-A-3",
+    tab: "modulos",
+    tag: "A. Emerg\xEAncia",
+    label: "A.3 \u2014 Protocolo de emerg\xEAncia (rota 4)",
+    text: `{{nome}}, fico grata por ter buscado ajuda. \u{1F49A} Meu atendimento por aqui \xE9 ambulatorial, ent\xE3o em situa\xE7\xE3o de crise AGORA o caminho mais seguro \xE9:
+
+\u{1F691} SAMU 192
+\u260E\uFE0F CVV 188 (24h, gratuito, sigiloso) \u2014 liga\xE7\xE3o ou chat em cvv.org.br
+\u{1F3E5} Pronto-socorro psiqui\xE1trico mais pr\xF3ximo
+\u{1F3DB}\uFE0F CAPS da sua regi\xE3o
+
+Ap\xF3s estabilizar, te encaixo na minha agenda em prioridade. Estou aqui. \u{1F33F}`
+  },
+  {
+    id: "m-A-4",
+    tab: "modulos",
+    tag: "A. Triagem",
+    label: "A.4 \u2014 Encaminhamento por gravidade",
+    text: `{{nome}}, com base no que voc\xEA me contou, classifico assim:
+
+\u{1F7E2} Leve/moderado \u2192 agendamento ambulatorial comigo nos pr\xF3ximos dias
+\u{1F7E1} Moderado/intenso com sofrimento alto \u2192 vou priorizar encaixe esta semana
+\u{1F534} Risco agudo (idea\xE7\xE3o ativa, plano, tentativa) \u2192 avalia\xE7\xE3o presencial AGORA (SAMU 192 / PS) + encaixe p\xF3s-estabiliza\xE7\xE3o
+
+Vou seguir conforme o caso. \u{1F49A}`
+  },
+  // ── Módulo B — Passo a Passo da Consulta Online
+  {
+    id: "m-B-1",
+    tab: "modulos",
+    tag: "B. Passo a passo",
+    label: "B.1 \u2014 Como funciona a teleconsulta",
+    text: `Como vai funcionar nossa consulta, {{nome}}: \u{1F33F}
+
+\u{1F4C5} 1. Agendamento \u2192 voc\xEA escolhe o hor\xE1rio em ${LINK}
+\u{1F4B3} 2. Pagamento \u2192 PIX, d\xE9bito ou cr\xE9dito (parcel\xE1vel) pelo checkout da Doctoralia
+\u2709\uFE0F 3. Confirma\xE7\xE3o \u2192 chega por e-mail e WhatsApp
+\u{1F517} 4. Link da videochamada \u2192 enviado 30 min antes
+\u{1F469}\u200D\u2695\uFE0F 5. Consulta \u2192 70 min (1\xAA) ou 60 min (retorno) comigo
+\u{1F4CB} 6. Plano de cuidado \u2192 conduta + documentos enviados ap\xF3s a consulta
+
+Simples assim. \u{1F49A}`
+  },
+  {
+    id: "m-B-2",
+    tab: "modulos",
+    tag: "B. Pr\xE9-consulta",
+    label: "B.2 \u2014 Checklist pr\xE9-consulta",
+    text: `{{nome}}, pra nossa consulta fluir bem:
+
+\u2705 Lugar tranquilo, com privacidade
+\u2705 Internet est\xE1vel (Wi-Fi de prefer\xEAncia)
+\u2705 Fone de ouvido (mais conforto e sigilo)
+\u2705 Documentos em m\xE3os: exames, relat\xF3rios, lista de medica\xE7\xF5es
+\u2705 Caderno e caneta pra anota\xE7\xF5es
+\u2705 Entre 5 min antes pra testar \xE1udio/v\xEDdeo
+
+Se cair conex\xE3o, a gente reconecta \u2014 sem stress. \u{1F33F}`
+  },
+  {
+    id: "m-B-3",
+    tab: "modulos",
+    tag: "B. Plataforma",
+    label: "B.3 \u2014 Plataforma e tecnologia",
+    text: `{{nome}}, a teleconsulta acontece em plataforma criptografada de telemedicina, conforme exig\xEAncia do CFM. \u{1F512}
+
+\u{1F4F1} Funciona em celular ou computador
+\u{1F310} Abre direto no navegador (sem instalar app)
+\u{1F3A5} C\xE2mera, microfone e internet \u2014 s\xF3 isso
+\u{1F510} Sigilo absoluto + LGPD
+
+Link chega por e-mail e WhatsApp 30 min antes. \u{1F33F}`
+  },
+  // ── Módulo C — Pagamento, Agendamento e Reembolso (atualizado)
+  {
+    id: "m-C-1",
+    tab: "modulos",
+    tag: "C. Pagamento",
+    label: "C.1 \u2014 Pol\xEDtica de pagamento",
+    text: `Pol\xEDtica de pagamento, {{nome}}:
+
+\u{1F4B3} Consulta: PIX, d\xE9bito ou cr\xE9dito (parcel\xE1vel) \u2014 checkout da Doctoralia
+\u{1F3E6} Confirma\xE7\xE3o autom\xE1tica por e-mail
+\u{1F4C4} Recibo emitido ap\xF3s a consulta (vale pra IR e reembolso de plano)
+\u{1F4E6} Receita controlada A/B em via f\xEDsica: taxa fixa de R$ 100 (Sedex), pagamento exclusivamente por PIX direto comigo, postagem em at\xE9 2 dias \xFAteis ap\xF3s confirma\xE7\xE3o, c\xF3digo de rastreamento enviado por aqui
+\u274C N\xE3o recebo PIX direto da consulta \u2014 sempre pelo link oficial da Doctoralia
+
+Qualquer d\xFAvida, me chama. \u{1F33F}`
+  },
+  {
+    id: "m-C-2",
+    tab: "modulos",
+    tag: "C. Reembolso",
+    label: "C.2 \u2014 Pol\xEDtica de cancelamento e reembolso",
+    text: `Pol\xEDtica de cancelamento e reembolso, {{nome}} (regra oficial Doctoralia):
+
+\u{1F7E2} Cancelamento com MAIS de 24h de anteced\xEAncia \u2192 reembolso INTEGRAL (100%) autom\xE1tico pela Doctoralia, no mesmo meio de pagamento
+\u{1F534} Cancelamento com MENOS de 24h ou falta sem aviso (no-show) \u2192 sem reembolso (cobre a reserva do hor\xE1rio)
+
+\u{1F501} Em casos de for\xE7a maior (luto, interna\xE7\xE3o, intercorr\xEAncia grave, comprovados) avalio individualmente o reagendamento sem custo.
+
+\u{1F4E6} Taxa de envio f\xEDsico de receita controlada A/B (R$ 100, PIX) \xE9 n\xE3o reembols\xE1vel ap\xF3s a postagem \u2014 antes da postagem, devolvo integralmente.
+
+\u{1F49A} ${LINK}`
+  },
+  {
+    id: "m-C-3",
+    tab: "modulos",
+    tag: "C. Reembolso plano",
+    label: "C.3 \u2014 Reembolso pelo plano de sa\xFAde",
+    text: `{{nome}}, o atendimento \xE9 particular, mas voc\xEA pode pedir reembolso parcial ao seu plano de sa\xFAde:
+
+1\uFE0F\u20E3 Ap\xF3s a consulta, voc\xEA recebe o recibo
+2\uFE0F\u20E3 Ligue no SAC do plano e pergunte sobre reembolso para consulta em sa\xFAde mental (CBHPM 50000462)
+3\uFE0F\u20E3 Envie o recibo pelo app/site do plano
+4\uFE0F\u20E3 O reembolso cai na sua conta em alguns dias \xFAteis
+
+Cada plano tem regras pr\xF3prias \u2014 vale ligar antes da consulta pra confirmar valores. \u{1F33F}`
+  },
+  {
+    id: "m-C-4",
+    tab: "modulos",
+    tag: "C. Receita Sedex",
+    label: "C.4 \u2014 Envio de receita controlada A/B (Sedex)",
+    text: `{{nome}}, fluxo do envio f\xEDsico da receita controlada (tipos A e B com reten\xE7\xE3o):
+
+1\uFE0F\u20E3 Confirmo que a indica\xE7\xE3o consta da \xFAltima consulta
+2\uFE0F\u20E3 Te envio chave PIX da taxa: R$ 100,00 (Sedex)
+3\uFE0F\u20E3 Voc\xEA confirma seu endere\xE7o completo (CEP, rua, n\xFAmero, complemento, refer\xEAncia)
+4\uFE0F\u20E3 Pagamento exclusivamente por PIX \u2192 me manda o comprovante
+5\uFE0F\u20E3 Posto em at\xE9 2 dias \xFAteis ap\xF3s confirma\xE7\xE3o
+6\uFE0F\u20E3 Te envio o c\xF3digo de rastreamento Sedex aqui pelo WhatsApp
+
+\u26A0\uFE0F Sem pagamento confirmado, n\xE3o h\xE1 postagem.
+\u26A0\uFE0F Ap\xF3s a postagem, a taxa n\xE3o \xE9 reembols\xE1vel (extravio dos Correios \xE9 tratado pela Doctoralia/Correios).
+
+Qualquer d\xFAvida, me avisa. \u{1F49A}`
+  },
+  // ── Módulo D — Lembretes e Checklist
+  {
+    id: "m-D-1",
+    tab: "modulos",
+    tag: "D. Lembrete",
+    label: "D.1 \u2014 Lembrete D-1 (v\xE9spera)",
+    text: `Oi, {{nome}}! \u{1F33F} Passando pra lembrar da nossa consulta amanh\xE3 ({{data}}).
+
+\u{1F4CD} 100% online \u2014 link chega 30 min antes
+\u2705 Checklist: lugar tranquilo, internet boa, exames em m\xE3os
+\u{1F4AC} Qualquer d\xFAvida, me chama por aqui
+
+At\xE9 amanh\xE3! \u{1F49A}`
+  },
+  {
+    id: "m-D-2",
+    tab: "modulos",
+    tag: "D. Lembrete",
+    label: "D.2 \u2014 Lembrete D-0 (1h antes)",
+    text: `{{nome}}, sua consulta \xE9 em 1 hora! \u23F0
+
+\u{1F517} Link j\xE1 est\xE1 no seu e-mail e WhatsApp
+\u{1F3A7} Recomendo entrar 5 min antes pra testar \xE1udio/v\xEDdeo
+\u{1F33F} Respira fundo \u2014 vai dar tudo certo
+
+T\xF4 aqui se precisar. \u{1F49A}`
+  },
+  {
+    id: "m-D-3",
+    tab: "modulos",
+    tag: "D. Checklist",
+    label: "D.3 \u2014 Checklist final 5 min antes",
+    text: `{{nome}}, \xFAltimos 5 minutos! \u{1F33F}
+
+\u2705 C\xE2mera funcionando
+\u2705 Microfone testado
+\u2705 Fone conectado
+\u2705 Lugar privado
+\u2705 Documentos por perto
+\u2705 \xC1gua do lado \u{1F4A7}
+
+Te vejo j\xE1 j\xE1. \u{1F49A}`
+  },
+  // ── Módulo E — Gestão de Limites Éticos
+  {
+    id: "m-E-1",
+    tab: "modulos",
+    tag: "E. Limites",
+    label: "E.1 \u2014 N\xE3o fa\xE7o diagn\xF3stico por WhatsApp",
+    text: `{{nome}}, entendo a urg\xEAncia da sua d\xFAvida. \u{1F49A} Por quest\xF5es \xE9ticas (CFM), n\xE3o posso passar diagn\xF3stico, prescri\xE7\xE3o nem ajustes de conduta por WhatsApp \u2014 defino s\xF3 em consulta, com avalia\xE7\xE3o individual.
+
+Por aqui, posso te orientar sobre agendamento, valores, documentos e d\xFAvidas administrativas. Pra cuidado cl\xEDnico: ${LINK}`
+  },
+  {
+    id: "m-E-2",
+    tab: "modulos",
+    tag: "E. Limites",
+    label: "E.2 \u2014 N\xE3o sou plant\xE3o / urg\xEAncia",
+    text: `{{nome}}, importante: meu atendimento \xE9 ambulatorial e agendado. \u{1F33F} N\xE3o fa\xE7o plant\xE3o 24h por WhatsApp.
+
+Em urg\xEAncia:
+\u{1F691} SAMU 192
+\u260E\uFE0F CVV 188 (24h)
+\u{1F3E5} Pronto-socorro mais pr\xF3ximo
+
+Aqui no chat respondo em hor\xE1rio comercial (seg-sex, 9h-18h). \u{1F49A}`
+  },
+  {
+    id: "m-E-3",
+    tab: "modulos",
+    tag: "E. Limites",
+    label: "E.3 \u2014 Sigilo e LGPD",
+    text: `{{nome}}, sua privacidade \xE9 prioridade. \u{1F512}
+
+\u{1F6E1}\uFE0F Tudo que voc\xEA compartilha aqui e em consulta \xE9 protegido por sigilo m\xE9dico (CFM) e LGPD
+\u{1F4F5} N\xE3o compartilho seus dados com terceiros sem autoriza\xE7\xE3o expressa
+\u{1F5C2}\uFE0F Prontu\xE1rio guardado em sistema seguro, com acesso restrito
+\u26A0\uFE0F Exce\xE7\xF5es legais: risco iminente \xE0 vida (pr\xF3prio ou de terceiros) e ordem judicial
+
+Pode ficar tranquila(o). \u{1F49A}`
+  },
+  {
+    id: "m-E-4",
+    tab: "modulos",
+    tag: "E. Limites",
+    label: "E.4 \u2014 N\xE3o respondo amigos/familiares do paciente",
+    text: `Ol\xE1! \u{1F33F} Por sigilo m\xE9dico, n\xE3o posso confirmar nem comentar nada sobre meus pacientes.
+
+Se houver preocupa\xE7\xE3o com algu\xE9m, oriente a pessoa a procurar ajuda direta \u2014 agendamento em ${LINK} ou, se for urg\xEAncia, CVV 188 / SAMU 192. \u{1F49A}`
+  },
+  // ── Módulo F — Ausência e Plantão Digital
+  {
+    id: "m-F-1",
+    tab: "modulos",
+    tag: "F. Aus\xEAncia",
+    label: "F.1 \u2014 Resposta autom\xE1tica fora do hor\xE1rio",
+    text: `Oi! \u{1F319} Recebi sua mensagem fora do meu hor\xE1rio (seg-sex, 9h-18h). Amanh\xE3 cedo te respondo com calma.
+
+\u26A0\uFE0F Em urg\xEAncia: CVV 188 (24h, gratuito) | SAMU 192 | pronto-socorro mais pr\xF3ximo. \u{1F49A}`
+  },
+  {
+    id: "m-F-2",
+    tab: "modulos",
+    tag: "F. Aus\xEAncia",
+    label: "F.2 \u2014 F\xE9rias / aus\xEAncia prolongada",
+    text: `Ol\xE1, {{nome}}! \u{1F33F} Estou em per\xEDodo de descanso e retorno previsto ap\xF3s {{data}}. Durante esse tempo, novos agendamentos seguem normalmente \u2014 s\xF3 ser\xE3o atendidos a partir da minha volta.
+
+Pacientes em acompanhamento que precisem de cuidado urgente ser\xE3o orientados sobre profissionais de cobertura. Em emerg\xEAncia: CVV 188 / SAMU 192. \u{1F49A}`
+  },
+  {
+    id: "m-F-3",
+    tab: "modulos",
+    tag: "F. Aus\xEAncia",
+    label: "F.3 \u2014 Plant\xE3o digital (hor\xE1rios e escopo)",
+    text: `{{nome}}, meu plant\xE3o digital funciona seg-sex, 9h-18h, por aqui no WhatsApp. \u{1F33F}
+
+\u2705 O que respondo: agendamento, valores, formato, documentos administrativos, orienta\xE7\xF5es
+\u274C O que N\xC3O respondo: diagn\xF3stico, prescri\xE7\xE3o, ajuste de medica\xE7\xE3o, urg\xEAncia cl\xEDnica
+
+Cuidado cl\xEDnico = s\xF3 em consulta. Urg\xEAncia = CVV 188 / SAMU 192. \u{1F49A}`
+  },
+  // ── Extra — Ficha de Acolhimento Pós-Agendamento
+  {
+    id: "m-X-1",
+    tab: "modulos",
+    tag: "X. Ficha",
+    label: "X.1 \u2014 Ficha de acolhimento p\xF3s-agendamento",
+    text: `{{nome}}, sua consulta est\xE1 confirmada para {{data}}! \u2705 Pra eu te conhecer melhor antes do nosso encontro, responde no seu tempo:
+
+1) Nome completo e idade:
+2) Cidade/estado onde mora:
+3) Em uma frase, o que te trouxe aqui:
+4) H\xE1 quanto tempo sente isso:
+5) J\xE1 fez acompanhamento em sa\xFAde mental antes? Est\xE1 em uso de alguma medica\xE7\xE3o?
+6) Tem alguma condi\xE7\xE3o cl\xEDnica relevante (cardiopatia, gesta\xE7\xE3o, etc.)?
+7) Algo que considera importante eu saber antes:
+
+Sem pressa \u2014 pode mandar em partes. Tudo \xE9 sigiloso. \u{1F49A}`
+  },
+  {
+    id: "m-X-2",
+    tab: "modulos",
+    tag: "X. Ficha",
+    label: "X.2 \u2014 Confirma\xE7\xE3o ap\xF3s receber ficha",
+    text: `Recebi tudo, {{nome}}! \u{1F49A} Vou revisar antes da nossa consulta. Qualquer coisa que faltar, conversamos direto no nosso encontro. \u{1F33F}
+
+At\xE9 {{data}}!`
+  },
+  {
+    id: "m-X-3",
+    tab: "modulos",
+    tag: "X. Ficha",
+    label: "X.3 \u2014 Sugest\xE3o de escalas auto-aplicadas",
+    text: `{{nome}}, antes da consulta, posso te enviar 1 ou 2 escalas curtas pra voc\xEA responder no seu tempo (5-10 min cada)? Ajuda muito a aprofundar a avalia\xE7\xE3o:
+
+\u2022 PHQ-9 (sintomas depressivos)
+\u2022 GAD-7 (ansiedade)
+\u2022 ASRS-18 (TDAH adulto)
+\u2022 MDQ (rastreio de bipolaridade)
+\u2022 AUDIT (uso de \xE1lcool)
+
+Me diz qual(is) faz sentido pro seu caso. \u{1F33F}`
+  },
+  // ── Fluxo Ideal de Atendimento (mapa)
+  {
+    id: "m-Z-1",
+    tab: "modulos",
+    tag: "Z. Fluxo",
+    label: "Z. Fluxo ideal de atendimento (mapa)",
+    text: `\u{1F5FA}\uFE0F FLUXO IDEAL \u2014 ATENDIMENTO WHATSAPP
+
+1. CONTATO \u2192 Sauda\xE7\xE3o autom\xE1tica (M\xF3dulo A.1)
+   \u2193
+2. CLASSIFICA\xC7\xC3O (responde 1/2/3/4)
+   \u251C\u2500\u2500 1. Agendar \u2192 Triagem A.2 \u2192 A.4 (gravidade) \u2192 encaixe \u2192 B.1 \u2192 C.1 \u2192 confirma\xE7\xE3o \u2192 X.1 (ficha) \u2192 X.3 (escalas)
+   \u251C\u2500\u2500 2. J\xE1 \xE9 paciente \u2192 atender d\xFAvida (atalhos 37-51) ou aplicar limite E.1 / receita Sedex (C.4)
+   \u251C\u2500\u2500 3. Informa\xE7\xF5es \u2192 atalhos 04-23 conforme tema
+   \u2514\u2500\u2500 4. CRISE \u2192 A.3 (emerg\xEAncia) + protocolo Risco r-01..r-11
+   \u2193
+3. PR\xC9-CONSULTA \u2192 D.1 (lembrete D-1) \u2192 D.2 (D-0 1h antes) \u2192 D.3 (5min)
+   \u2193
+4. CONSULTA (online comigo)
+   \u2193
+5. P\xD3S-CONSULTA \u2192 atalhos 59-61 \u2192 recibo/documentos / receita Sedex se A/B
+   \u2193
+6. RETEN\xC7\xC3O \u2192 follow-up gentil (atalho 60 \u2014 avalia\xE7\xE3o Doctoralia)
+
+\u26A0\uFE0F Em qualquer ponto: se aparecer sinal de risco, pular para M\xF3dulo Risco (sondagem r-01 \u2192 conduta conforme n\xEDvel). \u{1F49A}`
+  },
+  // ============================================================
+  // EXTRAS — Respostas adicionais por tema (1ª pessoa, tom "porto seguro")
+  // ============================================================
+  // ── Acolhimento extras (perfil real: "porto seguro", "fardo pesado")
+  {
+    id: "c-fardo-pesado",
+    tab: "casuais",
+    label: '"T\xF4 com o mundo nas costas"',
+    text: `{{nome}}, te leio. \u{1F49A} Quando o fardo est\xE1 pesado demais pra carregar sozinha(o), buscar ajuda n\xE3o \xE9 fraqueza \u2014 \xE9 sabedoria. Aqui \xE9 um lugar de pausa: a gente divide esse peso e procura juntas(os) o caminho de volta pro seu bem-estar.
+
+Sem cobran\xE7a, sem julgamento. Quando quiser come\xE7ar: ${LINK} \u{1F33F}`
+  },
+  {
+    id: "c-mente-cansada",
+    tab: "casuais",
+    label: '"Minha mente n\xE3o para"',
+    text: `Entendo, {{nome}}. \u{1F33F} Esse turbilh\xE3o na cabe\xE7a \u2014 pensamentos acelerados, sensa\xE7\xE3o de que voc\xEA n\xE3o consegue desligar \u2014 \xE9 exaustivo e tem nome, tem causa e tem tratamento.
+
+Posso te ajudar a entender o que est\xE1 acontecendo. Primeira consulta online, 70 min: ${LINK} \u{1F49A}`
+  },
+  {
+    id: "c-sem-leveza",
+    tab: "casuais",
+    label: '"Perdi a leveza"',
+    text: `{{nome}}, sentir que perdeu a leveza, que tudo virou peso, \xE9 um dos sinais mais comuns que escuto aqui. \u{1F49A} E \xE9 totalmente poss\xEDvel reencontrar a alegria de habitar a sua pr\xF3pria vida \u2014 com tempo, escuta e o cuidado certo.
+
+Quando quiser dar esse passo: ${LINK} \u{1F33F}`
+  },
+  {
+    id: "c-tentando-ser-forte",
+    tab: "casuais",
+    label: '"T\xF4 tentando ser forte"',
+    text: `{{nome}}, a mente adoece justamente de tanto tentar ser forte. \u{1F33F} Aqui voc\xEA n\xE3o precisa carregar essa armadura \u2014 pode chegar do jeito que est\xE1.
+
+Meu papel n\xE3o \xE9 te trazer mais cobran\xE7a, \xE9 amparar. Quando quiser: ${LINK} \u{1F49A}`
+  },
+  // ── Atalhos extras (69-110)
+  { id: "n69", tab: "atalhos", tag: "69. Sobre mim", label: "69. Quem \xE9 a doutora", text: `Sou a Dra. J\xE9ssica Carpaneda, {{nome}} \u2014 m\xE9dica (CRM GO 31189), p\xF3s-graduanda em Psiquiatria e Sa\xFAde Mental (Afya). Atuo principalmente com ansiedade, TDAH no adulto, depress\xE3o, ins\xF4nia e burnout. Atendimento 100% online, em todo o Brasil. \u{1F33F}` },
+  { id: "n70", tab: "atalhos", tag: "70. Sobre mim", label: "70. Forma\xE7\xE3o / RQE", text: `{{nome}}, sou m\xE9dica (CRM GO 31189) com p\xF3s-gradua\xE7\xE3o em Psiquiatria e Sa\xFAde Mental pela Afya \u2014 em processo de obten\xE7\xE3o do RQE. Atuo dentro do escopo legal da minha forma\xE7\xE3o, com escuta cl\xEDnica cuidadosa. \u{1F49A}` },
+  { id: "n71", tab: "atalhos", tag: "71. Sobre mim", label: "71. Especialista em qu\xEA?", text: `Atuo principalmente com ansiedade, TDAH no adulto, depress\xE3o, ins\xF4nia e burnout, {{nome}}. Tamb\xE9m acompanho transtornos do humor, do sono e quadros relacionados ao esgotamento. \u{1F33F}` },
+  { id: "n72", tab: "atalhos", tag: "72. Sobre mim", label: "72. Abordagem", text: `{{nome}}, minha abordagem combina ci\xEAncia (medica\xE7\xE3o quando necess\xE1rio) e humanidade (escuta cuidadosa, sem pressa de carimbar diagn\xF3stico). Trabalho em parceria com psic\xF3logos(as) e respeito o seu tempo. \u{1F49A}` },
+  { id: "n73", tab: "atalhos", tag: "73. Sobre mim", label: "73. 5 endere\xE7os?", text: `{{nome}}, os endere\xE7os que aparecem na Doctoralia s\xE3o apenas cadastrais. Atendo exclusivamente online, por videochamada, em todo o Brasil. \u{1F33F}` },
+  { id: "n74", tab: "atalhos", tag: "74. TDAH", label: "74. TDAH \u2014 como investigo", text: `{{nome}}, na investiga\xE7\xE3o de TDAH adulto eu uso escuta cl\xEDnica detalhada + escalas validadas (ASRS-18, DIVA quando necess\xE1rio) + an\xE1lise de impacto funcional ao longo da vida. N\xE3o preciso de exames antes da 1\xAA consulta. \u{1F49A}` },
+  { id: "n75", tab: "atalhos", tag: "75. TDAH", label: "75. TDAH \u2014 quantas consultas", text: `Em geral, o diagn\xF3stico de TDAH no adulto se confirma entre a 1\xAA consulta e o 1\xBA retorno (30 dias), {{nome}}. Depois entramos na fase de tratamento e ajuste fino. \u{1F33F}` },
+  { id: "n76", tab: "atalhos", tag: "76. TDAH", label: "76. TDAH \u2014 preciso de neuropsicol\xF3gico?", text: `Nem sempre, {{nome}}. O diagn\xF3stico de TDAH \xE9 cl\xEDnico \u2014 o neuropsicol\xF3gico pode ajudar em casos duvidosos ou para diferenciar de outros quadros. Decidimos juntas(os) se faz sentido. \u{1F49A}` },
+  { id: "n77", tab: "atalhos", tag: "77. Ansiedade", label: "77. Ansiedade \u2014 sem rem\xE9dio?", text: `Sim, {{nome}}, muitos quadros ansiosos respondem bem a mudan\xE7as de h\xE1bito + psicoterapia, sem medica\xE7\xE3o. Avalio caso a caso e decidimos juntas(os) o melhor caminho. \u{1F33F}` },
+  { id: "n78", tab: "atalhos", tag: "78. Ansiedade", label: "78. Crise de p\xE2nico \u2014 o que fa\xE7o agora?", text: `{{nome}}, na crise: respira\xE7\xE3o 4-7-8 (inspira 4s, segura 7s, solta 8s), os p\xE9s bem firmes no ch\xE3o, gole de \xE1gua gelada. A crise passa em 10-20 min mesmo parecendo eterna. \u{1F49A} Pra cuidar do quadro: ${LINK}` },
+  { id: "n79", tab: "atalhos", tag: "79. Ins\xF4nia", label: "79. Ins\xF4nia \u2014 primeiros passos", text: `{{nome}}, antes de qualquer rem\xE9dio, a gente revisa higiene do sono (hor\xE1rios, telas, cafe\xEDna, ambiente) e t\xE9cnicas comportamentais (controle de est\xEDmulo, restri\xE7\xE3o de sono). Em muitos casos, isso j\xE1 resolve. \u{1F33F}` },
+  { id: "n80", tab: "atalhos", tag: "80. Ins\xF4nia", label: "80. Ins\xF4nia \u2014 uso melatonina?", text: `{{nome}}, melatonina pode ajudar em alguns casos (atraso de fase, jet lag), mas n\xE3o \xE9 "rem\xE9dio pra dormir" universal. Vamos avaliar o seu padr\xE3o de sono primeiro. \u{1F49A}` },
+  { id: "n81", tab: "atalhos", tag: "81. Burnout", label: "81. Burnout \u2014 preciso afastar?", text: `Depende do quadro, {{nome}}. Avalio sintomas, fun\xE7\xE3o e contexto \u2014 quando h\xE1 indica\xE7\xE3o cl\xEDnica, emito laudo de afastamento. N\xE3o d\xE1 pra prescrever afastamento por WhatsApp; precisa de consulta. \u{1F33F}` },
+  { id: "n82", tab: "atalhos", tag: "82. Burnout", label: "82. Burnout \u2014 s\xF3 descanso resolve?", text: `Descanso ajuda, {{nome}}, mas burnout costuma envolver mudan\xE7as mais profundas: padr\xE3o de cobran\xE7a, limites, suporte. A gente trabalha tudo isso no acompanhamento. \u{1F49A}` },
+  { id: "n83", tab: "atalhos", tag: "83. Depress\xE3o", label: "83. Depress\xE3o \u2014 quanto tempo melhora?", text: `{{nome}}, a maioria dos pacientes come\xE7a a sentir melhora em 2-6 semanas de tratamento bem ajustado. O processo completo de recupera\xE7\xE3o leva alguns meses, com retornos regulares. \u{1F33F}` },
+  { id: "n84", tab: "atalhos", tag: "84. Depress\xE3o", label: "84. Depress\xE3o \u2014 vou ficar dependente?", text: `Antidepressivos n\xE3o causam depend\xEAncia qu\xEDmica, {{nome}}. Eles t\xEAm tempo de uso recomendado (geralmente 6-12 meses ap\xF3s melhora) e a retirada \xE9 gradual, planejada juntas(os). \u{1F49A}` },
+  { id: "n85", tab: "atalhos", tag: "85. Medica\xE7\xE3o", label: "85. Vai me drogar?", text: `N\xE3o, {{nome}}. \u{1F33F} Medica\xE7\xE3o psiqui\xE1trica bem indicada n\xE3o te "droga" \u2014 corrige o que est\xE1 desregulado pra voc\xEA voltar a ser voc\xEA. Qualquer indica\xE7\xE3o \xE9 conversada com voc\xEA, com pr\xF3s e contras na mesa.` },
+  { id: "n86", tab: "atalhos", tag: "86. Medica\xE7\xE3o", label: "86. Quanto tempo de tratamento?", text: `Depende do quadro, {{nome}}. Em geral: 6-12 meses para epis\xF3dios \xFAnicos de depress\xE3o/ansiedade; uso cont\xEDnuo em quadros recorrentes ou cr\xF4nicos (TDAH, bipolar). Sempre reavaliado em consulta. \u{1F49A}` },
+  { id: "n87", tab: "atalhos", tag: "87. Medica\xE7\xE3o", label: "87. E os efeitos colaterais?", text: `{{nome}}, todo medicamento tem possibilidade de efeitos. Eu sempre explico o que esperar, o que \xE9 passageiro e o que precisa de aviso imediato. A gente ajusta dose e troca se necess\xE1rio. \u{1F33F}` },
+  { id: "n88", tab: "atalhos", tag: "88. Medica\xE7\xE3o", label: "88. Posso parar quando quiser?", text: `{{nome}}, pode sim \u2014 mas com plano. Parada abrupta de alguns rem\xE9dios traz desconforto ou reca\xEDda. A gente combina a retirada juntas(os), no momento certo. \u{1F49A}` },
+  { id: "n89", tab: "atalhos", tag: "89. Receita", label: "89. Receita digital \u2014 como recebo?", text: `Receitas digitais (com assinatura ICP-Brasil) chegam por e-mail logo ap\xF3s a consulta, {{nome}}. Voc\xEA apresenta no celular ou imprime \u2014 vale em qualquer farm\xE1cia do Brasil. \u{1F33F}` },
+  { id: "n90", tab: "atalhos", tag: "90. Receita", label: "90. Receita controlada A/B (Sedex)", text: `{{nome}}, receita controlada tipo A (amarela) e B (azul) com reten\xE7\xE3o precisa ser enviada f\xEDsica. Taxa fixa de R$ 100 (Sedex), pagamento por PIX, postagem em at\xE9 2 dias \xFAteis e c\xF3digo de rastreamento te enviado por aqui. \u{1F49A}` },
+  { id: "n91", tab: "atalhos", tag: "91. Receita", label: "91. Validade da receita", text: `{{nome}}: receita comum vale 6 meses; receita B (azul) vale 30 dias; receita A (amarela, retinoides/opioides) vale 30 dias e \xE9 retida na farm\xE1cia. \u{1F33F}` },
+  { id: "n92", tab: "atalhos", tag: "92. 1\xAA consulta", label: "92. O que esperar da 1\xAA consulta", text: `{{nome}}, na 1\xAA consulta (70 min) eu te ou\xE7o com calma, fa\xE7o perguntas sobre seu hist\xF3rico, sintomas e contexto, e constru\xEDmos juntas(os) uma hip\xF3tese inicial e o primeiro plano de cuidado. Sem pressa, sem r\xF3tulo apressado. \u{1F49A}` },
+  { id: "n93", tab: "atalhos", tag: "93. 1\xAA consulta", label: "93. Preciso levar exames?", text: `Se tiver, traz! {{nome}}, exames recentes (sangue, tireoide, B12, vit D), relat\xF3rios anteriores e lista de medica\xE7\xF5es em uso ajudam muito. Se n\xE3o tiver, sem problema \u2014 pe\xE7o o que precisar. \u{1F33F}` },
+  { id: "n94", tab: "atalhos", tag: "94. 1\xAA consulta", label: "94. Vou precisar de exames depois?", text: `{{nome}}, em alguns casos sim \u2014 sangue, tireoide, B12, vit D pra descartar causas cl\xEDnicas. Eu prescrevo na consulta se for o caso, e a gente revisa no retorno. \u{1F49A}` },
+  { id: "n95", tab: "atalhos", tag: "95. Retorno", label: "95. Quanto tempo dura o retorno", text: `60 minutos, {{nome}}. Tempo focado em revisar evolu\xE7\xE3o, ajustar plano e renovar receita quando necess\xE1rio. \u{1F33F}` },
+  { id: "n96", tab: "atalhos", tag: "96. Retorno", label: "96. Posso fazer s\xF3 1 consulta?", text: `Pode, {{nome}} \u2014 mas vale lembrar: tratamento em sa\xFAde mental funciona com continuidade. A 1\xAA consulta inicia, e o(s) retorno(s) ajustam o que precisar. \u{1F49A}` },
+  { id: "n97", tab: "atalhos", tag: "97. WhatsApp", label: "97. Posso te chamar entre consultas?", text: `Pode, {{nome}}, dentro do meu hor\xE1rio (seg-sex, 9h-18h) e para d\xFAvidas administrativas ou orienta\xE7\xF5es pontuais. Diagn\xF3stico, ajuste de medica\xE7\xE3o e renova\xE7\xE3o de receita = s\xF3 em consulta. \u{1F33F}` },
+  { id: "n98", tab: "atalhos", tag: "98. WhatsApp", label: "98. Quanto tempo demora resposta", text: `Costumo responder em algumas horas dentro do hor\xE1rio comercial, {{nome}}. Fora desse hor\xE1rio, retorno no pr\xF3ximo dia \xFAtil. \u{1F49A}` },
+  { id: "n99", tab: "atalhos", tag: "99. Cancelamento", label: "99. Como cancelar (regra Doctoralia)", text: `{{nome}}, pelo painel da Doctoralia: cancelamento com mais de 24h de anteced\xEAncia tem reembolso INTEGRAL autom\xE1tico. Menos de 24h ou no-show: sem reembolso. ${LINK}` },
+  { id: "n100", tab: "atalhos", tag: "100. Cancelamento", label: "100. Reembolso quando cai", text: `O reembolso da Doctoralia cai automaticamente no mesmo meio de pagamento (PIX/cart\xE3o), em at\xE9 7 dias \xFAteis, {{nome}}. \u{1F33F}` },
+  { id: "n101", tab: "atalhos", tag: "101. Plano de sa\xFAde", label: "101. CBHPM consulta", text: `{{nome}}, o c\xF3digo CBHPM da consulta em sa\xFAde mental \xE9 50000462 \u2014 \xE9 esse que o seu plano usa pra calcular reembolso. Vale ligar no SAC do plano antes pra confirmar o valor. \u{1F49A}` },
+  { id: "n102", tab: "atalhos", tag: "102. Plano de sa\xFAde", label: "102. Plano cobre teleconsulta?", text: `A maioria dos planos cobre teleconsulta, {{nome}} \u2014 mas o valor de reembolso varia muito. Liga no SAC do seu plano e pergunta pelo c\xF3digo 50000462 (consulta em sa\xFAde mental). \u{1F33F}` },
+  { id: "n103", tab: "atalhos", tag: "103. Privacidade", label: "103. Vai aparecer no meu nome em algum lugar?", text: `N\xE3o, {{nome}}. \u{1F512} A consulta \xE9 sigilosa e n\xE3o aparece em sistemas p\xFAblicos, do trabalho ou em buscas. O recibo e a receita ficam s\xF3 com voc\xEA. \u{1F49A}` },
+  { id: "n104", tab: "atalhos", tag: "104. Privacidade", label: "104. Empresa vai saber?", text: `N\xE3o, {{nome}}. Sua consulta n\xE3o \xE9 informada a empregador, escola ou plano sem sua autoriza\xE7\xE3o expressa. Atestado e laudo s\xE3o entregues a voc\xEA, e voc\xEA decide se apresenta. \u{1F33F}` },
+  { id: "n105", tab: "atalhos", tag: "105. Fam\xEDlia", label: "105. Posso marcar pra outra pessoa?", text: `Pode iniciar o contato, {{nome}}, mas o agendamento precisa ser confirmado pelo(a) pr\xF3prio(a) paciente (acima de 16 anos), por quest\xE3o \xE9tica e de v\xEDnculo. \u{1F49A}` },
+  { id: "n106", tab: "atalhos", tag: "106. Anti-fraude", label: '106. "Atendem por R$ 50?"', text: `{{nome}}, meu valor \xE9 R$ 320 (1\xAA) e R$ 210 (retorno). Se viu valor diferente em algum lugar fora da Doctoralia, provavelmente \xE9 golpe \u2014 s\xF3 agendo pelo link oficial: ${LINK}` },
+  { id: "n107", tab: "atalhos", tag: "107. Anti-fraude", label: "107. Outra pessoa pediu PIX em meu nome", text: `{{nome}}, aten\xE7\xE3o: nunca pe\xE7o PIX pra agendar consulta \u2014 o pagamento \xE9 sempre pelo checkout da Doctoralia. S\xF3 recebo PIX direto na taxa de envio f\xEDsico de receita A/B (R$ 100), e sempre confirmo a chave por aqui. \u{1F6E1}\uFE0F` },
+  { id: "n108", tab: "atalhos", tag: "108. Diversos", label: "108. Acompanhamento por quanto tempo?", text: `Varia, {{nome}}: alguns quadros estabilizam em 6-12 meses; outros (TDAH, bipolar, recorrentes) pedem acompanhamento cont\xEDnuo, com retornos espa\xE7ados. A gente revisa juntas(os) sempre. \u{1F33F}` },
+  { id: "n109", tab: "atalhos", tag: "109. Diversos", label: "109. Mudei de cidade \u2014 continua?", text: `Continua, {{nome}}! \u{1F49A} Como atendo s\xF3 online, mudan\xE7a de cidade n\xE3o interrompe \u2014 basta manter o CPF ativo. Se for pra fora do Brasil, tamb\xE9m atendo brasileiros no exterior.` },
+  { id: "n110", tab: "atalhos", tag: "110. Diversos", label: "110. Reagendamento por intercorr\xEAncia minha", text: `{{nome}}, se eu precisar reagendar por algum motivo de for\xE7a maior, te aviso o quanto antes e te ofere\xE7o novos hor\xE1rios sem custo. Compromisso \xE9 via de m\xE3o dupla. \u{1F33F}\u{1F49A}` },
+  // ── Objeções extras
+  {
+    id: "o-rqe",
+    tab: "objecoes",
+    label: '"Voc\xEA \xE9 psiquiatra mesmo?"',
+    text: `Pergunta justa, {{nome}}. \u{1F33F} Sou m\xE9dica (CRM GO 31189) e atualmente p\xF3s-graduanda em Psiquiatria e Sa\xFAde Mental pela Afya \u2014 em processo de obten\xE7\xE3o do RQE. Atuo dentro do escopo legal da minha forma\xE7\xE3o m\xE9dica, com escuta cl\xEDnica cuidadosa e foco em sa\xFAde mental. Transpar\xEAncia total. \u{1F49A}`
+  },
+  {
+    id: "o-confianca-online",
+    tab: "objecoes",
+    label: '"N\xE3o confio em m\xE9dico online"',
+    text: `Entendo, {{nome}}. \u{1F33F} A teleconsulta \xE9 regulamentada pelo CFM (Resolu\xE7\xE3o 2.314/2022) e tem mesma validade legal da presencial. Pacientes relatam se sentir mais \xE0 vontade falando de casa \u2014 e a continuidade do cuidado fica mais f\xE1cil. Se n\xE3o fluir, voc\xEA n\xE3o fica preso(a). ${LINK} \u{1F49A}`
+  },
+  {
+    id: "o-tempo-resposta",
+    tab: "objecoes",
+    label: '"Vc demora pra responder"',
+    text: `Tem raz\xE3o, {{nome}} \u2014 me desculpa. \u{1F49A} Respondo dentro do meu hor\xE1rio (seg-sex, 9h-18h) e \xE0s vezes acumula. Se for urgente cl\xEDnica: CVV 188 / SAMU 192. Pra agendar / d\xFAvidas, fico \xE0 disposi\xE7\xE3o j\xE1 j\xE1. \u{1F33F}`
+  },
+  // ---------------- ATALHOS EXTRAS (n111+) ----------------
+  { id: "n111", tab: "atalhos", tag: "111. Agenda", label: "111. Pr\xF3ximo hor\xE1rio dispon\xEDvel", text: `Tenho hor\xE1rios abertos essa semana, {{nome}}! Os mais pr\xF3ximos aparecem logo no topo do link: ${LINK} \u{1F33F}` },
+  { id: "n112", tab: "atalhos", tag: "112. Agenda", label: "112. Atende fim de semana?", text: `Atendo de seg a sex, {{nome}}. Pra quem trabalha, costumo abrir hor\xE1rios cedo (8h) ou final de tarde (18h-19h). D\xE1 uma olhada: ${LINK}` },
+  { id: "n113", tab: "atalhos", tag: "113. Agenda", label: "113. Atende de madrugada?", text: `N\xE3o atendo de madrugada, {{nome}}. Se for emerg\xEAncia agora: *SAMU 192* ou *CVV 188* (24h, gratuito). \u{1F49A}` },
+  { id: "n114", tab: "atalhos", tag: "114. Agenda", label: "114. Lista de espera", text: `Posso te colocar numa lista de prioridade, {{nome}}! Se abrir um hor\xE1rio antes do que voc\xEA marcou, te aviso por aqui. \u{1F33F}` },
+  { id: "n115", tab: "atalhos", tag: "115. Agenda", label: "115. Encaixe urgente", text: `{{nome}}, encaixes dependem da agenda do dia. Me conta a sua urg\xEAncia por aqui que tento abrir um espa\xE7o. Se for risco agora: *CVV 188* / *SAMU 192*.` },
+  { id: "n116", tab: "atalhos", tag: "116. Agenda", label: "116. Mudan\xE7a de hor\xE1rio", text: `Sem problema, {{nome}}! Pra trocar de hor\xE1rio, \xE9 s\xF3 cancelar pelo painel da Doctoralia (com mais de 24h tem reembolso integral) e reagendar: ${LINK}` },
+  { id: "n117", tab: "atalhos", tag: "117. Agenda", label: "117. Esqueci da consulta", text: `Tudo bem, {{nome}}, acontece. \u{1F33F} Como o no-show n\xE3o tem reembolso pelo regulamento da Doctoralia, pra reagendar \xE9 uma nova consulta: ${LINK}` },
+  { id: "n118", tab: "atalhos", tag: "118. Agenda", label: "118. Confirma\xE7\xE3o de hor\xE1rio", text: `Confirmado, {{nome}}! \u{1F49A} Te espero no dia/hor\xE1rio marcado \u2014 o link da videochamada chega no seu e-mail e WhatsApp 30 min antes.` },
+  { id: "n119", tab: "atalhos", tag: "119. Pagamento", label: "119. Aceita PIX?", text: `Sim, {{nome}} \u2014 pagamento PIX direto pelo checkout da Doctoralia. Tamb\xE9m tem d\xE9bito e cr\xE9dito (parcelado). ${LINK}` },
+  { id: "n120", tab: "atalhos", tag: "120. Pagamento", label: "120. Parcela em quantas?", text: `D\xE1 pra parcelar no cart\xE3o pelo checkout da Doctoralia, {{nome}} \u2014 costuma ir at\xE9 3x sem juros (varia por bandeira). ${LINK}` },
+  { id: "n121", tab: "atalhos", tag: "121. Pagamento", label: "121. Pagamento na hora", text: `O pagamento \xE9 feito no momento do agendamento, {{nome}} \u2014 \xE9 o que garante seu hor\xE1rio reservado. ${LINK}` },
+  { id: "n122", tab: "atalhos", tag: "122. Pagamento", label: "122. Comprovante", text: `O comprovante e o recibo ficam dispon\xEDveis no seu painel da Doctoralia, {{nome}} \u2014 d\xE1 pra baixar em PDF a qualquer momento. \u{1F33F}` },
+  { id: "n123", tab: "atalhos", tag: "123. Pagamento", label: "123. Pagar depois", text: `Infelizmente o pagamento \xE9 antecipado, {{nome}} \u2014 \xE9 o que reserva seu hor\xE1rio. Se preferir, d\xE1 pra parcelar no cart\xE3o. ${LINK}` },
+  { id: "n124", tab: "atalhos", tag: "124. Telemedicina", label: "124. Que app uso?", text: `N\xE3o precisa instalar nada, {{nome}}! \u{1F33F} \xC9 s\xF3 clicar no link que chega no seu e-mail/WhatsApp 30 min antes \u2014 abre direto no navegador (Chrome, Safari, etc.).` },
+  { id: "n125", tab: "atalhos", tag: "125. Telemedicina", label: "125. Pelo celular ou notebook?", text: `Os dois funcionam, {{nome}}! \u{1F49A} Notebook costuma ser mais confort\xE1vel pra conversar, mas celular funciona igual \u2014 s\xF3 prefira um ambiente silencioso e com boa internet.` },
+  { id: "n126", tab: "atalhos", tag: "126. Telemedicina", label: "126. Caiu a chamada", text: `Sem stress, {{nome}}! \xC9 s\xF3 clicar no link de novo que entra direto. Se cair de vez, te chamo por aqui pra remarcar o que faltou, ok? \u{1F33F}` },
+  { id: "n127", tab: "atalhos", tag: "127. Telemedicina", label: "127. Internet ruim", text: `Se a internet falhar muito, {{nome}}, a gente continua por \xE1udio mesmo \u2014 o importante \xE9 a conversa. Se ficar invi\xE1vel, remarcamos sem custo.` },
+  { id: "n128", tab: "atalhos", tag: "128. Telemedicina", label: "128. Posso estar com algu\xE9m?", text: `Pode, {{nome}}! \u{1F33F} Se quiser que um familiar acompanhe parte da consulta, me avisa no in\xEDcio \u2014 s\xF3 pergunto o que voc\xEA prefere conversar a s\xF3s.` },
+  { id: "n129", tab: "atalhos", tag: "129. Receita", label: "129. Receita digital chega como?", text: `A receita digital chega no seu e-mail em PDF, {{nome}}, com assinatura ICP-Brasil \u2014 vale em qualquer farm\xE1cia do Brasil. \u{1F49A}` },
+  { id: "n130", tab: "atalhos", tag: "130. Receita", label: "130. Receita demora quanto?", text: `Em at\xE9 24h depois da consulta, {{nome}} \u2014 sempre dentro do meu hor\xE1rio comercial. Se n\xE3o chegou, me avisa por aqui que verifico. \u{1F33F}` },
+  { id: "n131", tab: "atalhos", tag: "131. Receita", label: "131. Perdi a receita", text: `Tudo bem, {{nome}}! \u{1F49A} Receita digital eu reenvio sem custo. Se for receita f\xEDsica A/B, \xE9 nova taxa de Sedex (R$ 100). Me confirma qual \xE9?` },
+  { id: "n132", tab: "atalhos", tag: "132. Receita", label: "132. Pode mandar receita sem consulta?", text: `N\xE3o posso, {{nome}} \u2014 receita exige consulta cl\xEDnica (quest\xE3o \xE9tica e legal do CFM). Pacientes em acompanhamento podem agendar um retorno: ${LINK}` },
+  { id: "n133", tab: "atalhos", tag: "133. Receita", label: "133. Receita pra outra pessoa", text: `N\xE3o posso, {{nome}}. \u{1F33F} Receita \xE9 nominal e exige consulta com a pr\xF3pria pessoa \u2014 \xE9 a \xFAnica forma segura e legal.` },
+  { id: "n134", tab: "atalhos", tag: "134. Documentos", label: "134. Atestado retroativo", text: `{{nome}}, posso emitir atestado pelo dia da consulta, mas n\xE3o retroativo \u2014 \xE9 norma do CFM. Se precisa cobrir dias anteriores, conversamos durante a consulta. \u{1F49A}` },
+  { id: "n135", tab: "atalhos", tag: "135. Documentos", label: "135. Laudo pra concurso/escola", text: `Sim, {{nome}}, emito laudos quando h\xE1 indica\xE7\xE3o cl\xEDnica. Geralmente exige uma ou duas consultas pra avalia\xE7\xE3o detalhada. ${LINK}` },
+  { id: "n136", tab: "atalhos", tag: "136. Documentos", label: "136. Relat\xF3rio pra outro m\xE9dico", text: `Posso emitir, {{nome}}! \u{1F33F} Relat\xF3rios pra outros profissionais ou para tratamentos paralelos s\xE3o parte do cuidado, sem custo extra.` },
+  { id: "n137", tab: "atalhos", tag: "137. Documentos", label: "137. INSS / per\xEDcia", text: `Posso emitir relat\xF3rio circunstanciado pra per\xEDcia, {{nome}}, com base no acompanhamento. Quem decide a concess\xE3o \xE9 o perito do INSS, n\xE3o eu \u2014 mas o relat\xF3rio ajuda. \u{1F49A}` },
+  { id: "n138", tab: "atalhos", tag: "138. Documentos", label: "138. Atestado de afastamento longo", text: `Quando h\xE1 indica\xE7\xE3o cl\xEDnica de afastamento prolongado, {{nome}}, conversamos durante a consulta e emito o atestado pelo per\xEDodo pertinente.` },
+  { id: "n139", tab: "atalhos", tag: "139. Tratamento", label: "139. Vou ficar dependente do rem\xE9dio?", text: `Boa pergunta, {{nome}}! \u{1F33F} A maioria dos rem\xE9dios em sa\xFAde mental N\xC3O causa depend\xEAncia (antidepressivos, estabilizadores). Os que podem (alguns ansiol\xEDticos) eu uso com crit\xE9rio, sempre conversado com voc\xEA.` },
+  { id: "n140", tab: "atalhos", tag: "140. Tratamento", label: "140. Engorda?", text: `{{nome}}, ganho de peso varia muito por medica\xE7\xE3o e por pessoa. Falo isso ABERTAMENTE com voc\xEA na consulta e a gente escolhe junto a melhor op\xE7\xE3o pro seu caso. \u{1F49A}` },
+  { id: "n141", tab: "atalhos", tag: "141. Tratamento", label: "141. Mexe com libido?", text: `Pode mexer, {{nome}}, dependendo do medicamento. Sempre converso isso com voc\xEA antes \u2014 e existem op\xE7\xF5es com menos efeito sobre libido. Plano individualizado. \u{1F33F}` },
+  { id: "n142", tab: "atalhos", tag: "142. Tratamento", label: "142. Posso beber tomando rem\xE9dio?", text: `Depende do rem\xE9dio, {{nome}}, mas em geral o ideal \xE9 evitar \u2014 \xE1lcool atrapalha o efeito e pode aumentar efeitos colaterais. A gente conversa caso a caso. \u{1F49A}` },
+  { id: "n143", tab: "atalhos", tag: "143. Tratamento", label: "143. Demora quanto pra fazer efeito?", text: `Antidepressivos e estabilizadores costumam levar de 2 a 6 semanas pra efeito completo, {{nome}}. Sintomas mais agudos (sono, ansiedade) podem melhorar antes. \u{1F33F}` },
+  { id: "n144", tab: "atalhos", tag: "144. Tratamento", label: "144. Quero parar o rem\xE9dio", text: `{{nome}}, parar rem\xE9dio sem orienta\xE7\xE3o pode trazer efeitos rebote ou reca\xEDda. Vamos conversar no retorno e desmamar com seguran\xE7a quando for o momento. \u{1F49A}` },
+  { id: "n145", tab: "atalhos", tag: "145. Tratamento", label: "145. Posso s\xF3 psicoterapia?", text: `Pode, sim, {{nome}}! \u{1F33F} Em muitos quadros, psicoterapia sozinha j\xE1 resolve. Avalio na consulta o que faz mais sentido pra voc\xEA \u2014 sem empurrar rem\xE9dio.` },
+  { id: "n146", tab: "atalhos", tag: "146. Tratamento", label: "146. Indica psic\xF3logo?", text: `Sim, {{nome}}! Trabalho em parceria com psic\xF3logos(as) e posso te indicar profissionais de confian\xE7a, dependendo do seu caso e abordagem desejada. \u{1F49A}` },
+  { id: "n147", tab: "atalhos", tag: "147. Quadros", label: "147. S\xEDndrome do p\xE2nico", text: `Sim, {{nome}}, acompanho s\xEDndrome do p\xE2nico \u2014 \xE9 um dos quadros que mais respondem bem a tratamento. ${LINK}` },
+  { id: "n148", tab: "atalhos", tag: "148. Quadros", label: "148. Fobia social", text: `Sim, {{nome}}, atendo fobia social \u2014 incluindo combina\xE7\xE3o de medicamento e indica\xE7\xE3o de TCC quando indicado. \u{1F33F} ${LINK}` },
+  { id: "n149", tab: "atalhos", tag: "149. Quadros", label: "149. Estresse p\xF3s-traum\xE1tico (TEPT)", text: `Sim, {{nome}}, acompanho TEPT com plano individualizado e indica\xE7\xE3o de psicoterapia especializada quando indicado. \u{1F49A} ${LINK}` },
+  { id: "n150", tab: "atalhos", tag: "150. Quadros", label: "150. Transtorno alimentar", text: `Acompanho parte cl\xEDnica de transtornos alimentares, {{nome}}, sempre em equipe (nutri + psic\xF3logo(a)). Posso te orientar. ${LINK}` },
+  { id: "n151", tab: "atalhos", tag: "151. Quadros", label: "151. Borderline", text: `Sim, {{nome}}, acompanho personalidade borderline \u2014 sempre com indica\xE7\xE3o forte de psicoterapia (DBT/TCC) em paralelo. \u{1F33F} ${LINK}` },
+  { id: "n152", tab: "atalhos", tag: "152. Quadros", label: "152. Autismo adulto", text: `Fa\xE7o avalia\xE7\xE3o inicial e acompanhamento de comorbidades do autismo no adulto, {{nome}}. Pra laudo formal, indico colega especializado. \u{1F49A}` },
+  { id: "n153", tab: "atalhos", tag: "153. Quadros", label: "153. Depend\xEAncia qu\xEDmica", text: `Acompanho casos leves a moderados, {{nome}}, e indico encaminhamento especializado para casos graves. ${LINK}` },
+  { id: "n154", tab: "atalhos", tag: "154. Quadros", label: "154. TPM / TDPM", text: `Sim, {{nome}}, TDPM (transtorno disf\xF3rico pr\xE9-menstrual) \xE9 uma das minhas \xE1reas. Tem tratamento eficaz! ${LINK}` },
+  { id: "n155", tab: "atalhos", tag: "155. Quadros", label: "155. Depress\xE3o p\xF3s-parto", text: `Sim, {{nome}}, acompanho depress\xE3o p\xF3s-parto com cuidado especial \u2014 incluindo op\xE7\xF5es compat\xEDveis com amamenta\xE7\xE3o. \u{1F49A} ${LINK}` },
+  { id: "n156", tab: "atalhos", tag: "156. Quadros", label: "156. Climat\xE9rio / menopausa", text: `Sim, {{nome}}, sintomas psiqui\xE1tricos do climat\xE9rio (humor, sono, ansiedade) entram no meu escopo. Trabalho em conjunto com a(o) ginecologista. \u{1F33F}` },
+  { id: "n157", tab: "atalhos", tag: "157. Primeira consulta", label: "157. Como me preparar?", text: `N\xE3o precisa preparar nada, {{nome}}! \u{1F33F} Se tiver exames recentes ou laudos, manda no WhatsApp antes \u2014 facilita. O resto a gente conversa.` },
+  { id: "n158", tab: "atalhos", tag: "158. Primeira consulta", label: "158. Vou levar bronca?", text: `De jeito nenhum, {{nome}}. \u{1F49A} Consult\xF3rio \xE9 zona livre de julgamento \u2014 pode contar tudo, inclusive o que normalmente n\xE3o conta pra ningu\xE9m.` },
+  { id: "n159", tab: "atalhos", tag: "159. Primeira consulta", label: "159. Quanto tempo dura?", text: `Primeira consulta dura cerca de 70 minutos, {{nome}} \u2014 pra eu conhecer voc\xEA sem pressa. Retornos duram 60 min. \u{1F33F}` },
+  { id: "n160", tab: "atalhos", tag: "160. Primeira consulta", label: "160. J\xE1 saio com receita?", text: `Pode ser, {{nome}}, se for o caso cl\xEDnico. Mas n\xE3o \xE9 regra \u2014 \xE0s vezes come\xE7amos com observa\xE7\xE3o ou s\xF3 com mudan\xE7as de h\xE1bito. Plano individualizado. \u{1F49A}` },
+  { id: "n161", tab: "atalhos", tag: "161. Primeira consulta", label: "161. Vou ter que voltar?", text: `Depende do caso, {{nome}}. Geralmente o primeiro retorno \xE9 em 30-45 dias pra ajustar conduta. Em quadros leves, alta pode ser r\xE1pida. \u{1F33F}` },
+  { id: "n162", tab: "atalhos", tag: "162. Sigilo", label: "162. Voc\xEA guarda anota\xE7\xF5es?", text: `Sim, {{nome}}, prontu\xE1rio digital e seguro (LGPD), de acesso s\xF3 meu. Voc\xEA pode pedir c\xF3pia quando quiser. \u{1F512}` },
+  { id: "n163", tab: "atalhos", tag: "163. Sigilo", label: "163. Sigilo com adolescente", text: `Sim, {{nome}}, mantenho sigilo com adolescentes. Fam\xEDlia s\xF3 \xE9 envolvida em situa\xE7\xF5es de risco grave, sempre conversado antes com o(a) jovem. \u{1F49A}` },
+  { id: "n164", tab: "atalhos", tag: "164. Sigilo", label: "164. E se for processo judicial?", text: `Sigilo m\xE9dico \xE9 protegido por lei, {{nome}}. S\xF3 forne\xE7o informa\xE7\xE3o a ju\xEDzes mediante requisi\xE7\xE3o formal e nos limites \xE9ticos do CFM. \u{1F512}` },
+  { id: "n165", tab: "atalhos", tag: "165. Comunica\xE7\xE3o", label: "165. Posso te mandar \xE1udio?", text: `Pode, {{nome}}! \u{1F33F} Mas pra d\xFAvidas r\xE1pidas, texto costuma ser mais \xE1gil. \xC1udios eu escuto dentro do hor\xE1rio comercial.` },
+  { id: "n166", tab: "atalhos", tag: "166. Comunica\xE7\xE3o", label: "166. Posso mandar print/exame?", text: `Pode, {{nome}}! Recebo por aqui mesmo (WhatsApp criptografado). Se for muito documento, melhor levar na consulta. \u{1F49A}` },
+  { id: "n167", tab: "atalhos", tag: "167. Comunica\xE7\xE3o", label: "167. N\xE3o respondo grupos", text: `{{nome}}, n\xE3o atendo nem oriento por grupos do WhatsApp \u2014 s\xF3 por contato direto, pra preservar seu sigilo. \u{1F512}` },
+  { id: "n168", tab: "atalhos", tag: "168. Crian\xE7as/adolescentes", label: "168. Filho de 14 anos", text: `Atendo a partir de 16, {{nome}}. Pra 14 anos, indico colega de psiquiatria infantojuvenil \u2014 se quiser, te passo op\xE7\xF5es de confian\xE7a. \u{1F49A}` },
+  { id: "n169", tab: "atalhos", tag: "169. Crian\xE7as/adolescentes", label: "169. Adolescente de 16/17", text: `Atendo, {{nome}}! \u{1F33F} Pra menores de 18, pe\xE7o que um respons\xE1vel esteja dispon\xEDvel pra autoriza\xE7\xE3o inicial e pra eventuais comunica\xE7\xF5es sobre risco grave.` },
+  { id: "n170", tab: "atalhos", tag: "170. Bem-estar", label: "170. Dica pra ansiedade agora", text: `{{nome}}, tr\xEAs passos r\xE1pidos: 1) respira fundo (4s inspira, 6s expira) por 2 min, 2) sai do ambiente por 5 min, 3) toma um copo de \xE1gua gelada. N\xE3o substitui consulta, mas ajuda no momento. \u{1F33F}` },
+  { id: "n171", tab: "atalhos", tag: "171. Bem-estar", label: "171. Dica pra dormir melhor", text: `{{nome}}, tr\xEAs coisas que ajudam: 1) celular fora do quarto, 2) escuro total, 3) hor\xE1rio fixo pra deitar. Se persistir, vale uma avalia\xE7\xE3o. \u{1F33F} ${LINK}` },
+  { id: "n172", tab: "atalhos", tag: "172. Bem-estar", label: "172. Dica pra crise de p\xE2nico", text: `{{nome}}, na crise: respira lentamente (4s inspira / 6s expira), olha em volta e nomeia 5 objetos, lembra que vai passar. N\xE3o \xE9 infarto. Se for recorrente, agenda avalia\xE7\xE3o: ${LINK}` },
+  { id: "n173", tab: "atalhos", tag: "173. Encaminhamentos", label: "173. Indica\xE7\xE3o de psic\xF3logo", text: `Posso indicar, {{nome}}! \u{1F33F} Trabalho com colegas de TCC, psican\xE1lise e DBT. Me conta seu perfil que ajusto a indica\xE7\xE3o.` },
+  { id: "n174", tab: "atalhos", tag: "174. Encaminhamentos", label: "174. Indica\xE7\xE3o de neuro", text: `Posso indicar neurologista de confian\xE7a, {{nome}} \u2014 \xFAtil em queixas de mem\xF3ria, enxaqueca cr\xF4nica, suspeita de epilepsia. \u{1F49A}` },
+  { id: "n175", tab: "atalhos", tag: "175. Encaminhamentos", label: "175. Indica\xE7\xE3o de nutri", text: `Tenho parceria com nutricionistas que trabalham em conjunto com sa\xFAde mental, {{nome}}. Se quiser, te passo contatos. \u{1F33F}` },
+  { id: "n176", tab: "atalhos", tag: "176. Diversos", label: "176. Atestado pra cirurgia", text: `Posso emitir libera\xE7\xE3o psiqui\xE1trica pra cirurgia, {{nome}}, com base na avalia\xE7\xE3o. ${LINK}` },
+  { id: "n177", tab: "atalhos", tag: "177. Diversos", label: "177. Avalia\xE7\xE3o pr\xE9-bari\xE1trica", text: `Fa\xE7o avalia\xE7\xE3o psiqui\xE1trica pr\xE9-bari\xE1trica, {{nome}} \u2014 exigida pela maioria das equipes cir\xFArgicas. ${LINK}` },
+  { id: "n178", tab: "atalhos", tag: "178. Diversos", label: "178. Habilita\xE7\xE3o / CNH", text: `Avalia\xE7\xE3o pra CNH \xE9 feita por psiquiatra credenciado ao Detran, {{nome}}. N\xE3o tenho esse credenciamento, mas posso indicar colega. \u{1F33F}` },
+  { id: "n179", tab: "atalhos", tag: "179. Diversos", label: "179. Porte de arma", text: `Avalia\xE7\xE3o pra porte de arma exige credenciamento espec\xEDfico da Pol\xEDcia Federal, {{nome}}. N\xE3o fa\xE7o esse tipo de laudo.` },
+  { id: "n180", tab: "atalhos", tag: "180. Diversos", label: "180. Indica\xE7\xE3o masculina", text: `Sim, {{nome}}, atendo homens \u2014 sa\xFAde mental masculina (depress\xE3o, burnout, andropausa) \xE9 tema importante e silenciado. \u{1F49A} ${LINK}` },
+  { id: "n181", tab: "atalhos", tag: "181. P\xF3s-consulta", label: "181. N\xE3o recebi nada ainda", text: `Vou verificar agora, {{nome}}! \u{1F33F} Receita e orienta\xE7\xF5es chegam em at\xE9 24h ap\xF3s a consulta. Se passou, me confirma seu e-mail por gentileza?` },
+  { id: "n182", tab: "atalhos", tag: "182. P\xF3s-consulta", label: "182. D\xFAvida sobre o rem\xE9dio", text: `Pode mandar, {{nome}}! \u{1F49A} D\xFAvidas pontuais sobre como/quando tomar respondo por aqui. Mudan\xE7as de dose ou suspens\xE3o s\xE3o em consulta.` },
+  { id: "n183", tab: "atalhos", tag: "183. P\xF3s-consulta", label: "183. Efeito colateral incomodando", text: `{{nome}}, me conta o que est\xE1 sentindo (sintoma + intensidade + quando come\xE7ou). Se for grave, suspende o rem\xE9dio e me avisa imediatamente. \u{1F33F}` },
+  { id: "n184", tab: "atalhos", tag: "184. P\xF3s-consulta", label: "184. Quando agendar retorno?", text: `Pelo que conversamos, ideal seria retorno em 30 dias, {{nome}}. Pra agendar: ${LINK} \u{1F49A}` },
+  { id: "n185", tab: "atalhos", tag: "185. Boas-vindas", label: "185. Recebimento simples", text: `Oi, {{nome}}! \u{1F33F} Recebi sua mensagem. Te respondo pessoalmente j\xE1 j\xE1 \u2014 ou, se preferir adiantar, agenda j\xE1 garantido seu hor\xE1rio: ${LINK}` },
+  { id: "n186", tab: "atalhos", tag: "186. Boas-vindas", label: "186. J\xE1 visitou Doctoralia", text: `Oi, {{nome}}! \u{1F49A} Vi que voc\xEA visitou meu perfil. Posso te ajudar com alguma d\xFAvida ou quer agendar direto? ${LINK}` },
+  { id: "n187", tab: "atalhos", tag: "187. Boas-vindas", label: "187. Veio por instagram", text: `Oi, {{nome}}! Que bom te ver por aqui \u{1F33F} Vi que veio pelo Instagram. Se quiser agendar: ${LINK} \u2014 qualquer d\xFAvida, \xE9 s\xF3 me chamar.` },
+  { id: "n188", tab: "atalhos", tag: "188. Despedida", label: "188. Encerramento amig\xE1vel", text: `Qualquer coisa, {{nome}}, \xE9 s\xF3 me chamar por aqui. \u{1F49A} T\xF4 torcendo por voc\xEA. \u{1F33F}` },
+  { id: "n189", tab: "atalhos", tag: "189. Despedida", label: "189. At\xE9 a consulta", text: `Combinado, {{nome}}! Te espero na consulta. Qualquer coisa antes, \xE9 s\xF3 me avisar. \u{1F33F}\u{1F49A}` },
+  { id: "n190", tab: "atalhos", tag: "190. Despedida", label: "190. Boa semana", text: `Boa semana, {{nome}}! \u{1F33F} Cuida de voc\xEA. T\xF4 por aqui se precisar. \u{1F49A}` }
+];
+
+// src/lib/mcp/tools/list-quick-replies.ts
+var list_quick_replies_default = defineTool4({
+  name: "list_quick_replies",
+  title: "Listar respostas r\xE1pidas",
+  description: "Lista os templates de resposta r\xE1pida (WhatsApp/Doctoralia) da Dra. J\xE9ssica, aplicando personaliza\xE7\xF5es do usu\xE1rio quando existirem. Filtra por aba (auto, triagem, risco, fillers, casuais, atalhos, objecoes, modulos) e/ou termo de busca.",
+  inputSchema: {
+    tab: z2.enum(["auto", "fillers", "casuais", "atalhos", "objecoes", "triagem", "risco", "modulos"]).optional().describe("Filtra por aba."),
+    search: z2.string().optional().describe("Termo de busca (aplicado a r\xF3tulo, tag e texto)."),
+    limit: z2.number().int().min(1).max(200).default(50).describe("M\xE1ximo de itens retornados.")
+  },
+  annotations: { readOnlyHint: true, openWorldHint: false },
+  handler: async ({ tab, search, limit }, ctx) => {
+    if (!ctx.isAuthenticated()) {
+      return { content: [{ type: "text", text: "N\xE3o autenticado." }], isError: true };
+    }
+    const supa = createClient(process.env.SUPABASE_URL, process.env.SUPABASE_PUBLISHABLE_KEY, {
+      global: { headers: { Authorization: `Bearer ${ctx.getToken()}` } },
+      auth: { persistSession: false, autoRefreshToken: false }
+    });
+    const { data: overrides, error } = await supa.from("quick_reply_overrides").select("reply_id,label,text,tag,active,expires_at").eq("user_id", ctx.getUserId());
+    if (error) return { content: [{ type: "text", text: error.message }], isError: true };
+    const map = new Map((overrides ?? []).map((o) => [o.reply_id, o]));
+    const q = search?.toLowerCase().trim();
+    const items = quickReplies.filter((r) => tab ? r.tab === tab : true).map((r) => {
+      const o = map.get(r.id);
+      return {
+        id: r.id,
+        tab: r.tab,
+        label: o?.label ?? r.label,
+        tag: o?.tag ?? r.tag ?? null,
+        active: o?.active ?? r.active ?? false,
+        expiresAt: o?.expires_at ?? r.expiresAt ?? null,
+        text: o?.text ?? r.text,
+        customized: Boolean(o)
+      };
+    }).filter(
+      (r) => !q ? true : `${r.label} ${r.tag ?? ""} ${r.text}`.toLowerCase().includes(q)
+    ).slice(0, limit);
+    return {
+      content: [{ type: "text", text: JSON.stringify(items, null, 2) }],
+      structuredContent: { count: items.length, items }
+    };
+  }
+});
+
+// src/lib/mcp/tools/update-quick-reply.ts
+import { createClient as createClient2 } from "npm:@supabase/supabase-js@^2.105.3";
+import { defineTool as defineTool5 } from "npm:@lovable.dev/mcp-js@0.20.1";
+import { z as z3 } from "npm:zod@^4.4.3";
+var update_quick_reply_default = defineTool5({
+  name: "update_quick_reply",
+  title: "Atualizar resposta r\xE1pida",
+  description: "Salva uma personaliza\xE7\xE3o (override) para um template de resposta r\xE1pida existente da Dra. J\xE9ssica. N\xE3o altera o template base \u2014 grava uma vers\xE3o do usu\xE1rio que a Biblioteca e o list_quick_replies passam a exibir. S\xF3 o pr\xF3prio usu\xE1rio v\xEA e edita seus overrides.",
+  inputSchema: {
+    reply_id: z3.string().min(1).describe("ID do template original (ex.: 'auto-boas-vindas')."),
+    text: z3.string().min(1).describe("Novo texto do template."),
+    label: z3.string().optional().describe("R\xF3tulo alternativo."),
+    tag: z3.string().optional().describe("Sub-categoria."),
+    active: z3.boolean().optional().describe("Marcar como ativa (auto-resposta)."),
+    expires_at: z3.string().regex(/^\d{4}-\d{2}-\d{2}$/).optional().describe("Data de expira\xE7\xE3o YYYY-MM-DD.")
+  },
+  annotations: { readOnlyHint: false, destructiveHint: false, idempotentHint: true },
+  handler: async ({ reply_id, text, label, tag, active, expires_at }, ctx) => {
+    if (!ctx.isAuthenticated()) {
+      return { content: [{ type: "text", text: "N\xE3o autenticado." }], isError: true };
+    }
+    if (!quickReplies.some((r) => r.id === reply_id)) {
+      return {
+        content: [{ type: "text", text: `Template desconhecido: ${reply_id}` }],
+        isError: true
+      };
+    }
+    const supa = createClient2(process.env.SUPABASE_URL, process.env.SUPABASE_PUBLISHABLE_KEY, {
+      global: { headers: { Authorization: `Bearer ${ctx.getToken()}` } },
+      auth: { persistSession: false, autoRefreshToken: false }
+    });
+    const { data, error } = await supa.from("quick_reply_overrides").upsert(
+      {
+        user_id: ctx.getUserId(),
+        reply_id,
+        text,
+        label: label ?? null,
+        tag: tag ?? null,
+        active: active ?? null,
+        expires_at: expires_at ?? null
+      },
+      { onConflict: "user_id,reply_id" }
+    ).select().single();
+    if (error) return { content: [{ type: "text", text: error.message }], isError: true };
+    return {
+      content: [{ type: "text", text: `Override salvo para ${reply_id}.` }],
+      structuredContent: { override: data }
+    };
+  }
+});
+
+// src/lib/mcp/tools/suggest-quick-reply.ts
+import { createClient as createClient3 } from "npm:@supabase/supabase-js@^2.105.3";
+import { defineTool as defineTool6 } from "npm:@lovable.dev/mcp-js@0.20.1";
+import { z as z4 } from "npm:zod@^4.4.3";
+var SYSTEM = `Voc\xEA ajuda a Dra. J\xE9ssica Carpaneda (psiquiatra, CRM GO 31189) a escolher o melhor template de resposta r\xE1pida para responder uma mensagem recebida. Fale sempre em primeira pessoa ("eu"). Responda ESTRITAMENTE em JSON v\xE1lido (sem markdown, sem cercas) no formato:
+{"best_id":"<id>","reasoning":"<curto>","suggested_text":"<texto final pronto para colar, em 1\xAA pessoa, tom acolhedor, sem jarg\xF5es, com valores atuais: Primeira consulta R$400/90min, Retorno R$250/60min, Renova\xE7\xE3o de receita R$150 (excepcional). Site: drajessicacarpaneda.com.br>"}`;
+var suggest_quick_reply_default = defineTool6({
+  name: "suggest_quick_reply",
+  title: "Sugerir resposta r\xE1pida",
+  description: "Dado o contexto/mensagem recebida, escolhe o melhor template da biblioteca da Dra. J\xE9ssica e retorna uma vers\xE3o adaptada em primeira pessoa, pronta para enviar no WhatsApp.",
+  inputSchema: {
+    context: z4.string().min(1).describe("Mensagem do paciente ou contexto da conversa."),
+    tab: z4.enum(["auto", "fillers", "casuais", "atalhos", "objecoes", "triagem", "risco", "modulos"]).optional().describe("Restringir a busca a uma aba.")
+  },
+  annotations: { readOnlyHint: true, openWorldHint: false },
+  handler: async ({ context, tab }, ctx) => {
+    if (!ctx.isAuthenticated()) {
+      return { content: [{ type: "text", text: "N\xE3o autenticado." }], isError: true };
+    }
+    const key = process.env.LOVABLE_API_KEY;
+    if (!key) return { content: [{ type: "text", text: "LOVABLE_API_KEY ausente." }], isError: true };
+    const supa = createClient3(process.env.SUPABASE_URL, process.env.SUPABASE_PUBLISHABLE_KEY, {
+      global: { headers: { Authorization: `Bearer ${ctx.getToken()}` } },
+      auth: { persistSession: false, autoRefreshToken: false }
+    });
+    const { data: overrides } = await supa.from("quick_reply_overrides").select("reply_id,label,text,tag").eq("user_id", ctx.getUserId());
+    const map = new Map((overrides ?? []).map((o) => [o.reply_id, o]));
+    const library = quickReplies.filter((r) => tab ? r.tab === tab : true).map((r) => {
+      const o = map.get(r.id);
+      return {
+        id: r.id,
+        tab: r.tab,
+        label: o?.label ?? r.label,
+        tag: o?.tag ?? r.tag ?? null,
+        text: (o?.text ?? r.text).slice(0, 900)
+      };
+    });
+    const userPrompt = `MENSAGEM RECEBIDA:
+${context}
+
+BIBLIOTECA (JSON):
+${JSON.stringify(library)}
+
+Escolha o melhor id e produza o suggested_text final.`;
+    const res = await fetch("https://ai.gateway.lovable.dev/v1/chat/completions", {
+      method: "POST",
+      headers: { "Content-Type": "application/json", "Lovable-API-Key": key },
+      body: JSON.stringify({
+        model: "google/gemini-3-flash-preview",
+        messages: [
+          { role: "system", content: SYSTEM },
+          { role: "user", content: userPrompt }
+        ],
+        response_format: { type: "json_object" }
+      })
+    });
+    if (!res.ok) {
+      return { content: [{ type: "text", text: `Erro do gateway: ${res.status}` }], isError: true };
+    }
+    const data = await res.json();
+    const raw = data?.choices?.[0]?.message?.content ?? "{}";
+    let parsed = {};
+    try {
+      parsed = JSON.parse(raw);
+    } catch {
+      return { content: [{ type: "text", text: raw }] };
+    }
+    const chosen = library.find((r) => r.id === parsed.best_id) ?? null;
+    return {
+      content: [
+        {
+          type: "text",
+          text: (parsed.suggested_text ?? "") + (chosen ? `
+
+\u2014 baseado em: ${chosen.label} (${chosen.id})` : "")
+        }
+      ],
+      structuredContent: {
+        best_id: parsed.best_id ?? null,
+        reasoning: parsed.reasoning ?? null,
+        suggested_text: parsed.suggested_text ?? "",
+        matched_template: chosen
+      }
+    };
+  }
+});
+
 // src/lib/mcp/index.ts
 var projectRef = "faripwgamoymvjdanvpf";
 var mcp_default = defineMcp({
   name: "dra-jessica-mcp",
   title: "Dra. J\xE9ssica \u2014 Protocolo de Atendimento",
-  version: "0.1.0",
-  instructions: "Ferramentas do consult\xF3rio da Dra. J\xE9ssica Carpaneda (psiquiatra). Use `formulate_reply` para gerar respostas em primeira pessoa (WhatsApp, opini\xE3o p\xFAblica ou Novidade Doctoralia), `list_services` para valores/dura\xE7\xE3o e `get_contact_info` para dados profissionais.",
+  version: "0.2.0",
+  instructions: "Ferramentas do consult\xF3rio da Dra. J\xE9ssica Carpaneda (psiquiatra). Respostas SEMPRE em primeira pessoa. Use `formulate_reply` para gerar respostas livres (WhatsApp, opini\xE3o p\xFAblica ou Novidade Doctoralia); `list_quick_replies` para consultar os templates da biblioteca; `update_quick_reply` para salvar uma personaliza\xE7\xE3o (override por usu\xE1rio); `suggest_quick_reply` para escolher o melhor template dado o contexto de uma mensagem recebida; `list_services` para valores/dura\xE7\xE3o; `get_contact_info` para dados profissionais.",
   auth: auth.oauth.issuer({
     issuer: `https://${projectRef}.supabase.co/auth/v1`,
     acceptedAudiences: "authenticated"
   }),
-  tools: [formulate_reply_default, list_services_default, get_contact_info_default]
+  tools: [
+    formulate_reply_default,
+    list_services_default,
+    get_contact_info_default,
+    list_quick_replies_default,
+    update_quick_reply_default,
+    suggest_quick_reply_default
+  ]
 });
 
 // lovable-mcp-supabase-entry.ts
