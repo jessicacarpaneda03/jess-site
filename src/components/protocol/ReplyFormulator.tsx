@@ -3,7 +3,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
-import { Sparkles, Copy, Check, Loader2 } from "lucide-react";
+import { Sparkles, Copy, Check, Loader2, Wand2, RotateCcw } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "@/hooks/use-toast";
 
@@ -18,11 +18,21 @@ const TEMAS_NOVIDADE = [
   "Ansiedade no trabalho",
 ];
 
+const formatForWhatsApp = (raw: string) =>
+  raw
+    .replace(/\*\*(.+?)\*\*/g, "*$1*")
+    .replace(/__(.+?)__/g, "_$1_")
+    .replace(/^[\s]*[-•]\s+/gm, "• ")
+    .replace(/[ \t]{2,}/g, " ")
+    .replace(/\n{3,}/g, "\n\n")
+    .trim();
+
 export const ReplyFormulator = () => {
   const [tipo, setTipo] = useState<Tipo>("mensagem");
   const [mensagem, setMensagem] = useState("");
   const [contexto, setContexto] = useState("");
   const [resposta, setResposta] = useState("");
+  const [rascunho, setRascunho] = useState("");
   const [loading, setLoading] = useState(false);
   const [copied, setCopied] = useState(false);
 
@@ -38,13 +48,16 @@ export const ReplyFormulator = () => {
     }
     setLoading(true);
     setResposta("");
+    setRascunho("");
     try {
       const { data, error } = await supabase.functions.invoke("formulador-resposta", {
         body: { mensagem: mensagem.trim(), contexto: contexto.trim() || undefined, tipo },
       });
       if (error) throw error;
       if ((data as any)?.error) throw new Error((data as any).error);
-      setResposta((data as any)?.resposta ?? "");
+      const texto = (data as any)?.resposta ?? "";
+      setResposta(texto);
+      setRascunho(texto);
     } catch (e: any) {
       toast({
         title: "Não foi possível gerar a resposta",
@@ -57,11 +70,15 @@ export const ReplyFormulator = () => {
   };
 
   const copiar = async () => {
-    if (!resposta) return;
-    await navigator.clipboard.writeText(resposta);
+    if (!rascunho) return;
+    await navigator.clipboard.writeText(rascunho);
     setCopied(true);
+    toast({ title: "Copiado — cole no WhatsApp ou Doctoralia." });
     setTimeout(() => setCopied(false), 1800);
   };
+
+  const aplicarFormatoWhatsApp = () => setRascunho((v) => formatForWhatsApp(v));
+  const restaurar = () => setRascunho(resposta);
 
   const labelMensagem =
     tipo === "opiniao"
@@ -199,15 +216,52 @@ export const ReplyFormulator = () => {
             </Button>
 
             {resposta && (
-              <div className="mt-4 rounded-lg border bg-background p-4">
-                <div className="flex items-center justify-between mb-2">
-                  <span className="text-sm font-medium">Resposta sugerida</span>
-                  <Button variant="outline" size="sm" onClick={copiar}>
-                    {copied ? <Check className="h-4 w-4" /> : <Copy className="h-4 w-4" />}
-                    {copied ? "Copiado" : "Copiar"}
-                  </Button>
+              <div className="mt-4 rounded-lg border bg-background p-4 space-y-3">
+                <div className="flex flex-wrap items-center justify-between gap-2">
+                  <div>
+                    <div className="text-sm font-medium">Pré-visualização editável</div>
+                    <p className="text-xs text-muted-foreground">
+                      Ajuste o texto abaixo antes de copiar. As mudanças ficam só aqui.
+                    </p>
+                  </div>
+                  <div className="flex flex-wrap gap-2">
+                    <Button variant="ghost" size="sm" onClick={aplicarFormatoWhatsApp} title="Converte **negrito**/__itálico__ e normaliza bullets">
+                      <Wand2 className="h-4 w-4" /> Formato WhatsApp
+                    </Button>
+                    <Button
+                      variant="ghost"
+                      size="sm"
+                      onClick={restaurar}
+                      disabled={rascunho === resposta}
+                      title="Voltar ao texto original gerado"
+                    >
+                      <RotateCcw className="h-4 w-4" /> Restaurar
+                    </Button>
+                    <Button variant="outline" size="sm" onClick={copiar}>
+                      {copied ? <Check className="h-4 w-4" /> : <Copy className="h-4 w-4" />}
+                      {copied ? "Copiado" : "Copiar"}
+                    </Button>
+                  </div>
                 </div>
-                <p className="whitespace-pre-wrap text-sm leading-relaxed">{resposta}</p>
+
+                <Textarea
+                  value={rascunho}
+                  onChange={(e) => setRascunho(e.target.value)}
+                  rows={Math.min(16, Math.max(6, rascunho.split("\n").length + 1))}
+                  className="font-sans text-sm leading-relaxed"
+                />
+
+                <div className="flex items-center justify-between text-xs text-muted-foreground">
+                  <span>
+                    {rascunho.length} caracteres · {rascunho.trim().split(/\s+/).filter(Boolean).length} palavras
+                  </span>
+                  {rascunho !== resposta && <span className="text-primary">Editado</span>}
+                </div>
+
+                <div className="rounded-md border bg-muted/40 p-3">
+                  <div className="text-xs font-medium text-muted-foreground mb-1">Prévia final</div>
+                  <p className="whitespace-pre-wrap text-sm leading-relaxed">{rascunho}</p>
+                </div>
               </div>
             )}
           </CardContent>
