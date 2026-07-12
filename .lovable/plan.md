@@ -1,38 +1,65 @@
+# Verificação MCP — Dra. Jéssica
+
 ## Objetivo
-Aumentar a conversão do guia `/guia-conversao-whatsapp` levando o leitor direto para os scripts prontos da Biblioteca de Mensagens, já filtrados pela categoria certa para o momento da leitura.
+Garantir que `formulate_reply`, `list_services` e `get_contact_info` sejam descobertas e executadas corretamente pelos três clientes MCP (ChatGPT, Claude Desktop, Cursor), autenticando via OAuth Supabase.
 
-## Como vai funcionar
+## Pré-requisitos
+1. App **publicado** (MCP OAuth exige HTTPS público; `id-preview--*.lovable.app` não é aceito por alguns clientes). URL de produção: `https://<seu-domínio>/functions/v1/mcp`.
+2. Google provider ativo no Supabase (login OAuth funciona).
+3. Rota `/.lovable/oauth/consent` acessível e completando o fluxo.
+4. Rodar `app_mcp_server--extract_mcp_manifest` e `supabase--deploy_edge_functions(["mcp"])` para garantir manifest e função no ar.
 
-1. **Âncora + deep link na Biblioteca**
-   - Adicionar `id="biblioteca"` na `<section>` da `MessageLibrary` (dentro de `src/components/protocol/MessageLibrary.tsx`).
-   - `MessageLibrary` passa a ler `?category=<nome>` da URL na montagem, e se a categoria existir, já aplica no filtro `activeCategory` e faz `scrollIntoView` suave até a seção.
-   - Suporta também `?q=<busca>` para pré-preencher o campo de busca (opcional, útil para CTAs mais específicos).
+## Passo 1 — Sanity checks do servidor
+- `GET https://<ref>.supabase.co/functions/v1/mcp/.well-known/oauth-protected-resource` deve retornar 200 com o issuer Supabase.
+- `POST .../functions/v1/mcp` com `initialize` (sem token) deve retornar 401 + header `WWW-Authenticate` apontando para o resource metadata.
+- Após login OAuth: `tools/list` deve retornar exatamente 3 tools com nomes, títulos, descrições e `inputSchema` corretos.
 
-2. **CTAs contextuais dentro do guia** (`src/pages/GuiaConversaoWhatsapp.tsx`)
-   Cada seção ganha um botão discreto “Copiar script pronto” logo abaixo do checklist, mirando a categoria da Biblioteca que resolve aquele ponto:
+## Passo 2 — Configuração em cada cliente
 
-   | Seção do guia | CTA | Deep link |
-   | --- | --- | --- |
-   | 1. Velocidade de resposta | Ver scripts de boas-vindas e ausência | `/#biblioteca?category=Boas-vindas` e `?category=Ausência` |
-   | 2. Tom humanizado | Ver scripts de primeira vez | `/#biblioteca?category=Primeira vez` |
-   | 3. Scripts para objeções | Botões separados: Valores · Objeções · Logística · Receitas | um por categoria |
-   | 4. Métricas | Ver scripts de confirmação e lembrete | `?category=Confirmação` e `?category=Lembrete` |
+### ChatGPT (Developer Mode / Connectors)
+- Settings → Connectors → Add custom MCP server
+- URL: `https://<ref>.supabase.co/functions/v1/mcp`
+- Transport: Streamable HTTP
+- Autorizar via popup OAuth → aprovar em `/.lovable/oauth/consent`
+- Verificar: as 3 tools aparecem na lista de ferramentas do conector.
 
-3. **CTA principal reforçado no fim do guia**
-   O bloco “Como aplicar isso no seu consultório hoje” ganha dois botões lado a lado:
-   - Primário: **“Abrir biblioteca de scripts”** → `/#biblioteca`
-   - Secundário: **“Ver protocolo completo”** → `/`
+### Claude Desktop (Custom Connectors — plano Pro/Team)
+- Settings → Connectors → Add custom connector → URL do MCP
+- Fluxo OAuth idêntico
+- Verificar: `formulate_reply`, `list_services`, `get_contact_info` listadas.
 
-4. **Barra sticky de conversão (topo do artigo)**
-   Uma faixa fina no topo do guia com um único botão “Copiar meus scripts de WhatsApp” → `/#biblioteca`, visível durante a leitura sem interromper o conteúdo. Reforça a conversão mesmo para quem só lê o começo.
+### Cursor
+- Settings → MCP → Add new server (Streamable HTTP)
+- URL do MCP + OAuth
+- Verificar descoberta em Cursor Chat.
 
-## Detalhes técnicos
+## Passo 3 — Execução de cada ferramenta (em cada cliente)
 
-- Uso de `<Link to={{ pathname: "/", hash: "biblioteca", search: "?category=Valores" }}>` do `react-router-dom`.
-- Em `MessageLibrary`, usar `useLocation()` + `useEffect` para aplicar `category`/`q` uma única vez e chamar `document.getElementById("biblioteca")?.scrollIntoView({ behavior: "smooth", block: "start" })`.
-- Se a categoria da URL não existir na lista atual, cai silenciosamente em “Todas”.
-- Nenhuma alteração em `messageLibrarySeed.ts`, edge functions ou lógica de negócio.
+| Tool | Prompt de teste | Resultado esperado |
+|---|---|---|
+| `list_services` | "Liste os serviços da Dra. Jéssica" | JSON com Primeira consulta R$400/90min, Retorno R$250/60min, Renovação R$150 |
+| `get_contact_info` | "Qual o CRM e site da Dra. Jéssica?" | CRM GO 31189, site drajessicacarpaneda.com.br |
+| `formulate_reply` (whatsapp) | "Formule resposta para: 'quanto custa a consulta?'" | Texto em 1ª pessoa citando R$400/90min |
+| `formulate_reply` (opiniao) | mode=opiniao, msg=avaliação 5★ | Agradecimento sem confirmar vínculo |
+| `formulate_reply` (novidade) | mode=novidade, tema=TDAH | Texto ≤750 chars, sem traços longos |
 
-## Fora de escopo
-- Rastreamento analítico dos cliques (pode ser adicionado depois).
-- Novas mensagens ou reorganização de categorias existentes.
+## Passo 3.5 — Checagem de logs
+- `supabase--edge_function_logs` para função `mcp` durante os testes: confirmar 200 nas chamadas de tools/list e tools/call; confirmar que `formulate_reply` chega ao Lovable AI Gateway sem erro.
+
+## Passo 4 — Critérios de aceitação
+- [ ] Os 3 clientes concluem OAuth e persistem sessão.
+- [ ] Cada cliente lista as 3 tools com metadados corretos.
+- [ ] Cada tool retorna dados válidos (não-erro) nos 5 cenários da tabela.
+- [ ] Logs não mostram 401/500 durante execução autorizada.
+
+## Passo 5 — Contingências
+- Se cliente rejeita issuer: verificar que `VITE_SUPABASE_PROJECT_ID` está inlined no bundle e issuer é `https://<ref>.supabase.co/auth/v1` (nunca `.lovable.cloud`).
+- Se `formulate_reply` falha: checar `LOVABLE_API_KEY` no ambiente da edge function.
+- Se Cursor/Claude não descobre: reimplantar função e revalidar manifest.
+
+## Entregável
+Relatório curto neste chat listando ✅/❌ por cliente × ferramenta, com screenshots ou trechos de log dos casos que falharem.
+
+## Notas técnicas
+- Nenhuma alteração de código é necessária se a validação passar. Correções aplicam-se apenas a `src/lib/mcp/**` + redeploy da função `mcp`.
+- Não editar `supabase/functions/mcp/index.ts` manualmente (auto-gerado).
