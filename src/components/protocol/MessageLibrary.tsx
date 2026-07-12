@@ -282,7 +282,7 @@ export const MessageLibrary = () => {
             Biblioteca de Mensagens
           </h2>
           <p className="text-muted-foreground">
-            Salve, edite e reutilize suas respostas do WhatsApp. Valores atuais: 90 min · R$ 400 e 60 min · R$ 230.
+            Salve, edite e reutilize suas respostas do WhatsApp. Valores atuais: 90 min · R$ 400 e 60 min · R$ 205.
             Tudo fica salvo no seu navegador.
           </p>
         </div>

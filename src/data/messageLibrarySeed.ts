@@ -1,5 +1,5 @@
 // Biblioteca de mensagens WhatsApp — sementes iniciais
-// Valores atualizados: Primeira consulta 90 min R$ 400 · Retorno 60 min R$ 230
+// Valores atualizados: Primeira consulta 90 min R$ 400 · Retorno 60 min R$ 205
 // Site: drajessicacarpaneda.com.br
 
 export type LibraryMessage = {
@@ -25,7 +25,7 @@ Enquanto isso, minha agenda online segue aberta — você pode agendar diretamen
 
 *Atendimento online:*
 • Primeira consulta — 90 min · R$ 400
-• Retorno — 60 min · R$ 230
+• Retorno — 60 min · R$ 205
 
 Qualquer dúvida, me escreva aqui que respondo pessoalmente 💙`,
   },
@@ -50,7 +50,7 @@ Te vejo em breve 💙`,
 
 Meus valores atuais para atendimento online:
 • *Primeira consulta* — 90 min · R$ 400
-• *Retorno* — 60 min · R$ 230
+• *Retorno* — 60 min · R$ 205
 • *Renovação de receita* (excepcional, pacientes já em acompanhamento) — R$ 150
 
 Você pode agendar diretamente pelo meu site:
@@ -69,7 +69,7 @@ Atendo em modelo *particular*, sem convênio — isso me permite oferecer consul
 Emito *recibo com CID* para você solicitar reembolso ao seu plano.
 
 • Primeira consulta — R$ 400
-• Retorno — R$ 230
+• Retorno — R$ 205
 
 Agendamento: ${SITE}`,
   },

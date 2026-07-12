@@ -95,7 +95,7 @@ export const ReplyFormulator = () => {
             Mensagem, opinião ou Novidade do perfil — pronto para copiar
           </h2>
           <p className="mt-3 text-muted-foreground max-w-2xl mx-auto">
-            Tudo em 1ª pessoa (você, Dra. Jéssica). Segue o protocolo: tom, valores (R$ 400 / R$ 230),
+            Tudo em 1ª pessoa (você, Dra. Jéssica). Segue o protocolo: tom, valores (R$ 400 / R$ 205),
             70/60 min, particular sem convênio, limites éticos do CFM e sigilo nas respostas públicas.
           </p>
         </div>
