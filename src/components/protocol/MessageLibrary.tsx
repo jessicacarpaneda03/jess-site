@@ -1,0 +1,291 @@
+import { useEffect, useMemo, useState } from "react";
+import { Copy, Plus, Pencil, Trash2, Save, X, Search, Download, Upload, RotateCcw } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
+import { Badge } from "@/components/ui/badge";
+import { Card } from "@/components/ui/card";
+import { toast } from "sonner";
+import { librarySeed, type LibraryMessage } from "@/data/messageLibrarySeed";
+
+const STORAGE_KEY = "whatsapp-message-library-v1";
+
+function loadMessages(): LibraryMessage[] {
+  try {
+    const raw = localStorage.getItem(STORAGE_KEY);
+    if (!raw) return librarySeed;
+    const parsed = JSON.parse(raw);
+    if (Array.isArray(parsed) && parsed.length) return parsed;
+    return librarySeed;
+  } catch {
+    return librarySeed;
+  }
+}
+
+function saveMessages(msgs: LibraryMessage[]) {
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(msgs));
+}
+
+function uid() {
+  return `msg-${Date.now()}-${Math.random().toString(36).slice(2, 7)}`;
+}
+
+export const MessageLibrary = () => {
+  const [messages, setMessages] = useState<LibraryMessage[]>(() => loadMessages());
+  const [query, setQuery] = useState("");
+  const [activeCategory, setActiveCategory] = useState<string>("Todas");
+  const [editingId, setEditingId] = useState<string | null>(null);
+  const [draft, setDraft] = useState<LibraryMessage | null>(null);
+
+  useEffect(() => {
+    saveMessages(messages);
+  }, [messages]);
+
+  const categories = useMemo(() => {
+    const set = new Set(messages.map((m) => m.category));
+    return ["Todas", ...Array.from(set).sort()];
+  }, [messages]);
+
+  const filtered = useMemo(() => {
+    const q = query.trim().toLowerCase();
+    return messages.filter((m) => {
+      const matchCat = activeCategory === "Todas" || m.category === activeCategory;
+      const matchQuery =
+        !q ||
+        m.title.toLowerCase().includes(q) ||
+        m.text.toLowerCase().includes(q) ||
+        m.category.toLowerCase().includes(q);
+      return matchCat && matchQuery;
+    });
+  }, [messages, query, activeCategory]);
+
+  const startNew = () => {
+    setDraft({ id: uid(), category: "Geral", title: "", text: "" });
+    setEditingId("__new__");
+  };
+
+  const startEdit = (m: LibraryMessage) => {
+    setDraft({ ...m });
+    setEditingId(m.id);
+  };
+
+  const cancelEdit = () => {
+    setDraft(null);
+    setEditingId(null);
+  };
+
+  const saveDraft = () => {
+    if (!draft) return;
+    if (!draft.title.trim() || !draft.text.trim()) {
+      toast.error("Preencha título e texto.");
+      return;
+    }
+    const cleaned: LibraryMessage = {
+      ...draft,
+      category: draft.category.trim() || "Geral",
+      title: draft.title.trim(),
+    };
+    setMessages((prev) => {
+      const exists = prev.some((m) => m.id === cleaned.id);
+      return exists ? prev.map((m) => (m.id === cleaned.id ? cleaned : m)) : [cleaned, ...prev];
+    });
+    toast.success("Mensagem salva.");
+    cancelEdit();
+  };
+
+  const removeMessage = (id: string) => {
+    setMessages((prev) => prev.filter((m) => m.id !== id));
+    toast.success("Mensagem removida.");
+  };
+
+  const copyText = async (text: string) => {
+    await navigator.clipboard.writeText(text);
+    toast.success("Copiada para o WhatsApp.");
+  };
+
+  const exportJson = () => {
+    const blob = new Blob([JSON.stringify(messages, null, 2)], { type: "application/json" });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = "biblioteca-mensagens-whatsapp.json";
+    a.click();
+    URL.revokeObjectURL(url);
+  };
+
+  const importJson = async (file: File) => {
+    try {
+      const text = await file.text();
+      const parsed = JSON.parse(text);
+      if (!Array.isArray(parsed)) throw new Error("Formato inválido");
+      const merged: LibraryMessage[] = [...messages];
+      for (const item of parsed) {
+        if (item?.title && item?.text) {
+          merged.unshift({
+            id: item.id || uid(),
+            category: item.category || "Importadas",
+            title: String(item.title),
+            text: String(item.text),
+          });
+        }
+      }
+      setMessages(merged);
+      toast.success("Mensagens importadas.");
+    } catch {
+      toast.error("Arquivo inválido.");
+    }
+  };
+
+  const resetSeed = () => {
+    if (confirm("Restaurar as mensagens iniciais? Suas edições serão substituídas.")) {
+      setMessages(librarySeed);
+      toast.success("Biblioteca restaurada.");
+    }
+  };
+
+  return (
+    <section className="py-16 px-4 bg-background border-t border-border">
+      <div className="max-w-6xl mx-auto">
+        <div className="mb-8">
+          <h2 className="text-3xl md:text-4xl font-serif font-medium text-foreground mb-2">
+            Biblioteca de Mensagens
+          </h2>
+          <p className="text-muted-foreground">
+            Salve, edite e reutilize suas respostas do WhatsApp. Valores atuais: 90 min · R$ 400 e 60 min · R$ 250.
+            Tudo fica salvo no seu navegador.
+          </p>
+        </div>
+
+        {/* Toolbar */}
+        <div className="flex flex-wrap gap-2 mb-4">
+          <div className="relative flex-1 min-w-[200px]">
+            <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
+            <Input
+              value={query}
+              onChange={(e) => setQuery(e.target.value)}
+              placeholder="Buscar por título, texto ou categoria..."
+              className="pl-9"
+            />
+          </div>
+          <Button onClick={startNew} className="gap-2">
+            <Plus className="h-4 w-4" /> Nova mensagem
+          </Button>
+          <Button variant="outline" onClick={exportJson} className="gap-2">
+            <Download className="h-4 w-4" /> Exportar
+          </Button>
+          <label className="inline-flex">
+            <Button variant="outline" asChild className="gap-2 cursor-pointer">
+              <span>
+                <Upload className="h-4 w-4" /> Importar
+              </span>
+            </Button>
+            <input
+              type="file"
+              accept="application/json"
+              className="hidden"
+              onChange={(e) => {
+                const f = e.target.files?.[0];
+                if (f) importJson(f);
+                e.target.value = "";
+              }}
+            />
+          </label>
+          <Button variant="ghost" onClick={resetSeed} className="gap-2">
+            <RotateCcw className="h-4 w-4" /> Restaurar
+          </Button>
+        </div>
+
+        {/* Categorias */}
+        <div className="flex flex-wrap gap-2 mb-6">
+          {categories.map((cat) => (
+            <button
+              key={cat}
+              onClick={() => setActiveCategory(cat)}
+              className={`px-3 py-1.5 rounded-full text-sm transition-colors border ${
+                activeCategory === cat
+                  ? "bg-primary text-primary-foreground border-primary"
+                  : "bg-background text-muted-foreground border-border hover:bg-muted"
+              }`}
+            >
+              {cat}
+            </button>
+          ))}
+        </div>
+
+        {/* Editor */}
+        {draft && (
+          <Card className="p-4 mb-6 border-primary/40">
+            <div className="grid gap-3">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                <Input
+                  value={draft.title}
+                  onChange={(e) => setDraft({ ...draft, title: e.target.value })}
+                  placeholder="Título (ex: Confirmação de agendamento)"
+                />
+                <Input
+                  value={draft.category}
+                  onChange={(e) => setDraft({ ...draft, category: e.target.value })}
+                  placeholder="Categoria (ex: Valores, Ausência, Boas-vindas)"
+                />
+              </div>
+              <Textarea
+                value={draft.text}
+                onChange={(e) => setDraft({ ...draft, text: e.target.value })}
+                placeholder="Texto da mensagem..."
+                className="min-h-[180px] font-mono text-sm"
+              />
+              <div className="flex gap-2 justify-end">
+                <Button variant="ghost" onClick={cancelEdit} className="gap-2">
+                  <X className="h-4 w-4" /> Cancelar
+                </Button>
+                <Button onClick={saveDraft} className="gap-2">
+                  <Save className="h-4 w-4" /> Salvar
+                </Button>
+              </div>
+            </div>
+          </Card>
+        )}
+
+        {/* Lista */}
+        <div className="grid gap-4 md:grid-cols-2">
+          {filtered.map((m) => (
+            <Card key={m.id} className="p-4 flex flex-col gap-3">
+              <div className="flex items-start justify-between gap-2">
+                <div>
+                  <Badge variant="secondary" className="mb-1">
+                    {m.category}
+                  </Badge>
+                  <h3 className="font-medium text-foreground">{m.title}</h3>
+                </div>
+                <div className="flex gap-1 shrink-0">
+                  <Button size="icon" variant="ghost" onClick={() => copyText(m.text)} title="Copiar">
+                    <Copy className="h-4 w-4" />
+                  </Button>
+                  <Button size="icon" variant="ghost" onClick={() => startEdit(m)} title="Editar">
+                    <Pencil className="h-4 w-4" />
+                  </Button>
+                  <Button
+                    size="icon"
+                    variant="ghost"
+                    onClick={() => removeMessage(m.id)}
+                    title="Remover"
+                  >
+                    <Trash2 className="h-4 w-4" />
+                  </Button>
+                </div>
+              </div>
+              <pre className="whitespace-pre-wrap text-sm text-muted-foreground font-sans leading-relaxed max-h-64 overflow-auto">
+                {m.text}
+              </pre>
+            </Card>
+          ))}
+          {filtered.length === 0 && (
+            <div className="col-span-full text-center text-muted-foreground py-12">
+              Nenhuma mensagem encontrada.
+            </div>
+          )}
+        </div>
+      </div>
+    </section>
+  );
+};

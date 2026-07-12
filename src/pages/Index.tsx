@@ -3,6 +3,7 @@ import { Stages } from "@/components/protocol/Stages";
 import { Scripts } from "@/components/protocol/Scripts";
 import { PublicReplies } from "@/components/protocol/PublicReplies";
 import { QuickReplies } from "@/components/protocol/QuickReplies";
+import { MessageLibrary } from "@/components/protocol/MessageLibrary";
 import { ReplyFormulator } from "@/components/protocol/ReplyFormulator";
 import { Scales } from "@/components/protocol/Scales";
 import { Anamnese } from "@/components/protocol/Anamnese";
@@ -23,6 +24,7 @@ const Index = () => (
     <DoctoraliaReviewReplies />
     <DoctoraliaTopics />
     <QuickReplies />
+    <MessageLibrary />
     <ReplyFormulator />
     <Scales />
     <Anamnese />
