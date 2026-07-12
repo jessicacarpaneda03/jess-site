@@ -203,6 +203,13 @@ export const MessageLibrary = () => {
     toast.success("Copiada para o WhatsApp.");
   };
 
+  const copyFinal = async (text: string) => {
+    const rendered = extractVars(text).length ? applyVars(text, varValues) : text;
+    const formatted = formatForWhatsApp(rendered);
+    await navigator.clipboard.writeText(formatted);
+    toast.success("Versão final formatada copiada.");
+  };
+
 
   const exportJson = () => {
     const blob = new Blob([JSON.stringify(messages, null, 2)], { type: "application/json" });
