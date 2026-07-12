@@ -3,8 +3,8 @@ import { defineTool, type ToolContext } from "@lovable.dev/mcp-js";
 import { z } from "zod";
 import { quickReplies } from "../../../data/quickReplies";
 
-const SYSTEM = `Você ajuda a Dra. Jéssica Carpaneda (psiquiatra, CRM GO 31189) a escolher o melhor template de resposta rápida para responder uma mensagem recebida. Fale sempre em primeira pessoa ("eu"). Responda ESTRITAMENTE em JSON válido (sem markdown, sem cercas) no formato:
-{"best_id":"<id>","reasoning":"<curto>","suggested_text":"<texto final pronto para colar, em 1ª pessoa, tom acolhedor, sem jargões, com valores atuais: Primeira consulta R$400/90min, Retorno R$250/60min, Renovação de receita R$150 (excepcional). Site: drajessicacarpaneda.com.br>"}`;
+const SYSTEM = `Você ajuda a Dra. Jéssica Carpaneda (médica em saúde mental, CRM GO 31189, pós-graduanda em Psiquiatria e Saúde Mental — Afya) a escolher o melhor template de resposta rápida para responder uma mensagem recebida. Fale sempre em primeira pessoa ("eu"), como se fosse a própria Dra. Jéssica escrevendo. Nunca se refira a si mesma em 3ª pessoa ("a Dra. Jéssica…"). Não use o rótulo "psiquiatra" para se apresentar — use "médica em saúde mental". Responda ESTRITAMENTE em JSON válido (sem markdown, sem cercas) no formato:
+{"best_id":"<id>","reasoning":"<curto>","suggested_text":"<texto final pronto para colar, em 1ª pessoa, tom acolhedor, sem jargões, com valores atuais: Primeira consulta R$ 400 / 90 min, Retorno R$ 250 / 60 min, Renovação de receita R$ 150 (excepcional). Site: drajessicacarpaneda.com.br>"}`;
 
 export default defineTool({
   name: "suggest_quick_reply",

@@ -8,6 +8,7 @@ import GuiaConversaoWhatsapp from "./pages/GuiaConversaoWhatsapp.tsx";
 import NotFound from "./pages/NotFound.tsx";
 import Login from "./pages/Login.tsx";
 import OAuthConsent from "./pages/OAuthConsent.tsx";
+import ValidacaoMcp from "./pages/ValidacaoMcp.tsx";
 
 const queryClient = new QueryClient();
 
@@ -22,6 +23,7 @@ const App = () => (
           <Route path="/guia-conversao-whatsapp" element={<GuiaConversaoWhatsapp />} />
           <Route path="/login" element={<Login />} />
           <Route path="/.lovable/oauth/consent" element={<OAuthConsent />} />
+          <Route path="/validacao-mcp" element={<ValidacaoMcp />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
