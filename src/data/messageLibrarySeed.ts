@@ -92,10 +92,10 @@ Agendamento pelo site: ${SITE} 💙`,
     id: "seed-confirmacao",
     category: "Confirmação",
     title: "Confirmação de agendamento",
-    text: `Perfeito! Sua consulta está confirmada ✅
+    text: `Oi {{nome}}! Sua consulta está confirmada ✅
 
-📅 *Data:* [DATA]
-🕒 *Horário:* [HORA]
+📅 *Data:* {{data}}
+🕒 *Horário:* {{hora}}
 💻 *Formato:* Online (vídeo)
 
 Vou te enviar o link da chamada *30 minutos antes* do horário.
@@ -107,15 +107,16 @@ Até lá 💙`,
     id: "seed-lembrete",
     category: "Lembrete",
     title: "Lembrete véspera",
-    text: `Oi! Passando só pra lembrar da nossa consulta amanhã 🌿
+    text: `Oi {{nome}}! Passando só pra lembrar da nossa consulta amanhã 🌿
 
-🕒 [HORA]
+🕒 {{hora}}
 💻 Online (envio o link 30 min antes)
 
 Separe um espaço tranquilo e, se usar medicação, deixe as caixas por perto.
 
 Até amanhã 💙`,
   },
+
   {
     id: "seed-pos-consulta",
     category: "Pós-consulta",
