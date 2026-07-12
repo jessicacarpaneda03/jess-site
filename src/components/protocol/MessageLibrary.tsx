@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState } from "react";
-import { Copy, Plus, Pencil, Trash2, Save, X, Search, Download, Upload, RotateCcw, Wand2 } from "lucide-react";
+import { Copy, Plus, Pencil, Trash2, Save, X, Search, Download, Upload, RotateCcw, Wand2, Sparkles } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -42,6 +42,43 @@ function applyVars(text: string, values: Record<string, string>): string {
     const v = values[key];
     return v && v.trim() ? v : `{{${name}}}`;
   });
+}
+
+// Formata texto para WhatsApp: quebras ideais, negrito/itálico nativos,
+// remove espaços extras, garante uma linha em branco entre parágrafos e
+// quebra frases longas em blocos legíveis no celular.
+function formatForWhatsApp(input: string): string {
+  let text = input.replace(/\r\n/g, "\n");
+
+  // Markdown -> WhatsApp
+  text = text.replace(/\*\*(.+?)\*\*/g, "*$1*"); // **negrito** -> *negrito*
+  text = text.replace(/__(.+?)__/g, "_$1_");     // __itálico__ -> _itálico_
+  text = text.replace(/~~(.+?)~~/g, "~$1~");     // ~~risco~~ -> ~risco~
+
+  // Limpa espaços em cada linha
+  text = text
+    .split("\n")
+    .map((l) => l.replace(/[ \t]+/g, " ").trim())
+    .join("\n");
+
+  // Colapsa 3+ quebras em 2 (parágrafos com uma linha em branco)
+  text = text.replace(/\n{3,}/g, "\n\n");
+
+  // Quebra parágrafos muito longos em frases (>280 chars vira uma frase por linha)
+  text = text
+    .split("\n\n")
+    .map((para) => {
+      if (para.length <= 280 || /^[-•\d]/.test(para)) return para;
+      const sentences = para.match(/[^.!?]+[.!?]+[)"']?\s?|[^.!?]+$/g);
+      if (!sentences) return para;
+      return sentences.map((s) => s.trim()).filter(Boolean).join("\n");
+    })
+    .join("\n\n");
+
+  // Normaliza bullets em listas
+  text = text.replace(/^\s*[-*]\s+/gm, "• ");
+
+  return text.trim();
 }
 
 
@@ -164,6 +201,13 @@ export const MessageLibrary = () => {
     }
     await navigator.clipboard.writeText(text);
     toast.success("Copiada para o WhatsApp.");
+  };
+
+  const copyFinal = async (text: string) => {
+    const rendered = extractVars(text).length ? applyVars(text, varValues) : text;
+    const formatted = formatForWhatsApp(rendered);
+    await navigator.clipboard.writeText(formatted);
+    toast.success("Versão final formatada copiada.");
   };
 
 
@@ -358,8 +402,17 @@ export const MessageLibrary = () => {
                         <Wand2 className="h-4 w-4" />
                       </Button>
                     )}
-                    <Button size="icon" variant="ghost" onClick={() => copyText(m.text)} title="Copiar">
+                    <Button size="icon" variant="ghost" onClick={() => copyText(m.text)} title="Copiar original">
                       <Copy className="h-4 w-4" />
+                    </Button>
+                    <Button
+                      size="icon"
+                      variant="ghost"
+                      onClick={() => copyFinal(m.text)}
+                      title="Gerar versão final formatada para WhatsApp"
+                      className="text-primary hover:text-primary"
+                    >
+                      <Sparkles className="h-4 w-4" />
                     </Button>
                     <Button size="icon" variant="ghost" onClick={() => startEdit(m)} title="Editar">
                       <Pencil className="h-4 w-4" />
@@ -388,9 +441,14 @@ export const MessageLibrary = () => {
                         />
                       </div>
                     ))}
-                    <Button size="sm" onClick={() => copyText(m.text)} className="gap-2 mt-1">
-                      <Copy className="h-3.5 w-3.5" /> Copiar personalizada
-                    </Button>
+                    <div className="flex gap-2 mt-1">
+                      <Button size="sm" variant="outline" onClick={() => copyText(m.text)} className="gap-2 flex-1">
+                        <Copy className="h-3.5 w-3.5" /> Copiar
+                      </Button>
+                      <Button size="sm" onClick={() => copyFinal(m.text)} className="gap-2 flex-1">
+                        <Sparkles className="h-3.5 w-3.5" /> Versão final
+                      </Button>
+                    </div>
                   </div>
                 )}
 
