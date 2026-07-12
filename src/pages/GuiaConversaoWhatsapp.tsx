@@ -1,6 +1,6 @@
 import { Helmet } from "react-helmet-async";
 import { Link } from "react-router-dom";
-import { ArrowLeft, MessageCircle, Clock, Heart, Shield, TrendingUp, CheckCircle2 } from "lucide-react";
+import { ArrowLeft, MessageCircle, Clock, Heart, Shield, TrendingUp, CheckCircle2, Copy } from "lucide-react";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -10,7 +10,16 @@ const TITLE = "Como aumentar a conversão de pacientes via WhatsApp na Psiquiatr
 const DESCRIPTION =
   "Guia prático de marketing médico e atendimento ao paciente: velocidade de resposta, tom humanizado e scripts de WhatsApp que aumentam a conversão em clínicas de psiquiatria.";
 
-const sections = [
+type Cta = { label: string; category: string };
+
+const sections: {
+  id: string;
+  icon: typeof MessageCircle;
+  title: string;
+  body: string[];
+  checklist?: string[];
+  ctas?: Cta[];
+}[] = [
   {
     id: "por-que-whatsapp",
     icon: MessageCircle,
@@ -34,6 +43,10 @@ const sections = [
       "Aviso claro do próximo horário em que você responde pessoalmente",
       "Mensagem de ausência específica para congressos e finais de semana",
     ],
+    ctas: [
+      { label: "Copiar script de boas-vindas", category: "Boas-vindas" },
+      { label: "Copiar aviso de ausência", category: "Ausência" },
+    ],
   },
   {
     id: "tom",
@@ -48,6 +61,9 @@ const sections = [
       "Zero jargão psiquiátrico na porta de entrada",
       "Emojis discretos (🌿 💙) sinalizam acolhimento sem infantilizar",
       "Uso do nome do paciente quando ele se identifica",
+    ],
+    ctas: [
+      { label: "Copiar script de primeira vez", category: "Primeira vez" },
     ],
   },
   {
@@ -65,6 +81,12 @@ const sections = [
       "Script de logística online (link, ambiente, exames)",
       "Script de renovação de receita apenas para pacientes já em acompanhamento",
     ],
+    ctas: [
+      { label: "Valores", category: "Valores" },
+      { label: "Objeções", category: "Objeções" },
+      { label: "Logística", category: "Logística" },
+      { label: "Receitas", category: "Receitas" },
+    ],
   },
   {
     id: "metricas",
@@ -79,8 +101,20 @@ const sections = [
       "Origem do contato (Doctoralia, Google, indicação, Instagram)",
       "Motivo de desistência quando o paciente para de responder",
     ],
+    ctas: [
+      { label: "Copiar confirmação de agendamento", category: "Confirmação" },
+      { label: "Copiar lembrete de consulta", category: "Lembrete" },
+    ],
   },
 ];
+
+function libraryLink(category?: string) {
+  return {
+    pathname: "/",
+    search: category ? `?category=${encodeURIComponent(category)}` : "",
+    hash: "biblioteca",
+  };
+}
 
 export default function GuiaConversaoWhatsapp() {
   const articleSchema = {
@@ -110,6 +144,20 @@ export default function GuiaConversaoWhatsapp() {
         <script type="application/ld+json">{JSON.stringify(articleSchema)}</script>
       </Helmet>
 
+      {/* Sticky conversion bar */}
+      <div className="sticky top-0 z-30 border-b border-border bg-background/90 backdrop-blur">
+        <div className="max-w-3xl mx-auto px-4 py-2 flex items-center justify-between gap-3">
+          <span className="text-xs md:text-sm text-muted-foreground hidden sm:inline">
+            Scripts prontos para colar no WhatsApp
+          </span>
+          <Button asChild size="sm" className="gap-2 ml-auto">
+            <Link to={libraryLink()}>
+              <Copy className="h-3.5 w-3.5" /> Copiar meus scripts
+            </Link>
+          </Button>
+        </div>
+      </div>
+
       <div className="max-w-3xl mx-auto px-4 py-12">
         <Link
           to="/"
@@ -129,7 +177,7 @@ export default function GuiaConversaoWhatsapp() {
         </header>
 
         <article className="space-y-10">
-          {sections.map(({ id, icon: Icon, title, body, checklist }) => (
+          {sections.map(({ id, icon: Icon, title, body, checklist, ctas }) => (
             <section key={id} id={id} className="scroll-mt-20">
               <div className="flex items-center gap-3 mb-4">
                 <div className="p-2 rounded-md bg-primary/10 text-primary">
@@ -156,6 +204,23 @@ export default function GuiaConversaoWhatsapp() {
                   </ul>
                 </Card>
               )}
+              {ctas && ctas.length > 0 && (
+                <div className="mt-4 flex flex-wrap gap-2">
+                  {ctas.map((cta) => (
+                    <Button
+                      key={cta.category}
+                      asChild
+                      size="sm"
+                      variant={ctas.length > 1 ? "outline" : "default"}
+                      className="gap-2"
+                    >
+                      <Link to={libraryLink(cta.category)}>
+                        <Copy className="h-3.5 w-3.5" /> {cta.label}
+                      </Link>
+                    </Button>
+                  ))}
+                </div>
+              )}
             </section>
           ))}
 
@@ -168,9 +233,16 @@ export default function GuiaConversaoWhatsapp() {
               dinâmicas, formulador de respostas com IA, scripts de risco, respostas para opiniões
               públicas e calendário de novidades. Basta ajustar aos seus valores e ao seu tom.
             </p>
-            <Button asChild>
-              <Link to="/">Abrir protocolo de atendimento</Link>
-            </Button>
+            <div className="flex flex-wrap gap-2">
+              <Button asChild className="gap-2">
+                <Link to={libraryLink()}>
+                  <Copy className="h-4 w-4" /> Abrir biblioteca de scripts
+                </Link>
+              </Button>
+              <Button asChild variant="outline">
+                <Link to="/">Ver protocolo completo</Link>
+              </Button>
+            </div>
           </section>
         </article>
       </div>
