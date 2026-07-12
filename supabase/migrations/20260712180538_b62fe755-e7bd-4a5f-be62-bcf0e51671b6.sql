@@ -1,0 +1,1 @@
+REVOKE EXECUTE ON FUNCTION public.tg_quick_reply_audit() FROM PUBLIC, anon, authenticated;
