@@ -402,8 +402,17 @@ export const MessageLibrary = () => {
                         <Wand2 className="h-4 w-4" />
                       </Button>
                     )}
-                    <Button size="icon" variant="ghost" onClick={() => copyText(m.text)} title="Copiar">
+                    <Button size="icon" variant="ghost" onClick={() => copyText(m.text)} title="Copiar original">
                       <Copy className="h-4 w-4" />
+                    </Button>
+                    <Button
+                      size="icon"
+                      variant="ghost"
+                      onClick={() => copyFinal(m.text)}
+                      title="Gerar versão final formatada para WhatsApp"
+                      className="text-primary hover:text-primary"
+                    >
+                      <Sparkles className="h-4 w-4" />
                     </Button>
                     <Button size="icon" variant="ghost" onClick={() => startEdit(m)} title="Editar">
                       <Pencil className="h-4 w-4" />
