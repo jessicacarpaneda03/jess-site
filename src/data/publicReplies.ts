@@ -44,7 +44,7 @@ export const publicReplies: PublicReply[] = [
 A Dra. Jéssica Carpaneda atende exclusivamente como particular, sem vínculo com convênios no momento. Após a consulta, é emitido recibo com CRM e CID, que pode ser usado para reembolso junto ao seu plano (a maioria oferece reembolso parcial — vale consultar diretamente com o seu).
 
 • Primeira consulta: R$ 400 (90 min)
-• Retorno: R$ 205 (60 min)
+• Retorno: R$ 250 (60 min)
 • 100% online, em todo o Brasil
 
 Se quiser agendar: ${LINK}
@@ -72,7 +72,7 @@ Para agendar: ${LINK}`,
 Os valores praticados pela Dra. Jéssica Carpaneda em {{especialidade}} são:
 
 • Primeira consulta — R$ 400 (90 min)
-• Retorno — R$ 205 (60 min)
+• Retorno — R$ 250 (60 min)
 • Diagnóstico e acompanhamento de TDAH em adultos — R$ 400
 
 Atendimento exclusivamente por telemedicina (videochamada), com mesma validade legal de uma consulta presencial. Receitas e relatórios são enviados digitalmente.
@@ -129,7 +129,7 @@ Se quiser conversar com a doutora: ${LINK}`,
     question: "Só preciso renovar a receita, posso?",
     answer: `Olá, {{nome}}! 🌿
 
-A renovação de receita exige consulta médica — é uma exigência ética e legal do CFM, não apenas do consultório. Pacientes em acompanhamento com a Dra. Jéssica podem agendar um retorno (R$ 205, 60 min) onde a medicação é reavaliada e a receita reemitida na hora.
+A renovação de receita exige consulta médica — é uma exigência ética e legal do CFM, não apenas do consultório. Pacientes em acompanhamento com a Dra. Jéssica podem agendar um retorno (R$ 250, 60 min) onde a medicação é reavaliada e a receita reemitida na hora.
 
 Para pacientes novos, é necessária a primeira consulta (R$ 400), que permite à doutora conhecer seu histórico antes de assumir a prescrição com segurança.
 
@@ -179,7 +179,7 @@ Para agendar: ${LINK}`,
 
 Por questões éticas e de segurança, a Dra. Jéssica não orienta sobre dose, ajuste ou troca de medicação fora de consulta — cada pessoa responde de forma diferente, e uma orientação genérica pode causar prejuízo.
 
-Se a dúvida é urgente e você já é paciente, agende um retorno breve (R$ 205). Se ainda não é paciente, a primeira consulta (R$ 400) permite avaliar com segurança.
+Se a dúvida é urgente e você já é paciente, agende um retorno breve (R$ 250). Se ainda não é paciente, a primeira consulta (R$ 400) permite avaliar com segurança.
 
 Em caso de efeito adverso grave, procure um pronto-socorro.
 
@@ -475,7 +475,7 @@ Para agendar retorno: ${LINK}`,
     question: "Já fui paciente há um tempo, conta como retorno?",
     answer: `Olá, {{nome}}! Que bom ter você de volta. 🌿
 
-Pacientes com último atendimento há até 12 meses podem agendar como retorno (R$ 205). Acima desse prazo, a recomendação é nova primeira consulta (R$ 400), para a doutora reavaliar seu quadro com calma e atualizar o plano de cuidado.
+Pacientes com último atendimento há até 12 meses podem agendar como retorno (R$ 250). Acima desse prazo, a recomendação é nova primeira consulta (R$ 400), para a doutora reavaliar seu quadro com calma e atualizar o plano de cuidado.
 
 Para agendar: ${LINK}`,
   },

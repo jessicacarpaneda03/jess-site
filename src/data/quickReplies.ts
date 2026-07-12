@@ -223,7 +223,7 @@ Pra reagendar: ${LINK}`,
   },
 
   // ---------------- ATALHOS (sintéticos, 1ª pessoa) ----------------
-  { id: "a-valor", tab: "atalhos", tag: "Valor", label: "Valor da consulta", text: `Primeira consulta R$ 400 (90 min) e retorno R$ 205 (60 min), {{nome}}. Tudo online. Agendamento: ${LINK}` },
+  { id: "a-valor", tab: "atalhos", tag: "Valor", label: "Valor da consulta", text: `Primeira consulta R$ 400 (90 min) e retorno R$ 250 (60 min), {{nome}}. Tudo online. Agendamento: ${LINK}` },
   { id: "a-convenio", tab: "atalhos", tag: "Convênio", label: "Convênio (curto)", text: `Não atendo convênio, {{nome}} — só particular. Emito recibo pra você pedir reembolso ao seu plano de saúde, quando aplicável. Agendamento: ${LINK}` },
   { id: "a-online", tab: "atalhos", tag: "Telemedicina", label: "Só online?", text: `Sim, {{nome}}, atendimento 100% online por videochamada — mesma validade legal de consulta presencial. Atendo todo o Brasil. ${LINK}` },
   { id: "a-receita", tab: "atalhos", tag: "Receita", label: "Receita controlada", text: `{{nome}}, condutas e encaminhamentos são definidos com base na avaliação clínica feita na consulta — tudo conversado com você. ${LINK}` },
@@ -244,7 +244,7 @@ Pra reagendar: ${LINK}`,
   { id: "a-cancelar", tab: "atalhos", tag: "Agenda", label: "Cancelar / reagendar", text: `Sem problema, {{nome}} — cancelamentos com mais de 24h têm reembolso integral pela Doctoralia. Pra reagendar: ${LINK}` },
   { id: "a-atestado", tab: "atalhos", tag: "Documentos", label: "Atestado", text: `Sim, {{nome}}, emito atestados, relatórios e laudos quando clinicamente indicado, com assinatura digital válida.` },
   { id: "a-recibo", tab: "atalhos", tag: "Documentos", label: "Recibo IR", text: `Sim, {{nome}}, o recibo serve pra dedução no IR e também pra pedido de reembolso ao plano de saúde.` },
-  { id: "a-renovar", tab: "atalhos", tag: "Receita", label: "Renovar receita", text: `Renovações e ajustes de conduta exigem uma consulta de retorno, {{nome}} — questão ética. Pacientes em acompanhamento agendam um retorno (R$ 205). ${LINK}` },
+  { id: "a-renovar", tab: "atalhos", tag: "Receita", label: "Renovar receita", text: `Renovações e ajustes de conduta exigem uma consulta de retorno, {{nome}} — questão ética. Pacientes em acompanhamento agendam um retorno (R$ 250). ${LINK}` },
   { id: "a-fora-brasil", tab: "atalhos", tag: "Telemedicina", label: "Fora do Brasil", text: `Sim, {{nome}}, brasileiros morando fora podem se consultar normalmente — basta CPF ativo. ${LINK}` },
   { id: "a-urgencia", tab: "atalhos", tag: "Urgência", label: "Crise / urgência", text: `{{nome}}, se houver risco agora, por favor ligue no CVV 188 (24h) ou procure um pronto-socorro. Meu atendimento é ambulatorial e agendado. 💚` },
 
@@ -417,7 +417,7 @@ Se quiser checar: ${LINK}`,
 Não tenho vínculo com a SulAmérica nem com outros convênios no momento. Atendo por telemedicina e, por não ter custos de clínica física, consigo praticar valores mais acessíveis sem abrir mão da qualidade:
 
 • Primeira consulta — R$ 400 (90 min)
-• Retorno — R$ 205 (60 min)
+• Retorno — R$ 250 (60 min)
 • Suporte por WhatsApp entre consultas
 • Documentos sem custo extra quando indicados
 
@@ -434,7 +434,7 @@ A teleconsulta tem a mesma validade legal da presencial, e muitos pacientes se s
 Não atendo pela Amil — não tenho vínculo com convênios. Mas atendo 100% por telemedicina, e por isso consigo manter valores mais acessíveis sem perder qualidade:
 
 • Primeira consulta — R$ 400 (90 min)
-• Retorno — R$ 205 (60 min)
+• Retorno — R$ 250 (60 min)
 • Suporte por WhatsApp entre consultas
 • Documentos sem custo extra quando indicados
 
@@ -451,7 +451,7 @@ A teleconsulta tem a mesma validade da presencial e muitos pacientes preferem pe
 Não tenho vínculo com o Bradesco Saúde nem com outros convênios. O atendimento é 100% por telemedicina, o que me permite praticar valores mais acessíveis sem abrir mão da qualidade:
 
 • Primeira consulta — R$ 400 (90 min)
-• Retorno — R$ 205 (60 min)
+• Retorno — R$ 250 (60 min)
 • Suporte por WhatsApp entre consultas
 • Documentos sem custo extra quando indicados
 
@@ -468,7 +468,7 @@ A teleconsulta tem a mesma validade legal da presencial e oferece o conforto de 
 Não atendo pela Unimed — não tenho vínculo com convênios. Atendo por telemedicina e, por não ter custos de clínica física, consigo praticar valores mais acessíveis sem perder qualidade:
 
 • Primeira consulta — R$ 400 (90 min)
-• Retorno — R$ 205 (60 min)
+• Retorno — R$ 250 (60 min)
 • Suporte por WhatsApp entre consultas
 • Documentos sem custo extra quando indicados
 
@@ -485,7 +485,7 @@ A teleconsulta tem a mesma validade da presencial e muitos pacientes preferem o 
 Por não ter custos de clínica física, mantenho valores mais acessíveis sem perder qualidade:
 
 • Primeira consulta — R$ 400 (90 min)
-• Retorno — R$ 205 (60 min)
+• Retorno — R$ 250 (60 min)
 • Suporte por WhatsApp entre consultas
 • Documentos sem custo extra quando indicados
 
@@ -823,7 +823,7 @@ Manda preenchido por aqui que eu reviso com você. 💚`,
 
   // ── Valores (04–08)
   { id: "n04", tab: "atalhos", tag: "04. Valor", label: "04. Valor 1ª consulta", text: `Primeira consulta: R$ 400 (90 min, online), {{nome}}. Inclui avaliação completa e plano de cuidado individualizado. Agendamento: ${LINK}` },
-  { id: "n05", tab: "atalhos", tag: "05. Valor", label: "05. Valor retorno", text: `Retorno: R$ 205 (60 min, online), {{nome}}. Indicado para acompanhamento, ajustes e renovação de conduta. ${LINK}` },
+  { id: "n05", tab: "atalhos", tag: "05. Valor", label: "05. Valor retorno", text: `Retorno: R$ 250 (60 min, online), {{nome}}. Indicado para acompanhamento, ajustes e renovação de conduta. ${LINK}` },
   { id: "n06", tab: "atalhos", tag: "06. Valor", label: "06. Por que esse valor", text: `O valor reflete formação especializada, consulta longa, suporte pós-consulta por WhatsApp e documentos sem custo extra quando indicados (exceto envio físico de receita A/B), {{nome}}. 🌿` },
   { id: "n07", tab: "atalhos", tag: "07. Valor", label: "07. Parcelamento", text: `Sim, {{nome}}! O checkout da Doctoralia permite parcelar no cartão de crédito (sujeito às condições da operadora). ${LINK}` },
   { id: "n08", tab: "atalhos", tag: "08. Valor", label: "08. Desconto / social", text: `{{nome}}, hoje não trabalho com descontos individuais — pra manter equidade entre pacientes. Se o valor pesar, posso te indicar serviços públicos (CAPS, UBS) ou clínicas-escola. 💚` },
@@ -874,7 +874,7 @@ Manda preenchido por aqui que eu reviso com você. 💚`,
   { id: "n41", tab: "atalhos", tag: "41. Doc", label: "41. Recibo IR", text: `Sim, {{nome}}, o recibo serve para dedução no Imposto de Renda e reembolso parcial pelo plano de saúde, quando aplicável.` },
   { id: "n42", tab: "atalhos", tag: "42. Doc", label: "42. Laudo INSS", text: `Laudo para INSS é emitido quando há indicação clínica de afastamento, {{nome}}. Pode requerer mais de uma consulta para histórico consistente. 🌿` },
   { id: "n43", tab: "atalhos", tag: "43. Doc", label: "43. Declaração de comparecimento", text: `Claro, {{nome}}! Declaração de comparecimento é gratuita e enviada por e-mail logo após a consulta.` },
-  { id: "n44", tab: "atalhos", tag: "44. Doc", label: "44. 2ª via de receita", text: `Para 2ª via de receita digital não vencida, {{nome}}, basta solicitar por aqui. Para renovação após vencimento, é necessária consulta de retorno (R$ 205). 🌿` },
+  { id: "n44", tab: "atalhos", tag: "44. Doc", label: "44. 2ª via de receita", text: `Para 2ª via de receita digital não vencida, {{nome}}, basta solicitar por aqui. Para renovação após vencimento, é necessária consulta de retorno (R$ 250). 🌿` },
   { id: "n45", tab: "atalhos", tag: "45. Doc", label: "45. Documentos para advogado/escola", text: `Documentos para terceiros (advogado, escola, RH) são emitidos com sua autorização expressa por escrito, {{nome}} — sigilo é prioridade. 💚` },
 
   // ── Cancelamento, Remarcação e Retornos (46–51)
@@ -882,7 +882,7 @@ Manda preenchido por aqui que eu reviso com você. 💚`,
   { id: "n47", tab: "atalhos", tag: "47. Cancel", label: "47. Remarcar", text: `Claro, {{nome}}! Me confirma o melhor dia/período e vejo o que tenho disponível. 🌿` },
   { id: "n48", tab: "atalhos", tag: "48. Cancel", label: "48. Faltei sem avisar", text: `Tudo bem acontecer, {{nome}}. 💚 Faltas sem aviso prévio (no-show) não geram reembolso, mas posso te ajudar a reagendar uma nova consulta. Quer marcar?` },
   { id: "n49", tab: "atalhos", tag: "49. Retorno", label: "49. Quando marcar retorno", text: `Em geral, primeiro retorno em 30 dias, {{nome}} — depois espaçamos conforme estabilidade. Alinho com você na consulta. 🌿` },
-  { id: "n50", tab: "atalhos", tag: "50. Retorno", label: "50. Retorno tardio (sumi)", text: `Que bom te ver de volta, {{nome}}! 💚 Se a última consulta foi há mais de 6 meses, conto como nova primeira consulta (R$ 400). Até lá, é retorno (R$ 205).` },
+  { id: "n50", tab: "atalhos", tag: "50. Retorno", label: "50. Retorno tardio (sumi)", text: `Que bom te ver de volta, {{nome}}! 💚 Se a última consulta foi há mais de 6 meses, conto como nova primeira consulta (R$ 400). Até lá, é retorno (R$ 250).` },
   { id: "n51", tab: "atalhos", tag: "51. Cancel", label: "51. Cancelei e quero remarcar", text: `Claro, {{nome}}! Posso reativar seu agendamento — só me confirma o melhor horário e te envio o novo link. 🌿` },
 
   // ── Urgência e Crises (52–54)
@@ -1320,7 +1320,7 @@ Meu papel não é te trazer mais cobrança, é amparar. Quando quiser: ${LINK} �
 
   { id: "n105", tab: "atalhos", tag: "105. Família", label: "105. Posso marcar pra outra pessoa?", text: `Pode iniciar o contato, {{nome}}, mas o agendamento precisa ser confirmado pelo(a) próprio(a) paciente (acima de 16 anos), por questão ética e de vínculo. 💚` },
 
-  { id: "n106", tab: "atalhos", tag: "106. Anti-fraude", label: "106. \"Atendem por R$ 50?\"", text: `{{nome}}, meu valor é R$ 400 (1ª) e R$ 205 (retorno). Se viu valor diferente em algum lugar fora da Doctoralia, provavelmente é golpe — só agendo pelo link oficial: ${LINK}` },
+  { id: "n106", tab: "atalhos", tag: "106. Anti-fraude", label: "106. \"Atendem por R$ 50?\"", text: `{{nome}}, meu valor é R$ 400 (1ª) e R$ 250 (retorno). Se viu valor diferente em algum lugar fora da Doctoralia, provavelmente é golpe — só agendo pelo link oficial: ${LINK}` },
   { id: "n107", tab: "atalhos", tag: "107. Anti-fraude", label: "107. Outra pessoa pediu PIX em meu nome", text: `{{nome}}, atenção: nunca peço PIX pra agendar consulta — o pagamento é sempre pelo checkout da Doctoralia. Só recebo PIX direto na taxa de envio físico de receita A/B (R$ 100), e sempre confirmo a chave por aqui. 🛡️` },
 
   { id: "n108", tab: "atalhos", tag: "108. Diversos", label: "108. Acompanhamento por quanto tempo?", text: `Varia, {{nome}}: alguns quadros estabilizam em 6-12 meses; outros (TDAH, bipolar, recorrentes) pedem acompanhamento contínuo, com retornos espaçados. A gente revisa juntas(os) sempre. 🌿` },
