@@ -9,6 +9,7 @@ import NotFound from "./pages/NotFound.tsx";
 import Login from "./pages/Login.tsx";
 import OAuthConsent from "./pages/OAuthConsent.tsx";
 import ValidacaoMcp from "./pages/ValidacaoMcp.tsx";
+import AuditoriaTemplates from "./pages/AuditoriaTemplates.tsx";
 
 const queryClient = new QueryClient();
 
@@ -24,6 +25,7 @@ const App = () => (
           <Route path="/login" element={<Login />} />
           <Route path="/.lovable/oauth/consent" element={<OAuthConsent />} />
           <Route path="/validacao-mcp" element={<ValidacaoMcp />} />
+          <Route path="/auditoria-templates" element={<AuditoriaTemplates />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
