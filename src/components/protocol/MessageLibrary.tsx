@@ -310,45 +310,103 @@ export const MessageLibrary = () => {
           </Card>
         )}
 
+        {/* Dica sobre variáveis */}
+        <Card className="p-3 mb-4 bg-muted/40 border-dashed">
+          <p className="text-xs text-muted-foreground">
+            <strong className="text-foreground">Variáveis dinâmicas:</strong> use{" "}
+            <code className="px-1 bg-background rounded">{`{{nome}}`}</code>,{" "}
+            <code className="px-1 bg-background rounded">{`{{data}}`}</code>,{" "}
+            <code className="px-1 bg-background rounded">{`{{hora}}`}</code>,{" "}
+            <code className="px-1 bg-background rounded">{`{{preço}}`}</code>,{" "}
+            <code className="px-1 bg-background rounded">{`{{medicação}}`}</code> etc. em qualquer mensagem.
+            Clique em <em>Personalizar</em> para preencher antes de copiar.
+          </p>
+        </Card>
+
         {/* Lista */}
         <div className="grid gap-4 md:grid-cols-2">
-          {filtered.map((m) => (
-            <Card key={m.id} className="p-4 flex flex-col gap-3">
-              <div className="flex items-start justify-between gap-2">
-                <div>
-                  <Badge variant="secondary" className="mb-1">
-                    {m.category}
-                  </Badge>
-                  <h3 className="font-medium text-foreground">{m.title}</h3>
+          {filtered.map((m) => {
+            const vars = extractVars(m.text);
+            const isCustomizing = customizingId === m.id;
+            const preview = vars.length ? applyVars(m.text, varValues) : m.text;
+            return (
+              <Card key={m.id} className="p-4 flex flex-col gap-3">
+                <div className="flex items-start justify-between gap-2">
+                  <div>
+                    <Badge variant="secondary" className="mb-1">
+                      {m.category}
+                    </Badge>
+                    <h3 className="font-medium text-foreground">{m.title}</h3>
+                    {vars.length > 0 && (
+                      <div className="flex flex-wrap gap-1 mt-1">
+                        {vars.map((v) => (
+                          <Badge key={v} variant="outline" className="text-[10px]">
+                            {`{{${v}}}`}
+                          </Badge>
+                        ))}
+                      </div>
+                    )}
+                  </div>
+                  <div className="flex gap-1 shrink-0">
+                    {vars.length > 0 && (
+                      <Button
+                        size="icon"
+                        variant="ghost"
+                        onClick={() => setCustomizingId(isCustomizing ? null : m.id)}
+                        title="Personalizar variáveis"
+                      >
+                        <Wand2 className="h-4 w-4" />
+                      </Button>
+                    )}
+                    <Button size="icon" variant="ghost" onClick={() => copyText(m.text)} title="Copiar">
+                      <Copy className="h-4 w-4" />
+                    </Button>
+                    <Button size="icon" variant="ghost" onClick={() => startEdit(m)} title="Editar">
+                      <Pencil className="h-4 w-4" />
+                    </Button>
+                    <Button
+                      size="icon"
+                      variant="ghost"
+                      onClick={() => removeMessage(m.id)}
+                      title="Remover"
+                    >
+                      <Trash2 className="h-4 w-4" />
+                    </Button>
+                  </div>
                 </div>
-                <div className="flex gap-1 shrink-0">
-                  <Button size="icon" variant="ghost" onClick={() => copyText(m.text)} title="Copiar">
-                    <Copy className="h-4 w-4" />
-                  </Button>
-                  <Button size="icon" variant="ghost" onClick={() => startEdit(m)} title="Editar">
-                    <Pencil className="h-4 w-4" />
-                  </Button>
-                  <Button
-                    size="icon"
-                    variant="ghost"
-                    onClick={() => removeMessage(m.id)}
-                    title="Remover"
-                  >
-                    <Trash2 className="h-4 w-4" />
-                  </Button>
-                </div>
-              </div>
-              <pre className="whitespace-pre-wrap text-sm text-muted-foreground font-sans leading-relaxed max-h-64 overflow-auto">
-                {m.text}
-              </pre>
-            </Card>
-          ))}
+
+                {isCustomizing && vars.length > 0 && (
+                  <div className="grid gap-2 p-3 rounded-md bg-muted/40 border border-border">
+                    {vars.map((v) => (
+                      <div key={v} className="grid grid-cols-[110px_1fr] items-center gap-2">
+                        <label className="text-xs text-muted-foreground font-mono">{`{{${v}}}`}</label>
+                        <Input
+                          value={varValues[v] || ""}
+                          onChange={(e) => setVarValues((prev) => ({ ...prev, [v]: e.target.value }))}
+                          placeholder={VAR_DEFAULTS[v] || `Valor para ${v}`}
+                          className="h-8 text-sm"
+                        />
+                      </div>
+                    ))}
+                    <Button size="sm" onClick={() => copyText(m.text)} className="gap-2 mt-1">
+                      <Copy className="h-3.5 w-3.5" /> Copiar personalizada
+                    </Button>
+                  </div>
+                )}
+
+                <pre className="whitespace-pre-wrap text-sm text-muted-foreground font-sans leading-relaxed max-h-64 overflow-auto">
+                  {preview}
+                </pre>
+              </Card>
+            );
+          })}
           {filtered.length === 0 && (
             <div className="col-span-full text-center text-muted-foreground py-12">
               Nenhuma mensagem encontrada.
             </div>
           )}
         </div>
+
       </div>
     </section>
   );
