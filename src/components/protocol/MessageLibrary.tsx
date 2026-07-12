@@ -275,7 +275,7 @@ export const MessageLibrary = () => {
   };
 
   return (
-    <section className="py-16 px-4 bg-background border-t border-border">
+    <section id="biblioteca" className="py-16 px-4 bg-background border-t border-border scroll-mt-20">
       <div className="max-w-6xl mx-auto">
         <div className="mb-8">
           <h2 className="text-3xl md:text-4xl font-serif font-medium text-foreground mb-2">
