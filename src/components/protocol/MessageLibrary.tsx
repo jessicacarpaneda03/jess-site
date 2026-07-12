@@ -44,6 +44,43 @@ function applyVars(text: string, values: Record<string, string>): string {
   });
 }
 
+// Formata texto para WhatsApp: quebras ideais, negrito/itálico nativos,
+// remove espaços extras, garante uma linha em branco entre parágrafos e
+// quebra frases longas em blocos legíveis no celular.
+function formatForWhatsApp(input: string): string {
+  let text = input.replace(/\r\n/g, "\n");
+
+  // Markdown -> WhatsApp
+  text = text.replace(/\*\*(.+?)\*\*/g, "*$1*"); // **negrito** -> *negrito*
+  text = text.replace(/__(.+?)__/g, "_$1_");     // __itálico__ -> _itálico_
+  text = text.replace(/~~(.+?)~~/g, "~$1~");     // ~~risco~~ -> ~risco~
+
+  // Limpa espaços em cada linha
+  text = text
+    .split("\n")
+    .map((l) => l.replace(/[ \t]+/g, " ").trim())
+    .join("\n");
+
+  // Colapsa 3+ quebras em 2 (parágrafos com uma linha em branco)
+  text = text.replace(/\n{3,}/g, "\n\n");
+
+  // Quebra parágrafos muito longos em frases (>280 chars vira uma frase por linha)
+  text = text
+    .split("\n\n")
+    .map((para) => {
+      if (para.length <= 280 || /^[-•\d]/.test(para)) return para;
+      const sentences = para.match(/[^.!?]+[.!?]+[)"']?\s?|[^.!?]+$/g);
+      if (!sentences) return para;
+      return sentences.map((s) => s.trim()).filter(Boolean).join("\n");
+    })
+    .join("\n\n");
+
+  // Normaliza bullets em listas
+  text = text.replace(/^\s*[-*]\s+/gm, "• ");
+
+  return text.trim();
+}
+
 
 const STORAGE_KEY = "whatsapp-message-library-v1";
 
