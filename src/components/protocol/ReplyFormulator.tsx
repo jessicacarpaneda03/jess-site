@@ -18,11 +18,21 @@ const TEMAS_NOVIDADE = [
   "Ansiedade no trabalho",
 ];
 
+const formatForWhatsApp = (raw: string) =>
+  raw
+    .replace(/\*\*(.+?)\*\*/g, "*$1*")
+    .replace(/__(.+?)__/g, "_$1_")
+    .replace(/^[\s]*[-•]\s+/gm, "• ")
+    .replace(/[ \t]{2,}/g, " ")
+    .replace(/\n{3,}/g, "\n\n")
+    .trim();
+
 export const ReplyFormulator = () => {
   const [tipo, setTipo] = useState<Tipo>("mensagem");
   const [mensagem, setMensagem] = useState("");
   const [contexto, setContexto] = useState("");
   const [resposta, setResposta] = useState("");
+  const [rascunho, setRascunho] = useState("");
   const [loading, setLoading] = useState(false);
   const [copied, setCopied] = useState(false);
 
@@ -38,13 +48,16 @@ export const ReplyFormulator = () => {
     }
     setLoading(true);
     setResposta("");
+    setRascunho("");
     try {
       const { data, error } = await supabase.functions.invoke("formulador-resposta", {
         body: { mensagem: mensagem.trim(), contexto: contexto.trim() || undefined, tipo },
       });
       if (error) throw error;
       if ((data as any)?.error) throw new Error((data as any).error);
-      setResposta((data as any)?.resposta ?? "");
+      const texto = (data as any)?.resposta ?? "";
+      setResposta(texto);
+      setRascunho(texto);
     } catch (e: any) {
       toast({
         title: "Não foi possível gerar a resposta",
@@ -57,11 +70,15 @@ export const ReplyFormulator = () => {
   };
 
   const copiar = async () => {
-    if (!resposta) return;
-    await navigator.clipboard.writeText(resposta);
+    if (!rascunho) return;
+    await navigator.clipboard.writeText(rascunho);
     setCopied(true);
+    toast({ title: "Copiado — cole no WhatsApp ou Doctoralia." });
     setTimeout(() => setCopied(false), 1800);
   };
+
+  const aplicarFormatoWhatsApp = () => setRascunho((v) => formatForWhatsApp(v));
+  const restaurar = () => setRascunho(resposta);
 
   const labelMensagem =
     tipo === "opiniao"
