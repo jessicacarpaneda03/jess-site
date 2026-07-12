@@ -1,0 +1,87 @@
+{
+  "version": 1,
+  "sdk_version": "0.20.1",
+  "path": "/mcp",
+  "auth": {
+    "type": "oauth",
+    "issuer": "https://faripwgamoymvjdanvpf.supabase.co/auth/v1",
+    "accepted_audiences": [
+      "authenticated"
+    ]
+  },
+  "mcp": {
+    "server": {
+      "name": "dra-jessica-mcp",
+      "version": "0.1.0",
+      "title": "Dra. Jéssica — Protocolo de Atendimento"
+    },
+    "tools": [
+      {
+        "name": "formulate_reply",
+        "title": "Formular resposta",
+        "description": "Gera uma resposta em primeira pessoa (Dra. Jéssica) para WhatsApp, opinião pública do Doctoralia, ou Novidade do perfil.",
+        "annotations": {
+          "readOnlyHint": true,
+          "openWorldHint": false
+        },
+        "inputSchema": {
+          "$schema": "http://json-schema.org/draft-07/schema#",
+          "type": "object",
+          "properties": {
+            "message": {
+              "type": "string",
+              "minLength": 1,
+              "description": "Mensagem/contexto recebido ou tema da Novidade."
+            },
+            "mode": {
+              "default": "whatsapp",
+              "description": "Tipo de resposta a gerar.",
+              "type": "string",
+              "enum": [
+                "whatsapp",
+                "opiniao",
+                "novidade"
+              ]
+            }
+          },
+          "required": [
+            "message"
+          ]
+        },
+        "outputSchema": null
+      },
+      {
+        "name": "list_services",
+        "title": "Listar serviços e valores",
+        "description": "Retorna os serviços atuais da Dra. Jéssica com duração, valor em BRL e observações.",
+        "annotations": {
+          "readOnlyHint": true,
+          "idempotentHint": true,
+          "openWorldHint": false
+        },
+        "inputSchema": {
+          "$schema": "http://json-schema.org/draft-07/schema#",
+          "type": "object",
+          "properties": {}
+        },
+        "outputSchema": null
+      },
+      {
+        "name": "get_contact_info",
+        "title": "Informações profissionais",
+        "description": "Retorna dados públicos da Dra. Jéssica (nome, CRM, site, público atendido, canais de emergência).",
+        "annotations": {
+          "readOnlyHint": true,
+          "idempotentHint": true,
+          "openWorldHint": false
+        },
+        "inputSchema": {
+          "$schema": "http://json-schema.org/draft-07/schema#",
+          "type": "object",
+          "properties": {}
+        },
+        "outputSchema": null
+      }
+    ]
+  }
+}
