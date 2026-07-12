@@ -150,9 +150,22 @@ export const MessageLibrary = () => {
   };
 
   const copyText = async (text: string) => {
+    const vars = extractVars(text);
+    if (vars.length > 0) {
+      const missing = vars.filter((v) => !varValues[v] || !varValues[v].trim());
+      const rendered = applyVars(text, varValues);
+      await navigator.clipboard.writeText(rendered);
+      if (missing.length) {
+        toast.warning(`Copiada, mas faltou preencher: ${missing.map((m) => `{{${m}}}`).join(", ")}`);
+      } else {
+        toast.success("Copiada com variáveis preenchidas.");
+      }
+      return;
+    }
     await navigator.clipboard.writeText(text);
     toast.success("Copiada para o WhatsApp.");
   };
+
 
   const exportJson = () => {
     const blob = new Blob([JSON.stringify(messages, null, 2)], { type: "application/json" });
