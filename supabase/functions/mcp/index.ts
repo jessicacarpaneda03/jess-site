@@ -1548,6 +1548,23 @@ var update_quick_reply_default = defineTool5({
         isError: true
       };
     }
+    const OFFICIAL_PRICES = /* @__PURE__ */ new Set([400, 250, 150]);
+    const priceMatches = [
+      ...text.matchAll(/R\$\s*(\d{2,4})(?:[.,]\d{2})?/gi),
+      ...text.matchAll(/(\d{2,4})\s*reais\b/gi)
+    ];
+    const invalid = priceMatches.map((m) => parseInt(m[1], 10)).filter((n) => !OFFICIAL_PRICES.has(n));
+    if (invalid.length > 0) {
+      return {
+        content: [
+          {
+            type: "text",
+            text: `Valor(es) n\xE3o oficial(is) detectado(s): R$ ${[...new Set(invalid)].join(", R$ ")}. Valores permitidos: R$ 400 (primeira, 90 min), R$ 250 (retorno, 60 min), R$ 150 (renova\xE7\xE3o excepcional). Ajuste o texto antes de salvar.`
+          }
+        ],
+        isError: true
+      };
+    }
     const supa = createClient2(process.env.SUPABASE_URL, process.env.SUPABASE_PUBLISHABLE_KEY, {
       global: { headers: { Authorization: `Bearer ${ctx.getToken()}` } },
       auth: { persistSession: false, autoRefreshToken: false }
