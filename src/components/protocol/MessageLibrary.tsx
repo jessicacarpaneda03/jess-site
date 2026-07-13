@@ -437,6 +437,15 @@ export const MessageLibrary = () => {
                     <Button
                       size="icon"
                       variant="ghost"
+                      onClick={() => setPreviewingId(isPreviewing ? null : m.id)}
+                      title="Pré-visualizar versão final"
+                      className={isPreviewing ? "text-primary" : ""}
+                    >
+                      <Eye className="h-4 w-4" />
+                    </Button>
+                    <Button
+                      size="icon"
+                      variant="ghost"
                       onClick={() => copyFinal(m.text)}
                       title="Gerar versão final formatada para WhatsApp"
                       className="text-primary hover:text-primary"
