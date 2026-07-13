@@ -31,6 +31,26 @@ export default defineTool({
         isError: true,
       };
     }
+    // Validação de valores oficiais — bloqueia salvar preços divergentes do cadastro.
+    const OFFICIAL_PRICES = new Set([400, 250, 150]);
+    const priceMatches = [
+      ...text.matchAll(/R\$\s*(\d{2,4})(?:[.,]\d{2})?/gi),
+      ...text.matchAll(/(\d{2,4})\s*reais\b/gi),
+    ];
+    const invalid = priceMatches
+      .map((m) => parseInt(m[1], 10))
+      .filter((n) => !OFFICIAL_PRICES.has(n));
+    if (invalid.length > 0) {
+      return {
+        content: [
+          {
+            type: "text",
+            text: `Valor(es) não oficial(is) detectado(s): R$ ${[...new Set(invalid)].join(", R$ ")}. Valores permitidos: R$ 400 (primeira, 90 min), R$ 250 (retorno, 60 min), R$ 150 (renovação excepcional). Ajuste o texto antes de salvar.`,
+          },
+        ],
+        isError: true,
+      };
+    }
     const supa = createClient(process.env.SUPABASE_URL!, process.env.SUPABASE_PUBLISHABLE_KEY!, {
       global: { headers: { Authorization: `Bearer ${ctx.getToken()}` } },
       auth: { persistSession: false, autoRefreshToken: false },
