@@ -114,6 +114,7 @@ export const MessageLibrary = () => {
   const [editingId, setEditingId] = useState<string | null>(null);
   const [draft, setDraft] = useState<LibraryMessage | null>(null);
   const [customizingId, setCustomizingId] = useState<string | null>(null);
+  const [previewingId, setPreviewingId] = useState<string | null>(null);
   const [varValues, setVarValues] = useState<Record<string, string>>(() => {
     try {
       const raw = localStorage.getItem(VAR_STORAGE_KEY);
