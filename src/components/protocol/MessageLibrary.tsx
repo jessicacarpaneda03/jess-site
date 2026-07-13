@@ -398,7 +398,10 @@ export const MessageLibrary = () => {
           {filtered.map((m) => {
             const vars = extractVars(m.text);
             const isCustomizing = customizingId === m.id;
+            const isPreviewing = previewingId === m.id;
             const preview = vars.length ? applyVars(m.text, varValues) : m.text;
+            const finalPreview = formatForWhatsApp(preview);
+            const missingVars = vars.filter((v) => !varValues[v] || !varValues[v].trim());
             return (
               <Card key={m.id} className="p-4 flex flex-col gap-3">
                 <div className="flex items-start justify-between gap-2">
