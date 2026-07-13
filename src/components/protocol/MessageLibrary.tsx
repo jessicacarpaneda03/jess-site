@@ -493,6 +493,40 @@ export const MessageLibrary = () => {
                 <pre className="whitespace-pre-wrap text-sm text-muted-foreground font-sans leading-relaxed max-h-64 overflow-auto">
                   {preview}
                 </pre>
+
+                {isPreviewing && (
+                  <div className="rounded-md border border-primary/40 bg-primary/5 p-3 grid gap-2">
+                    <div className="flex items-center justify-between gap-2">
+                      <div className="flex items-center gap-2">
+                        <Sparkles className="h-4 w-4 text-primary" />
+                        <span className="text-xs font-medium text-foreground">
+                          Pré-visualização final (WhatsApp)
+                        </span>
+                      </div>
+                      <span className="text-[10px] text-muted-foreground">
+                        {finalPreview.length} caracteres
+                      </span>
+                    </div>
+                    {missingVars.length > 0 && (
+                      <p className="text-[11px] text-amber-700 dark:text-amber-400">
+                        ⚠ Variáveis não preenchidas: {missingVars.map((v) => `{{${v}}}`).join(", ")}
+                      </p>
+                    )}
+                    {!/R\$\s*250/.test(finalPreview) && /retorno/i.test(finalPreview) && (
+                      <p className="text-[11px] text-amber-700 dark:text-amber-400">
+                        ⚠ Menciona "retorno" mas não confirma R$ 250 (60 min).
+                      </p>
+                    )}
+                    <pre className="whitespace-pre-wrap text-sm text-foreground font-sans leading-relaxed max-h-72 overflow-auto bg-background rounded p-2 border border-border">
+                      {finalPreview}
+                    </pre>
+                    <div className="flex gap-2">
+                      <Button size="sm" onClick={() => copyFinal(m.text)} className="gap-2 flex-1">
+                        <Copy className="h-3.5 w-3.5" /> Copiar versão final
+                      </Button>
+                    </div>
+                  </div>
+                )}
               </Card>
             );
           })}
