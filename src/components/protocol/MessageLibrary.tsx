@@ -19,6 +19,8 @@ const VAR_DEFAULTS: Record<string, string> = {
   preço: "R$ 400",
   preco: "R$ 400",
   valor: "R$ 400",
+  retorno: "R$ 250 (60 min)",
+  primeira: "R$ 400 (90 min)",
   link: "drajessicacarpaneda.com.br",
   site: "drajessicacarpaneda.com.br",
   medicação: "",
