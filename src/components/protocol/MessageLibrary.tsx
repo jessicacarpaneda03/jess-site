@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useState } from "react";
 import { useLocation } from "react-router-dom";
-import { Copy, Plus, Pencil, Trash2, Save, X, Search, Download, Upload, RotateCcw, Wand2, Sparkles } from "lucide-react";
+import { Copy, Plus, Pencil, Trash2, Save, X, Search, Download, Upload, RotateCcw, Wand2, Sparkles, Send } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -24,6 +24,7 @@ const VAR_DEFAULTS: Record<string, string> = {
   medicação: "",
   medicacao: "",
   dosagem: "",
+  telefone: "",
 };
 
 const VAR_STORAGE_KEY = "whatsapp-message-library-vars-v1";
@@ -233,6 +234,19 @@ export const MessageLibrary = () => {
     toast.success("Versão final formatada copiada.");
   };
 
+  const sendWhatsApp = (text: string) => {
+    const rendered = extractVars(text).length ? applyVars(text, varValues) : text;
+    const formatted = formatForWhatsApp(rendered);
+    // Normaliza telefone: apenas dígitos. Se informado sem DDI, assume Brasil (55).
+    const raw = (varValues.telefone || "").replace(/\D/g, "");
+    const phone = raw ? (raw.startsWith("55") ? raw : `55${raw}`) : "";
+    const base = phone ? `https://wa.me/${phone}` : "https://wa.me/";
+    const url = `${base}?text=${encodeURIComponent(formatted)}`;
+    window.open(url, "_blank", "noopener,noreferrer");
+    toast.success(phone ? "Abrindo conversa no WhatsApp." : "Abrindo WhatsApp — escolha o contato.");
+  };
+
+
 
   const exportJson = () => {
     const blob = new Blob([JSON.stringify(messages, null, 2)], { type: "application/json" });
@@ -437,6 +451,15 @@ export const MessageLibrary = () => {
                     >
                       <Sparkles className="h-4 w-4" />
                     </Button>
+                    <Button
+                      size="icon"
+                      variant="ghost"
+                      onClick={() => sendWhatsApp(m.text)}
+                      title="Enviar no WhatsApp (wa.me)"
+                      className="text-green-600 hover:text-green-700"
+                    >
+                      <Send className="h-4 w-4" />
+                    </Button>
                     <Button size="icon" variant="ghost" onClick={() => startEdit(m)} title="Editar">
                       <Pencil className="h-4 w-4" />
                     </Button>
@@ -468,8 +491,11 @@ export const MessageLibrary = () => {
                       <Button size="sm" variant="outline" onClick={() => copyText(m.text)} className="gap-2 flex-1">
                         <Copy className="h-3.5 w-3.5" /> Copiar
                       </Button>
-                      <Button size="sm" onClick={() => copyFinal(m.text)} className="gap-2 flex-1">
+                      <Button size="sm" variant="outline" onClick={() => copyFinal(m.text)} className="gap-2 flex-1">
                         <Sparkles className="h-3.5 w-3.5" /> Versão final
+                      </Button>
+                      <Button size="sm" onClick={() => sendWhatsApp(m.text)} className="gap-2 flex-1 bg-green-600 hover:bg-green-700 text-white">
+                        <Send className="h-3.5 w-3.5" /> Enviar
                       </Button>
                     </div>
                   </div>
