@@ -24,6 +24,7 @@ const VAR_DEFAULTS: Record<string, string> = {
   medicação: "",
   medicacao: "",
   dosagem: "",
+  telefone: "",
 };
 
 const VAR_STORAGE_KEY = "whatsapp-message-library-vars-v1";
