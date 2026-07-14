@@ -451,6 +451,15 @@ export const MessageLibrary = () => {
                     >
                       <Sparkles className="h-4 w-4" />
                     </Button>
+                    <Button
+                      size="icon"
+                      variant="ghost"
+                      onClick={() => sendWhatsApp(m.text)}
+                      title="Enviar no WhatsApp (wa.me)"
+                      className="text-green-600 hover:text-green-700"
+                    >
+                      <Send className="h-4 w-4" />
+                    </Button>
                     <Button size="icon" variant="ghost" onClick={() => startEdit(m)} title="Editar">
                       <Pencil className="h-4 w-4" />
                     </Button>
