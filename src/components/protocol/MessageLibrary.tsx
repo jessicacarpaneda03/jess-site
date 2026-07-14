@@ -234,6 +234,19 @@ export const MessageLibrary = () => {
     toast.success("Versão final formatada copiada.");
   };
 
+  const sendWhatsApp = (text: string) => {
+    const rendered = extractVars(text).length ? applyVars(text, varValues) : text;
+    const formatted = formatForWhatsApp(rendered);
+    // Normaliza telefone: apenas dígitos. Se informado sem DDI, assume Brasil (55).
+    const raw = (varValues.telefone || "").replace(/\D/g, "");
+    const phone = raw ? (raw.startsWith("55") ? raw : `55${raw}`) : "";
+    const base = phone ? `https://wa.me/${phone}` : "https://wa.me/";
+    const url = `${base}?text=${encodeURIComponent(formatted)}`;
+    window.open(url, "_blank", "noopener,noreferrer");
+    toast.success(phone ? "Abrindo conversa no WhatsApp." : "Abrindo WhatsApp — escolha o contato.");
+  };
+
+
 
   const exportJson = () => {
     const blob = new Blob([JSON.stringify(messages, null, 2)], { type: "application/json" });
