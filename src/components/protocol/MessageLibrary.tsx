@@ -491,9 +491,11 @@ export const MessageLibrary = () => {
                       <Button size="sm" variant="outline" onClick={() => copyText(m.text)} className="gap-2 flex-1">
                         <Copy className="h-3.5 w-3.5" /> Copiar
                       </Button>
-                      <Button size="sm" onClick={() => copyFinal(m.text)} className="gap-2 flex-1">
+                      <Button size="sm" variant="outline" onClick={() => copyFinal(m.text)} className="gap-2 flex-1">
                         <Sparkles className="h-3.5 w-3.5" /> Versão final
                       </Button>
+                      <Button size="sm" onClick={() => sendWhatsApp(m.text)} className="gap-2 flex-1 bg-green-600 hover:bg-green-700 text-white">
+                        <Send className="h-3.5 w-3.5" /> Enviar
                     </div>
                   </div>
                 )}
