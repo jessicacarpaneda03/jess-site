@@ -234,17 +234,63 @@ export const MessageLibrary = () => {
     toast.success("Versão final formatada copiada.");
   };
 
+  // Normaliza telefone para E.164 (só dígitos, sem "+", pronto para wa.me).
+  // Regras:
+  //  - remove tudo que não for dígito, preservando um "+" inicial;
+  //  - "00" inicial (prefixo internacional discado) vira DDI direto;
+  //  - se não houver DDI (10 a 11 dígitos), assume Brasil (55);
+  //  - celular BR (DDD + 9 dígitos) é normalizado: se vier com 10 dígitos após o 55, insere o "9" após o DDD;
+  //  - resultado precisa ter entre 8 e 15 dígitos (RFC E.164).
+  const normalizePhoneE164 = (
+    input: string
+  ): { e164: string; error?: string } => {
+    if (!input) return { e164: "" };
+    const trimmed = input.trim();
+    const hasPlus = trimmed.startsWith("+");
+    let digits = trimmed.replace(/\D/g, "");
+    if (!digits) return { e164: "", error: "Telefone inválido." };
+
+    // 00XXXX... → XXXX... (prefixo internacional discado)
+    if (!hasPlus && digits.startsWith("00")) digits = digits.slice(2);
+
+    // Sem DDI explícito → assume Brasil (55) quando cabe em número local BR
+    if (!hasPlus && !digits.startsWith("55") && digits.length >= 10 && digits.length <= 11) {
+      digits = `55${digits}`;
+    }
+
+    // Correção Brasil: celular deve ter DDD (2) + 9 + 8 dígitos = 11 após o 55.
+    // Se veio "55" + 10 dígitos e o 3º dígito (1º do assinante) for 6-9 (celular), insere o "9".
+    if (digits.startsWith("55") && digits.length === 12) {
+      const ddd = digits.slice(2, 4);
+      const first = digits.slice(4, 5);
+      if (/^[1-9]{2}$/.test(ddd) && /[6-9]/.test(first)) {
+        digits = `55${ddd}9${digits.slice(4)}`;
+      }
+    }
+
+    if (digits.length < 8 || digits.length > 15) {
+      return { e164: "", error: "Telefone deve ter entre 8 e 15 dígitos (E.164)." };
+    }
+    return { e164: digits };
+  };
+
   const sendWhatsApp = (text: string) => {
     const rendered = extractVars(text).length ? applyVars(text, varValues) : text;
     const formatted = formatForWhatsApp(rendered);
-    // Normaliza telefone: apenas dígitos. Se informado sem DDI, assume Brasil (55).
-    const raw = (varValues.telefone || "").replace(/\D/g, "");
-    const phone = raw ? (raw.startsWith("55") ? raw : `55${raw}`) : "";
-    const base = phone ? `https://wa.me/${phone}` : "https://wa.me/";
-    const url = `${base}?text=${encodeURIComponent(formatted)}`;
+    const rawInput = (varValues.telefone || "").trim();
+    const { e164, error } = normalizePhoneE164(rawInput);
+    if (rawInput && error) {
+      toast.error(error);
+      return;
+    }
+    // Limite de segurança do parâmetro text (wa.me suporta até ~2000 chars com folga)
+    const safeText = formatted.length > 4000 ? formatted.slice(0, 4000) : formatted;
+    const base = e164 ? `https://wa.me/${e164}` : "https://wa.me/";
+    const url = `${base}?text=${encodeURIComponent(safeText)}`;
     window.open(url, "_blank", "noopener,noreferrer");
-    toast.success(phone ? "Abrindo conversa no WhatsApp." : "Abrindo WhatsApp — escolha o contato.");
+    toast.success(e164 ? `Abrindo conversa com +${e164}.` : "Abrindo WhatsApp — escolha o contato.");
   };
+
 
 
 
