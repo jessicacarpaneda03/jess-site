@@ -1,0 +1,25 @@
+{
+  "name": "Respostas WhatsApp — Dra. Jéssica",
+  "short_name": "Respostas WPP",
+  "description": "Biblioteca de respostas prontas para WhatsApp da Dra. Jéssica Carpaneda.",
+  "start_url": "/whatsapp",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#ffffff",
+  "theme_color": "#128C7E",
+  "icons": [
+    {
+      "src": "/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ]
+}
