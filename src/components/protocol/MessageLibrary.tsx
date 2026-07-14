@@ -496,6 +496,7 @@ export const MessageLibrary = () => {
                       </Button>
                       <Button size="sm" onClick={() => sendWhatsApp(m.text)} className="gap-2 flex-1 bg-green-600 hover:bg-green-700 text-white">
                         <Send className="h-3.5 w-3.5" /> Enviar
+                      </Button>
                     </div>
                   </div>
                 )}
