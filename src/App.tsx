@@ -11,6 +11,8 @@ import OAuthConsent from "./pages/OAuthConsent.tsx";
 import ValidacaoMcp from "./pages/ValidacaoMcp.tsx";
 import AuditoriaTemplates from "./pages/AuditoriaTemplates.tsx";
 import WhatsappApp from "./pages/WhatsappApp.tsx";
+import Tema from "./pages/Tema.tsx";
+import Temas from "./pages/Temas.tsx";
 
 const queryClient = new QueryClient();
 
@@ -28,6 +30,8 @@ const App = () => (
           <Route path="/validacao-mcp" element={<ValidacaoMcp />} />
           <Route path="/auditoria-templates" element={<AuditoriaTemplates />} />
           <Route path="/whatsapp" element={<WhatsappApp />} />
+          <Route path="/temas" element={<Temas />} />
+          <Route path="/tema/:slug" element={<Tema />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
