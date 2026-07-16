@@ -163,6 +163,12 @@ async function runOne(apiKey: string, c: Case) {
     const ok = typeof needle === "string" ? text.includes(needle) : needle.test(text);
     if (!ok) failures.push(`faltou: ${needle}`);
   }
+  for (const group of c.mustIncludeAny ?? []) {
+    const anyOk = group.some((needle) =>
+      typeof needle === "string" ? text.includes(needle) : needle.test(text),
+    );
+    if (!anyOk) failures.push(`faltou pelo menos um de: ${group.map(String).join(" | ")}`);
+  }
   for (const needle of c.mustNotInclude ?? []) {
     const bad = typeof needle === "string" ? text.includes(needle) : needle.test(text);
     if (bad) failures.push(`não deveria conter: ${needle}`);
