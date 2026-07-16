@@ -245,6 +245,7 @@ Pra reagendar: ${LINK}`,
   { id: "a-atestado", tab: "atalhos", tag: "Documentos", label: "Atestado", text: `Sim, {{nome}}, emito atestados, relatórios e laudos quando clinicamente indicado, com assinatura digital válida.` },
   { id: "a-recibo", tab: "atalhos", tag: "Documentos", label: "Recibo IR", text: `Sim, {{nome}}, o recibo serve pra dedução no IR e também pra pedido de reembolso ao plano de saúde.` },
   { id: "a-renovar", tab: "atalhos", tag: "Receita", label: "Renovar receita", text: `Renovações e ajustes de conduta exigem uma consulta de retorno, {{nome}} — questão ética. Pacientes em acompanhamento agendam um retorno (R$ 250). ${LINK}` },
+  { id: "a-intervalo-curto", tab: "atalhos", tag: "Cobrança", label: "Nova consulta em intervalo curto", text: `Sim, {{nome}}. Entendo que é bem perto da consulta anterior, mas, como seria um novo atendimento, é uma nova consulta e a cobrança é feita normalmente, tá?` },
   { id: "a-fora-brasil", tab: "atalhos", tag: "Telemedicina", label: "Fora do Brasil", text: `Sim, {{nome}}, brasileiros morando fora podem se consultar normalmente — basta CPF ativo. ${LINK}` },
   { id: "a-urgencia", tab: "atalhos", tag: "Urgência", label: "Crise / urgência", text: `{{nome}}, se houver risco agora, por favor ligue no CVV 188 (24h) ou procure um pronto-socorro. Meu atendimento é ambulatorial e agendado. 💚` },
 
