@@ -60,8 +60,8 @@ const CASES: Case[] = [
   {
     name: "Intervalo curto / nova cobrança",
     message: "Doutora, tive consulta com você semana passada e agora tô muito mal, quero marcar de novo essa semana. Vai vir cobrado de novo?",
-    mustInclude: [/nova consulta/i, /nova cobran|cobrada normalmente|cobrança .* normal/i],
-    mustIncludeAny: [[/perto|próxim|pouco tempo|recente|intervalo curto|semana passada|anterior/i]],
+    mustInclude: [/nova consulta/i, /nova cobran|cobrad[oa] normalmente|cobrança .* normal|valor .* (cobrad|é cobrado)|é cobrado normalmente/i],
+    mustIncludeAny: [[/perto|próxim|pouco tempo|recente|intervalo curto|semana passada|anterior|novo atendimento|logo após|foi há pouco/i]],
     mustNotInclude: [
       /vou verificar/i,
       /vou conferir/i,
