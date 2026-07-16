@@ -116,8 +116,8 @@ const CASES: Case[] = [
   },
 ];
 
-// Marcadores de 1ª pessoa aceitáveis
-const FIRST_PERSON = /\b(eu|meu|minha|minhas|meus|atendo|faço|posso|estou|tenho|sou)\b/i;
+// Marcadores de 1ª pessoa aceitáveis (verbos comuns na voz da Dra.)
+const FIRST_PERSON = /\b(eu|meu|minha|minhas|meus|atendo|faço|posso|estou|tenho|sou|vejo|aceito|emito|ofereço|indico|recebo|envio|consigo|agendo|converso|sinto|entendo|cobro|deixo)\b/i;
 const THIRD_PERSON_SELF = /\ba dra\.? jéssica\b/i;
 
 async function runOne(apiKey: string, c: Case) {
