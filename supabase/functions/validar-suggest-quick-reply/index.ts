@@ -95,13 +95,13 @@ const CASES: Case[] = [
     name: "Convênio",
     message: "Vocês atendem por Unimed?",
     mustInclude: [/particular/i, /recibo/i],
-    mustNotInclude: [/aceito unimed/i, /credenciad/i],
+    mustNotInclude: [/(?<!não )\baceito unimed/i, /(?<!não )\bsou credenciad/i],
   },
   {
     name: "SulAmérica",
     message: "Atende SulAmérica?",
     mustInclude: [/particular/i],
-    mustNotInclude: [/aceito sulam/i, /sou credenciad/i],
+    mustNotInclude: [/(?<!não )\baceito sulam/i, /(?<!não )\bsou credenciad/i],
   },
   {
     name: "Risco",
