@@ -289,6 +289,7 @@ Pra reagendar: ${LINK}`
   { id: "a-atestado", tab: "atalhos", tag: "Documentos", label: "Atestado", text: `Sim, {{nome}}, emito atestados, relat\xF3rios e laudos quando clinicamente indicado, com assinatura digital v\xE1lida.` },
   { id: "a-recibo", tab: "atalhos", tag: "Documentos", label: "Recibo IR", text: `Sim, {{nome}}, o recibo serve pra dedu\xE7\xE3o no IR e tamb\xE9m pra pedido de reembolso ao plano de sa\xFAde.` },
   { id: "a-renovar", tab: "atalhos", tag: "Receita", label: "Renovar receita", text: `Renova\xE7\xF5es e ajustes de conduta exigem uma consulta de retorno, {{nome}} \u2014 quest\xE3o \xE9tica. Pacientes em acompanhamento agendam um retorno (R$ 250). ${LINK}` },
+  { id: "a-intervalo-curto", tab: "atalhos", tag: "Cobran\xE7a", label: "Nova consulta em intervalo curto", text: `Sim, {{nome}}. Entendo que \xE9 bem perto da consulta anterior, mas, como seria um novo atendimento, \xE9 uma nova consulta e a cobran\xE7a \xE9 feita normalmente, t\xE1?` },
   { id: "a-fora-brasil", tab: "atalhos", tag: "Telemedicina", label: "Fora do Brasil", text: `Sim, {{nome}}, brasileiros morando fora podem se consultar normalmente \u2014 basta CPF ativo. ${LINK}` },
   { id: "a-urgencia", tab: "atalhos", tag: "Urg\xEAncia", label: "Crise / urg\xEAncia", text: `{{nome}}, se houver risco agora, por favor ligue no CVV 188 (24h) ou procure um pronto-socorro. Meu atendimento \xE9 ambulatorial e agendado. \u{1F49A}` },
   // NOVOS — Receita A/B Sedex
