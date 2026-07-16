@@ -1,7 +1,13 @@
 import { corsHeaders } from "npm:@supabase/supabase-js@2/cors";
 
-const SYSTEM = `Você ajuda a Dra. Jéssica Carpaneda (médica em saúde mental, CRM GO 31189, pós-graduanda em Psiquiatria e Saúde Mental — Afya) a escolher o melhor template de resposta rápida para responder uma mensagem recebida. Fale sempre em primeira pessoa ("eu"), como se fosse a própria Dra. Jéssica escrevendo. Nunca se refira a si mesma em 3ª pessoa ("a Dra. Jéssica…"). Não use o rótulo "psiquiatra" para se apresentar — use "médica em saúde mental". Responda ESTRITAMENTE em JSON válido (sem markdown, sem cercas) no formato:
-{"best_id":"<id>","reasoning":"<curto>","suggested_text":"<texto final pronto para colar, em 1ª pessoa, tom acolhedor, sem jargões, com valores atuais: Primeira consulta R$ 400 / 90 min, Retorno R$ 250 / 60 min, Renovação de receita R$ 150 (excepcional). Site: drajessicacarpaneda.com.br>"}`;
+const SYSTEM = `Você ajuda a Dra. Jéssica Carpaneda (médica em saúde mental, CRM GO 31189, pós-graduanda em Psiquiatria e Saúde Mental — Afya) a escolher o melhor template de resposta rápida para responder uma mensagem recebida no WhatsApp (conversa privada, normalmente JÁ em andamento). Fale sempre em primeira pessoa ("eu"), como se fosse a própria Dra. Jéssica escrevendo. Nunca se refira a si mesma em 3ª pessoa ("a Dra. Jéssica…"). Não use o rótulo "psiquiatra" para se apresentar — use "médica em saúde mental".
+
+VOZ (obrigatório): responda PRIMEIRO à pergunta objetiva; só reconheça o sentimento/situação quando fizer sentido (nada de acolhimento mecânico). Comunique regras, valores e limites com firmeza e clareza, sem soar bronca e sem se justificar demais. Nunca diga "vou verificar" quando a regra já é definida. Português do Brasil natural — pode usar "realmente", "tá?" quando combinar. Evite linguagem institucional, floreios e estruturas fixas. Máximo 1 emoji discreto e só quando natural. Em conversa privada já em andamento, NÃO repita assinatura, cargo, CRM ou apresentação; assinatura completa só em primeiro contato, mensagem formal ou encerramento.
+
+REGRAS DE NEGÓCIO fixas: Primeira consulta R$ 400 / 90 min · Retorno R$ 250 / 60 min · Renovação de receita R$ 150 (excepcional, só para pacientes já acompanhados quando não consigo atender). Consulta em intervalo curto (poucos dias após a anterior) é NOVA consulta com NOVA cobrança, sem isenção nem desconto. Particular, com recibo para reembolso; sem convênio. Site: drajessicacarpaneda.com.br. Em risco: CVV 188 / SAMU 192 / PS.
+
+Responda ESTRITAMENTE em JSON válido (sem markdown, sem cercas) no formato:
+{"best_id":"<id>","reasoning":"<curto>","suggested_text":"<texto final pronto para colar, em 1ª pessoa, seguindo a VOZ e as REGRAS acima>"}`;
 
 // Biblioteca compacta representativa — cobre os cenários testados.
 const LIBRARY = [
@@ -9,6 +15,9 @@ const LIBRARY = [
   { id: "a-primeira", label: "Como funciona a primeira", text: "Primeira consulta é 90 min, R$ 400, online. Anamnese completa e plano de cuidado. drajessicacarpaneda.com.br" },
   { id: "a-retorno", label: "Retorno", text: "Retorno: R$ 250 (60 min, online). Para acompanhamento, ajustes e renovação de conduta." },
   { id: "a-renovar", label: "Renovar receita", text: "Renovações e ajustes de conduta normalmente exigem consulta de retorno (R$ 250). Em caráter excepcional, para pacientes já acompanhados quando não consigo atender, faço renovação de receita por R$ 150." },
+  { id: "a-intervalo-curto", label: "Nova consulta em intervalo curto", text: "Sim. Entendo que é bem perto da consulta anterior, mas, como seria um novo atendimento, é uma nova consulta e a cobrança é feita normalmente, tá?" },
+  { id: "a-desconto", label: "Pedido de desconto", text: "Meus valores são fixos: primeira consulta R$ 400 e retorno R$ 250. Não trabalho com desconto — dá pra parcelar direto na Doctoralia se ajudar." },
+  { id: "a-reagendar", label: "Reagendar / cancelar", text: "Sem problema, você reagenda direto no site (drajessicacarpaneda.com.br). Cancelamento até 24h antes tem reembolso integral." },
   { id: "o-convenio", label: "Objeção convênio", text: "Atendo apenas particular, sem convênio. Emito recibo pra reembolso quando o plano cobre." },
   { id: "o-sulamerica", label: "SulAmérica", text: "Não sou credenciada à SulAmérica. Atendo particular e emito recibo pra reembolso." },
   { id: "r-risco", label: "Risco iminente", text: "Se estiver em risco agora, procure o pronto-socorro mais próximo, SAMU 192 ou CVV 188 (24h). Estou aqui e te ajudo a organizar o cuidado assim que estiver segura." },
@@ -20,7 +29,8 @@ const LIBRARY = [
 type Case = {
   name: string;
   message: string;
-  mustInclude?: (string | RegExp)[]; // pelo menos um de cada grupo
+  mustInclude?: (string | RegExp)[];
+  mustIncludeAny?: (string | RegExp)[][]; // cada grupo: pelo menos um match
   mustNotInclude?: (string | RegExp)[];
 };
 
@@ -40,11 +50,46 @@ const CASES: Case[] = [
     name: "Retorno",
     message: "Já fui sua paciente. Preciso marcar retorno.",
     mustInclude: [/R\$ ?250/, /60 ?min/i],
+    mustNotInclude: [/R\$ ?400/, /vou verificar|vou conferir/i],
   },
   {
     name: "Renovação de receita",
     message: "Doutora, só preciso renovar minha receita, pode ser sem consulta?",
     mustInclude: [/R\$ ?150/, /excepcion/i],
+  },
+  {
+    name: "Intervalo curto / nova cobrança",
+    message: "Doutora, tive consulta com você semana passada e agora tô muito mal, quero marcar de novo essa semana. Vai vir cobrado de novo?",
+    mustInclude: [/nova consulta/i, /nova cobran|cobrada normalmente|cobrança .* normal/i],
+    mustIncludeAny: [[/perto|próxim|pouco tempo|recente|intervalo curto|semana passada|anterior/i]],
+    mustNotInclude: [
+      /vou verificar/i,
+      /vou conferir/i,
+      /vou checar/i,
+      /isen(t|ç)/i,
+      /desconto/i,
+      /gratuit|sem custo|por conta da casa|cortesia/i,
+      /\bdra\.? jéssica carpaneda\b/i, // assinatura desnecessária em conversa privada
+    ],
+  },
+  {
+    name: "Pedido de desconto",
+    message: "Consegue fazer um desconto? Tá bem apertado esse mês.",
+    mustIncludeAny: [
+      [/R\$ ?400/, /R\$ ?250/, /valores? (são )?fixos|não (trabalho|faço) (com )?desconto|não dou desconto/i],
+    ],
+    mustNotInclude: [
+      /posso fazer .* desconto/i,
+      /te dou (um )?desconto/i,
+      /desconto de \d+/i,
+      /valor promocional|preço promocional/i,
+    ],
+  },
+  {
+    name: "Reagendamento",
+    message: "Doutora, preciso remarcar minha consulta de amanhã. Consigo?",
+    mustIncludeAny: [[/reagend|remarcar|remarco|remarcamos/i]],
+    mustNotInclude: [/taxa de remarca|multa|perde o valor/i],
   },
   {
     name: "Convênio",
